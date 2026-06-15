@@ -10,6 +10,7 @@ const allowlist = new Set([
   'docs/12_CACHE_AND_SITEMAP_STRATEGY.md',
   'docs/13_COST_GUARDS.md',
   'docs/14_OPEN_SOURCE_REUSE_POLICY.md',
+  'docs/19_FOUNDER_VALUE_LAYER.md',
   'docs/RISK_ACCEPTANCE_LOG.md',
   'third_party/NOTICE.md',
   'scripts/scan-forbidden-patterns.mjs',

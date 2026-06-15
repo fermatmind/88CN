@@ -5,7 +5,9 @@ export const SITE_DESCRIPTION =
 
 export const NAV_LINKS = [
   { href: "/projects", label: "Projects" },
-  { href: "/submit", label: "Submit" },
+  { href: "/categories/ai-agents", label: "Categories" },
+  { href: "/reports", label: "Reports" },
+  { href: "/founders", label: "Founders" },
 ] as const;
 
 export const SIGNAL_DIMENSIONS = [
