@@ -18,6 +18,7 @@ const allowlist = new Set([
 
 const ignoredDirs = new Set([
   '.git',
+  '.scratch',
   'node_modules',
   '.next',
   '.vercel',
