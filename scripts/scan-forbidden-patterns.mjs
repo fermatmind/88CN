@@ -4,8 +4,14 @@ import path from 'node:path';
 const root = process.cwd();
 
 const allowlist = new Set([
+  'docs/DAY0_AUDIT.md',
   'docs/06_FORBIDDEN_PATTERNS.md',
+  'docs/11_SCALABILITY_GUARDS.md',
+  'docs/12_CACHE_AND_SITEMAP_STRATEGY.md',
+  'docs/13_COST_GUARDS.md',
+  'docs/14_OPEN_SOURCE_REUSE_POLICY.md',
   'docs/RISK_ACCEPTANCE_LOG.md',
+  'third_party/NOTICE.md',
   'scripts/scan-forbidden-patterns.mjs',
   'AGENTS.md',
 ]);

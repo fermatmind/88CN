@@ -181,6 +181,14 @@ External scans must be queued and sharded:
 - keep the last successful snapshot
 - mark the source as stale
 
+Public routes must not crawl external sources or recalculate scores at request time. External refreshes belong in bounded queues, and public pages must render from reviewed local snapshots.
+
+Scale and cost rules live in:
+
+- `docs/11_SCALABILITY_GUARDS.md`
+- `docs/12_CACHE_AND_SITEMAP_STRATEGY.md`
+- `docs/13_COST_GUARDS.md`
+
 ## AI Editorial Pipeline
 
 AI may generate drafts only. AI editorial drafts must not publish directly. Public Editorial Notes require human review.
@@ -209,3 +217,9 @@ Forbidden inputs:
 - paid sponsorship as hidden score boost
 
 Paid exposure and Signal Score must remain separate.
+
+## Open Source Reuse
+
+Do not copy, fork, adapt, or bulk import third-party code, templates, schemas, screenshots, descriptions, logos, or datasets without checking `docs/14_OPEN_SOURCE_REUSE_POLICY.md`.
+
+Any direct fork or module extraction must be from a permissive upstream license and must be recorded in `third_party/NOTICE.md` with upstream URL, license, commit SHA, copied files, adapted files, usage, review owner, date, and risk notes.
