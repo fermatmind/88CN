@@ -11,6 +11,7 @@ const allowlist = new Set([
   'docs/13_COST_GUARDS.md',
   'docs/14_OPEN_SOURCE_REUSE_POLICY.md',
   'docs/19_FOUNDER_VALUE_LAYER.md',
+  'docs/23_SUBMIT_CLAIM_BACKEND_V0.md',
   'docs/RISK_ACCEPTANCE_LOG.md',
   'third_party/NOTICE.md',
   'scripts/scan-forbidden-patterns.mjs',
