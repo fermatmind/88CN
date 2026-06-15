@@ -1,6 +1,5 @@
 # Flow Bugs
 
-No flow or API contract bugs found in the 2026-06-15 PR #11 API Contract + Security Headers QA pass.
-
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P1 | `/api/project-submissions` and `/api/project-claims` | API / curl | `../screenshots/qa/pr13-submit-valid-503.png`, `../screenshots/qa/pr13-claim-valid-503.png` | 1. Start dev server without `NEXT_PUBLIC_SUPABASE_URL` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`. 2. `POST /api/project-submissions` with an invalid body such as `{"project_name":"","category_slug":"","one_liner":""}`. 3. `POST /api/project-claims` with an invalid body such as `{"project_slug":"","claimant_name":"","claimant_email":"bad","claim_method":"bad"}`. | Both endpoints return HTTP 503 `application/problem+json` with service unavailable details before request-body validation runs. Problem Details fields and security headers are present. | Invalid request payloads should return HTTP 400 `application/problem+json` with validation details even when Supabase env is missing. Supabase configuration should only be required after the request body passes syntax and Zod validation. | `app/api/project-submissions/route.ts`; `app/api/project-claims/route.ts` | Parse JSON and run Zod validation before checking `getSupabaseClient()`. Keep the 503 path for valid payloads when Supabase env is missing. |
