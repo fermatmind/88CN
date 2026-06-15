@@ -18,3 +18,4 @@ secrets/
 *.key
 .scratch/
 research/upstream/
+*.tsbuildinfo
