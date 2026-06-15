@@ -24,6 +24,14 @@ Public repositories must not collect contact addresses, private revenue proof, p
 
 External JSON must enter an import staging table first. Admin review is required before data moves into primary project records.
 
+External imports must not create published project pages directly. Import workers may create staging rows, normalized snapshots, and review tasks only.
+
+## Snapshot Boundary
+
+Public rendering must use reviewed local snapshots. External APIs must not be called at render time for public project pages.
+
+Long-term storage should prefer normalized snapshots. Raw payloads are short-term evidence only and must have bounded retention.
+
 ## Unknown Values
 
 When a value is unavailable, use:
