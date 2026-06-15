@@ -1,6 +1,6 @@
 # Flow Bugs
 
-No flow QA has been performed yet.
+No flow bugs found in the 2026-06-15 Day 1 Scaffold QA pass.
 
-| Date | Flow | Issue | Evidence | Status |
-| --- | --- | --- | --- | --- |
+| Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
