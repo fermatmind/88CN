@@ -1,0 +1,12 @@
+{
+  "name": "88cn",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Day 0 policy bootstrap for the 88CN Free AI Project Growth Index.",
+  "type": "module",
+  "scripts": {
+    "docs:check": "node -e \"const fs=require('fs'); const files=['AGENTS.md','README.md','.gitignore','package.json','docs/00_PROJECT_BRIEF.md','docs/01_AGENT_OPERATING_MODEL.md','docs/02_ZERO_STATE_BOOTSTRAP.md','docs/06_FORBIDDEN_PATTERNS.md','docs/07_RUNTIME_GUARDS.md','docs/08_BATCH_PIPELINE.md','docs/09_EDITORIAL_PIPELINE.md','docs/10_DATA_CONTRACT.md','docs/RISK_ACCEPTANCE_LOG.md','docs/TASK_STATUS.md','docs/QA_REPORT.md','docs/VISUAL_BUGS.md','docs/FLOW_BUGS.md','docs/BUILD_ERRORS.md','screenshots/qa/.gitkeep','scripts/scan-forbidden-patterns.mjs','scripts/codex-preflight.sh']; const missing=files.filter((file)=>!fs.existsSync(file)); if (missing.length) { console.error('Missing required files:\\n'+missing.join('\\n')); process.exit(1); } console.log('docs:check passed');\"",
+    "policy:scan": "node scripts/scan-forbidden-patterns.mjs",
+    "verify:day0": "npm run docs:check && npm run policy:scan"
+  }
+}
