@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# 88CN Rsync Deploy Script — Example
+# Copy to deploy/scripts/deploy-rsync.sh and customize for your server
+# Usage: bash deploy/scripts/deploy-rsync.sh
+set -euo pipefail
+
+# ============================================================
+# CONFIGURE THESE VALUES — do NOT commit real values to git
+# ============================================================
+SERVER_USER="deploy"
+SERVER_HOST="your-server-ip-or-hostname"
+SERVER_PATH="/var/www/88cn"
+SSH_KEY="$HOME/.ssh/id_rsa"  # or id_ed25519
+# ============================================================
+
+cd "$(dirname "$0")/../.."
+
+echo "[88CN] Building locally..."
+npm run build
+
+echo "[88CN] Rsync to $SERVER_USER@$SERVER_HOST:$SERVER_PATH..."
+rsync -avz --delete \
+  --exclude=".git" \
+  --exclude="node_modules" \
+  --exclude=".env" \
+  --exclude=".env.*" \
+  --exclude=".next/cache" \
+  --exclude=".scratch" \
+  --exclude="screenshots" \
+  -e "ssh -i $SSH_KEY" \
+  ./ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"
+
+echo "[88CN] Running production install on server..."
+ssh -i "$SSH_KEY" "$SERVER_USER@$SERVER_HOST" \
+  "cd $SERVER_PATH && npm ci --omit=dev && npm run build"
+
+echo "[88CN] Restarting PM2 on server..."
+ssh -i "$SSH_KEY" "$SERVER_USER@$SERVER_HOST" \
+  "cd $SERVER_PATH && bash deploy/scripts/restart-pm2.sh"
+
+echo "[88CN] Running health check..."
+ssh -i "$SSH_KEY" "$SERVER_USER@$SERVER_HOST" \
+  "cd $SERVER_PATH && bash deploy/scripts/check-runtime.sh"
+
+echo "[88CN] Deploy complete."

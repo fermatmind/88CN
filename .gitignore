@@ -19,3 +19,9 @@ secrets/
 .scratch/
 research/upstream/
 *.tsbuildinfo
+*.pem
+*.key
+*.crt
+*.cert
+secrets/
+deploy/scripts/deploy-rsync.sh
