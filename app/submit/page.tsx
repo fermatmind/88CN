@@ -1,5 +1,6 @@
 import { siteTitle, siteDescription, noIndex } from "@/lib/seo";
 import { PlusCircle, FileText, Search, ShieldCheck } from "lucide-react";
+import SubmitForm from "@/components/submit-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -65,18 +66,7 @@ export default function SubmitPage() {
         ))}
       </div>
 
-      <div className="rounded-lg border border-terminal-border bg-terminal-surface p-8 text-center">
-        <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-terminal-border">
-          <PlusCircle className="h-4 w-4 text-terminal-dim" />
-        </div>
-        <h2 className="mb-2 text-sm font-semibold text-terminal-fg">
-          Submission Coming Soon
-        </h2>
-        <p className="text-xs text-terminal-dim leading-relaxed max-w-sm mx-auto">
-          The project submission form is under development. In the meantime,
-          express interest and we will notify you when submissions open.
-        </p>
-      </div>
+      <SubmitForm />
     </div>
   );
 }

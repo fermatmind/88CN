@@ -2,21 +2,31 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const MIGRATION_FILE = path.join(ROOT, 'supabase', 'migrations', '001_init.sql');
+const MIGRATION_FILES = [
+  path.join(ROOT, 'supabase', 'migrations', '001_init.sql'),
+  path.join(ROOT, 'supabase', 'migrations', '002_audit_notification.sql'),
+];
 
 const errors = [];
 
-// 1. Migration file must exist
-if (!fs.existsSync(MIGRATION_FILE)) {
-  errors.push('Missing migration file: supabase/migrations/001_init.sql');
-  if (errors.length > 0) {
-    console.error('db:schema:check failed');
-    for (const error of errors) console.error(`- ${error}`);
-    process.exit(1);
+// 1. Migration files must exist
+for (const file of MIGRATION_FILES) {
+  if (!fs.existsSync(file)) {
+    errors.push(`Missing migration file: ${path.relative(ROOT, file)}`);
   }
 }
 
-const sql = fs.readFileSync(MIGRATION_FILE, 'utf8');
+if (errors.length > 0) {
+  console.error('db:schema:check failed');
+  for (const error of errors) console.error(`- ${error}`);
+  process.exit(1);
+}
+
+// Read all SQL into one string
+let sql = '';
+for (const file of MIGRATION_FILES) {
+  sql += fs.readFileSync(file, 'utf8') + '\n';
+}
 const sqlLower = sql.toLowerCase();
 
 // 2. Required extensions
@@ -46,6 +56,8 @@ const requiredTables = [
   'source_refresh_jobs',
   'system_flags',
   'system_budgets',
+  'audit_events',
+  'notification_events',
 ];
 
 for (const table of requiredTables) {

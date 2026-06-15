@@ -16,5 +16,6 @@
 | SEO/GEO content topology | Complete | Category hubs, collections, reports, founders, and genesis badge pages (PR #6). |
 | Supabase schema | Complete | Core schema v0 with RLS, lifecycle states, score tables, editorial pipeline, queue jobs, and system controls (PR #9). |
 | API contract + security | Complete | RFC 9457 Problem Details, security headers, request ID, read-only project API (PR #10). |
+| Submit + claim backend | Complete | Supabase client, Zod validation, POST /api/project-submissions, POST /api/project-claims, audit_events, notification_events (PR #12). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Not started | Intentionally out of Day 0 scope. |
