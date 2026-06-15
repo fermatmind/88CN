@@ -7,41 +7,34 @@ import {
   methodNotAllowed,
   serviceUnavailable,
 } from "@/lib/api/problem";
-import {
-  projectClaimSchema,
-  type ProjectClaimInput,
-} from "@/lib/validation/project-claim";
+import { projectClaimSchema } from "@/lib/validation/project-claim";
+import { checkForbiddenFields } from "@/lib/validation/shared";
 
 export async function POST(request: NextRequest) {
   const requestId = getOrCreateRequestId();
+  const instance = "/api/project-claims";
 
-  const client = getSupabaseClient();
-  if (!client) {
-    return errorResponse(
-      serviceUnavailable(
-        "Claim service is not configured. Set Supabase environment variables.",
-        "/api/project-claims",
-        requestId
-      ),
-      requestId
-    );
-  }
-
+  // 1. Parse JSON
   let body: unknown;
   try {
     body = await request.json();
   } catch {
     return errorResponse(
-      badRequest(
-        "Request body must be valid JSON.",
-        "/api/project-claims",
-        undefined,
-        requestId
-      ),
+      badRequest("Request body must be valid JSON.", instance, undefined, requestId),
       requestId
     );
   }
 
+  // 2. Reject forbidden monetization/commercial fields
+  const forbiddenError = checkForbiddenFields(body, "project-claims");
+  if (forbiddenError) {
+    return errorResponse(
+      badRequest(forbiddenError, instance, undefined, requestId),
+      requestId
+    );
+  }
+
+  // 3. Zod strict validation
   const parsed = projectClaimSchema.safeParse(body);
   if (!parsed.success) {
     const fieldErrors: Record<string, string[]> = {};
@@ -53,8 +46,21 @@ export async function POST(request: NextRequest) {
     return errorResponse(
       badRequest(
         "Validation failed. Check the errors field for details.",
-        "/api/project-claims",
+        instance,
         fieldErrors,
+        requestId
+      ),
+      requestId
+    );
+  }
+
+  // 4. Check Supabase availability (only after valid payload)
+  const client = getSupabaseClient();
+  if (!client) {
+    return errorResponse(
+      serviceUnavailable(
+        "Claim service is not configured. Set Supabase environment variables.",
+        instance,
         requestId
       ),
       requestId
@@ -63,6 +69,7 @@ export async function POST(request: NextRequest) {
 
   const data = parsed.data;
 
+  // 5. Insert
   const { error: insertError } = await client
     .from("project_claims")
     .insert({
@@ -79,13 +86,14 @@ export async function POST(request: NextRequest) {
     return errorResponse(
       serviceUnavailable(
         "Failed to save claim. Please try again later.",
-        "/api/project-claims",
+        instance,
         requestId
       ),
       requestId
     );
   }
 
+  // 6. Audit + notify (non-blocking)
   await recordAudit(client, "project_claim", {
     project_slug: data.project_slug,
     claim_method: data.claim_method,

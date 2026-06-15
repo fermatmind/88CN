@@ -40,6 +40,6 @@ export const projectClaimSchema = z.object({
     .max(1000, "Proof note must be under 1000 characters")
     .optional()
     .or(z.literal("")),
-});
+}).strict();
 
 export type ProjectClaimInput = z.infer<typeof projectClaimSchema>;

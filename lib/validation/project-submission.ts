@@ -70,7 +70,7 @@ export const projectSubmissionSchema = z.object({
     .max(1000, "Growth note must be under 1000 characters")
     .optional()
     .or(z.literal("")),
-});
+}).strict();
 
 export type ProjectSubmissionInput = z.infer<
   typeof projectSubmissionSchema

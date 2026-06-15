@@ -9,39 +9,34 @@ import {
 } from "@/lib/api/problem";
 import {
   projectSubmissionSchema,
-  type ProjectSubmissionInput,
 } from "@/lib/validation/project-submission";
+import { checkForbiddenFields } from "@/lib/validation/shared";
 
 export async function POST(request: NextRequest) {
   const requestId = getOrCreateRequestId();
+  const instance = "/api/project-submissions";
 
-  const client = getSupabaseClient();
-  if (!client) {
-    return errorResponse(
-      serviceUnavailable(
-        "Submission service is not configured. Set Supabase environment variables.",
-        "/api/project-submissions",
-        requestId
-      ),
-      requestId
-    );
-  }
-
+  // 1. Parse JSON
   let body: unknown;
   try {
     body = await request.json();
   } catch {
     return errorResponse(
-      badRequest(
-        "Request body must be valid JSON.",
-        "/api/project-submissions",
-        undefined,
-        requestId
-      ),
+      badRequest("Request body must be valid JSON.", instance, undefined, requestId),
       requestId
     );
   }
 
+  // 2. Reject forbidden monetization/commercial fields
+  const forbiddenError = checkForbiddenFields(body, "project-submissions");
+  if (forbiddenError) {
+    return errorResponse(
+      badRequest(forbiddenError, instance, undefined, requestId),
+      requestId
+    );
+  }
+
+  // 3. Zod strict validation
   const parsed = projectSubmissionSchema.safeParse(body);
   if (!parsed.success) {
     const fieldErrors: Record<string, string[]> = {};
@@ -53,8 +48,21 @@ export async function POST(request: NextRequest) {
     return errorResponse(
       badRequest(
         "Validation failed. Check the errors field for details.",
-        "/api/project-submissions",
+        instance,
         fieldErrors,
+        requestId
+      ),
+      requestId
+    );
+  }
+
+  // 4. Check Supabase availability (only after valid payload)
+  const client = getSupabaseClient();
+  if (!client) {
+    return errorResponse(
+      serviceUnavailable(
+        "Submission service is not configured. Set Supabase environment variables.",
+        instance,
         requestId
       ),
       requestId
@@ -63,6 +71,7 @@ export async function POST(request: NextRequest) {
 
   const data = parsed.data;
 
+  // 5. Insert
   const { error: insertError } = await client
     .from("project_submissions")
     .insert({
@@ -73,9 +82,7 @@ export async function POST(request: NextRequest) {
       category_slug: data.category_slug,
       submitter_note: [
         data.description,
-        data.growth_note
-          ? `Growth note: ${data.growth_note}`
-          : null,
+        data.growth_note ? `Growth note: ${data.growth_note}` : null,
       ]
         .filter(Boolean)
         .join("\n\n"),
@@ -85,13 +92,14 @@ export async function POST(request: NextRequest) {
     return errorResponse(
       serviceUnavailable(
         "Failed to save submission. Please try again later.",
-        "/api/project-submissions",
+        instance,
         requestId
       ),
       requestId
     );
   }
 
+  // 6. Audit + notify (non-blocking)
   await recordAudit(client, "project_submission", {
     project_name: data.project_name,
     category_slug: data.category_slug,
@@ -147,7 +155,7 @@ async function recordAudit(
       request_id: requestId,
     });
   } catch {
-    // Audit failure is non-blocking
+    // Non-blocking
   }
 }
 
@@ -165,6 +173,6 @@ async function recordNotification(
       request_id: requestId,
     });
   } catch {
-    // Notification failure is non-blocking
+    // Non-blocking
   }
 }
