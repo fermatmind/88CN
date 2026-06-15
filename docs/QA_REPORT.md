@@ -3,9 +3,9 @@
 ## Latest Run
 
 - Date: 2026-06-15
-- Scope: 88CN PR #7 SEO/GEO Content Topology QA
+- Scope: 88CN PR #11 API Contract + Security Headers QA
 - Role: Codex Computer Use read-only QA
-- Result: PASS with one P3 visual issue
+- Result: PASS
 - Blocked: No
 
 ## Commands
@@ -15,10 +15,11 @@
 | 1 | `npm run verify:day0` | PASS |
 | 2 | `npm run policy:scan` | PASS |
 | 3 | `npm run third-party:check` | PASS |
-| 4 | `npm run lint` | PASS |
-| 5 | `npm run typecheck` | PASS |
-| 6 | `npm run build` | PASS |
-| 7 | `scripts/codex-preflight.sh` | PASS |
+| 4 | `npm run db:schema:check` | PASS |
+| 5 | `npm run lint` | PASS |
+| 6 | `npm run typecheck` | PASS |
+| 7 | `npm run build` | PASS |
+| 8 | `scripts/codex-preflight.sh` | PASS |
 
 ## Browser QA
 
@@ -30,108 +31,105 @@ Checked pages:
 - `/projects`
 - `/projects/aurora-code`
 - `/categories/ai-agents`
-- `/categories/open-source-ai`
-- `/collections/chinese-ai-projects-going-global`
 - `/collections/open-source-ai-agents`
-- `/reports`
 - `/reports/weekly-ai-project-signals-2026-06-21`
+- `/submit`
+- `/claim/aurora-code`
 - `/founders`
 - `/genesis`
-- `/sitemap.xml`
-- `/robots.txt`
-
-Note: the in-app browser reported `ERR_BLOCKED_BY_CLIENT` for direct `sitemap.xml` navigation. `sitemap.xml` and `robots.txt` were verified with `curl`; both returned HTTP 200 with expected content.
 
 ## Screenshots
 
 | Viewport | Page | Screenshot |
 | --- | --- | --- |
-| desktop | `/` | `../screenshots/qa/pr7-desktop-home.png` |
-| desktop | `/projects` | `../screenshots/qa/pr7-desktop-projects.png` |
-| desktop | `/projects/aurora-code` | `../screenshots/qa/pr7-desktop-project-aurora-code.png` |
-| desktop | `/categories/ai-agents` | `../screenshots/qa/pr7-desktop-category-ai-agents.png` |
-| desktop | `/categories/open-source-ai` | `../screenshots/qa/pr7-desktop-category-open-source-ai.png` |
-| desktop | `/collections/chinese-ai-projects-going-global` | `../screenshots/qa/pr7-desktop-collection-chinese-ai-projects-going-global.png` |
-| desktop | `/collections/open-source-ai-agents` | `../screenshots/qa/pr7-desktop-collection-open-source-ai-agents.png` |
-| desktop | `/reports` | `../screenshots/qa/pr7-desktop-reports.png` |
-| desktop | `/reports/weekly-ai-project-signals-2026-06-21` | `../screenshots/qa/pr7-desktop-report-weekly-ai-project-signals-2026-06-21.png` |
-| desktop | `/founders` | `../screenshots/qa/pr7-desktop-founders.png` |
-| desktop | `/genesis` | `../screenshots/qa/pr7-desktop-genesis.png` |
-| mobile | `/` | `../screenshots/qa/pr7-mobile-home.png` |
-| mobile | `/projects` | `../screenshots/qa/pr7-mobile-projects.png` |
-| mobile | `/projects/aurora-code` | `../screenshots/qa/pr7-mobile-project-aurora-code.png` |
-| mobile | `/categories/ai-agents` | `../screenshots/qa/pr7-mobile-category-ai-agents.png` |
-| mobile | `/categories/open-source-ai` | `../screenshots/qa/pr7-mobile-category-open-source-ai.png` |
-| mobile | `/collections/chinese-ai-projects-going-global` | `../screenshots/qa/pr7-mobile-collection-chinese-ai-projects-going-global.png` |
-| mobile | `/collections/open-source-ai-agents` | `../screenshots/qa/pr7-mobile-collection-open-source-ai-agents.png` |
-| mobile | `/reports` | `../screenshots/qa/pr7-mobile-reports.png` |
-| mobile | `/reports/weekly-ai-project-signals-2026-06-21` | `../screenshots/qa/pr7-mobile-report-weekly-ai-project-signals-2026-06-21.png` |
-| mobile | `/founders` | `../screenshots/qa/pr7-mobile-founders.png` |
-| mobile | `/genesis` | `../screenshots/qa/pr7-mobile-genesis.png` |
+| desktop | `/` | `../screenshots/qa/pr11-desktop-home.png` |
+| desktop | `/projects` | `../screenshots/qa/pr11-desktop-projects.png` |
+| desktop | `/projects/aurora-code` | `../screenshots/qa/pr11-desktop-project-aurora-code.png` |
+| desktop | `/categories/ai-agents` | `../screenshots/qa/pr11-desktop-category-ai-agents.png` |
+| desktop | `/collections/open-source-ai-agents` | `../screenshots/qa/pr11-desktop-collection-open-source-ai-agents.png` |
+| desktop | `/reports/weekly-ai-project-signals-2026-06-21` | `../screenshots/qa/pr11-desktop-report-weekly-ai-project-signals.png` |
+| desktop | `/submit` | `../screenshots/qa/pr11-desktop-submit.png` |
+| desktop | `/claim/aurora-code` | `../screenshots/qa/pr11-desktop-claim-aurora-code.png` |
+| desktop | `/founders` | `../screenshots/qa/pr11-desktop-founders.png` |
+| desktop | `/genesis` | `../screenshots/qa/pr11-desktop-genesis.png` |
+| mobile | `/` | `../screenshots/qa/pr11-mobile-home.png` |
+| mobile | `/projects` | `../screenshots/qa/pr11-mobile-projects.png` |
+| mobile | `/projects/aurora-code` | `../screenshots/qa/pr11-mobile-project-aurora-code.png` |
+| mobile | `/categories/ai-agents` | `../screenshots/qa/pr11-mobile-category-ai-agents.png` |
+| mobile | `/collections/open-source-ai-agents` | `../screenshots/qa/pr11-mobile-collection-open-source-ai-agents.png` |
+| mobile | `/reports/weekly-ai-project-signals-2026-06-21` | `../screenshots/qa/pr11-mobile-report-weekly-ai-project-signals.png` |
+| mobile | `/submit` | `../screenshots/qa/pr11-mobile-submit.png` |
+| mobile | `/claim/aurora-code` | `../screenshots/qa/pr11-mobile-claim-aurora-code.png` |
+| mobile | `/founders` | `../screenshots/qa/pr11-mobile-founders.png` |
+| mobile | `/genesis` | `../screenshots/qa/pr11-mobile-genesis.png` |
 
 ## Visual Assessment
 
 PASS:
 
-- The new pages keep the black, cool gray, silver-white, thin-border data terminal style.
-- Category, collection, report, founders, and Genesis pages avoid the low-quality AI directory look.
-- Category pages have hub structure: overview, signal-ranked projects, methodology, confidence, and FAQ sections.
-- Collection pages include explicit inclusion criteria and curated rationale.
-- Report pages read like data media with executive summary, movers, momentum, readiness watch, source confidence, methodology, and report notes.
-- Founder and Genesis pages are clear, restrained, and consistent with the rest of the product surface.
-- Mobile content remains readable in sampled views.
-
-Open issue:
-
-- P3: mobile header navigation creates a 3px horizontal overflow across sampled pages. Details are recorded in `docs/VISUAL_BUGS.md`.
-
-## Information Architecture
-
-PASS:
-
-- Category pages read as industry hubs rather than simple lists.
-- Collection pages show inclusion criteria before project cards.
-- Report detail page presents structured signal analysis rather than ordinary blog-style copy.
-- Founders page clearly explains the value for project teams.
-- Genesis page clearly frames the badge as an optional signal display, not a guarantee.
-
-## Public Language
-
-PASS:
-
-- `npm run policy:scan` passed.
-- Browser/curl checks found no requested banned public-language terms on sampled public pages.
+- Middleware and security headers did not break page rendering.
+- Desktop and mobile pages retain the dark terminal visual system.
+- No sampled page showed horizontal overflow at the tested mobile viewport.
+- No browser console warnings or errors appeared on sampled pages.
+- No CSP-related browser console messages appeared on sampled pages.
 
 ## Structured Data
 
 PASS:
 
-- Category pages include `WebPage` and `ItemList` JSON-LD.
-- Collection pages include `CollectionPage` JSON-LD.
-- Reports index includes `ItemList` JSON-LD.
-- Report detail includes `TechArticle` JSON-LD.
-- Founders and Genesis pages include `WebPage` JSON-LD.
-- No fake rating, review, offer, private metric, or private commercial metric schema objects were found.
-- Existing Day 1 pages `/`, `/projects`, and `/projects/aurora-code` still have no JSON-LD, consistent with the current structured data policy scope.
+- `/categories/ai-agents` has valid `WebPage` and `ItemList` JSON-LD.
+- `/collections/open-source-ai-agents` has valid `CollectionPage` JSON-LD.
+- `/reports/weekly-ai-project-signals-2026-06-21` has valid `TechArticle` JSON-LD.
+- `/founders` has valid `WebPage` JSON-LD.
+- `/genesis` has valid `WebPage` JSON-LD.
+- Existing pages without JSON-LD remained unchanged.
 
 ## Sitemap And Robots
 
 PASS:
 
-- `sitemap.xml` includes demo published project pages.
-- `sitemap.xml` includes category, collection, report, founders, and Genesis pages.
-- `sitemap.xml` excludes admin, API, preview, pending, and submitted URLs.
-- `robots.txt` disallows `/admin/`, `/api/`, `/preview/`, `/claim/`, and `/submit/`.
+- `/sitemap.xml` returned HTTP 200.
+- `/robots.txt` returned HTTP 200.
+- Both responses included the expected global security and request ID headers.
 
-## Console
+## API Contract
 
 PASS:
 
-- Browser console error/warning log check returned no entries for sampled pages.
+| Endpoint | Expected | Observed |
+| --- | --- | --- |
+| `GET /api/projects/aurora-code` | HTTP 200 success envelope | HTTP 200, `application/json`, `ok: true`, `service: 88cn-web`, `data.slug: aurora-code`, `request_id` present |
+| `GET /api/projects/unknown-slug` | HTTP 404 Problem Details envelope | HTTP 404, `application/problem+json`, `ok: false`, `service: 88cn-web`, Problem Details fields present |
+
+Problem Details fields verified:
+
+- `type`
+- `title`
+- `status`
+- `detail`
+- `instance`
+- `request_id`
+
+Non-public demo slug check:
+
+- Not applicable in this seed set. All demo projects in `lib/demo-projects.ts` are currently public lifecycle states, so there is no available non-public demo slug for a 403 check.
+
+## Security Headers
+
+PASS:
+
+Checked on public pages, sitemap, robots, and API responses:
+
+- `x-content-type-options`
+- `referrer-policy`
+- `permissions-policy`
+- `content-security-policy`
+- `x-request-id`
+- frame protection via `x-frame-options` or CSP `frame-ancestors`
 
 ## Findings
 
 - P0: none
 - P1: none
 - P2: none
-- P3: one mobile header overflow issue
+- P3: none

@@ -1,6 +1,6 @@
 # Flow Bugs
 
-No flow bugs found in the 2026-06-15 PR #7 SEO/GEO Content Topology QA pass.
+No flow or API contract bugs found in the 2026-06-15 PR #11 API Contract + Security Headers QA pass.
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
