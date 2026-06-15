@@ -12,6 +12,8 @@
 | Cost guards | Complete | `docs/13_COST_GUARDS.md` defines kill switches and daily budget boundaries. |
 | Open source reuse policy | Complete | `docs/14_OPEN_SOURCE_REUSE_POLICY.md` and `third_party/NOTICE.md` define upstream reuse controls. |
 | Third-party notice check | Complete | `npm run third-party:check` verifies notice templates and future plan references. |
-| Application scaffold | Not started | Intentionally out of Day 0 scope. |
+| Application scaffold | Complete | Next.js App Router scaffold with Tailwind and shadcn conventions (PR #4). |
+| SEO/GEO content topology | Complete | Category hubs, collections, reports, founders, and genesis badge pages (PR #6). |
+| Supabase schema | Complete | Core schema v0 with RLS, lifecycle states, score tables, editorial pipeline, queue jobs, and system controls (PR #9). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Not started | Intentionally out of Day 0 scope. |
