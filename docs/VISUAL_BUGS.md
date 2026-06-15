@@ -1,6 +1,6 @@
 # Visual Bugs
 
-No visual QA has been performed yet.
+No visual bugs found in the 2026-06-15 Day 1 Scaffold QA pass.
 
-| Date | Area | Issue | Evidence | Status |
-| --- | --- | --- | --- | --- |
+| Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
