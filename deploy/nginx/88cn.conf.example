@@ -1,0 +1,113 @@
+# 88CN Nginx Configuration — Example
+# Copy to /etc/nginx/sites-available/88cn.conf and symlink to sites-enabled
+# Replace server_name and SSL paths for your domain
+
+# Redirect HTTP to HTTPS
+server {
+    listen 80;
+    server_name 88cn.com www.88cn.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name 88cn.com www.88cn.com;
+
+    # SSL certificates — replace with your actual paths
+    # ssl_certificate     /etc/ssl/certs/88cn.com.pem;
+    # ssl_certificate_key /etc/ssl/private/88cn.com.key;
+    # ssl_protocols       TLSv1.2 TLSv1.3;
+    # ssl_ciphers         HIGH:!aNULL:!MD5;
+
+    root /var/www/88cn;
+    index index.html;
+
+    client_max_body_size 2m;
+
+    # Gzip compression
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/javascript image/svg+xml;
+    gzip_min_length 1000;
+    gzip_vary on;
+
+    # ---- No Cache Zones ----
+    location /admin {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, max-age=0";
+    }
+
+    location /submit {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, max-age=0";
+    }
+
+    location /claim {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, max-age=0";
+    }
+
+    # ---- API Zone ----
+    # Basic rate limiting example (uncomment to enable)
+    # limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, max-age=0";
+        # limit_req zone=api burst=20 nodelay;
+    }
+
+    # proxy_set_header needed for Next.js to know the original protocol
+    # Without Host, Next.js cannot resolve dynamic routes correctly
+    # Without X-Forwarded-Proto, Next.js may generate http:// URLs on https://
+
+    # ---- Public Cacheable Zone ----
+    # In production, consider enabling short-lived cache for these paths:
+    # add_header Cache-Control "public, max-age=300, s-maxage=600, stale-while-revalidate=86400";
+    # For now, pass through without custom cache — Next.js sets its own cache headers.
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # ---- Next.js Static Assets ----
+    # _next/static files are immutable and versioned by content hash
+    location /_next/static {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_cache_valid 200 365d;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    # ---- Health Check ----
+    # Allow health check endpoint without auth
+    location = /api/healthz {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        add_header Cache-Control "no-store";
+    }
+
+    # ---- Security Headers (duplicated from Next.js middleware as defense-in-depth) ----
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+}
