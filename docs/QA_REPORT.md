@@ -3,9 +3,9 @@
 ## Latest Run
 
 - Date: 2026-06-15
-- Scope: 88CN PR #11 API Contract + Security Headers QA
-- Role: Codex Computer Use read-only QA
-- Result: PASS
+- Scope: 88CN PR #13 Submit / Claim Backend QA
+- Role: Codex Computer Use read-only QA and API acceptance
+- Result: PASS with one P1 API contract finding
 - Blocked: No
 
 ## Commands
@@ -15,10 +15,10 @@
 | 1 | `npm run verify:day0` | PASS |
 | 2 | `npm run policy:scan` | PASS |
 | 3 | `npm run third-party:check` | PASS |
-| 4 | `npm run db:schema:check` | PASS |
-| 5 | `npm run lint` | PASS |
+| 4 | `npm run db:schema:check` | PASS, 22 tables verified |
+| 5 | `npm run lint` | PASS, 0 warnings |
 | 6 | `npm run typecheck` | PASS |
-| 7 | `npm run build` | PASS |
+| 7 | `npm run build` | PASS, 32/32 pages generated |
 | 8 | `scripts/codex-preflight.sh` | PASS |
 
 ## Browser QA
@@ -28,80 +28,50 @@ Base URL: `http://localhost:3000`
 Checked pages:
 
 - `/`
-- `/projects`
-- `/projects/aurora-code`
-- `/categories/ai-agents`
-- `/collections/open-source-ai-agents`
-- `/reports/weekly-ai-project-signals-2026-06-21`
 - `/submit`
 - `/claim/aurora-code`
-- `/founders`
-- `/genesis`
+- `/projects/aurora-code`
 
 ## Screenshots
 
-| Viewport | Page | Screenshot |
+| Page / State | Screenshot |
+| --- | --- |
+| `/` | `../screenshots/qa/pr13-home.png` |
+| `/projects/aurora-code` | `../screenshots/qa/pr13-project-aurora-code.png` |
+| `/submit` initial | `../screenshots/qa/pr13-submit-initial.png` |
+| `/submit` empty form validation | `../screenshots/qa/pr13-submit-empty-validation.png` |
+| `/submit` valid minimal payload with missing Supabase env | `../screenshots/qa/pr13-submit-valid-503.png` |
+| `/claim/aurora-code` initial | `../screenshots/qa/pr13-claim-initial.png` |
+| `/claim/aurora-code` empty form validation | `../screenshots/qa/pr13-claim-empty-validation.png` |
+| `/claim/aurora-code` valid minimal payload with missing Supabase env | `../screenshots/qa/pr13-claim-valid-503.png` |
+
+## Form QA
+
+PASS:
+
+- `/submit` renders as a functional project submission form.
+- `/submit` empty form submission triggers native required-field validation for `project_name`, `category_slug`, and `one_liner`; the page does not white screen.
+- `/submit` minimal valid browser submission returns a visible graceful error when Supabase env is missing.
+- `/claim/aurora-code` renders as a functional claim form.
+- `/claim/aurora-code` empty form submission triggers native required-field validation for `claimant_name`, `claimant_email`, and `claim_method`; the page does not white screen.
+- `/claim/aurora-code` minimal valid browser submission returns a visible graceful error when Supabase env is missing.
+- Browser console error log was empty during the checked flows.
+
+Privacy / data collection check:
+
+- Submit form does not collect private revenue, API keys, Stripe data, analytics screenshots, or investor information.
+- Claim form does not collect private revenue, API keys, Stripe data, analytics screenshots, or investor information.
+
+## API QA
+
+| Request | Expected | Observed |
 | --- | --- | --- |
-| desktop | `/` | `../screenshots/qa/pr11-desktop-home.png` |
-| desktop | `/projects` | `../screenshots/qa/pr11-desktop-projects.png` |
-| desktop | `/projects/aurora-code` | `../screenshots/qa/pr11-desktop-project-aurora-code.png` |
-| desktop | `/categories/ai-agents` | `../screenshots/qa/pr11-desktop-category-ai-agents.png` |
-| desktop | `/collections/open-source-ai-agents` | `../screenshots/qa/pr11-desktop-collection-open-source-ai-agents.png` |
-| desktop | `/reports/weekly-ai-project-signals-2026-06-21` | `../screenshots/qa/pr11-desktop-report-weekly-ai-project-signals.png` |
-| desktop | `/submit` | `../screenshots/qa/pr11-desktop-submit.png` |
-| desktop | `/claim/aurora-code` | `../screenshots/qa/pr11-desktop-claim-aurora-code.png` |
-| desktop | `/founders` | `../screenshots/qa/pr11-desktop-founders.png` |
-| desktop | `/genesis` | `../screenshots/qa/pr11-desktop-genesis.png` |
-| mobile | `/` | `../screenshots/qa/pr11-mobile-home.png` |
-| mobile | `/projects` | `../screenshots/qa/pr11-mobile-projects.png` |
-| mobile | `/projects/aurora-code` | `../screenshots/qa/pr11-mobile-project-aurora-code.png` |
-| mobile | `/categories/ai-agents` | `../screenshots/qa/pr11-mobile-category-ai-agents.png` |
-| mobile | `/collections/open-source-ai-agents` | `../screenshots/qa/pr11-mobile-collection-open-source-ai-agents.png` |
-| mobile | `/reports/weekly-ai-project-signals-2026-06-21` | `../screenshots/qa/pr11-mobile-report-weekly-ai-project-signals.png` |
-| mobile | `/submit` | `../screenshots/qa/pr11-mobile-submit.png` |
-| mobile | `/claim/aurora-code` | `../screenshots/qa/pr11-mobile-claim-aurora-code.png` |
-| mobile | `/founders` | `../screenshots/qa/pr11-mobile-founders.png` |
-| mobile | `/genesis` | `../screenshots/qa/pr11-mobile-genesis.png` |
+| `POST /api/project-submissions` invalid payload | HTTP 400 `application/problem+json` | HTTP 503 `application/problem+json` |
+| `POST /api/project-claims` invalid payload | HTTP 400 `application/problem+json` | HTTP 503 `application/problem+json` |
+| `POST /api/project-submissions` valid payload, no Supabase env | HTTP 503 `application/problem+json` | HTTP 503 `application/problem+json` |
+| `POST /api/project-claims` valid payload, no Supabase env | HTTP 503 `application/problem+json` | HTTP 503 `application/problem+json` |
 
-## Visual Assessment
-
-PASS:
-
-- Middleware and security headers did not break page rendering.
-- Desktop and mobile pages retain the dark terminal visual system.
-- No sampled page showed horizontal overflow at the tested mobile viewport.
-- No browser console warnings or errors appeared on sampled pages.
-- No CSP-related browser console messages appeared on sampled pages.
-
-## Structured Data
-
-PASS:
-
-- `/categories/ai-agents` has valid `WebPage` and `ItemList` JSON-LD.
-- `/collections/open-source-ai-agents` has valid `CollectionPage` JSON-LD.
-- `/reports/weekly-ai-project-signals-2026-06-21` has valid `TechArticle` JSON-LD.
-- `/founders` has valid `WebPage` JSON-LD.
-- `/genesis` has valid `WebPage` JSON-LD.
-- Existing pages without JSON-LD remained unchanged.
-
-## Sitemap And Robots
-
-PASS:
-
-- `/sitemap.xml` returned HTTP 200.
-- `/robots.txt` returned HTTP 200.
-- Both responses included the expected global security and request ID headers.
-
-## API Contract
-
-PASS:
-
-| Endpoint | Expected | Observed |
-| --- | --- | --- |
-| `GET /api/projects/aurora-code` | HTTP 200 success envelope | HTTP 200, `application/json`, `ok: true`, `service: 88cn-web`, `data.slug: aurora-code`, `request_id` present |
-| `GET /api/projects/unknown-slug` | HTTP 404 Problem Details envelope | HTTP 404, `application/problem+json`, `ok: false`, `service: 88cn-web`, Problem Details fields present |
-
-Problem Details fields verified:
+Problem Details fields verified on every API error response:
 
 - `type`
 - `title`
@@ -110,26 +80,26 @@ Problem Details fields verified:
 - `instance`
 - `request_id`
 
-Non-public demo slug check:
+Headers verified on API responses:
 
-- Not applicable in this seed set. All demo projects in `lib/demo-projects.ts` are currently public lifecycle states, so there is no available non-public demo slug for a 403 check.
+- `x-request-id`
+- `content-type`
+- `x-content-type-options`
+- `referrer-policy`
+- `content-security-policy`
+- `permissions-policy`
 
-## Security Headers
+## Forbidden Language
 
 PASS:
 
-Checked on public pages, sitemap, robots, and API responses:
+Checked public pages `/`, `/submit`, `/claim/aurora-code`, and `/projects/aurora-code`.
 
-- `x-content-type-options`
-- `referrer-policy`
-- `permissions-policy`
-- `content-security-policy`
-- `x-request-id`
-- frame protection via `x-frame-options` or CSP `frame-ancestors`
+No exact matches were detected for the user-specified public-language ban list.
 
 ## Findings
 
 - P0: none
-- P1: none
+- P1: API invalid payloads return 503 before validation when Supabase env is missing. See `docs/FLOW_BUGS.md`.
 - P2: none
 - P3: none
