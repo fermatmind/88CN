@@ -2,10 +2,10 @@
 
 ## Latest Run
 
-- Date: 2026-06-15
-- Scope: 88CN PR #13 Submit / Claim Backend QA
-- Role: Codex Computer Use read-only QA and API acceptance
-- Result: PASS with one P1 API contract finding
+- Date: 2026-06-16
+- Scope: 88CN PR #16 API / Admin / Public Surface QA
+- Role: Codex Computer Use read-only QA and API / visual acceptance
+- Result: PASS
 - Blocked: No
 
 ## Commands
@@ -15,11 +15,12 @@
 | 1 | `npm run verify:day0` | PASS |
 | 2 | `npm run policy:scan` | PASS |
 | 3 | `npm run third-party:check` | PASS |
-| 4 | `npm run db:schema:check` | PASS, 22 tables verified |
-| 5 | `npm run lint` | PASS, 0 warnings |
-| 6 | `npm run typecheck` | PASS |
-| 7 | `npm run build` | PASS, 32/32 pages generated |
-| 8 | `scripts/codex-preflight.sh` | PASS |
+| 4 | `npm run db:schema:check` | PASS, 23 tables verified |
+| 5 | `npm run public-surface:check` | PASS |
+| 6 | `npm run lint` | PASS, 0 warnings |
+| 7 | `npm run typecheck` | PASS |
+| 8 | `npm run build` | PASS, 35/35 pages generated |
+| 9 | `scripts/codex-preflight.sh` | PASS |
 
 ## Browser QA
 
@@ -30,46 +31,55 @@ Checked pages:
 - `/`
 - `/submit`
 - `/claim/aurora-code`
+- `/admin`
+- `/admin/login`
 - `/projects/aurora-code`
 
 ## Screenshots
 
 | Page / State | Screenshot |
 | --- | --- |
-| `/` | `../screenshots/qa/pr13-home.png` |
-| `/projects/aurora-code` | `../screenshots/qa/pr13-project-aurora-code.png` |
-| `/submit` initial | `../screenshots/qa/pr13-submit-initial.png` |
-| `/submit` empty form validation | `../screenshots/qa/pr13-submit-empty-validation.png` |
-| `/submit` valid minimal payload with missing Supabase env | `../screenshots/qa/pr13-submit-valid-503.png` |
-| `/claim/aurora-code` initial | `../screenshots/qa/pr13-claim-initial.png` |
-| `/claim/aurora-code` empty form validation | `../screenshots/qa/pr13-claim-empty-validation.png` |
-| `/claim/aurora-code` valid minimal payload with missing Supabase env | `../screenshots/qa/pr13-claim-valid-503.png` |
+| `/` | `../screenshots/qa/pr16-home.png` |
+| `/submit` | `../screenshots/qa/pr16-submit.png` |
+| `/claim/aurora-code` | `../screenshots/qa/pr16-claim-aurora-code.png` |
+| `/admin` no Supabase env | `../screenshots/qa/pr16-admin.png` |
+| `/admin/login` no Supabase env | `../screenshots/qa/pr16-admin-login.png` |
+| `/projects/aurora-code` | `../screenshots/qa/pr16-project-aurora-code.png` |
 
-## Form QA
+## Admin QA
 
 PASS:
 
-- `/submit` renders as a functional project submission form.
-- `/submit` empty form submission triggers native required-field validation for `project_name`, `category_slug`, and `one_liner`; the page does not white screen.
-- `/submit` minimal valid browser submission returns a visible graceful error when Supabase env is missing.
-- `/claim/aurora-code` renders as a functional claim form.
-- `/claim/aurora-code` empty form submission triggers native required-field validation for `claimant_name`, `claimant_email`, and `claim_method`; the page does not white screen.
-- `/claim/aurora-code` minimal valid browser submission returns a visible graceful error when Supabase env is missing.
-- Browser console error log was empty during the checked flows.
+- `/admin` renders a graceful `Admin Not Configured` state when Supabase env is absent.
+- `/admin` does not expose submission or claim records.
+- `/admin/login` renders a safe configuration-missing state when Supabase env is absent.
+- `/admin/login` does not expose secret values or a hardcoded admin email.
+- Admin pages did not white screen.
+- Browser console error log was empty on sampled admin pages.
 
-Privacy / data collection check:
+## Public Page QA
 
-- Submit form does not collect private revenue, API keys, Stripe data, analytics screenshots, or investor information.
-- Claim form does not collect private revenue, API keys, Stripe data, analytics screenshots, or investor information.
+PASS:
+
+- `/submit` and `/claim/aurora-code` still render functional public forms.
+- `/submit`, `/claim/aurora-code`, `/`, and `/projects/aurora-code` returned HTTP 200.
+- No CSP or middleware-related white screens appeared on sampled pages.
+- No exact matches were detected for the user-specified public-language ban list.
 
 ## API QA
 
+PASS:
+
 | Request | Expected | Observed |
 | --- | --- | --- |
-| `POST /api/project-submissions` invalid payload | HTTP 400 `application/problem+json` | HTTP 503 `application/problem+json` |
-| `POST /api/project-claims` invalid payload | HTTP 400 `application/problem+json` | HTTP 503 `application/problem+json` |
-| `POST /api/project-submissions` valid payload, no Supabase env | HTTP 503 `application/problem+json` | HTTP 503 `application/problem+json` |
-| `POST /api/project-claims` valid payload, no Supabase env | HTTP 503 `application/problem+json` | HTTP 503 `application/problem+json` |
+| Submission invalid payload | HTTP 400 `application/problem+json` | HTTP 400 `application/problem+json` |
+| Submission valid payload, no Supabase env | HTTP 503 `application/problem+json` | HTTP 503 `application/problem+json` |
+| Submission blocked commercial-field sample A | HTTP 400 `application/problem+json` | HTTP 400 `application/problem+json` |
+| Submission blocked commercial-field sample B | HTTP 400 `application/problem+json` | HTTP 400 `application/problem+json` |
+| Claim invalid payload | HTTP 400 `application/problem+json` | HTTP 400 `application/problem+json` |
+| Claim valid payload, no Supabase env | HTTP 503 `application/problem+json` | HTTP 503 `application/problem+json` |
+| Claim blocked commercial-field sample A | HTTP 400 `application/problem+json` | HTTP 400 `application/problem+json` |
+| Claim blocked commercial-field sample B | HTTP 400 `application/problem+json` | HTTP 400 `application/problem+json` |
 
 Problem Details fields verified on every API error response:
 
@@ -80,26 +90,33 @@ Problem Details fields verified on every API error response:
 - `instance`
 - `request_id`
 
-Headers verified on API responses:
+Headers verified on API and page responses:
 
 - `x-request-id`
-- `content-type`
+- `content-security-policy`
 - `x-content-type-options`
 - `referrer-policy`
-- `content-security-policy`
 - `permissions-policy`
 
-## Forbidden Language
+## Query Noindex QA
 
 PASS:
 
-Checked public pages `/`, `/submit`, `/claim/aurora-code`, and `/projects/aurora-code`.
+| URL | Expected | Observed |
+| --- | --- | --- |
+| `/projects?bad=1` | `X-Robots-Tag: noindex, nofollow, noarchive` | present |
+| `/categories/ai-agents?search=spam` | `X-Robots-Tag: noindex, nofollow, noarchive` | present |
+| `/reports?utm_source=test` | `X-Robots-Tag: noindex, nofollow, noarchive` | present |
 
-No exact matches were detected for the user-specified public-language ban list.
+Additional checks:
+
+- `/sitemap.xml` contains no query URLs.
+- `/robots.txt` does not depend on query blocking for noindex behavior.
+- API responses are not polluted by public HTML query noindex logic.
 
 ## Findings
 
 - P0: none
-- P1: API invalid payloads return 503 before validation when Supabase env is missing. See `docs/FLOW_BUGS.md`.
+- P1: none
 - P2: none
 - P3: none
