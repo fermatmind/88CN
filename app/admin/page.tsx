@@ -60,18 +60,22 @@ export default async function AdminPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 mb-8">
-        <AdminCard
-          icon={FileText}
-          title="Submissions Review"
-          description="Review, approve, or reject project submissions. Coming in the next PR."
-          tag="Coming next"
-        />
-        <AdminCard
-          icon={UserPlus}
-          title="Claims Review"
-          description="Review and verify founder claims. Coming in the next PR."
-          tag="Coming next"
-        />
+        <Link href="/admin/submissions" className="block">
+          <AdminCard
+            icon={FileText}
+            title="Submissions Review"
+            description="Review, approve, or reject project submissions."
+            tag="Active"
+          />
+        </Link>
+        <Link href="/admin/claims" className="block">
+          <AdminCard
+            icon={UserPlus}
+            title="Claims Review"
+            description="Review and verify founder claims."
+            tag="Active"
+          />
+        </Link>
         <AdminCard
           icon={Edit3}
           title="Editorial Review"
