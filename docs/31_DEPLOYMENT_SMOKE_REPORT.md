@@ -4,6 +4,10 @@
 
 2026-06-16
 
+## Result
+
+PARTIAL.
+
 ## Deployment Target
 
 Aliyun Hong Kong.
@@ -21,13 +25,13 @@ Aliyun Hong Kong.
 | Item | Result |
 | --- | --- |
 | OS | Ubuntu 24.04.4 LTS |
-| Node version | v18.19.1 installed from Ubuntu packages |
+| Node version | v18.19.1 observed from the prior server setup attempt; Node 20+ still required before production build |
 | npm version | 9.2.0 |
 | PM2 version | 7.0.1 |
 | Nginx | Installed and service started |
 | Git | Installed |
 | curl | Installed |
-| Supabase env | not configured |
+| Supabase env status | NOT CONFIGURED |
 
 ## Source Deployment
 
@@ -39,6 +43,18 @@ Aliyun Hong Kong.
 | Source path | PASS | Source extracted to `/var/www/88cn`. |
 | Source SHA | PASS | Server-local `.deployed-source-sha` recorded the deployed `origin/main` SHA. |
 | Dependency install | PASS with warnings | `npm ci` completed. Node engine warnings appeared because the server had Node 18 while current dependencies request Node 20+. |
+
+## PR #19 Continuation Attempt
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| ECS status | PASS | Aliyun Hong Kong instance was visible and running in the ECS console. |
+| Cloud Assistant agent | PASS | Agent status was normal in the console. |
+| Inbound network reachability | PARTIAL | TCP checks from the local workstation reached ports 22, 80, and 443. |
+| SSH login | BLOCKED | SSH established the TCP connection but timed out during banner exchange before authentication. |
+| Cloud Assistant command entry | BLOCKED | The console command editor did not reliably replace script content; a residual partial script was discarded rather than executed. |
+| DNS verification | PARTIAL | Local resolver did not return the ECS public host for `88cn.com` / `www.88cn.com` during this continuation run. |
+| Public HTTPS smoke | BLOCKED | Public HTTPS requests failed before application smoke could run because DNS/TLS was not live. |
 
 ## PM2 Status Summary
 
@@ -103,13 +119,18 @@ Browser screenshots were not captured. Capturing Workbench or Aliyun console scr
 
 ## Known Limitations
 
-1. Local SSH to the server timed out during banner exchange even after adding the local public key to `authorized_keys`.
-2. Aliyun Workbench terminal repeatedly disconnected with WebSocket errors during long-running validation.
-3. Workbench text input removed literal `:`, `?`, and some punctuation in pasted commands; commands had to be rewritten with shell-generated delimiters.
-4. GitHub deploy key registration succeeded through GitHub API, but server-side SSH clone was still rejected by GitHub.
-5. Server currently has Node v18.19.1; current dependencies request Node 20+ and should be upgraded before production build.
-6. TLS, PM2 startup, Nginx reverse proxy, and public smoke tests remain pending.
+1. Local SSH to the server timed out during banner exchange before authentication.
+2. Aliyun Workbench terminal previously disconnected with WebSocket errors during long-running validation.
+3. Workbench text input previously removed literal `:`, `?`, and some punctuation in pasted commands.
+4. Cloud Assistant command editor did not reliably replace the full command body during PR #19 continuation, so no command was executed from the residual editor state.
+5. GitHub deploy key registration previously succeeded through GitHub API, but server-side SSH clone was still rejected by GitHub.
+6. Server currently needs Node 20+ before production build.
+7. DNS, TLS, PM2 startup, Nginx reverse proxy finalization, and public smoke tests remain pending.
 
-## Result
+## Secrets
 
-PARTIAL / BLOCKED. Infrastructure purchase, DNS setup, base runtime installation, source extraction, and dependency install were completed. Production build, PM2 startup, Nginx finalization, TLS, and live smoke checks remain blocked by SSH/Workbench connectivity and Node runtime version.
+REDACTED.
+
+## Final Status
+
+PARTIAL. Infrastructure exists and the ECS agent is reachable through Aliyun console surfaces, but the live deployment could not be safely completed in this run because SSH banner exchange timed out and Cloud Assistant command editing was unreliable. No server IPs, SSH keys, archive URLs, environment values, or certificate material were written to this repository.

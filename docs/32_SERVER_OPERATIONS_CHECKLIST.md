@@ -4,6 +4,34 @@
 
 Operational checklist for the Aliyun Hong Kong 88CN host. Server identifiers, IPs, credentials, environment values, and certificate paths must stay outside git.
 
+## Restore SSH Before Production Changes
+
+Before completing production deployment, verify that SSH returns a banner and accepts the approved admin key from the operator workstation:
+
+```bash
+ssh -o ConnectTimeout=10 root@<redacted-host> 'echo ok'
+```
+
+If the connection times out during banner exchange:
+
+1. Use Aliyun console access to inspect `sshd` status.
+2. Confirm the host firewall and Aliyun security group both allow port 22.
+3. Restart `sshd` only from the server console or another verified access path.
+4. Retry SSH before running build, PM2, Nginx, or TLS commands.
+
+Do not store host addresses, passwords, private keys, or console recovery values in this repository.
+
+## Prepare Node Runtime
+
+The production host must run Node 20+ before building:
+
+```bash
+node -v
+npm -v
+```
+
+If Node is older than 20, upgrade through the server package manager or another approved server-local method, then re-run the full validation stack before PM2 startup.
+
 ## Restart PM2
 
 ```bash
