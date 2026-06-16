@@ -2,6 +2,16 @@
 # Copy to /etc/nginx/sites-available/88cn.conf and symlink to sites-enabled
 # Replace server_name and SSL paths for your domain
 
+# ---- Rate Limiting Zones ----
+# Submission endpoints: 5 requests per minute per IP — prevents spam floods
+limit_req_zone $binary_remote_addr zone=submit:10m rate=5r/m;
+
+# Claim endpoints: 5 requests per minute per IP
+limit_req_zone $binary_remote_addr zone=claim:10m rate=5r/m;
+
+# General API zone: 30 requests per second per IP
+limit_req_zone $binary_remote_addr zone=api:10m rate=30r/s;
+
 # Redirect HTTP to HTTPS
 server {
     listen 80;
@@ -22,13 +32,40 @@ server {
     root /var/www/88cn;
     index index.html;
 
-    client_max_body_size 2m;
+    # Global body size limit — 64KB max for API endpoints
+    client_max_body_size 64k;
 
     # Gzip compression
     gzip on;
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/javascript image/svg+xml;
     gzip_min_length 1000;
     gzip_vary on;
+
+    # ---- Intake Endpoints (Rate-Limited) ----
+
+    location = /api/project-submissions {
+        limit_req zone=submit burst=3 nodelay;
+        limit_req_status 429;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, max-age=0";
+        add_header Retry-After "60" always;
+    }
+
+    location = /api/project-claims {
+        limit_req zone=claim burst=3 nodelay;
+        limit_req_status 429;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, max-age=0";
+        add_header Retry-After "60" always;
+    }
 
     # ---- No Cache Zones ----
     location /admin {
@@ -59,22 +96,16 @@ server {
     }
 
     # ---- API Zone ----
-    # Basic rate limiting example (uncomment to enable)
-    # limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
-
     location /api/ {
+        limit_req zone=api burst=20 nodelay;
+        limit_req_status 429;
         proxy_pass http://127.0.0.1:3000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         add_header Cache-Control "no-store, max-age=0";
-        # limit_req zone=api burst=20 nodelay;
     }
-
-    # proxy_set_header needed for Next.js to know the original protocol
-    # Without Host, Next.js cannot resolve dynamic routes correctly
-    # Without X-Forwarded-Proto, Next.js may generate http:// URLs on https://
 
     # ---- Public Cacheable Zone ----
     # In production, consider enabling short-lived cache for these paths:
@@ -90,7 +121,6 @@ server {
     }
 
     # ---- Next.js Static Assets ----
-    # _next/static files are immutable and versioned by content hash
     location /_next/static {
         proxy_pass http://127.0.0.1:3000;
         proxy_set_header Host $host;
@@ -99,7 +129,6 @@ server {
     }
 
     # ---- Health Check ----
-    # Allow health check endpoint without auth
     location = /api/healthz {
         proxy_pass http://127.0.0.1:3000;
         proxy_set_header Host $host;

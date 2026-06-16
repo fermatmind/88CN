@@ -70,6 +70,9 @@ export const projectSubmissionSchema = z.object({
     .max(1000, "Growth note must be under 1000 characters")
     .optional()
     .or(z.literal("")),
+  // Honeypot fields — allowed in schema, rejected by precheck if filled
+  company_homepage: z.string().optional().or(z.literal("")),
+  fax_number: z.string().optional().or(z.literal("")),
 }).strict();
 
 export type ProjectSubmissionInput = z.infer<

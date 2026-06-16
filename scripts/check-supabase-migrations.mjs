@@ -7,6 +7,7 @@ const MIGRATION_FILES = [
   path.join(ROOT, 'supabase', 'migrations', '002_audit_notification.sql'),
   path.join(ROOT, 'supabase', 'migrations', '003_admin_users.sql'),
   path.join(ROOT, 'supabase', 'migrations', '004_needs_info_status.sql'),
+  path.join(ROOT, 'supabase', 'migrations', '005_intake_indexes.sql'),
 ];
 
 const errors = [];

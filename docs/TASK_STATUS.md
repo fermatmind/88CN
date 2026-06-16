@@ -19,6 +19,7 @@
 | Submit + claim backend | Complete | Supabase client, Zod validation, POST /api/project-submissions, POST /api/project-claims, audit_events, notification_events (PR #12). |
 | Admin auth guard | Complete | Supabase Auth, admin_users table, is_admin() guard, admin shell with placeholder cards, no review logic yet (PR #14). |
 | Admin review | Complete | Submissions/claims review UI, two-step publish, approve/reject/needs_info actions, audit events, notification events (PR #20). |
+| Intake firewall | Complete | Nginx rate-limit, body size guard, honeypot fields, URL protocol guard, keyword scan, category allowlist, 64KB limit, intake indexes (PR #22). |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |

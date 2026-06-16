@@ -141,6 +141,12 @@ export default function ClaimForm({
         />
       </div>
 
+      {/* Honeypot fields — hidden from users, filled by bots */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }}>
+        <input type="text" name="contact_company" tabIndex={-1} autoComplete="off" />
+        <input type="text" name="website_confirm" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="flex flex-col items-start gap-3">
         <button
           type="submit"

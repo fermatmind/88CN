@@ -40,6 +40,9 @@ export const projectClaimSchema = z.object({
     .max(1000, "Proof note must be under 1000 characters")
     .optional()
     .or(z.literal("")),
+  // Honeypot fields — allowed in schema, rejected by precheck if filled
+  contact_company: z.string().optional().or(z.literal("")),
+  website_confirm: z.string().optional().or(z.literal("")),
 }).strict();
 
 export type ProjectClaimInput = z.infer<typeof projectClaimSchema>;
