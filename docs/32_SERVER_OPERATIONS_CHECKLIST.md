@@ -57,6 +57,23 @@ systemctl reload nginx
 systemctl status nginx --no-pager
 ```
 
+## Verify Intake Firewall
+
+After any Nginx change, confirm the intake firewall is still present without printing the full live config:
+
+```bash
+nginx -t
+grep -E 'limit_req_zone|client_max_body_size|project-submissions|project-claims|limit_req_status 429|Retry-After' /etc/nginx/sites-available/88cn.conf
+systemctl reload nginx
+```
+
+Required behavior:
+
+- Submit and claim intake endpoints enforce the 64k body limit.
+- Low-intensity repeated invalid POSTs eventually return 429.
+- Throttled responses include `Retry-After`, `x-request-id`, and security headers.
+- `/admin`, `/submit`, `/claim`, and `/api` responses are not cached.
+
 ## Renew TLS
 
 ```bash
