@@ -152,6 +152,12 @@ export default function SubmitForm() {
         />
       </Section>
 
+      {/* Honeypot fields — hidden from users, filled by bots */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }}>
+        <input type="text" name="company_homepage" tabIndex={-1} autoComplete="off" />
+        <input type="text" name="fax_number" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="flex flex-col items-start gap-3">
         <button
           type="submit"

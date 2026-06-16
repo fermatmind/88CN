@@ -110,3 +110,11 @@ export function unauthorized(
 ): ProblemDetail {
   return problem(401, "Unauthorized", detail, instance, undefined, request_id);
 }
+
+export function payloadTooLarge(
+  detail: string,
+  instance?: string,
+  request_id?: string
+): ProblemDetail {
+  return problem(413, "Payload Too Large", detail, instance, undefined, request_id);
+}
