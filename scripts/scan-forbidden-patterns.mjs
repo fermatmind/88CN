@@ -17,6 +17,7 @@ const allowlist = new Set([
   'lib/index-data/forbidden-fields.ts',
   'lib/index-data/config.ts',
   'lib/index-data/source.ts',
+  'scripts/check-geo-checker.mjs',
   'docs/RISK_ACCEPTANCE_LOG.md',
   'third_party/NOTICE.md',
   'scripts/scan-forbidden-patterns.mjs',
