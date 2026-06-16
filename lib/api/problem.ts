@@ -102,3 +102,11 @@ export function forbidden(
 ): ProblemDetail {
   return problem(403, "Forbidden", detail, instance, undefined, request_id);
 }
+
+export function unauthorized(
+  detail: string,
+  instance?: string,
+  request_id?: string
+): ProblemDetail {
+  return problem(401, "Unauthorized", detail, instance, undefined, request_id);
+}
