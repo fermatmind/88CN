@@ -82,12 +82,14 @@ export default async function AdminPage() {
           description="Review AI-generated editorial drafts. Coming in a later PR."
           tag="Coming later"
         />
-        <AdminCard
-          icon={RefreshCw}
-          title="Source Refresh Jobs"
-          description="Monitor and manage external source refresh jobs. Coming in a later PR."
-          tag="Coming later"
-        />
+        <Link href="/admin/external-imports" className="block">
+          <AdminCard
+            icon={RefreshCw}
+            title="External Imports"
+            description="Manage external project data imports from 88cn-index-data."
+            tag="Active"
+          />
+        </Link>
       </div>
 
       <div className="flex items-center gap-4">
