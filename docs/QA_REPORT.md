@@ -120,3 +120,35 @@ Additional checks:
 - P1: none
 - P2: none
 - P3: none
+
+---
+
+# PR #26: OSS Data Repo + External Import QA
+
+## Result
+
+PASS. See `docs/38_OSS_DATA_REPO_EXTERNAL_IMPORT_QA.md` for the full cross-repo QA report.
+
+## Scope
+
+- Verified `fermatmind/88cn-index-data` public repo structure, schema, validation scripts, privacy checks, GitHub Action, PR template, and CODEOWNERS.
+- Verified temporary negative data-repo cases fail as expected and leave the data repo clean.
+- Verified 88CN external import integration is admin-gated and stages only into `external_project_imports`.
+- Verified unauthenticated admin external import APIs return `401 application/problem+json` without exposing import payloads, tokens, env values, or staged data.
+
+## Screenshots
+
+| Surface | Screenshot |
+| --- | --- |
+| 88cn-index-data repository | `../screenshots/qa/pr26-index-data-repo.png` |
+| 88cn-index-data Actions | `../screenshots/qa/pr26-index-data-actions.png` |
+| 88cn-index-data PR template | `../screenshots/qa/pr26-index-data-pr-template.png` |
+| Local `/admin/external-imports` | `../screenshots/qa/pr26-admin-external-imports.png` |
+| Local `/api/admin/external-imports` unauthorized response | `../screenshots/qa/pr26-admin-external-imports-unauthorized.png` |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: none
+- P3: none
