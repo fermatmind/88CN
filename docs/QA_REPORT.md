@@ -123,6 +123,47 @@ Additional checks:
 
 ---
 
+# PR #28: AI Search Readiness Checker QA + Live Deploy Smoke
+
+## Result
+
+PARTIAL on deployed `main`; remediation PASS on this PR branch. See `docs/40_AI_SEARCH_READINESS_CHECKER_QA.md` for the full local, live deployment, API, browser, sitemap, header, Nginx rate-limit, and remediation report.
+
+## Scope
+
+- Verified latest main at commit `588cd61`.
+- Deployed latest main to `88cn.com` through Cloud Assistant after SSH proved unstable.
+- Verified server `npm ci`, full gate stack, and `npm run build:production`.
+- Verified PM2 `88cn-web` online and Nginx syntax check passing.
+- Verified `/geo-checker` local and live page rendering.
+- Verified `POST /api/geo-checker` happy path using a public URL sample.
+- Verified live headers, sitemap inclusion, and low-intensity Nginx rate-limit behavior.
+
+## Screenshots
+
+| Surface | Screenshot |
+| --- | --- |
+| Local `/geo-checker` desktop | `../screenshots/qa/pr28-local-geo-checker-desktop.png` |
+| Local `/geo-checker` mobile | `../screenshots/qa/pr28-local-geo-checker-mobile.png` |
+| Local `/geo-checker` result | `../screenshots/qa/pr28-local-geo-checker-result.png` |
+| Live home | `../screenshots/qa/pr28-live-home.png` |
+| Live `/geo-checker` | `../screenshots/qa/pr28-live-geo-checker.png` |
+| Live `/geo-checker` result | `../screenshots/qa/pr28-live-geo-checker-result.png` |
+| Live `/geo-checker` mobile | `../screenshots/qa/pr28-live-geo-checker-mobile.png` |
+| Live `/submit` | `../screenshots/qa/pr28-live-submit.png` |
+| Live `/admin` | `../screenshots/qa/pr28-live-admin.png` |
+| Live `/founders` | `../screenshots/qa/pr28-live-founders.png` |
+| Live `/genesis` | `../screenshots/qa/pr28-live-genesis.png` |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: two findings recorded in `docs/FLOW_BUGS.md`, both remediated in this PR branch and pending live redeploy verification
+- P3: none
+
+---
+
 # PR #26: OSS Data Repo + External Import QA
 
 ## Result

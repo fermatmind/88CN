@@ -54,7 +54,7 @@ const VALUES = [
     icon: Ban,
     title: "What We Do Not Promise",
     description:
-      "88CN does not promise traffic, ranking improvements, SEO benefits, or backlinks. The index is a public discovery tool based on growth signals — not a traffic-generation service. Project profiles are informational. There are no guaranteed outcomes from listing or claiming.",
+      "88CN does not promise traffic, ranking improvements, SEO benefits, or link placement. The index is a public discovery tool based on growth signals — not a traffic-generation service. Project profiles are informational. There are no guaranteed outcomes from listing or claiming.",
   },
 ];
 
