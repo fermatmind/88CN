@@ -4,7 +4,17 @@
 
 It helps early AI builders, researchers, and future agent systems understand public AI projects through reviewed project profiles, machine-readability checks, public source links, and structured metadata.
 
-88CN is not a generic AI tools directory, a paid placement exchange, an automated content farm, an investment platform, or a private-data collection product.
+88CN is not a generic AI tools directory, a paid machine-ranking system, an automated content farm, an investment platform, or a private-data collection product.
+
+---
+
+## Name and positioning
+
+88CN is used as a compact infrastructure mark for the 88CN project.
+
+The name does not imply a regional gate, financial product, search ranking promise, or commercial placement guarantee. In this repository, 88CN refers to the open project index, review workflow, and structured signal system used to describe public AI projects.
+
+The meaning of the brand is built through code, reviewed data, public reports, and repeatable machine-readability checks.
 
 ---
 
@@ -44,8 +54,9 @@ The first version of 88CN focuses on one practical problem:
 - external import integration for the open data repository
 - production deployment on 88cn.com
 - companion open data repository for public project metadata
+- initial Seed 100 project corpus in the open data repository
 
-The project is still in early alpha. Public data, project review rules, and operational tooling are being developed through small pull requests with strict review boundaries.
+The project is still in early alpha. Public data, project review rules, operational tooling, and machine-readability reports are being developed through small pull requests with strict review boundaries.
 
 ---
 
@@ -67,6 +78,7 @@ This repository contains:
 - public-surface checks
 - deployment and QA reports
 - machine-readability tooling
+- external import integration
 
 ### Open data repository
 
@@ -103,6 +115,8 @@ Only reviewed public project profiles may be published.
 
 Submitted, pending, quarantined, or unreviewed data must not be added to the public sitemap, public API, or future machine-readable agent payloads.
 
+Runtime failures from imported public data, such as DNS failure, timeout, redirect loops, or unreachable websites, should be recorded as quarantine signals rather than silently promoted into public project records.
+
 ---
 
 ## Machine-readable profiles
@@ -120,7 +134,7 @@ A published project profile may include:
 - public metadata checks
 - review status
 
-88CN does not promise search placement, traffic, third-party indexing outcomes, or inclusion in any external system.
+88CN does not promise search placement, traffic, third-party indexing outcomes, AI citations, or inclusion in any external system.
 
 ---
 
@@ -175,7 +189,7 @@ Paid visibility, if enabled, is a user-interface placement only.
 - a fundraising platform
 - a token project
 - a private-data broker
-- a promise of traffic, ranking, or external discovery outcomes
+- a promise of traffic, ranking, AI citation, or external discovery outcomes
 
 ---
 
@@ -217,9 +231,10 @@ The current near-term roadmap is:
 
 1. validate that the Seed 100 open data corpus can be consumed safely by the web application
 2. ensure seed projects do not auto-publish or leak into the sitemap
-3. run a machine-readability audit over the seed corpus
-4. publish the first data-backed founder intent signal report
-5. connect the report to the AI Search Readiness Checker, submit flow, and claim flow
+3. quarantine runtime failures such as unreachable websites, DNS failures, timeouts, or redirect loops
+4. run a machine-readability audit over the seed corpus
+5. publish the first data-backed founder intent signal report
+6. connect the report to the AI Search Readiness Checker, submit flow, and claim flow
 
 The near-term goal is to produce a public, data-backed report that helps early AI founders understand how machine-readable their project websites are.
 
@@ -275,4 +290,4 @@ Security-sensitive findings should be reported privately to the maintainer.
 
 88CN is currently maintained by FermatMind as a solo-founder, AI-native infrastructure project.
 
-The project is built through small, auditable pull requests with strict separation between build tasks, QA tasks, public data, admin review, and future commercial surfaces.
+The project is built through small, auditable pull requests with strict separation between build tasks, QA tasks, public data, admin review, deployment operations, and future commercial surfaces.
