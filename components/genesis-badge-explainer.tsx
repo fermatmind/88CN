@@ -34,13 +34,13 @@ const ATTRIBUTES = [
     icon: Code,
     title: "Optional Embed Planned",
     description:
-      "In a future phase, verified projects may embed a Genesis Badge on their own websites. This embed will be optional and will not require backlinks, payment, or any mandatory attribution format.",
+      "In a future phase, verified projects may embed a Genesis Badge on their own websites. This embed will be optional and will not require reciprocal links, payment, or any mandatory attribution format.",
   },
   {
     icon: Link,
-    title: "No Forced Backlinks",
+    title: "No Forced Link Placement",
     description:
-      "The Genesis Badge does not require, imply, or incentivize backlinks. There are no SEO obligations, link schemes, or ranking promises associated with the badge. Badge display is purely informational.",
+      "The Genesis Badge does not require, imply, or incentivize reciprocal links. There are no SEO obligations, link schemes, or ranking promises associated with the badge. Badge display is purely informational.",
   },
 ];
 

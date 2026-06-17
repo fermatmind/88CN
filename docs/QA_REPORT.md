@@ -127,7 +127,7 @@ Additional checks:
 
 ## Result
 
-PARTIAL. See `docs/40_AI_SEARCH_READINESS_CHECKER_QA.md` for the full local, live deployment, API, browser, sitemap, header, and Nginx rate-limit report.
+PARTIAL on deployed `main`; remediation PASS on this PR branch. See `docs/40_AI_SEARCH_READINESS_CHECKER_QA.md` for the full local, live deployment, API, browser, sitemap, header, Nginx rate-limit, and remediation report.
 
 ## Scope
 
@@ -159,7 +159,7 @@ PARTIAL. See `docs/40_AI_SEARCH_READINESS_CHECKER_QA.md` for the full local, liv
 
 - P0: none
 - P1: none
-- P2: two findings recorded in `docs/FLOW_BUGS.md`
+- P2: two findings recorded in `docs/FLOW_BUGS.md`, both remediated in this PR branch and pending live redeploy verification
 - P3: none
 
 ---

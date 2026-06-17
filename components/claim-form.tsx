@@ -187,7 +187,7 @@ export default function ClaimForm({
 
       <p className="text-[11px] text-terminal-dim leading-relaxed">
         Claims are reviewed by the 88CN editorial team. No ranking guarantees.
-        No backlink promises. Verification is for public signal accuracy only.
+        No link placement promises. Verification is for public signal accuracy only.
       </p>
     </form>
   );

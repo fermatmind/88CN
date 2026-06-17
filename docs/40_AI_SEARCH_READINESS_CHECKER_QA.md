@@ -2,14 +2,20 @@
 
 ## Result
 
-PARTIAL.
+PARTIAL on the deployed `main` snapshot; REMEDIATION PASS on this PR branch.
 
 The feature is deployed live and the main happy path works locally and on `88cn.com`, including `/geo-checker`, `POST /api/geo-checker`, sitemap inclusion, security headers, PM2 restart, and Nginx syntax validation.
 
-Two QA findings remain:
+The original live QA found two P2 issues:
 
 - P2 API guard ordering: a URL with embedded credentials returns `502 application/problem+json` instead of the expected guard-layer `400 application/problem+json`.
 - P2 public copy: a PR #28 restricted link-promise term appears on `/submit`, `/founders`, and `/genesis`.
+
+Follow-up remediation in this PR branch:
+
+- Embedded-credential URL now returns `400 application/problem+json` locally.
+- IPv6 loopback URL now returns `400 application/problem+json` locally.
+- The restricted public-copy term was removed from app and component public UI files.
 
 No high-volume load test was performed.
 
@@ -50,8 +56,8 @@ Base URL: `http://localhost:3000`
 | Localhost target | 400 Problem Details | PASS |
 | IPv4 loopback target | 400 Problem Details | PASS |
 | Zero-address target | 400 Problem Details | PASS |
-| IPv6 loopback target | 400 Problem Details | FAIL, returned 502 Problem Details |
-| URL with embedded credentials | 400 Problem Details | FAIL, returned 502 Problem Details |
+| IPv6 loopback target | 400 Problem Details | PASS after remediation |
+| URL with embedded credentials | 400 Problem Details | PASS after remediation |
 | Non-standard port | 400 Problem Details | PASS |
 | Missing URL | 400 Problem Details | PASS |
 | Empty body | 400 Problem Details | PASS |
@@ -147,7 +153,7 @@ Headers verified on `/geo-checker`:
 | Valid public URL sample: `https://88cn.com` | 200 JSON with score and checks | PASS, score 40, 11 checks |
 | HTTP scheme | 400 Problem Details | PASS |
 | Localhost target | 400 Problem Details | PASS |
-| URL with embedded credentials | 400 Problem Details | FAIL, returned 502 Problem Details |
+| URL with embedded credentials | 400 Problem Details | FAIL on deployed snapshot; fixed locally in this PR branch |
 | Non-standard port | 400 Problem Details | PASS |
 | Invalid JSON | 400 Problem Details | PASS |
 
@@ -220,10 +226,12 @@ Checked public pages:
 - `/founders`
 - `/genesis`
 
-Observed:
+Observed on the deployed snapshot:
 
 - `/` and `/geo-checker` passed the PR #28 public-copy scan.
 - `/submit`, `/founders`, and `/genesis` contain one restricted link-promise term from the PR #28 ban list.
+
+Follow-up remediation in this PR branch removed that restricted public-copy term from the public UI files.
 
 ## Known Limitations
 
@@ -234,4 +242,4 @@ Observed:
 
 ## Next Recommended Action
 
-OpenCode should fix the P2 guard-ordering issue for embedded-credential URLs and IPv6 loopback URLs, then replace the restricted link-promise term on public pages with approved 88CN language.
+Merge this PR, redeploy, then rerun the PR #28 live smoke to confirm the deployed site reaches LIVE PASS.

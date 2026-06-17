@@ -19,14 +19,6 @@ export type SsrfGuardResult = {
 export function ssrfGuard(rawUrl: string): SsrfGuardResult {
   let urlStr = rawUrl.trim();
 
-  // Reject credentials in URL
-  if (urlStr.includes("@") && urlStr.includes("://")) {
-    const afterScheme = urlStr.split("://")[1] || "";
-    if (afterScheme.includes("@") && afterScheme.indexOf("@") < afterScheme.indexOf("/")) {
-      return { ok: false, error: "URLs with credentials are not accepted.", status: 400 };
-    }
-  }
-
   let parsed: URL;
   try {
     parsed = new URL(urlStr);
@@ -39,12 +31,17 @@ export function ssrfGuard(rawUrl: string): SsrfGuardResult {
     return { ok: false, error: "Only https:// URLs are accepted.", status: 400 };
   }
 
+  // Reject credentials in URL before any network fetch.
+  if (parsed.username || parsed.password) {
+    return { ok: false, error: "URLs with credentials are not accepted.", status: 400 };
+  }
+
   // Port check
   if (parsed.port && parsed.port !== "443") {
     return { ok: false, error: "Only default HTTPS port (443) is accepted.", status: 400 };
   }
 
-  const hostname = parsed.hostname.toLowerCase();
+  const hostname = normalizeHostname(parsed.hostname);
 
   // Blocked hostnames
   if (BLOCKED_HOSTS.has(hostname)) {
@@ -78,6 +75,10 @@ export function ssrfGuard(rawUrl: string): SsrfGuardResult {
   const normalized = parsed.toString().replace(/\/$/, "") || parsed.origin;
 
   return { ok: true, normalized_url: normalized };
+}
+
+function normalizeHostname(hostname: string): string {
+  return hostname.toLowerCase().replace(/^\[|\]$/g, "");
 }
 
 function isPrivateOrReservedIP(ip: string): boolean {

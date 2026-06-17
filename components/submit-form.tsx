@@ -198,7 +198,7 @@ export default function SubmitForm() {
 
       <p className="text-[11px] text-terminal-dim leading-relaxed">
         Create a free structured AI project profile. No ranking guarantees. No
-        backlink promises. Submissions are reviewed for public growth signals
+        link placement promises. Submissions are reviewed for public growth signals
         and editorial quality.
       </p>
     </form>
