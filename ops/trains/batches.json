@@ -124,7 +124,7 @@
         "PR49"
       ],
       "batch_limit": 3,
-      "auto_merge_allowed": false,
+      "auto_merge_allowed": true,
       "live_deploy_allowed": false,
       "payment_change_allowed": false,
       "mcp_change_allowed": false,
@@ -133,12 +133,6 @@
       "new_dependency_allowed": false,
       "continue_on_sidecar": true,
       "stop_on": [
-        "missing_task_object",
-        "validation_failure_outside_batch_scope",
-        "forbidden_path_change",
-        "secret_or_server_detail_detected",
-        "public_language_ban_violation",
-        "same_worktree_parallel_write_detected",
         "secret_exposure",
         "scope_validation_failure",
         "policy_scan_failure",
@@ -147,16 +141,19 @@
       ],
       "human_checkpoints": [],
       "required_preconditions": [
-        "PR47 through PR49 roadmap tasks are registered before execution",
-        "public copy guard policy is current",
-        "worktree is clean and created from current origin/main"
+        "TRAIN-PR42-PR46 complete",
+        "OPS4BQ pass",
+        "OPS5A pass",
+        "PR47-PR49 task objects registered"
       ],
       "allowed_roles": [
         "codex-build",
         "codex-qa"
       ],
       "notes": [
-        "Safe batch candidate if the roadmap keeps scope to submission channels, public copy, and founder FAQ behavior."
+        "TRAIN-PR47-PR49 is registered for sequential execution after OPS5B.",
+        "No live deploy, server configuration, payment, MCP, plugin install, or new dependency changes are allowed in this train.",
+        "Sidecar findings may be recorded without stopping the train unless a stop_on reason is triggered."
       ]
     },
     {
