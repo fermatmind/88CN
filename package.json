@@ -23,6 +23,7 @@
     "seed-audit:run": "node scripts/audit-seed-100-readiness.mjs --data-repo ../88cn-index-data --out data/audits/seed-100-readiness --concurrency 2 --timeout 5000 --max-body 262144",
     "seed-audit:check": "node scripts/check-seed-100-readiness-audit.mjs",
     "report:founder-intent:check": "node scripts/check-founder-intent-report.mjs",
+    "editorial-draft:check": "node scripts/check-editorial-draft-pipeline.mjs",
     "brand-voice:check": "node scripts/check-brand-voice.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",

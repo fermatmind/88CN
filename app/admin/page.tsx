@@ -76,12 +76,14 @@ export default async function AdminPage() {
             tag="Active"
           />
         </Link>
-        <AdminCard
-          icon={Edit3}
-          title="Editorial Review"
-          description="Review AI-generated editorial drafts. Coming in a later PR."
-          tag="Coming later"
-        />
+        <Link href="/admin/editorial" className="block">
+          <AdminCard
+            icon={Edit3}
+            title="Editorial Review"
+            description="Review draft-only editorial notes before any publication workflow."
+            tag="Active"
+          />
+        </Link>
         <Link href="/admin/external-imports" className="block">
           <AdminCard
             icon={RefreshCw}
