@@ -4,6 +4,7 @@ import { siteTitle, noIndex } from "@/lib/seo";
 import { Shield, ShieldAlert, ArrowLeft, Download, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { summarizeImportRows } from "@/lib/index-data/import-summary";
 
 export const metadata: Metadata = {
   title: siteTitle("Admin — External Imports"),
@@ -45,9 +46,13 @@ export default async function ExternalImportsPage() {
 
   const { data: imports } = await client
     .from("external_project_imports")
-    .select("id, source_name, source_url, status, import_fingerprint, created_at")
+    .select("id, source_name, source_url, status, import_fingerprint, quarantine_reason_code, quarantine_details, last_imported_at, created_at")
     .order("created_at", { ascending: false })
     .limit(50);
+
+  const rows = imports ?? [];
+  const summary = summarizeImportRows(rows);
+  const activeReasons = Object.entries(summary.reasons).filter(([, count]) => count > 0);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
@@ -76,6 +81,34 @@ export default async function ExternalImportsPage() {
             Last sync: <span className="text-terminal-muted">Manual trigger only</span>
           </span>
         </div>
+        <div className="mt-4 grid gap-2 sm:grid-cols-5">
+          {[
+            ["total", summary.total],
+            ["pending review", summary.accepted],
+            ["quarantined", summary.quarantined],
+            ["duplicates", summary.duplicates],
+            ["rejected", summary.rejected],
+          ].map(([label, value]) => (
+            <div key={String(label)} className="rounded-md border border-terminal-border bg-terminal-bg px-3 py-2">
+              <div className="text-[10px] uppercase tracking-wide text-terminal-dim">{label}</div>
+              <div className="mt-1 font-mono text-sm text-terminal-fg">{String(value)}</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 rounded-md border border-terminal-border bg-terminal-bg p-3">
+          <div className="mb-2 text-[10px] uppercase tracking-wide text-terminal-dim">Reason counts</div>
+          {activeReasons.length === 0 ? (
+            <p className="text-[10px] text-terminal-dim">No quarantine reasons recorded.</p>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {activeReasons.map(([reason, count]) => (
+                <span key={reason} className="rounded border border-terminal-border px-2 py-1 font-mono text-[10px] text-terminal-muted">
+                  {reason}: {count}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
         <div className="mt-3 flex items-center gap-2">
           <form action="/api/admin/external-imports/sync" method="post">
             <input type="hidden" name="source" value="local" />
@@ -88,13 +121,13 @@ export default async function ExternalImportsPage() {
         </div>
       </div>
 
-      {(!imports || imports.length === 0) ? (
+      {rows.length === 0 ? (
         <div className="rounded-lg border border-terminal-border bg-terminal-surface p-8 text-center">
           <p className="text-xs text-terminal-dim">No external imports staged yet.</p>
         </div>
       ) : (
         <div className="space-y-2">
-          {imports.map((imp: Record<string, unknown>) => (
+          {rows.map((imp: Record<string, unknown>) => (
             <div
               key={String(imp.id)}
               className="flex items-center justify-between rounded-lg border border-terminal-border bg-terminal-surface p-3 text-xs"
@@ -108,6 +141,11 @@ export default async function ExternalImportsPage() {
                   <span className="rounded border border-terminal-border px-1 py-0.5 text-[10px]">
                     {String(imp.status || "—")}
                   </span>
+                  {imp.quarantine_reason_code ? (
+                    <span className="rounded border border-amber-500/30 px-1 py-0.5 text-[10px] text-amber-300">
+                      {String(imp.quarantine_reason_code)}
+                    </span>
+                  ) : null}
                 </div>
               </div>
               <span className="shrink-0 text-[10px] text-terminal-dim ml-2">

@@ -314,7 +314,11 @@
         "lib/index-data/**",
         "lib/admin/**",
         "scripts/check-external-import-integration.mjs",
+        "scripts/check-external-import-quarantine.mjs",
+        "supabase/migrations/**",
         "docs/**",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
         "package.json"
       ],
       "forbidden_paths": [

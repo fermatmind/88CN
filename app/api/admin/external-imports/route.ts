@@ -4,6 +4,7 @@ import { getAdminClient } from "@/lib/supabase/admin-server";
 import { getOrCreateRequestId } from "@/lib/api/request-id";
 import { success, errorResponse } from "@/lib/api/response";
 import { unauthorized, forbidden, serviceUnavailable } from "@/lib/api/problem";
+import { summarizeImportRows } from "@/lib/index-data/import-summary";
 
 export async function GET() {
   const requestId = getOrCreateRequestId();
@@ -24,7 +25,7 @@ export async function GET() {
 
   const { data, error } = await client
     .from("external_project_imports")
-    .select("id, source_name, source_url, status, import_fingerprint, created_at")
+    .select("id, source_name, source_url, status, import_fingerprint, quarantine_reason_code, quarantine_details, last_imported_at, created_at")
     .order("created_at", { ascending: false })
     .limit(100);
 
@@ -32,5 +33,8 @@ export async function GET() {
     return errorResponse(serviceUnavailable("Failed to fetch imports.", instance, requestId), requestId);
   }
 
-  return success(data ?? [], requestId);
+  return success({
+    imports: data ?? [],
+    quarantine_summary: summarizeImportRows(data ?? []),
+  }, requestId);
 }
