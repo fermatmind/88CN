@@ -1,5 +1,14 @@
 # Flow Bugs
 
+PR32 Seed 100 Import Dry Run + Admin Staging QA found two P2 flow/coverage findings and two P3 process findings. None block PR33. See `docs/43_SEED_100_IMPORT_DRY_RUN_QA.md` for the full report.
+
+| Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P2 | External import dry run | CLI | N/A | Attempt to run a dedicated Seed 100 dry-run command in 88CN. | No dedicated command exists; QA used temporary `/tmp` compilation of pure import-classification helpers. | A first-class read-only dry-run command should make Seed 100 QA repeatable. | External import tooling | Add a dedicated read-only Seed 100 dry-run command in a future build task. |
+| P2 | `/admin/external-imports` | Admin | `../screenshots/qa/pr32-admin-external-imports-unauth.png` | Verify admin summary visibility without logging into real admin or using real Supabase credentials. | Unauth guard is verified, but authenticated summary rendering was not exercised. | A safe local/staging admin fixture should verify authenticated summary rendering. | Admin external imports QA fixture | Add a safe admin-session QA fixture or staging-only auth path for later QA. |
+| P3 | Agent gate | CLI | N/A | Run `npm run agent:gate`, then compare with PR32 required checks. | `agent:gate` passes but does not include `external-import:quarantine:check`; the check passes separately. | Broad gate should eventually include the quarantine check or document why it stays separate. | Agent gate script | Consider adding the quarantine check to a future ops gate update. |
+| P3 | Browser QA | Desktop | `../screenshots/qa/pr32-projects-public-surface.png` | Start dev server on 3000, run browser checks, then observe port behavior. | Port 3000 was later occupied by another local service after the first dev server exited; QA restarted 88CN on 3100. | Browser QA should use an isolated port when 3000 is unstable. | Local QA environment | Prefer a dedicated QA port for future browser checks. |
+
 PR #28 AI Search Readiness Checker QA found two P2 flow / public-surface issues. Both are remediated in the PR #27 branch and need live redeploy verification after merge. See `docs/40_AI_SEARCH_READINESS_CHECKER_QA.md` for the full report.
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |

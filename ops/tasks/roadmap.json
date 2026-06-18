@@ -371,11 +371,13 @@
         "PR31"
       ],
       "allowed_paths": [
+        "docs/43_SEED_100_IMPORT_DRY_RUN_QA.md",
         "docs/QA_REPORT.md",
         "docs/VISUAL_BUGS.md",
         "docs/FLOW_BUGS.md",
         "docs/BUILD_ERRORS.md",
-        "screenshots/qa/**"
+        "screenshots/qa/**",
+        "ops/tasks/roadmap.json"
       ],
       "forbidden_paths": [
         "app/**",
