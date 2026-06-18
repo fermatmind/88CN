@@ -1,8 +1,6 @@
 # Flow Bugs
 
-PR39 Brand Voice and Public Copy Guard QA found no flow bugs.
-
-The task did not change public flows, routes, forms, APIs, middleware, or deployment behavior.
+PR41 Genesis Badge Founder Explainer QA + Live Smoke found no flow bugs.
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
