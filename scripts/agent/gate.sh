@@ -13,6 +13,8 @@ checks=(
   "npm run external-import:seed-dry-run"
   "npm run geo-checker:check"
   "npm run seed-audit:check"
+  "npm run agent:batch:check"
+  "npm run agent:train-plan:check"
   "npm run lint"
   "npm run typecheck"
   "npm run build"

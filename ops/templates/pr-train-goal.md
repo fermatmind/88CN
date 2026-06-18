@@ -20,13 +20,15 @@ Rules:
 1. Refuse to run if the selected batch is missing, malformed, or larger than `batch_limit`.
 2. Refuse to run if any provided input flag is broader than the selected batch allows.
 3. Read `ops/skills/pr-train-runner.md` before editing files.
-4. Read each task object in `ops/tasks/roadmap.json` before executing that task.
-5. Create or use a clean git worktree for this train. Do not write in the same worktree as another active PR train.
-6. Edit only paths allowed by the active roadmap task and the selected batch.
-7. Stop at every `human_checkpoints` rule before performing the checkpointed action.
-8. Record sidecar issues in `docs/SIDECAR_ISSUES.md` only when the issue is outside the current task scope and `continue_on_sidecar` is true.
-9. Do not install plugins, add dependencies, configure real MCP servers, touch payment enablement, or change server configuration unless both the batch and task explicitly allow it.
-10. Run the validations required by each task, then run the train-level validation bundle.
+4. Run `npm run agent:batch:check`.
+5. Run `node scripts/agent/train-plan-check.mjs --batch <BATCH_ID>` and treat it as a dry-run only.
+6. Read each task object in `ops/tasks/roadmap.json` before executing that task.
+7. Create or use a clean git worktree for this train. Do not write in the same worktree as another active PR train.
+8. Edit only paths allowed by the active roadmap task and the selected batch.
+9. Stop at every `human_checkpoints` rule before performing the checkpointed action.
+10. Record sidecar issues in `docs/SIDECAR_ISSUES.md` only when the issue is outside the current task scope and `continue_on_sidecar` is true.
+11. Do not install plugins, add dependencies, configure real MCP servers, touch payment enablement, or change server configuration unless both the batch and task explicitly allow it.
+12. Run the validations required by each task, then run the train-level validation bundle.
 
 Completion:
 - Summarize completed tasks.

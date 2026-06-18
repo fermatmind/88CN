@@ -9,8 +9,10 @@ Use this card when a user starts a bounded PR train by `BATCH_ID`.
 3. Confirm the selected batch has explicit boolean values for merge, live deploy, payment, MCP, server, plugin, and dependency permissions.
 4. Confirm the selected task count does not exceed `batch_limit`.
 5. For train entries with `sub_batches`, execute only one sub-batch at a time.
-6. Read each matching task object in `ops/tasks/roadmap.json` before editing.
-7. If a task object is missing, stop and record the missing task as a blocker.
+6. Run `npm run agent:batch:check`.
+7. Run `node scripts/agent/train-plan-check.mjs --batch <BATCH_ID>` before execution.
+8. Read each matching task object in `ops/tasks/roadmap.json` before editing.
+9. If a task object is missing and not covered by a roadmap skeleton, stop and record the missing task as a blocker.
 
 ## Human Checkpoint Rule
 

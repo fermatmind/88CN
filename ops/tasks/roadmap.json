@@ -983,6 +983,136 @@
         "mobile and desktop QA evidence are recorded",
         "no app code is modified"
       ]
+    },
+    {
+      "id": "OPS4B",
+      "title": "Batch Runner Scripts + Agent Gate Integration v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "agent-os",
+      "depends_on": [
+        "OPS4A"
+      ],
+      "allowed_paths": [
+        "scripts/agent/batch-check.mjs",
+        "scripts/agent/train-plan-check.mjs",
+        "scripts/agent/gate.sh",
+        "package.json",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "ops/templates/pr-train-goal.md",
+        "ops/skills/pr-train-runner.md",
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "docs/OPS4B_BATCH_RUNNER_INTEGRATION_V0.md",
+        "docs/TASK_STATUS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "README.md",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:tool:check",
+        "npm run agent:mcp-config:check",
+        "npm run agent:plugin-policy:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS4B",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "batch registry is validated by script",
+        "train plan dry-run can read BATCH_ID and produce ordered task plan",
+        "human checkpoint flags are validated",
+        "live-smoke-only tasks are distinguished from server-config-change tasks",
+        "payment/MCP/server/plugin/new-dependency flags are enforced",
+        "package scripts exist",
+        "agent:gate includes batch and train-plan checks",
+        "no product code is modified",
+        "OPS4BQ can proceed"
+      ]
+    },
+    {
+      "id": "OPS4BQ",
+      "title": "Batch Runner Scripts + Agent Gate QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "agent-os",
+      "depends_on": [
+        "OPS4B"
+      ],
+      "allowed_paths": [
+        "docs/OPS4B_BATCH_RUNNER_QA.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "ops/tasks/current.json",
+        "docs/TASK_STATUS.md"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "README.md",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS4BQ",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "OPS4B scripts and package gates are verified from QA scope",
+        "negative and positive QA evidence is recorded",
+        "QA does not modify scripts, package files, product code, or deployment configuration"
+      ]
     }
   ],
   "skeletons": [

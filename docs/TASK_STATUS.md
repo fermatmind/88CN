@@ -35,6 +35,7 @@
 | Brand Voice and Public Copy Guard | Complete | PR38 adds machine-readable brand voice rules, `brand-voice:check`, positive/negative probes, and policy-source allowlist entries without changing public page copy. |
 | Brand Voice and Public Copy Guard QA | Complete | PR39 verified positive and negative guard probes, public source scanning, and read-only QA scope. |
 | Genesis Badge Founder Explainer | Complete | PR40 clarifies the Genesis Badge as optional signal display, adds `Tracked by 88CN` and `Founder Claimed` status language, and avoids backend, API, payment, or sitemap changes. |
+| Batch Runner Scripts + Agent Gate Integration | Complete | OPS4B adds batch registry validation, train-plan dry-run checks, package scripts, and agent gate integration without executing future product trains. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
