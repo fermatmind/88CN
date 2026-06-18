@@ -46,9 +46,10 @@
 | PR47-PR49 readiness registration | Complete | OPS5B registers full PR47-PR49 task objects, refreshes TRAIN-PR47-PR49, and records gate-maintenance sidecar as non-blocking. |
 | Submission Channels Report Page | Complete | PR47 adds an original founder guide to practical submission channels and validates public copy boundaries. |
 | Founder Submission Onboarding | Complete | PR48 adds founder-ready FAQ, reviewed publication boundaries, and correction/removal guidance. |
+| Submission Channels + Founder Onboarding QA | Complete | PR49 verifies PR47 and PR48 local rendering, sitemap boundaries, public copy, and desktop/mobile screenshots. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: proceed to PR49 Submission Channels + Founder Onboarding QA v0.
+Next: close TRAIN-PR47-PR49 after PR49 merge and post-merge validation.

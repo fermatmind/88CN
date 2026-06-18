@@ -3,19 +3,45 @@
 ## Latest Run
 
 - Date: 2026-06-18
-- Scope: PR45 Scouted Profile QA
+- Scope: PR49 Submission Channels + Founder Onboarding QA v0
 - Role: Codex-QA
 - Result: PASS
 - Blocked: No
 
 ## Summary
 
-- PR45 verified the PR44 scouted profile surface after the scouted profile engine merge.
-- Scouted profile pages return 200 but include `noindex, nofollow`.
-- Sitemap output excludes `/scouted/` routes.
-- Public project API output exposes no scouted/admin/internal fields.
-- `/admin/scouted` remains gated when unauthenticated.
-- No app code, scripts, package files, schema files, migrations, API routes, or public copy were modified by this QA task.
+- PR49 verified the PR47 submission channels report and PR48 founder onboarding surfaces after both merges.
+- Local QA ran on `http://localhost:3100` after `PORT=3100 scripts/codex-preflight.sh` passed.
+- `/reports/ai-project-submission-channels-2026`, `/founding-slots`, `/submit`, `/claim/aurora-code`, `/founders`, `/sitemap.xml`, and `/robots.txt` returned 200 locally.
+- Public copy scan on the checked HTML found no restricted public-copy phrases.
+- Sitemap includes the intended PR47 report URL and does not expose scouted, pending, quarantine, or submitted paths.
+- Desktop and mobile screenshots were recorded under `../screenshots/qa/`.
+- No product code was modified by PR49.
+
+## Runtime Evidence
+
+| Check | Result |
+| --- | --- |
+| `GET /reports/ai-project-submission-channels-2026` | 200 |
+| `GET /founding-slots` | 200 |
+| `GET /submit` | 200 |
+| `GET /claim/aurora-code` | 200 |
+| `GET /founders` | 200 |
+| `GET /sitemap.xml` | 200 |
+| `GET /robots.txt` | 200 |
+| Sitemap contains `/reports/ai-project-submission-channels-2026` | PASS |
+| Sitemap excludes scouted/pending/quarantine/submitted paths | PASS |
+| Checked public HTML avoids restricted public-copy phrases | PASS |
+
+## Screenshots
+
+| Page | Viewport | Screenshot |
+| --- | --- | --- |
+| `/reports/ai-project-submission-channels-2026` | Desktop 1440px | `../screenshots/qa/pr49-submission-channels-desktop.png` |
+| `/founding-slots` | Desktop 1440px | `../screenshots/qa/pr49-founder-onboarding-desktop.png` |
+| `/founding-slots` | Mobile 390px | `../screenshots/qa/pr49-founder-onboarding-mobile.png` |
+| `/submit` | Mobile 390px | `../screenshots/qa/pr49-submit-mobile.png` |
+| `/claim/aurora-code` | Mobile 390px | `../screenshots/qa/pr49-claim-mobile.png` |
 
 ## Validation Commands
 
@@ -26,13 +52,8 @@
 | `npm run third-party:check` | PASS |
 | `npm run public-surface:check` | PASS |
 | `npm run agent:redact:check` | PASS |
-| `npm run scouted-profile:check` | PASS |
-| `npm run lint` | PASS |
-| `npm run typecheck` | PASS |
-| `npm run build` | PASS |
-| `npm run agent:gate` | PASS |
+| `npm run agent:scope:check -- PR49` | PASS |
 | `PORT=3100 scripts/codex-preflight.sh` | PASS |
-| Runtime scouted route, sitemap, public API, admin gate checks | PASS |
 
 ## Findings
 
@@ -43,4 +64,4 @@
 
 ## Recommendation
 
-PR45 can merge. PR46 Conversion Metrics + Pivot Gate v0 can proceed after PR45 cleanup.
+PR49 can merge. TRAIN-PR47-PR49 can close after post-merge cleanup and final main validation.
