@@ -132,6 +132,9 @@
         "OPS1"
       ],
       "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "docs/OPS1_AGENT_OS_QA.md",
         "docs/QA_REPORT.md",
         "docs/VISUAL_BUGS.md",
         "docs/FLOW_BUGS.md",
