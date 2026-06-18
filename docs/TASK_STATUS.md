@@ -24,6 +24,7 @@
 | AI Search Readiness Checker | Complete | Public geo-checker tool, SSRF-guarded URL fetch, HTML analysis, readiness scoring, no storage, no LLM (PR #27). |
 | Agent Operating System | Complete | Roadmap registry, scope gate, redaction gate, triage gate, contracts, templates, and smoke helpers added (OPS1). |
 | Tool and plugin registry | Complete | Codex tool allowlist, plugin policy, MCP example config, and registry checks added (OPS2). |
+| Tool and plugin registry QA | Complete | OPS2 registry QA verified positive checks, negative probes, policy docs, ignored local config, and scope remediation (OPS2Q). |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |

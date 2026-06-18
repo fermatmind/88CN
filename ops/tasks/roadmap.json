@@ -255,10 +255,15 @@
         "OPS2"
       ],
       "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "docs/OPS2_TOOL_PLUGIN_REGISTRY_QA.md",
         "docs/QA_REPORT.md",
         "docs/FLOW_BUGS.md",
         "docs/BUILD_ERRORS.md",
-        "screenshots/qa/**"
+        "docs/VISUAL_BUGS.md",
+        "docs/TASK_STATUS.md",
+        "screenshots/qa/ops2q-*.png"
       ],
       "forbidden_paths": [
         "app/**",

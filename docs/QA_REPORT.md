@@ -3,19 +3,19 @@
 ## Latest Run
 
 - Date: 2026-06-18
-- Scope: OPS-1Q Agent Operating System QA
+- Scope: OPS-2Q Codex Tool & Plugin Registry QA
 - Role: Codex-QA read-only acceptance
 - Result: PASS
 - Blocked: No
 
-See `docs/OPS1_AGENT_OS_QA.md` for the full report.
+See `docs/OPS2_TOOL_PLUGIN_REGISTRY_QA.md` for the full report.
 
 Summary:
 
-- OPS1 file existence, roadmap JSON, package scripts, contracts, core gates, agent gates, shell syntax, deploy dry-run, redaction negative test, and scope negative test were verified.
-- Original finding P1: `OPS1Q.allowed_paths` did not include `docs/OPS1_AGENT_OS_QA.md`; remediated in PR #32.
-- Original finding P3: `ops/tasks/current.json` still pointed to OPS1; remediated in PR #32.
-- Final `npm run agent:scope:check -- OPS1Q` now passes.
+- OPS2 file existence, package scripts, registry schema, positive checks, negative probes, policy docs, ignored local config, and sensitive scan were verified.
+- Original finding P1: `OPS2Q.allowed_paths` did not include `docs/OPS2_TOOL_PLUGIN_REGISTRY_QA.md`; remediated in this PR.
+- Original finding P3: `ops/tasks/current.json` still pointed to OPS2; remediated in this PR.
+- Final `npm run agent:scope:check -- OPS2Q` now passes.
 
 ---
 
