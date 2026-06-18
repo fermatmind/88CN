@@ -514,28 +514,66 @@
       "id": "PR34",
       "title": "First Founder Intent Signal Report v0",
       "type": "product",
-      "role": "gpt",
+      "role": "codex-build",
       "repo": "88CN",
       "phase": "reports",
       "depends_on": [
         "PR33"
       ],
       "allowed_paths": [
-        "docs/**",
         "app/reports/**",
-        "lib/**",
-        "components/**"
+        "app/sitemap.ts",
+        "components/reports/**",
+        "components/seo/**",
+        "lib/reports/**",
+        "lib/seo/**",
+        "scripts/check-founder-intent-report.mjs",
+        "docs/45_FIRST_FOUNDER_INTENT_SIGNAL_REPORT_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
       ],
       "forbidden_paths": [
+        "README.md",
+        "app/api/**",
+        "app/admin/**",
+        "app/projects/**",
+        "components/project/**",
+        "lib/index-data/**",
+        "lib/geo-checker/**",
+        "middleware.ts",
         "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
         ".env*",
-        "deploy/**"
+        "scripts/agent/gate.sh"
       ],
       "validations": [
+        "npm run verify:day0",
         "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run db:schema:check",
+        "npm run public-surface:check",
+        "npm run intake:check",
+        "npm run external-import:check",
+        "npm run external-import:quarantine:check",
+        "npm run external-import:seed-dry-run",
+        "npm run geo-checker:check",
+        "npm run seed-audit:check",
+        "npm run report:founder-intent:check",
+        "npm run agent:redact:check",
+        "npm run agent:tool:check",
+        "npm run agent:mcp-config:check",
+        "npm run agent:plugin-policy:check",
+        "npm run agent:scope:check -- PR34",
         "npm run lint",
         "npm run typecheck",
-        "npm run build"
+        "npm run build",
+        "npm run agent:gate"
       ],
       "data_planes": [
         "public_web",
@@ -547,9 +585,13 @@
       "payments": "none",
       "mcp": "published-only",
       "definition_of_done": [
-        "report uses verified public signals only",
+        "report uses PR33 audit dataset",
+        "public route is static and included in sitemap",
+        "report shows aggregate facts only",
+        "no Seed 100 project slugs are added to sitemap",
+        "structured data is report-level only",
         "copy avoids restricted public claims",
-        "human review gate is documented"
+        "PR35 QA can proceed"
       ]
     },
     {

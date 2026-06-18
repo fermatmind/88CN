@@ -22,6 +22,7 @@
     "geo-checker:check": "node scripts/check-geo-checker.mjs",
     "seed-audit:run": "node scripts/audit-seed-100-readiness.mjs --data-repo ../88cn-index-data --out data/audits/seed-100-readiness --concurrency 2 --timeout 5000 --max-body 262144",
     "seed-audit:check": "node scripts/check-seed-100-readiness-audit.mjs",
+    "report:founder-intent:check": "node scripts/check-founder-intent-report.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",
