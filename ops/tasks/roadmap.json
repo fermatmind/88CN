@@ -1555,6 +1555,315 @@
         "no public launch automation is added",
         "checker validates boundaries"
       ]
+    },
+    {
+      "id": "OPS5B",
+      "title": "TRAIN-PR47-PR49 Readiness Scan + Roadmap Registration v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "agent-os",
+      "depends_on": [
+        "PR46",
+        "OPS5A"
+      ],
+      "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "docs/OPS5B_PR47_49_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package.json",
+        "package-lock.json",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5B",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR47-PR49"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "PR47 through PR49 task objects exist and are complete",
+        "duplicate or superseded task risks are resolved or documented",
+        "TRAIN-PR47-PR49 batch exists and passes train-plan dry run",
+        "gate-maintenance sidecar is triaged",
+        "human checkpoint flags are correct",
+        "no product code is modified",
+        "PR47 implementation can proceed after this PR"
+      ]
+    },
+    {
+      "id": "OPS5BQ",
+      "title": "TRAIN-PR47-PR49 Readiness Scan QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "agent-os",
+      "depends_on": [
+        "OPS5B"
+      ],
+      "allowed_paths": [
+        "docs/OPS5B_PR47_49_READINESS_QA.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package.json",
+        "package-lock.json",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5BQ",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR47-PR49"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "OPS5B registration report is reviewed from QA scope",
+        "TRAIN-PR47-PR49 dry-run evidence is verified",
+        "QA does not modify roadmap implementation beyond current task marker"
+      ]
+    },
+    {
+      "id": "PR47",
+      "title": "Submission Channels Report Page v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "submission-and-public-copy",
+      "depends_on": [
+        "OPS5B",
+        "PR46"
+      ],
+      "allowed_paths": [
+        "app/collections/**",
+        "app/reports/**",
+        "components/reports/**",
+        "components/collections/**",
+        "lib/reports/**",
+        "lib/seo/**",
+        "scripts/check-submission-channels-page.mjs",
+        "docs/54_SUBMISSION_CHANNELS_REPORT_PAGE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/api/**",
+        "app/admin/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR47",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web",
+        "curated_public_content"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "submission channels page exists",
+        "page avoids restricted public outcome claims",
+        "checker validates copy and boundaries",
+        "sitemap inclusion is intentional and limited",
+        "no Seed, scouted, staged, or private slugs are leaked",
+        "PR48 can proceed"
+      ]
+    },
+    {
+      "id": "PR48",
+      "title": "Founder-Ready Submission FAQ + Structured Profile Onboarding v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "submission-and-public-copy",
+      "depends_on": [
+        "PR47"
+      ],
+      "allowed_paths": [
+        "app/submit/**",
+        "app/claim/**",
+        "app/founding-slots/**",
+        "app/founders/**",
+        "components/founder/**",
+        "components/forms/**",
+        "lib/seo/**",
+        "scripts/check-founder-onboarding-copy.mjs",
+        "docs/55_FOUNDER_SUBMISSION_ONBOARDING_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/api/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR48",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web",
+        "founder_onboarding_copy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "founder FAQ or onboarding surface exists or is improved",
+        "correction and removal path is explained",
+        "reviewed publication boundary is clear",
+        "no public outcome promises are introduced",
+        "copy guard passes",
+        "PR49 can proceed"
+      ]
+    },
+    {
+      "id": "PR49",
+      "title": "Submission Channels + Founder Onboarding QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "submission-and-public-copy",
+      "depends_on": [
+        "PR48"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/56_SUBMISSION_CHANNELS_FOUNDER_ONBOARDING_QA.md",
+        "screenshots/qa/pr49-*.png",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR49"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "submission channels page returns 200 locally",
+        "founder onboarding, submit, and claim surfaces render",
+        "public copy avoids restricted claims",
+        "sitemap contains only intended published public pages",
+        "no staged, scouted, quarantined, or private project data is exposed",
+        "mobile and desktop evidence is recorded",
+        "no product code is modified",
+        "TRAIN-PR47-PR49 can close"
+      ]
     }
   ],
   "skeletons": [

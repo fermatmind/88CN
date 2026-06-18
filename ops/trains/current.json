@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR36-PR41",
-  "next_recommended_train": "TRAIN-PR42-PR46",
-  "notes": "OPS5A registered TRAIN-PR42-PR46 for the next sequential train after PR35 live pass and OPS4BQ pass."
+  "last_completed_train": "TRAIN-PR42-PR46",
+  "next_recommended_train": "TRAIN-PR47-PR49",
+  "notes": "OPS5B registers TRAIN-PR47-PR49 for the next sequential train after TRAIN-PR42-PR46 completion."
 }
