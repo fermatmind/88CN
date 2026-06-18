@@ -5,6 +5,12 @@ import {
   FOUNDER_INTENT_REPORT_SUBTITLE,
   FOUNDER_INTENT_REPORT_TITLE,
 } from "@/lib/reports/seed-100-readiness-report";
+import {
+  SUBMISSION_CHANNELS_REPORT_PATH,
+  SUBMISSION_CHANNELS_REPORT_SLUG,
+  SUBMISSION_CHANNELS_REPORT_SUBTITLE,
+  SUBMISSION_CHANNELS_REPORT_TITLE,
+} from "@/lib/reports/submission-channels-report";
 import type { MetadataRoute } from "next";
 
 export interface PublishedReportRoute {
@@ -33,6 +39,18 @@ const founderIntentReport: PublishedReportRoute = {
   priority: 0.7,
 };
 
+const submissionChannelsReport: PublishedReportRoute = {
+  slug: SUBMISSION_CHANNELS_REPORT_SLUG,
+  path: SUBMISSION_CHANNELS_REPORT_PATH,
+  title: SUBMISSION_CHANNELS_REPORT_TITLE,
+  description: SUBMISSION_CHANNELS_REPORT_SUBTITLE,
+  date: "2026-06-18",
+  status: "published",
+  kind: "founder-intent",
+  changeFrequency: "monthly",
+  priority: 0.65,
+};
+
 const demoPublishedReports: PublishedReportRoute[] = demoReports.map(
   (report) => ({
     slug: report.slug,
@@ -50,7 +68,11 @@ const demoPublishedReports: PublishedReportRoute[] = demoReports.map(
 export function getPublishedReportRoutes(): PublishedReportRoute[] {
   const byPath = new Map<string, PublishedReportRoute>();
 
-  for (const report of [founderIntentReport, ...demoPublishedReports]) {
+  for (const report of [
+    founderIntentReport,
+    submissionChannelsReport,
+    ...demoPublishedReports,
+  ]) {
     if (report.status === "published") byPath.set(report.path, report);
   }
 
