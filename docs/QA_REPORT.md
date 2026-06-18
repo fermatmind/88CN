@@ -3,46 +3,46 @@
 ## Latest Run
 
 - Date: 2026-06-18
-- Scope: PR37 Founder Intent Report Archive QA + Live Smoke
-- Role: Codex-QA / live smoke
-- Result: LIVE PASS
+- Scope: PR39 Brand Voice and Public Copy Guard QA
+- Role: Codex-QA / governance verification
+- Result: PASS
 - Blocked: No
 
 ## Summary
 
-- PR36 was merged as PR #42 and deployed to production at commit `143aa2ae58540a8e9d6b5ef96ae6a41495240c83`.
-- Deployment used the existing Aliyun Workbench server channel and the hardened `scripts/agent/deploy-production.sh` path.
-- `/reports` returns 200 on `https://88cn.com`.
-- `/reports/early-ai-project-machine-readability-2026` returns 200 on `https://88cn.com`.
-- `/sitemap.xml` returns 200 and includes the founder intent report URL.
-- The live sitemap now uses PR36 report-registry dates for report detail `lastmod` values.
-- Security headers remain present on sampled report pages.
-- No app code was modified by this QA task.
+- PR38 added machine-readable brand voice rules in `ops/copy/brand-voice-rules.json`.
+- PR38 added `npm run brand-voice:check`.
+- PR39 verified the checker with positive and negative synthetic probes.
+- PR39 verified the checker scans public source roots without modifying app code.
+- No browser QA was required because this is a governance-script QA task with no public UI changes.
+- No screenshots were captured.
 
-## Screenshots
+## Probe Coverage
 
-- `../screenshots/qa/pr37-reports-archive.png`
-- `../screenshots/qa/pr37-founder-intent-report.png`
+The exact synthetic probe text remains in the allowlisted policy-source file `ops/copy/brand-voice-rules.json`. This QA report records probe classes instead of copying risky public-copy phrases into a non-policy report file.
 
-## Live Evidence
+| Probe Class | Expected | Observed |
+| --- | --- | --- |
+| Factual public signal wording | PASS | PASS |
+| Non-promise checker disclaimer | PASS | PASS |
+| Badge limitation disclaimer | PASS | PASS |
+| Outcome-limitation disclaimer | PASS | PASS |
+| `ranking_promise` negative probe | FAIL CLOSED | PASS |
+| `traffic_promise` negative probe | FAIL CLOSED | PASS |
+| `ai_citation_promise` negative probe | FAIL CLOSED | PASS |
+| `link_exchange_claim` negative probe | FAIL CLOSED | PASS |
+| `generic_outcome_promise` rule | FAIL CLOSED when used as a positive claim | PASS |
+
+## Source Scan
 
 | Check | Result |
 | --- | --- |
-| Production deploy target SHA | PASS, `143aa2ae58540a8e9d6b5ef96ae6a41495240c83` |
-| `npm run agent:smoke:live` | PASS |
-| `EXTRA_PATHS="/reports /reports/early-ai-project-machine-readability-2026" REQUIRED_SITEMAP_PATHS="/reports/early-ai-project-machine-readability-2026" scripts/agent/smoke-live.sh` | PASS |
-| `https://88cn.com/reports` | PASS, 200 |
-| `https://88cn.com/reports/early-ai-project-machine-readability-2026` | PASS, 200 |
-| `https://88cn.com/sitemap.xml` | PASS, 200 |
-| Sitemap contains `https://88cn.com/reports/early-ai-project-machine-readability-2026` | PASS |
-| Founder intent report `lastmod` | PASS, `2026-06-18T00:00:00.000Z` |
-| Demo report registry `lastmod` values | PASS, report-date based values present |
-| `x-request-id` on sampled report pages | PASS |
-| `content-security-policy` on sampled report pages | PASS |
-| `x-content-type-options` on sampled report pages | PASS |
-| `x-frame-options` on sampled report pages | PASS |
-| `referrer-policy` on sampled report pages | PASS |
-| `permissions-policy` on sampled report pages | PASS |
+| Restricted claim groups loaded | PASS, 5 groups |
+| Public source files scanned | PASS, 72 files |
+| Positive probes | PASS, 4 probes |
+| Negative probes | PASS, 5 probes fail closed |
+| App code modified by PR39 | PASS, none |
+| PR39 scope gate | PASS |
 
 ## Validation Commands
 
@@ -51,9 +51,8 @@
 | `npm run verify:day0` | PASS |
 | `npm run policy:scan` | PASS |
 | `npm run third-party:check` | PASS |
-| `npm run report:founder-intent:check` | PASS |
-| `npm run agent:smoke:live` | PASS |
-| `npm run agent:scope:check -- PR37` | PASS |
+| `npm run brand-voice:check` | PASS |
+| `npm run agent:scope:check -- PR39` | PASS |
 
 ## Findings
 
@@ -64,4 +63,4 @@
 
 ## Recommendation
 
-PR37 is complete. PR38 Brand Voice and Public Copy Guard v0 can proceed after this QA PR is merged.
+PR39 is complete. PR40 Genesis Badge Founder Explainer v1 can proceed after this QA PR is merged.
