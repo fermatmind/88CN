@@ -33,7 +33,7 @@ Completion:
 - List validations and results.
 - List sidecar issues, if any.
 - Confirm `git status --short --branch`.
-- Do not merge unless repo policy, tool registry, the selected batch, and explicit human approval all allow merge.
+- Do not run unattended auto-merge unless repo policy, tool registry, the selected batch, and explicit human approval all allow merge. A direct human-approved merge request for a specific PR may use `gh pr merge` when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
 ```
 
 Only change these template inputs for routine use:

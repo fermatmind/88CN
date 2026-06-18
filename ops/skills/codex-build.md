@@ -7,7 +7,7 @@ Use this card when the roadmap assigns a task to `codex-build`.
 - Implement only the assigned roadmap task.
 - Read `ops/tasks/roadmap.json` and confirm allowed paths before editing.
 - Do not expand scope into adjacent product work.
-- Do not merge the pull request.
+- Do not merge the pull request unless the human team explicitly approves this exact PR merge and repo merge gates pass.
 - Do not deploy unless the task explicitly grants deployment scope.
 - Run all validations listed for the roadmap task.
 - Create a draft PR with a scoped title and complete summary.
