@@ -1,8 +1,14 @@
 # Visual Bugs
 
-No visual bugs found in the PR #28 AI Search Readiness Checker QA pass.
+No visual bugs found in the PR32 Seed 100 Import Dry Run + Admin Staging QA remediation pass.
 
-The `/geo-checker` page keeps the 88CN black, cool-gray, silver-white data terminal style on desktop and mobile. Result cards are readable, the score state is visible, and the mobile viewport did not show obvious horizontal overflow.
+Screenshots:
+
+- `../screenshots/qa/pr32-admin-external-imports-unauth.png`
+- `../screenshots/qa/pr32-admin-external-imports-fixture.png`
+- `../screenshots/qa/pr32-sitemap-or-curl-evidence.png`
+- `../screenshots/qa/pr32-projects-public-surface.png`
+- `../screenshots/qa/pr32-geo-checker-public-surface.png`
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

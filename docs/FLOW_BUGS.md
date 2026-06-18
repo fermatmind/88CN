@@ -1,5 +1,14 @@
 # Flow Bugs
 
+PR32 Seed 100 Import Dry Run + Admin Staging QA originally found two P2 flow/coverage findings and two P3 process findings. PR36 remediation closes all four. See `docs/43_SEED_100_IMPORT_DRY_RUN_QA.md` for the full report.
+
+| Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P2 | External import dry run | CLI | N/A | Run `npm run external-import:seed-dry-run`. | Resolved: command reads local Seed 100 data, verifies summary shape, and passes negative probes without Supabase, network, or repo writes. | A first-class read-only dry-run command should make Seed 100 QA repeatable. | External import tooling | Fixed in PR36. |
+| P2 | `/admin/external-imports` | Admin | `../screenshots/qa/pr32-admin-external-imports-fixture.png` | Run dev server with `ADMIN_EXTERNAL_IMPORTS_FIXTURE=1`, open `/admin/external-imports`. | Resolved: non-production fixture renders summary cards and reason counts without real credentials. | A safe local/staging admin fixture should verify authenticated summary rendering. | Admin external imports QA fixture | Fixed in PR36. |
+| P3 | Agent gate | CLI | N/A | Run `npm run agent:gate`, then compare with PR32 required checks. | Resolved: `agent:gate` includes `external-import:quarantine:check` and `external-import:seed-dry-run`. | Broad gate should cover import quarantine and Seed 100 dry-run checks. | Agent gate script | Fixed in PR36. |
+| P3 | Browser QA | Desktop | `../screenshots/qa/pr32-admin-external-imports-fixture.png` | Run `npm run dev:qa`, then `PORT=3100 scripts/codex-preflight.sh`. | Resolved: QA has stable port 3100, while preflight keeps 3000 as default and supports `PORT`. | Browser QA should use an isolated port when 3000 is unstable. | Local QA environment | Fixed in PR36. |
+
 PR #28 AI Search Readiness Checker QA found two P2 flow / public-surface issues. Both are remediated in the PR #27 branch and need live redeploy verification after merge. See `docs/40_AI_SEARCH_READINESS_CHECKER_QA.md` for the full report.
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |

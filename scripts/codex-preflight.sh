@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -u
 
-APP_URL="${APP_URL:-http://localhost:3000}"
+if [ -n "${APP_URL:-}" ]; then
+  BASE_URL="$APP_URL"
+else
+  BASE_URL="http://localhost:${PORT:-3000}"
+fi
+APP_URL="$BASE_URL"
 HEALTH_URL="${APP_URL%/}/api/healthz"
 ERROR_FILE="docs/BUILD_ERRORS.md"
 TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"

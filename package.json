@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "dev:qa": "next dev -p 3100",
     "build": "next build",
     "build:production": "NODE_ENV=production next build",
     "start:production": "next start",
@@ -17,6 +18,7 @@
     "intake:check": "node scripts/check-intake-firewall.mjs",
     "external-import:check": "node scripts/check-external-import-integration.mjs",
     "external-import:quarantine:check": "node scripts/check-external-import-quarantine.mjs",
+    "external-import:seed-dry-run": "node scripts/check-seed-100-import-dry-run.mjs",
     "geo-checker:check": "node scripts/check-geo-checker.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
