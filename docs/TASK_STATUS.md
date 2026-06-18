@@ -30,9 +30,10 @@
 | First Founder Intent Signal Report | Complete | PR34 publishes a static aggregate report page from the PR33 Seed 100 machine-readability audit dataset. |
 | Founder Intent Report QA + Live Deploy | Complete | PR35 live QA rerun passes after production redeploy: the live PR34 report route returns 200 and the live sitemap includes the report URL. |
 | PR36-PR41 roadmap registration | Complete | PR36-PR41 now have full task objects in `ops/tasks/roadmap.json` and can proceed sequentially after PR35 live pass. |
+| Founder Intent Report Archive + Index Hardening | Complete | PR36 adds a published report registry used by the reports archive and sitemap, with checks preventing Seed 100 item-level route exposure. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR36 Founder Intent Report Archive + Index Hardening v0.
+Next: PR37 Founder Intent Report QA + Live Smoke.

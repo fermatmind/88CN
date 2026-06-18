@@ -2,6 +2,7 @@ import { demoReports } from "@/lib/demo-reports";
 import ReportCard from "@/components/report-card";
 import { itemListJSONLD } from "@/lib/structured-data";
 import { siteTitle, siteDescription } from "@/lib/seo";
+import { getPublishedReportListItems } from "@/lib/reports/published-reports";
 import {
   FOUNDER_INTENT_REPORT_PATH,
   FOUNDER_INTENT_REPORT_SUBTITLE,
@@ -23,18 +24,7 @@ export default function ReportsPage() {
   const baseUrl =
     process.env.APP_URL ?? "http://localhost:3000";
 
-  const reportsLD = itemListJSONLD(
-    [
-      {
-        url: `${baseUrl}${FOUNDER_INTENT_REPORT_PATH}`,
-        name: FOUNDER_INTENT_REPORT_TITLE,
-      },
-      ...demoReports.map((r) => ({
-        url: `${baseUrl}/reports/${r.slug}`,
-        name: r.title,
-      })),
-    ]
-  );
+  const reportsLD = itemListJSONLD(getPublishedReportListItems(baseUrl));
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">

@@ -1,12 +1,9 @@
 import { getPublishedProjects } from "@/lib/demo-projects";
 import { demoCategories } from "@/lib/demo-categories";
 import { demoCollections } from "@/lib/demo-collections";
-import { demoReports } from "@/lib/demo-reports";
+import { getPublishedReportSitemapEntries } from "@/lib/reports/published-reports";
 import { INDEXABLE_STATES } from "@/lib/constants";
 import type { MetadataRoute } from "next";
-
-const founderIntentReportPath =
-  "/reports/early-ai-project-machine-readability-2026";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
@@ -80,20 +77,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const reportEntries: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}${founderIntentReportPath}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    ...demoReports.map((r) => ({
-      url: `${baseUrl}/reports/${r.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    })),
-  ];
+  const reportEntries = getPublishedReportSitemapEntries(baseUrl);
 
   return [
     ...staticEntries,
