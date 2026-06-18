@@ -2079,7 +2079,7 @@
     },
     {
       "id": "PR51",
-      "title": "Ad Payment Feature Flag + Stripe Checkout v0",
+      "title": "Ad Payment Feature Flag + Commercial Boundary Shell v0",
       "type": "product",
       "role": "codex-build",
       "repo": "88CN",
@@ -2088,7 +2088,7 @@
         "PR50",
         "OPS5C"
       ],
-      "purpose": "Add feature-flagged Stripe or payment-link scaffolding for Featured Signals. Defaults must be disabled. Payment success must not activate campaigns automatically. Admin review remains required.",
+      "purpose": "Add a disabled commercial/payment boundary shell for Featured Signals. Defaults must be disabled. No live Stripe, no real checkout, no payment links, no secrets, and no automatic campaign activation. Admin review remains required for any future paid state.",
       "allowed_paths": [
         "lib/payments/**",
         "app/api/payments/featured-signals/**",
@@ -2124,7 +2124,7 @@
         "npm run public-surface:check",
         "npm run agent:redact:check",
         "npm run agent:scope:check -- PR51",
-        "npm run ad-payment:check",
+        "npm run ad-payment-boundary:check",
         "npm run lint",
         "npm run typecheck",
         "npm run build"
@@ -2135,7 +2135,7 @@
       ],
       "deployment": "none",
       "human_checkpoint": true,
-      "payments": "feature-flagged-test-mode-only",
+      "payments": "disabled-boundary-shell-only",
       "mcp": "none",
       "definition_of_done": [
         "AD_PAYMENTS_ENABLED default false",
