@@ -12,6 +12,7 @@ Open sidecar issues:
 - OPS5D triage: PR59 is spec-only, but the current train-plan checker treats MCP task text conservatively. PR59 is therefore human-checkpointed in the train registry rather than changing checker behavior in a roadmap-only PR.
 - PR52 P3 sidecar: `agent:gate` does not yet run `lifecycle-archive:check` because PR52 scope does not include `scripts/agent/gate.sh`. The PR52 task-specific checker runs independently and passes. A later gate-maintenance task should add PR52 specialized checks to the agent gate in one scoped update.
 - PR53 P3 sidecar: `agent:gate` does not yet run `changelog-engine:check` because PR53 scope does not include `scripts/agent/gate.sh`. The PR53 task-specific checker runs independently and passes. A later gate-maintenance task should add PR53 specialized checks to the agent gate in one scoped update.
+- PR54 P3 sidecar: `agent:gate` does not yet run `backers-landing:check` because PR54 scope does not include `scripts/agent/gate.sh`. The PR54 task-specific checker runs independently and passes. A later gate-maintenance task should add PR54 specialized checks to the agent gate in one scoped update.
 
 Use this file for future PR-train findings that are outside the active task scope and allowed by the selected batch's `continue_on_sidecar` policy.
 

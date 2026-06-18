@@ -53,9 +53,10 @@
 | PR52-PR60 readiness registration | Complete | OPS5D registers full PR52-PR60 roadmap objects, deprecates the broad PR52-PR55 and PR56-PR60 placeholders, splits the next phase into lifecycle, OSS evidence, Public API, and MCP trains, and keeps PR58/PR60 human-checkpointed. PR59 is spec-only but human-checkpointed by conservative MCP risk detection. |
 | Signal Alert + Soft Archive | Complete | PR52 adds lifecycle archive boundaries, disabled signal alert rules, admin-only boundary pages, and `lifecycle-archive:check`. No real email, external notification provider, Public API, MCP, payment, sitemap, deploy, or private founder data exposure. |
 | Changelog Engine | Complete | PR53 adds draft/staged changelog boundaries, admin review states, and `changelog-engine:check`. No automatic publication, Signal Score mutation, Source Confidence mutation, Public API exposure, MCP exposure, payment, data repo mutation, or deploy. |
+| Backers / Alpha Data Feed Landing | Complete | PR54 adds a static read-only landing page for future Alpha Data Feed interest and `backers-landing:check`. No payment or commitment flow, private backer data collection, public API feed, private project data exposure, MCP, deploy, or restricted capital-product claims. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR54 Backers / Alpha Data Feed Landing v0 can proceed after PR53 merges and post-merge validation is clean.
+Next: TRAIN-PR55-PR56-OSS-EVIDENCE can proceed after final train validation. Do not start PR55 automatically.
