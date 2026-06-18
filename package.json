@@ -16,6 +16,7 @@
     "public-surface:check": "node scripts/check-public-surface-hardening.mjs",
     "intake:check": "node scripts/check-intake-firewall.mjs",
     "external-import:check": "node scripts/check-external-import-integration.mjs",
+    "external-import:quarantine:check": "node scripts/check-external-import-quarantine.mjs",
     "geo-checker:check": "node scripts/check-geo-checker.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",

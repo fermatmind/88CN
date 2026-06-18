@@ -31,4 +31,5 @@ export interface IndexDataSyncResult {
   failed_count: number;
   errors: string[];
   dry_run: boolean;
+  quarantine_summary: import("./import-summary").ImportQuarantineSummary;
 }

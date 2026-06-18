@@ -19,6 +19,8 @@ const libFiles = [
   "lib/index-data/validate.ts",
   "lib/index-data/normalize.ts",
   "lib/index-data/sync.ts",
+  "lib/index-data/quarantine.ts",
+  "lib/index-data/import-summary.ts",
 ];
 for (const f of libFiles) {
   if (!fs.existsSync(path.join(ROOT, f))) {
@@ -82,6 +84,11 @@ if (fs.existsSync(docsPath)) {
 // 10. Migration 006 exists
 if (!fs.existsSync(path.join(ROOT, "supabase/migrations/006_external_import_indexes.sql"))) {
   fail("Missing migration 006_external_import_indexes.sql");
+}
+
+// 11. Migration 007 exists
+if (!fs.existsSync(path.join(ROOT, "supabase/migrations/007_external_import_quarantine_summary.sql"))) {
+  fail("Missing migration 007_external_import_quarantine_summary.sql");
 }
 
 if (errors.length > 0) {

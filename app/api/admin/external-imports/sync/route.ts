@@ -44,6 +44,10 @@ export async function POST(request: NextRequest) {
   }
 
   const result = await syncExternalImports(source as "local" | "github", dryRun);
+  if (!dryRun && result.errors.some((message) => message.includes("Supabase admin client not configured"))) {
+    return errorResponse(serviceUnavailable("Admin service is not configured.", instance, requestId), requestId);
+  }
+
   return success(result, requestId);
 }
 
