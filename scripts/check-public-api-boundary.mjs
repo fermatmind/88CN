@@ -184,21 +184,35 @@ if (!fs.existsSync(docPath)) {
   }
 }
 
-const publicApiRouteDir = path.join(ROOT, "app/api/public");
-if (fs.existsSync(publicApiRouteDir)) {
-  fail("app/api/public must not exist in PR57");
-}
-
 const publicRouteFiles = scanDir(path.join(ROOT, "app/api")).filter((file) => {
   const relative = path.relative(ROOT, file).split(path.sep).join("/");
   return relative.includes("/public/") || relative.endsWith("/public/route.ts");
 });
+
 if (publicRouteFiles.length > 0) {
-  fail(
-    `Public API route files must not exist in PR57: ${publicRouteFiles
-      .map((file) => path.relative(ROOT, file))
-      .join(", ")}`
-  );
+  const allowedPublicRoutes = new Set([
+    "app/api/public/v0/projects/[slug]/route.ts",
+    "app/api/public/v0/projects/route.ts",
+  ]);
+  const routeNames = publicRouteFiles
+    .map((file) => path.relative(ROOT, file).split(path.sep).join("/"))
+    .sort();
+  for (const route of routeNames) {
+    if (!allowedPublicRoutes.has(route)) {
+      fail(`Unexpected public API route file: ${route}`);
+    }
+  }
+  const requiredPr58Files = [
+    "lib/public-api/feature-flags.ts",
+    "lib/public-api/serializer.ts",
+    "scripts/check-public-api-v0.mjs",
+    "docs/65_PUBLIC_READ_ONLY_API_V0.md",
+  ];
+  for (const file of requiredPr58Files) {
+    if (!fs.existsSync(path.join(ROOT, file))) {
+      fail(`Public API route requires PR58 boundary file: ${file}`);
+    }
+  }
 }
 
 const mcpDirs = [
@@ -243,5 +257,5 @@ if (errors.length > 0) {
 
 console.log("public-api-boundary:check passed");
 console.log(
-  "Verified: published-only status, explicit field allowlist, denied private/admin/payment fields, no public API route, no MCP runtime exposure"
+  "Verified: published-only status, explicit field allowlist, denied private/admin/payment fields, PR58 v0 route boundary, no MCP runtime exposure"
 );
