@@ -3,20 +3,19 @@
 ## Latest Run
 
 - Date: 2026-06-18
-- Scope: OPS4BQ Batch Runner QA
+- Scope: PR45 Scouted Profile QA
 - Role: Codex-QA
 - Result: PASS
 - Blocked: No
 
 ## Summary
 
-- OPS4B PR #51 is merged into `origin/main` at `443e401439dc0cf332644324ea921b39b013aec1`.
-- `agent:batch:check` and `agent:train-plan:check` exist and pass.
-- `agent:gate` includes both batch runner checks and passes.
-- Positive validations passed, including `verify:day0`, policy, redaction, tool/plugin/MCP checks, lint, typecheck, build, and agent gate.
-- Negative tests fail closed for missing fields, duplicate batch ids, missing high-risk checkpoints, unknown batch/task ids, and live-config tasks in non-live batches.
-- All registered future train dry-runs pass.
-- No product code, scripts, package files, train registry files, roadmap files, deployment files, or data repo files were modified by this QA task.
+- PR45 verified the PR44 scouted profile surface after the scouted profile engine merge.
+- Scouted profile pages return 200 but include `noindex, nofollow`.
+- Sitemap output excludes `/scouted/` routes.
+- Public project API output exposes no scouted/admin/internal fields.
+- `/admin/scouted` remains gated when unauthenticated.
+- No app code, scripts, package files, schema files, migrations, API routes, or public copy were modified by this QA task.
 
 ## Validation Commands
 
@@ -25,17 +24,15 @@
 | `npm run verify:day0` | PASS |
 | `npm run policy:scan` | PASS |
 | `npm run third-party:check` | PASS |
+| `npm run public-surface:check` | PASS |
 | `npm run agent:redact:check` | PASS |
-| `npm run agent:tool:check` | PASS |
-| `npm run agent:mcp-config:check` | PASS |
-| `npm run agent:plugin-policy:check` | PASS |
-| `npm run agent:batch:check` | PASS |
-| `npm run agent:train-plan:check` | PASS |
-| `npm run agent:scope:check -- OPS4BQ` | PASS |
+| `npm run scouted-profile:check` | PASS |
 | `npm run lint` | PASS |
 | `npm run typecheck` | PASS |
 | `npm run build` | PASS |
 | `npm run agent:gate` | PASS |
+| `PORT=3100 scripts/codex-preflight.sh` | PASS |
+| Runtime scouted route, sitemap, public API, admin gate checks | PASS |
 
 ## Findings
 
@@ -46,4 +43,4 @@
 
 ## Recommendation
 
-OPS4BQ can merge. TRAIN-PR42-PR46 is unblocked for batch planning and dry-run preflight, but each PR42-PR46 implementation task still needs a full roadmap task object before implementation.
+PR45 can merge. PR46 Conversion Metrics + Pivot Gate v0 can proceed after PR45 cleanup.

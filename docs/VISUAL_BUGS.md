@@ -1,6 +1,6 @@
 # Visual Bugs
 
-PR41 Genesis Badge Founder Explainer QA + Live Smoke found one P3 visual issue.
+PR45 Scouted Profile QA found no new visual bugs. The earlier PR41 P3 mobile header observation remains unchanged and outside PR45 scope.
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
