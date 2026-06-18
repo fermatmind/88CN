@@ -187,7 +187,7 @@ Paid visibility, if enabled, is a user-interface placement only.
 - an automated pSEO content farm
 - an investment product
 - a fundraising platform
-- a token project
+- a crypto asset project
 - a private-data broker
 - a promise of traffic, ranking, AI citation, or external discovery outcomes
 
