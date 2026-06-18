@@ -48,6 +48,24 @@
       "link-exchange framing"
     ]
   },
+  "extension_surfaces": [
+    {
+      "id": "editorial_drafts",
+      "description": "Internal editorial draft notes and review comments must remain factual, source-grounded, and non-promissory."
+    },
+    {
+      "id": "scouted_profiles",
+      "description": "Scouted profile copy must describe observed public-source signals without implying review, claim, or publication."
+    },
+    {
+      "id": "conversion_ctas",
+      "description": "Conversion CTAs must invite founder action without promising search, traffic, citation, or placement outcomes."
+    },
+    {
+      "id": "claim_correct_remove",
+      "description": "Claim, correct, and remove copy must present admin-reviewed intent, not automatic mutation or public outcome promises."
+    }
+  ],
   "restricted_public_claims": [
     {
       "id": "link_exchange_claim",
@@ -66,8 +84,10 @@
       "severity": "P1",
       "phrases": [
         "guaranteed ranking",
+        "guarantee ranking",
         "ranking guarantee",
         "ranking guarantees",
+        "ranking boost",
         "rank boost",
         "guaranteed rank"
       ],
@@ -79,6 +99,7 @@
       "phrases": [
         "traffic promise",
         "traffic promises",
+        "traffic boost",
         "traffic guarantee",
         "traffic guarantees",
         "guaranteed traffic"
@@ -120,5 +141,41 @@
     "Add the badge for a guaranteed AI citation.",
     "Join the link marketplace for a paid link.",
     "88CN gives every listed company SEO juice."
+  ],
+  "extension_positive_probes": [
+    {
+      "surface": "editorial_drafts",
+      "text": "Draft notes summarize public signals and require human editorial review before release."
+    },
+    {
+      "surface": "scouted_profiles",
+      "text": "This observed profile is based on public sources and is not yet founder claimed."
+    },
+    {
+      "surface": "conversion_ctas",
+      "text": "Claim this profile to review public project details and request corrections."
+    },
+    {
+      "surface": "claim_correct_remove",
+      "text": "Submit a correction or removal request for admin review."
+    }
+  ],
+  "extension_negative_probes": [
+    {
+      "surface": "editorial_drafts",
+      "text": "Publish this editorial note for guaranteed ranking."
+    },
+    {
+      "surface": "scouted_profiles",
+      "text": "This scouted profile includes a dofollow backlink."
+    },
+    {
+      "surface": "conversion_ctas",
+      "text": "Claim now for guaranteed traffic."
+    },
+    {
+      "surface": "claim_correct_remove",
+      "text": "Pay for a ranking boost and automatic approval."
+    }
   ]
 }
