@@ -158,7 +158,7 @@
     },
     {
       "id": "TRAIN-PR50-PR51",
-      "title": "Featured signals and payment feature flag train",
+      "title": "Deprecated combined featured signals and payment train",
       "phase": "featured-signals",
       "tasks": [
         "PR50",
@@ -189,24 +189,25 @@
       ],
       "human_checkpoints": [
         {
-          "task": "PR51",
-          "reason": "payment, Stripe, or commercial enablement boundary requires human checkpoint"
+          "task": "ANY",
+          "reason": "Deprecated combined train includes payment-adjacent work; use TRAIN-PR50-FEATURED-UI then TRAIN-PR51-PAYMENT-FLAG instead."
         }
       ],
       "required_preconditions": [
-        "PR50 and PR51 roadmap tasks are registered before execution",
-        "payment boundary contract is reviewed",
-        "Stripe work is test-mode only unless the human team separately approves otherwise",
-        "worktree is clean and created from current origin/main"
+        "Deprecated: do not use for one-click execution",
+        "Use TRAIN-PR50-FEATURED-UI for PR50",
+        "Use TRAIN-PR51-PAYMENT-FLAG for PR51 after explicit human checkpoint"
       ],
       "allowed_roles": [
         "codex-build",
         "codex-qa"
       ],
       "notes": [
-        "PR50 can be a codex-build task if roadmap scope is narrow.",
-        "PR51 must pause for human checkpoint before any payment or Stripe/commercial enablement change proceeds."
-      ]
+        "Deprecated by OPS5C.",
+        "PR50 and PR51 must not run together because PR51 touches payment, Stripe, or commercial enablement.",
+        "This entry remains only for historical continuity and train-plan safety checks."
+      ],
+      "status": "deprecated"
     },
     {
       "id": "TRAIN-PR52-PR55",
@@ -628,6 +629,102 @@
         "No external framework PR creation may happen without explicit human confirmation."
       ],
       "sub_batch_limit": 4
+    },
+    {
+      "id": "TRAIN-PR50-FEATURED-UI",
+      "title": "Featured Signals UI train",
+      "phase": "featured-signals-ui",
+      "tasks": [
+        "PR50"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "TRAIN-PR47-PR49 complete",
+        "OPS5C complete",
+        "PR50 task object registered"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "PR50 is UI-only and may auto-merge if checks pass.",
+        "No payment, MCP, server, plugin, dependency, or live deploy changes are allowed.",
+        "Featured Signals must remain human-visible only and must not alter sitemap, Public API, MCP, Signal Score, Source Confidence, or organic ordering."
+      ]
+    },
+    {
+      "id": "TRAIN-PR51-PAYMENT-FLAG",
+      "title": "Payment feature flag train",
+      "phase": "payment-feature-flag",
+      "tasks": [
+        "PR51"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": true,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": false,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "live_payment_or_real_charge_requested",
+        "stripe_live_mode_requested",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR51",
+          "reason": "payment checkpoint required"
+        },
+        {
+          "task": "PR51",
+          "reason": "stripe checkpoint required"
+        },
+        {
+          "task": "PR51",
+          "reason": "commercial enablement checkpoint required"
+        }
+      ],
+      "required_preconditions": [
+        "PR50 complete",
+        "OPS5C complete",
+        "PR51 task object registered"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "PR51 is registered but cannot be auto-run or auto-merged by the train runner.",
+        "Payment flags must default off and live Stripe must remain disabled without explicit human approval.",
+        "Payment success must never activate Featured Signals without admin review."
+      ]
     }
   ]
 }

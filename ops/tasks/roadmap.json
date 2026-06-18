@@ -1864,6 +1864,298 @@
         "no product code is modified",
         "TRAIN-PR47-PR49 can close"
       ]
+    },
+    {
+      "id": "OPS5C",
+      "title": "TRAIN-PR50-PR51 Commercial Readiness Scan + Roadmap Registration v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "operations-commercial-readiness",
+      "depends_on": [
+        "PR49"
+      ],
+      "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "docs/OPS5C_PR50_51_COMMERCIAL_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5C",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR50-FEATURED-UI",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR51-PAYMENT-FLAG"
+      ],
+      "data_planes": [
+        "roadmap_registry",
+        "commercial_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "registration-only",
+      "mcp": "none",
+      "definition_of_done": [
+        "PR50 and PR51 task objects exist and are complete",
+        "PR50 and PR51 are split into separate trains",
+        "PR50 is allowed to auto-merge if checks pass",
+        "PR51 is human-checkpoint because it touches payment, Stripe, or commercial enablement",
+        "featured/payment boundary contracts are referenced",
+        "TRAIN-PR50-FEATURED-UI passes train-plan dry run",
+        "TRAIN-PR51-PAYMENT-FLAG passes train-plan dry run and is not eligible for automatic execution",
+        "no product code is modified",
+        "PR50 implementation can proceed after this PR"
+      ]
+    },
+    {
+      "id": "OPS5CQ",
+      "title": "TRAIN-PR50-PR51 Commercial Readiness QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "operations-commercial-readiness",
+      "depends_on": [
+        "OPS5C"
+      ],
+      "allowed_paths": [
+        "docs/OPS5C_PR50_51_COMMERCIAL_READINESS_QA.md",
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "screenshots/qa/ops5cq-*.png"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5CQ",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR50-FEATURED-UI",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR51-PAYMENT-FLAG"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "OPS5C registry changes are verified",
+        "PR50 and PR51 remain split into separate trains",
+        "PR51 remains human-checkpointed",
+        "QA output uses allowed paths only",
+        "no implementation files are modified"
+      ]
+    },
+    {
+      "id": "PR50",
+      "title": "Premium Featured Signals UI Component v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "featured-signals-ui",
+      "depends_on": [
+        "OPS5C"
+      ],
+      "purpose": "Add human-visible Featured Verified Signals UI components for reviewed projects. This is a UI placement layer only. It must not alter machine-readable ranking, sitemap, Public API, future MCP payloads, Signal Score, Source Confidence, or organic ordering.",
+      "allowed_paths": [
+        "components/featured/**",
+        "lib/featured/**",
+        "app/admin/featured-signals/**",
+        "app/page.tsx",
+        "app/categories/**",
+        "scripts/check-featured-signals-boundary.mjs",
+        "docs/57_PREMIUM_FEATURED_SIGNALS_UI_COMPONENT_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json",
+        "supabase/migrations/**"
+      ],
+      "forbidden_paths": [
+        "app/sitemap.ts",
+        "app/api/projects/**",
+        "app/api/public/**",
+        "app/api/mcp/**",
+        "app/api/payments/**",
+        "lib/payments/**",
+        "lib/score/**",
+        "lib/source-confidence/**",
+        "lib/mcp/**",
+        "lib/public-api/**",
+        "deploy/**",
+        "middleware.ts",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR50",
+        "npm run featured-signals:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web",
+        "admin_staging",
+        "human_visible_featured_ui"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "Featured Signals are human-visible UI only",
+        "feature flag default false",
+        "eligible projects only: published or claimed/reviewed",
+        "pending/quarantined/submitted/rejected projects cannot be featured",
+        "external paid links, if any, use rel=\"sponsored noopener noreferrer\"",
+        "no sitemap modification",
+        "no Public API modification",
+        "no MCP modification",
+        "no Signal Score modification",
+        "no Source Confidence modification",
+        "no organic sort modification",
+        "checker validates boundaries",
+        "PR51 can proceed only after human checkpoint"
+      ]
+    },
+    {
+      "id": "PR51",
+      "title": "Ad Payment Feature Flag + Stripe Checkout v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "payment-feature-flag",
+      "depends_on": [
+        "PR50",
+        "OPS5C"
+      ],
+      "purpose": "Add feature-flagged Stripe or payment-link scaffolding for Featured Signals. Defaults must be disabled. Payment success must not activate campaigns automatically. Admin review remains required.",
+      "allowed_paths": [
+        "lib/payments/**",
+        "app/api/payments/featured-signals/**",
+        "app/admin/featured-signals/orders/**",
+        "scripts/check-ad-payment-boundary.mjs",
+        "docs/58_AD_PAYMENT_FEATURE_FLAG_STRIPE_CHECKOUT_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json",
+        "supabase/migrations/**"
+      ],
+      "forbidden_paths": [
+        "app/sitemap.ts",
+        "app/api/projects/**",
+        "app/api/public/**",
+        "app/api/mcp/**",
+        "lib/score/**",
+        "lib/source-confidence/**",
+        "lib/mcp/**",
+        "lib/public-api/**",
+        "deploy/**",
+        "middleware.ts",
+        "public SEO/report pages unless task explicitly allows",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR51",
+        "npm run ad-payment:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "admin_staging",
+        "payment_scaffolding"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "feature-flagged-test-mode-only",
+      "mcp": "none",
+      "definition_of_done": [
+        "AD_PAYMENTS_ENABLED default false",
+        "STRIPE_CHECKOUT_ENABLED default false",
+        "FEATURED_SIGNAL_CHECKOUT_ENABLED default false",
+        "checkout route returns disabled Problem Details when flags off",
+        "eligible projects only",
+        "payment success creates paid_pending_admin_review only",
+        "webhook, if included, only updates order status",
+        "no automatic campaign activation",
+        "no sitemap modification",
+        "no Public API modification",
+        "no MCP modification",
+        "no Signal Score modification",
+        "no Source Confidence modification",
+        "no ranking/discovery/traffic/citation promise",
+        "no live Stripe",
+        "no real secret committed",
+        "checker validates payment boundary"
+      ]
     }
   ],
   "skeletons": [
