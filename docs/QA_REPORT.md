@@ -3,48 +3,65 @@
 ## Latest Run
 
 - Date: 2026-06-18
-- Scope: PR35 Founder Intent Report live QA rerun after production deploy
+- Scope: PR37 Founder Intent Report Archive QA + Live Smoke
 - Role: Codex-QA / live smoke
 - Result: LIVE PASS
 - Blocked: No
 
-See `docs/PR36_41_BATCH_READINESS_SCAN.md` for the refreshed readiness status.
-
 ## Summary
 
-- Production has been redeployed from current `origin/main`.
-- The PR35 founder intent report page now returns 200 on `88cn.com`.
-- The live sitemap now includes `https://88cn.com/reports/early-ai-project-machine-readability-2026`.
-- Generic live smoke and PR35-specific live smoke both pass.
-- No product code was modified by this QA rerun.
+- PR36 was merged as PR #42 and deployed to production at commit `143aa2ae58540a8e9d6b5ef96ae6a41495240c83`.
+- Deployment used the existing Aliyun Workbench server channel and the hardened `scripts/agent/deploy-production.sh` path.
+- `/reports` returns 200 on `https://88cn.com`.
+- `/reports/early-ai-project-machine-readability-2026` returns 200 on `https://88cn.com`.
+- `/sitemap.xml` returns 200 and includes the founder intent report URL.
+- The live sitemap now uses PR36 report-registry dates for report detail `lastmod` values.
+- Security headers remain present on sampled report pages.
+- No app code was modified by this QA task.
 
-## PR35 Live QA Evidence
+## Screenshots
+
+- `../screenshots/qa/pr37-reports-archive.png`
+- `../screenshots/qa/pr37-founder-intent-report.png`
+
+## Live Evidence
 
 | Check | Result |
 | --- | --- |
+| Production deploy target SHA | PASS, `143aa2ae58540a8e9d6b5ef96ae6a41495240c83` |
 | `npm run agent:smoke:live` | PASS |
-| `EXTRA_PATHS='/reports/early-ai-project-machine-readability-2026' REQUIRED_SITEMAP_PATHS='/reports/early-ai-project-machine-readability-2026' scripts/agent/smoke-live.sh` | PASS |
+| `EXTRA_PATHS="/reports /reports/early-ai-project-machine-readability-2026" REQUIRED_SITEMAP_PATHS="/reports/early-ai-project-machine-readability-2026" scripts/agent/smoke-live.sh` | PASS |
+| `https://88cn.com/reports` | PASS, 200 |
 | `https://88cn.com/reports/early-ai-project-machine-readability-2026` | PASS, 200 |
 | `https://88cn.com/sitemap.xml` | PASS, 200 |
-| `https://88cn.com/sitemap.xml` includes report URL | PASS |
-| Report page title | `Early AI Project Machine-Readability Report 2026 | 88CN | 88CN` |
+| Sitemap contains `https://88cn.com/reports/early-ai-project-machine-readability-2026` | PASS |
+| Founder intent report `lastmod` | PASS, `2026-06-18T00:00:00.000Z` |
+| Demo report registry `lastmod` values | PASS, report-date based values present |
+| `x-request-id` on sampled report pages | PASS |
+| `content-security-policy` on sampled report pages | PASS |
+| `x-content-type-options` on sampled report pages | PASS |
+| `x-frame-options` on sampled report pages | PASS |
+| `referrer-policy` on sampled report pages | PASS |
+| `permissions-policy` on sampled report pages | PASS |
 
 ## Validation Commands
 
 | Command | Result |
 | --- | --- |
+| `npm run verify:day0` | PASS |
 | `npm run policy:scan` | PASS |
 | `npm run third-party:check` | PASS |
+| `npm run report:founder-intent:check` | PASS |
 | `npm run agent:smoke:live` | PASS |
-| `EXTRA_PATHS='/reports/early-ai-project-machine-readability-2026' REQUIRED_SITEMAP_PATHS='/reports/early-ai-project-machine-readability-2026' scripts/agent/smoke-live.sh` | PASS |
+| `npm run agent:scope:check -- PR37` | PASS |
 
 ## Findings
 
 - P0: none
-- P1: none open
-- P2: none open
-- P3: none open
+- P1: none
+- P2: none
+- P3: none
 
 ## Recommendation
 
-PR35 is complete. The PR36 train can proceed from this live QA gate, with future live QA tasks using PR-specific `EXTRA_PATHS` and `REQUIRED_SITEMAP_PATHS` checks when they add public indexable routes.
+PR37 is complete. PR38 Brand Voice and Public Copy Guard v0 can proceed after this QA PR is merged.
