@@ -14,7 +14,14 @@
       "id": "TRAIN-PR36-PR41",
       "title": "Founder intent report archive, copy guard, and Genesis explainer train",
       "phase": "reports-governance-founder-experience",
-      "tasks": ["PR36", "PR37", "PR38", "PR39", "PR40", "PR41"],
+      "tasks": [
+        "PR36",
+        "PR37",
+        "PR38",
+        "PR39",
+        "PR40",
+        "PR41"
+      ],
       "batch_limit": 6,
       "auto_merge_allowed": false,
       "live_deploy_allowed": true,
@@ -31,7 +38,12 @@
         "dependency_or_package_change_requested",
         "payment_or_mcp_change_requested",
         "same_worktree_parallel_write_detected",
-        "live_config_change_requested"
+        "live_config_change_requested",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -49,7 +61,10 @@
         "worktree is isolated from active PR36-PR41 train sessions",
         "tool registry allows gh pr merge only when merge gates pass"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "Status: already_in_progress_or_recent.",
         "PR37 and PR41 are live-smoke-only checkpoints, not server-config-change tasks.",
@@ -60,7 +75,13 @@
       "id": "TRAIN-PR42-PR46",
       "title": "Founder conversion core train",
       "phase": "founder-conversion",
-      "tasks": ["PR42", "PR43", "PR44", "PR45", "PR46"],
+      "tasks": [
+        "PR42",
+        "PR43",
+        "PR44",
+        "PR45",
+        "PR46"
+      ],
       "batch_limit": 5,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
@@ -77,7 +98,12 @@
         "secret_or_server_detail_detected",
         "payment_or_mcp_change_requested",
         "live_deploy_requested_without_later_roadmap_permission",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -90,7 +116,10 @@
         "TRAIN-PR36-PR41 is complete or explicitly skipped by the human team",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "Founder conversion core is a maximum five-task batch.",
         "No payment, MCP, server, or live deployment change is allowed by this registry entry."
@@ -100,7 +129,11 @@
       "id": "TRAIN-PR47-PR49",
       "title": "Submission channels, public copy, and founder FAQ train",
       "phase": "submission-and-public-copy",
-      "tasks": ["PR47", "PR48", "PR49"],
+      "tasks": [
+        "PR47",
+        "PR48",
+        "PR49"
+      ],
       "batch_limit": 3,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
@@ -116,7 +149,12 @@
         "forbidden_path_change",
         "secret_or_server_detail_detected",
         "public_language_ban_violation",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [],
       "required_preconditions": [
@@ -124,7 +162,10 @@
         "public copy guard policy is current",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "Safe batch candidate if the roadmap keeps scope to submission channels, public copy, and founder FAQ behavior."
       ]
@@ -133,7 +174,10 @@
       "id": "TRAIN-PR50-PR51",
       "title": "Featured signals and payment feature flag train",
       "phase": "featured-signals",
-      "tasks": ["PR50", "PR51"],
+      "tasks": [
+        "PR50",
+        "PR51"
+      ],
       "batch_limit": 2,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
@@ -150,7 +194,12 @@
         "secret_or_server_detail_detected",
         "live_payment_or_real_charge_requested",
         "stripe_live_mode_requested",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -164,7 +213,10 @@
         "Stripe work is test-mode only unless the human team separately approves otherwise",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "PR50 can be a codex-build task if roadmap scope is narrow.",
         "PR51 must pause for human checkpoint before any payment or Stripe/commercial enablement change proceeds."
@@ -174,7 +226,12 @@
       "id": "TRAIN-PR52-PR55",
       "title": "Lifecycle and retention train",
       "phase": "lifecycle-retention",
-      "tasks": ["PR52", "PR53", "PR54", "PR55"],
+      "tasks": [
+        "PR52",
+        "PR53",
+        "PR54",
+        "PR55"
+      ],
       "batch_limit": 4,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
@@ -190,7 +247,12 @@
         "forbidden_path_change",
         "secret_or_server_detail_detected",
         "external_notification_requested_without_checkpoint",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -203,7 +265,10 @@
         "notification and retention boundaries are documented in the roadmap task",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "Lifecycle and retention changes must not create uncontrolled external outreach."
       ]
@@ -212,7 +277,13 @@
       "id": "TRAIN-PR56-PR60",
       "title": "Public API boundary train",
       "phase": "public-api",
-      "tasks": ["PR56", "PR57", "PR58", "PR59", "PR60"],
+      "tasks": [
+        "PR56",
+        "PR57",
+        "PR58",
+        "PR59",
+        "PR60"
+      ],
       "batch_limit": 5,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
@@ -229,7 +300,12 @@
         "secret_or_server_detail_detected",
         "public_api_external_release_requested",
         "unreviewed_external_data_exposure",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -242,7 +318,10 @@
         "public API boundary contract is reviewed",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "Public API boundary work may build internal contracts before external release.",
         "External release must pause for human checkpoint."
@@ -275,13 +354,38 @@
         "PR80"
       ],
       "sub_batches": [
-        ["PR61", "PR62", "PR63", "PR64"],
-        ["PR65", "PR66", "PR67", "PR68"],
-        ["PR69", "PR70", "PR71", "PR72"],
-        ["PR73", "PR74", "PR75", "PR76"],
-        ["PR77", "PR78", "PR79", "PR80"]
+        [
+          "PR61",
+          "PR62",
+          "PR63",
+          "PR64"
+        ],
+        [
+          "PR65",
+          "PR66",
+          "PR67",
+          "PR68"
+        ],
+        [
+          "PR69",
+          "PR70",
+          "PR71",
+          "PR72"
+        ],
+        [
+          "PR73",
+          "PR74",
+          "PR75",
+          "PR76"
+        ],
+        [
+          "PR77",
+          "PR78",
+          "PR79",
+          "PR80"
+        ]
       ],
-      "batch_limit": 4,
+      "batch_limit": 20,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
       "payment_change_allowed": false,
@@ -297,7 +401,12 @@
         "secret_or_server_detail_detected",
         "scaled_content_or_programmatic_page_generation_without_review",
         "public_language_ban_violation",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -311,11 +420,15 @@
         "anti-scaled-content boundary is documented in the roadmap task",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "This train must be split into sub-batches of four.",
         "Do not create scaled public content or indexability changes without explicit human checkpoint."
-      ]
+      ],
+      "sub_batch_limit": 4
     },
     {
       "id": "TRAIN-PR81-PR100",
@@ -344,13 +457,38 @@
         "PR100"
       ],
       "sub_batches": [
-        ["PR81", "PR82", "PR83", "PR84"],
-        ["PR85", "PR86", "PR87", "PR88"],
-        ["PR89", "PR90", "PR91", "PR92"],
-        ["PR93", "PR94", "PR95", "PR96"],
-        ["PR97", "PR98", "PR99", "PR100"]
+        [
+          "PR81",
+          "PR82",
+          "PR83",
+          "PR84"
+        ],
+        [
+          "PR85",
+          "PR86",
+          "PR87",
+          "PR88"
+        ],
+        [
+          "PR89",
+          "PR90",
+          "PR91",
+          "PR92"
+        ],
+        [
+          "PR93",
+          "PR94",
+          "PR95",
+          "PR96"
+        ],
+        [
+          "PR97",
+          "PR98",
+          "PR99",
+          "PR100"
+        ]
       ],
-      "batch_limit": 4,
+      "batch_limit": 20,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
       "payment_change_allowed": true,
@@ -365,7 +503,12 @@
         "forbidden_path_change",
         "secret_or_server_detail_detected",
         "laravel_or_api_key_or_metering_or_payment_or_data_feed_release_requested_without_checkpoint",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -379,11 +522,15 @@
         "server or Laravel changes are explicitly allowed by each task",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "This train can contain server and payment-adjacent work only after roadmap registration and human checkpoint.",
         "Plugin install and new dependency changes remain false until a later registry update explicitly allows them."
-      ]
+      ],
+      "sub_batch_limit": 4
     },
     {
       "id": "TRAIN-PR101-PR121",
@@ -413,14 +560,41 @@
         "PR121"
       ],
       "sub_batches": [
-        ["PR101", "PR102", "PR103", "PR104"],
-        ["PR105", "PR106", "PR107", "PR108"],
-        ["PR109", "PR110", "PR111", "PR112"],
-        ["PR113", "PR114", "PR115", "PR116"],
-        ["PR117", "PR118", "PR119", "PR120"],
-        ["PR121"]
+        [
+          "PR101",
+          "PR102",
+          "PR103",
+          "PR104"
+        ],
+        [
+          "PR105",
+          "PR106",
+          "PR107",
+          "PR108"
+        ],
+        [
+          "PR109",
+          "PR110",
+          "PR111",
+          "PR112"
+        ],
+        [
+          "PR113",
+          "PR114",
+          "PR115",
+          "PR116"
+        ],
+        [
+          "PR117",
+          "PR118",
+          "PR119",
+          "PR120"
+        ],
+        [
+          "PR121"
+        ]
       ],
-      "batch_limit": 4,
+      "batch_limit": 21,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
       "payment_change_allowed": false,
@@ -436,7 +610,12 @@
         "secret_or_server_detail_detected",
         "external_framework_pr_creation_requested_without_human_confirmation",
         "real_mcp_server_or_private_endpoint_requested_without_checkpoint",
-        "same_worktree_parallel_write_detected"
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
       ],
       "human_checkpoints": [
         {
@@ -454,11 +633,15 @@
         "tool and plugin registries explicitly allow required tools",
         "worktree is clean and created from current origin/main"
       ],
-      "allowed_roles": ["codex-build", "codex-qa"],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
       "notes": [
         "MCP and agent ecosystem work stays registry-first.",
         "No external framework PR creation may happen without explicit human confirmation."
-      ]
+      ],
+      "sub_batch_limit": 4
     }
   ]
 }
