@@ -28,9 +28,11 @@
 | External import quarantine summary | Complete | PR31 adds accepted/quarantined/duplicate/rejected classification and admin-only reason summaries. |
 | Seed 100 machine-readability audit dataset | Complete | PR33 generates a sanitized local audit dataset for 100 Seed projects with bounded official-site, robots, and sitemap checks. |
 | First Founder Intent Signal Report | Complete | PR34 publishes a static aggregate report page from the PR33 Seed 100 machine-readability audit dataset. |
+| Founder Intent Report QA + Live Deploy | Blocked | PR35 generic live smoke passes, but the live PR34 report route returns 404 and the live sitemap does not include the report URL. Production needs redeploy from current `origin/main`. |
+| PR36-PR41 roadmap registration | Complete | PR36-PR41 now have full task objects in `ops/tasks/roadmap.json`, but remain gated on PR35 live pass. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR35 Founder Intent Report QA + Live Deploy.
+Next: PR35 Live Deploy Remediation + Founder Intent Report Smoke QA.

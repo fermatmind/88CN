@@ -642,21 +642,356 @@
         "sitemap includes only published report URL",
         "QA evidence is recorded"
       ]
+    },
+    {
+      "id": "PR36",
+      "title": "Founder Intent Report Archive + Index Hardening v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "reports",
+      "depends_on": [
+        "PR35"
+      ],
+      "allowed_paths": [
+        "app/reports/**",
+        "app/sitemap.ts",
+        "components/reports/**",
+        "components/seo/**",
+        "lib/reports/**",
+        "lib/seo/**",
+        "scripts/check-founder-intent-report.mjs",
+        "docs/46_FOUNDER_INTENT_REPORT_ARCHIVE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/api/**",
+        "app/admin/**",
+        "app/projects/**",
+        "components/admin/**",
+        "lib/admin/**",
+        "lib/index-data/**",
+        "lib/geo-checker/**",
+        "middleware.ts",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run seed-audit:check",
+        "npm run report:founder-intent:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR36",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "report archive and index behavior remains static and published-only",
+        "sitemap includes only approved published report URLs",
+        "report structured data remains report-level only",
+        "no project slugs from Seed 100 are made public by this task",
+        "copy avoids restricted public claims",
+        "PR37 QA can proceed"
+      ]
+    },
+    {
+      "id": "PR37",
+      "title": "Founder Intent Report Archive QA + Live Smoke",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "reports",
+      "depends_on": [
+        "PR36"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "screenshots/qa/pr37-*.png"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run report:founder-intent:check",
+        "npm run agent:smoke:live",
+        "npm run agent:scope:check -- PR37"
+      ],
+      "data_planes": [
+        "public_web"
+      ],
+      "deployment": "live-smoke-only",
+      "human_checkpoint": true,
+      "definition_of_done": [
+        "live report archive returns 200 for published pages",
+        "sitemap includes only published report URLs",
+        "robots and security headers remain valid",
+        "QA screenshots or curl evidence are recorded",
+        "no app code is modified"
+      ]
+    },
+    {
+      "id": "PR38",
+      "title": "Brand Voice and Public Copy Guard v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "governance",
+      "depends_on": [
+        "PR37"
+      ],
+      "allowed_paths": [
+        "ops/copy/**",
+        "scripts/check-brand-voice.mjs",
+        "scripts/scan-forbidden-patterns.mjs",
+        "docs/47_BRAND_VOICE_PUBLIC_COPY_GUARD_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run brand-voice:check",
+        "npm run agent:scope:check -- PR38",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "brand voice rules are machine-readable",
+        "public copy guard complements the forbidden pattern scanner",
+        "scanner stores no secrets and performs no network calls",
+        "no public page copy is changed in this task",
+        "PR39 QA can proceed"
+      ]
+    },
+    {
+      "id": "PR39",
+      "title": "Brand Voice and Public Copy Guard QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "governance",
+      "depends_on": [
+        "PR38"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "screenshots/qa/pr39-*.png"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run brand-voice:check",
+        "npm run agent:scope:check -- PR39"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "positive and negative copy guard probes are recorded",
+        "forbidden public claims remain blocked",
+        "QA stays read-only",
+        "no app code is modified"
+      ]
+    },
+    {
+      "id": "PR40",
+      "title": "Genesis Badge Founder Explainer v1",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "founder-experience",
+      "depends_on": [
+        "PR39"
+      ],
+      "allowed_paths": [
+        "app/genesis/**",
+        "app/founders/**",
+        "components/genesis-badge-explainer.tsx",
+        "components/founder-value-card.tsx",
+        "lib/seo/**",
+        "docs/48_GENESIS_BADGE_FOUNDER_EXPLAINER_V1.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/api/**",
+        "app/admin/**",
+        "app/projects/**",
+        "app/sitemap.ts",
+        "components/admin/**",
+        "lib/admin/**",
+        "lib/index-data/**",
+        "lib/geo-checker/**",
+        "middleware.ts",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR40",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "Genesis Badge remains optional signal display, not a guarantee",
+        "founder copy avoids restricted public claims",
+        "no claim, payment, restricted asset, or investment flow is introduced",
+        "structured data remains truthful and non-fabricated",
+        "PR41 QA can proceed"
+      ]
+    },
+    {
+      "id": "PR41",
+      "title": "Genesis Badge Founder Explainer QA + Live Smoke",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "founder-experience",
+      "depends_on": [
+        "PR40"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "screenshots/qa/pr41-*.png"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:smoke:live",
+        "npm run agent:scope:check -- PR41"
+      ],
+      "data_planes": [
+        "public_web"
+      ],
+      "deployment": "live-smoke-only",
+      "human_checkpoint": true,
+      "definition_of_done": [
+        "live genesis and founders pages return 200",
+        "public copy avoids restricted claims",
+        "mobile and desktop QA evidence are recorded",
+        "no app code is modified"
+      ]
     }
   ],
   "skeletons": [
     {
-      "range": "PR36-PR60",
+      "range": "PR42-PR60",
       "level": "task",
       "status": "reserved",
-      "purpose": "post-seed product and QA expansion after PR35",
+      "purpose": "post-PR41 product and QA expansion",
       "ids": [
-        "PR36",
-        "PR37",
-        "PR38",
-        "PR39",
-        "PR40",
-        "PR41",
         "PR42",
         "PR43",
         "PR44",

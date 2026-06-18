@@ -3,31 +3,39 @@
 ## Latest Run
 
 - Date: 2026-06-18
-- Scope: PR32 Seed 100 Import Dry Run + Admin Staging QA Remediation
-- Role: Codex-QA / narrow QA-remediation acceptance
-- Result: PASS_AFTER_REMEDIATION
-- Blocked: No
+- Scope: PR35 Founder Intent Report QA + PR36-PR41 task registration refresh
+- Role: Codex-QA / roadmap readiness
+- Result: PARTIAL
+- Blocked: Yes
 
-See `docs/43_SEED_100_IMPORT_DRY_RUN_QA.md` for the full report.
+See `docs/PR36_41_BATCH_READINESS_SCAN.md` for the full readiness report.
 
-Summary:
+## Summary
 
-- `88cn-index-data` main at `1fb09e3` passed taxonomy, privacy, validate, aggregate, seed, and test checks.
-- 88CN main at `86d6611` passed the full gate stack, including build and agent gate.
-- PR31 artifacts and reason codes are present.
-- `npm run external-import:seed-dry-run` accepted 101 local project files, verified 100 seed manifest items, and passed duplicate, URL, category, blocked-field, privacy-risk, and malformed-payload probes.
-- Sampled Seed 100 slugs did not enter sitemap.
-- Sampled Seed 100 slugs returned 404 from the public project API without import metadata leaks.
-- Unauthenticated admin external imports page/API did not expose staged import data.
-- Non-production `ADMIN_EXTERNAL_IMPORTS_FIXTURE=1` verified authenticated admin summary rendering without real credentials or Supabase env.
-- `agent:gate` now includes external import quarantine and Seed 100 dry-run checks.
-- Browser QA now uses `npm run dev:qa` on port 3100 with `PORT=3100 scripts/codex-preflight.sh`.
+- PR36-PR41 are now registered as full roadmap task objects in `ops/tasks/roadmap.json`.
+- The previous `agent:scope:check` blocker for missing PR36-PR41 task definitions is resolved.
+- `npm run agent:smoke:live` passed against the generic live smoke endpoints.
+- PR35 is still not complete because the live founder intent report page returns 404.
+- The live sitemap does not include `early-ai-project-machine-readability-2026`.
+- No product code was modified by this QA refresh.
 
-Findings:
+## PR35 Live QA Evidence
+
+| Check | Result |
+| --- | --- |
+| `npm run agent:smoke:live` | PASS |
+| `https://88cn.com/reports/early-ai-project-machine-readability-2026` | FAIL, 404 |
+| `https://88cn.com/sitemap.xml` includes report URL | FAIL, missing |
+| Security headers on live report response | PASS on 404 response |
+
+## Findings
 
 - P0: none
-- P1: none
-- P2: none open
+- P1: PR35 live report route returns 404.
+- P1: PR35 report URL is missing from live sitemap.
+- P2: Generic `agent:smoke:live` does not include the PR35 report route, so PR35-specific checks must be run separately.
 - P3: none open
 
-Recommendation: PR33 can proceed.
+## Recommendation
+
+Redeploy `origin/main` to production, then rerun PR35 live QA. Start PR36 only after the live report route returns 200 and the live sitemap contains the published report URL.
