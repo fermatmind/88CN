@@ -1,31 +1,112 @@
 {
-  "schema_version": "1.0",
-  "visibility": "published-only",
-  "allowed_fields": [
-    "slug",
-    "name",
-    "short_description",
-    "category_slug",
-    "official_site",
-    "public_sources",
-    "signal_score",
-    "source_confidence",
-    "lifecycle_state",
-    "updated_at"
+  "schema_version": "2.0",
+  "task_id": "PR57",
+  "title": "Public API Data Boundary + Threat Model v0",
+  "endpoint_exposure": "none",
+  "public_api_release_allowed": false,
+  "allowed_statuses": [
+    "published"
   ],
-  "forbidden_fields": [
+  "denied_statuses": [
     "submitted",
     "pending_review",
+    "approved",
+    "claimed",
+    "owner_verified",
+    "archived",
     "quarantined",
-    "founder_email",
-    "admin_notes",
-    "reviewer_id",
-    "payment_data",
-    "private_import_payload"
+    "rejected",
+    "scouted_unreviewed",
+    "admin_review"
   ],
-  "rules": [
-    "unknown or non-public records return RFC 9457 errors",
-    "public API must not expose admin staging rows",
-    "public API must include request_id"
+  "allowed_public_fields": [
+    "slug",
+    "name",
+    "canonical_url",
+    "category",
+    "short_description",
+    "public_source_links",
+    "technology_tags",
+    "published_at",
+    "updated_at",
+    "profile_status",
+    "structured_metadata_summary"
+  ],
+  "denied_fields": [
+    "id",
+    "created_by",
+    "updated_by",
+    "founder_email",
+    "submitter_email",
+    "claim_email",
+    "contact_email",
+    "admin_notes",
+    "review_comments",
+    "reviewer_id",
+    "review_decision",
+    "review_queue_state",
+    "external_import_id",
+    "external_import_status",
+    "quarantine_reason",
+    "quarantine_details",
+    "raw_payload",
+    "raw_supabase_row",
+    "audit_events",
+    "notification_events",
+    "payment_data",
+    "payment_state",
+    "featured_payment_state",
+    "commercial_order_state",
+    "source_confidence_internal",
+    "source_confidence_inputs",
+    "signal_score_internal",
+    "signal_score_inputs",
+    "hidden_score_weights",
+    "private_founder_data",
+    "private_source_notes",
+    "scouted_review_state",
+    "scouted_unreviewed_payload"
+  ],
+  "serialization_rules": [
+    "Public API serialization must be implemented from this explicit allowlist only.",
+    "Public API serialization must not pass through broad project rows.",
+    "Public API serialization must not expose raw Supabase rows.",
+    "Unknown or non-public records must return RFC 9457-style errors without leaking existence details.",
+    "Public API responses must include a request_id when an endpoint exists in a later PR.",
+    "PR57 does not create, register, or expose any public API endpoint."
+  ],
+  "privacy_rules": [
+    "No email, private founder, admin review, notification, audit, payment, commercial order, or raw import data may appear in public API output.",
+    "Pending, submitted, quarantined, rejected, scouted-unreviewed, and admin-review records are not public API records.",
+    "Source confidence and Signal Score internals are not public API fields.",
+    "Public API output must preserve unknown-value handling and must not infer missing facts."
+  ],
+  "machine_data_rules": [
+    "Machine-readable output must be derived from reviewed local snapshots.",
+    "Machine-readable output must not crawl external sources at request time.",
+    "Machine-readable output must not mutate sitemap, MCP, payment, Signal Score, or source-confidence behavior.",
+    "Machine-readable output must not include private source notes or hidden scoring details."
+  ],
+  "rate_limit_expectations": [
+    "Any future endpoint must have request bounds before external release.",
+    "Any future endpoint must document per-client abuse handling before external release.",
+    "Bulk export, scraping support, API keys, and metering are out of scope for PR57."
+  ],
+  "future_pr58_preconditions": [
+    "PR58 must depend on this contract.",
+    "PR58 must keep a restrictive or disabled-by-default external release posture until human checkpoint approval.",
+    "PR58 must enforce allowed_statuses and allowed_public_fields in code.",
+    "PR58 must include output validation that blocks denied fields and denied statuses.",
+    "PR58 must not expose MCP behavior.",
+    "PR58 must not expose payment or commercial order state.",
+    "PR58 must not alter sitemap, scoring, source-confidence, or deploy configuration."
+  ],
+  "non_goals": [
+    "No public API route.",
+    "No external API behavior.",
+    "No MCP behavior.",
+    "No payment behavior.",
+    "No deployment behavior.",
+    "No data repository mutation."
   ]
 }

@@ -37,6 +37,7 @@
     "changelog-engine:check": "node scripts/check-changelog-engine.mjs",
     "backers-landing:check": "node scripts/check-backers-landing-boundary.mjs",
     "oss-maintainer:check": "node scripts/oss/check-maintainer-automation.mjs",
+    "public-api-boundary:check": "node scripts/check-public-api-boundary.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",
