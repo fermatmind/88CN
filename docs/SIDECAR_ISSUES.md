@@ -8,6 +8,8 @@ Open sidecar issues:
 - `agent:gate` does not yet run `founder-onboarding:check` because PR48 scope does not include `scripts/agent/gate.sh`. The PR48 task-specific check runs independently and passes. A later gate-maintenance task should add PR47-PR49 specialized checks to the agent gate in one scoped update.
 - `agent:gate` does not yet run `featured-signals:check` because PR50 scope does not include `scripts/agent/gate.sh`. The PR50 task-specific check runs independently and must pass before merge. A later gate-maintenance task should add PR50 specialized checks to the agent gate in one scoped update.
 - `agent:gate` does not yet run `ad-payment-boundary:check` because PR51 scope does not include `scripts/agent/gate.sh`. The PR51 task-specific check runs independently and must pass before merge review. A later gate-maintenance task should add PR51 specialized checks to the agent gate in one scoped update.
+- OPS5D triage: `agent:gate` passes, and PR52-PR60 tasks carry task-level validations, so gate maintenance is non-blocking for `TRAIN-PR52-PR54-LIFECYCLE`. A future scoped OPS task should wire PR42-PR51 specialized checks plus future PR52-PR60 checkers into the gate without mixing implementation work.
+- OPS5D triage: PR59 is spec-only, but the current train-plan checker treats MCP task text conservatively. PR59 is therefore human-checkpointed in the train registry rather than changing checker behavior in a roadmap-only PR.
 
 Use this file for future PR-train findings that are outside the active task scope and allowed by the selected batch's `continue_on_sidecar` policy.
 

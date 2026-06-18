@@ -49,10 +49,11 @@
 | Submission Channels + Founder Onboarding QA | Complete | PR49 verifies PR47 and PR48 local rendering, sitemap boundaries, public copy, and desktop/mobile screenshots. |
 | PR50-PR51 commercial readiness registration | Complete | OPS5C registers PR50 and PR51 as separate trains: PR50 UI-only can auto-merge, PR51 payment flag requires human checkpoint. |
 | Premium Featured Signals UI | Complete | PR50 adds a feature-flagged, human-visible Featured Signals component with no sitemap, public API, MCP, score, source confidence, payment, or organic ordering changes. |
-| Ad Payment Feature Flag + Commercial Boundary Shell | Merge ready | PR51 adds disabled commercial feature flags, a disabled checkout route, future state types, and an admin orders placeholder. Human payment/commercial checkpoint is still required before merge. No live checkout, payment account, API keys, sitemap, public API, MCP, score, source confidence, or organic ordering changes. |
+| Ad Payment Feature Flag + Commercial Boundary Shell | Complete | PR51 adds disabled commercial feature flags, a disabled checkout route, future state types, and an admin orders placeholder. No live checkout, payment account, API keys, sitemap, public API, MCP, score, source confidence, or organic ordering changes. |
+| PR52-PR60 readiness registration | Complete | OPS5D registers full PR52-PR60 roadmap objects, deprecates the broad PR52-PR55 and PR56-PR60 placeholders, splits the next phase into lifecycle, OSS evidence, Public API, and MCP trains, and keeps PR58/PR60 human-checkpointed. PR59 is spec-only but human-checkpointed by conservative MCP risk detection. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: human payment/commercial checkpoint review for PR51. Do not merge automatically.
+Next: `TRAIN-PR52-PR54-LIFECYCLE` can proceed after OPS5D merges and post-merge validation is clean. Do not start PR52 automatically from OPS5D.

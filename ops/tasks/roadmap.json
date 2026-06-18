@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-18T00:00:00Z",
+  "updated_at": "2026-06-18",
   "tasks": [
     {
       "id": "OPS0",
@@ -2155,6 +2155,684 @@
         "no live Stripe",
         "no real secret committed",
         "checker validates payment boundary"
+      ]
+    },
+    {
+      "id": "OPS5D",
+      "title": "TRAIN-PR52-PR60 Readiness Scan + Roadmap Registration v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "operations-api-mcp-readiness",
+      "depends_on": [
+        "PR51"
+      ],
+      "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "docs/OPS5D_PR52_60_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5D",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR52-PR54-LIFECYCLE",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR55-PR56-OSS-EVIDENCE",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR57-PUBLIC-API-BOUNDARY",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR58-PUBLIC-API-V0",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR59-MCP-SPEC",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR60-MCP-SERVER"
+      ],
+      "data_planes": [
+        "roadmap_registry",
+        "public_api_boundary",
+        "mcp_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "registration-only",
+      "definition_of_done": [
+        "PR52 through PR60 task objects exist and are complete",
+        "PR52 through PR60 are split into safer train groups",
+        "high-risk API and MCP tasks are human-checkpointed",
+        "duplicate or superseded task risks are resolved or documented",
+        "gate-maintenance sidecar is classified",
+        "train-plan dry runs pass for all new trains",
+        "no product code is modified",
+        "PR52 implementation can proceed after this PR"
+      ]
+    },
+    {
+      "id": "OPS5DQ",
+      "title": "TRAIN-PR52-PR60 Readiness Scan QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "operations-api-mcp-readiness",
+      "depends_on": [
+        "OPS5D"
+      ],
+      "allowed_paths": [
+        "docs/OPS5D_PR52_60_READINESS_QA.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5DQ",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR52-PR54-LIFECYCLE",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR55-PR56-OSS-EVIDENCE",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR57-PUBLIC-API-BOUNDARY",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR58-PUBLIC-API-V0",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR59-MCP-SPEC",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR60-MCP-SERVER"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "OPS5D registration report is reviewed from QA scope",
+        "all split train dry-run evidence is verified",
+        "QA output uses allowed paths only",
+        "no implementation files are modified"
+      ]
+    },
+    {
+      "id": "PR52",
+      "title": "Signal Alert + Soft Archive v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "lifecycle-retention",
+      "depends_on": [
+        "OPS5D",
+        "PR51"
+      ],
+      "purpose": "Add lifecycle state tracking and soft archive behavior. Inactive projects should become historical snapshots rather than hard-deleted. Signal alerts must be feature-flagged and must not send real email in v0 unless explicitly approved.",
+      "allowed_paths": [
+        "lib/lifecycle/**",
+        "lib/alerts/**",
+        "app/admin/lifecycle/**",
+        "app/admin/alerts/**",
+        "components/admin/**",
+        "supabase/migrations/**",
+        "scripts/check-lifecycle-archive.mjs",
+        "docs/59_SIGNAL_ALERT_SOFT_ARCHIVE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "real email provider",
+        "external notification send",
+        "payment",
+        "MCP",
+        "public API",
+        "deploy",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR52",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "admin_staging",
+        "lifecycle_state"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "soft archive state is defined",
+        "archived pages remain historical snapshots if implemented",
+        "no hard delete path for public historical records",
+        "alerts default disabled",
+        "no real email send",
+        "no private founder data leak",
+        "checker validates lifecycle boundary"
+      ]
+    },
+    {
+      "id": "PR53",
+      "title": "Changelog Engine v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "lifecycle-retention",
+      "depends_on": [
+        "PR52"
+      ],
+      "purpose": "Allow reviewed changelog entries to be staged and reviewed before publication. Changelog updates must not auto-publish and must not mutate Signal Score unless explicitly defined later.",
+      "allowed_paths": [
+        "lib/changelog/**",
+        "app/admin/changelog/**",
+        "app/api/admin/changelog/**",
+        "components/admin/**",
+        "supabase/migrations/**",
+        "scripts/check-changelog-engine.mjs",
+        "docs/60_CHANGELOG_ENGINE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "direct public changelog publication",
+        "public API exposure",
+        "MCP exposure",
+        "data repo mutation unless explicitly approved",
+        "deploy",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR53",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "admin_staging",
+        "reviewed_changelog"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "changelog entries are staged or draft by default",
+        "admin review required before public visibility",
+        "no automatic score change",
+        "no private data collection",
+        "checker validates boundary"
+      ]
+    },
+    {
+      "id": "PR54",
+      "title": "Backers / Alpha Data Feed Landing v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "lifecycle-retention",
+      "depends_on": [
+        "PR53"
+      ],
+      "purpose": "Create a restrained read-only landing page for future Alpha Data Feed interest. This is a public-interest surface only and must avoid restricted financial-product, return, ownership, and payment-commitment claims.",
+      "allowed_paths": [
+        "app/backers/**",
+        "components/backers/**",
+        "lib/seo/**",
+        "scripts/check-backers-landing-boundary.mjs",
+        "docs/61_BACKERS_ALPHA_DATA_FEED_LANDING_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "payment",
+        "investment flow",
+        "restricted capital-product claims",
+        "public API data feed",
+        "deploy",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR54",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web",
+        "interest_copy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "landing page exists if implemented",
+        "no financial product claims",
+        "no payment or commitment flow",
+        "no outcome guarantees",
+        "no private data collection",
+        "checker validates restricted financial and commercial claims"
+      ]
+    },
+    {
+      "id": "PR55",
+      "title": "OSS Maintainer Automation v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "oss-maintainer-evidence",
+      "depends_on": [
+        "PR54"
+      ],
+      "purpose": "Add safe maintainer automation for the open data repository workflow. V0 should focus on validation, labels, check summaries, and maintainer guidance. It must not auto-merge, auto-approve, auto-comment externally without explicit control, or use LLM APIs.",
+      "allowed_paths": [
+        ".github/workflows/**",
+        "scripts/oss/**",
+        "ops/oss/**",
+        "docs/62_OSS_MAINTAINER_AUTOMATION_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "auto merge",
+        "external LLM API",
+        "GitHub secret changes",
+        "production credentials",
+        "payment",
+        "MCP",
+        "deploy",
+        "data repo mutation in this main repo task unless explicitly approved"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR55",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "maintainer_workflow",
+        "open_data_validation"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "automation is safe and maintainer-controlled",
+        "no auto merge",
+        "no external API secrets",
+        "no LLM calls",
+        "checker or docs define boundaries",
+        "Open data repo flow remains human-reviewed"
+      ]
+    },
+    {
+      "id": "PR56",
+      "title": "OpenAI OSS Application Evidence Dossier v0",
+      "type": "docs",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "oss-maintainer-evidence",
+      "depends_on": [
+        "PR55"
+      ],
+      "purpose": "Create an evidence dossier for future OSS or open infrastructure support applications. This is not an application submission and must not claim OpenAI endorsement.",
+      "allowed_paths": [
+        "docs/63_OPENAI_OSS_EVIDENCE_DOSSIER_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "package.json",
+        "external submission",
+        "OpenAI API call",
+        "endorsement claim"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR56"
+      ],
+      "data_planes": [
+        "docs_only",
+        "evidence_dossier"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "dossier exists",
+        "evidence is factual",
+        "no false endorsement",
+        "no fabricated users, stars, traffic, or adoption metrics",
+        "no secret material",
+        "no external submission"
+      ]
+    },
+    {
+      "id": "PR57",
+      "title": "Public API Data Boundary + Threat Model v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "public-api-boundary",
+      "depends_on": [
+        "PR56"
+      ],
+      "purpose": "Define Public API field allowlist, denied fields, threat model, rate-limit expectations, and published-only data boundary. No API implementation release in this PR.",
+      "allowed_paths": [
+        "ops/contracts/public-api-boundary.json",
+        "docs/64_PUBLIC_API_DATA_BOUNDARY_THREAT_MODEL_V0.md",
+        "scripts/check-public-api-boundary.mjs",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "app/api/public/**",
+        "app/api/projects/**",
+        "MCP",
+        "payment",
+        "deploy",
+        "Supabase production access",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR57",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_api_boundary",
+        "threat_model"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "published-only API boundary defined",
+        "field allowlist exists",
+        "pending, submitted, quarantined, scouted, admin, and payment data are forbidden",
+        "threat model documented",
+        "checker validates boundary",
+        "PR58 can proceed only after boundary pass"
+      ]
+    },
+    {
+      "id": "PR58",
+      "title": "Public Read-only API v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "public-api-v0",
+      "depends_on": [
+        "PR57"
+      ],
+      "purpose": "Implement feature-flagged read-only public API v0 using published-only allowlist. It must not expose pending, scouted, quarantined, admin, payment, founder contact, or private data.",
+      "allowed_paths": [
+        "app/api/public/**",
+        "lib/public-api/**",
+        "scripts/check-public-api-v0.mjs",
+        "docs/65_PUBLIC_READ_ONLY_API_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "MCP",
+        "payment",
+        "deploy",
+        "direct exposure of Supabase raw rows",
+        "founder contact/private data",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR58",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_api",
+        "published_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "feature flag default disabled or restrictive",
+        "published-only records only",
+        "field allowlist enforced",
+        "rate-limit or abuse boundary documented",
+        "no private fields",
+        "checker validates API output",
+        "human checkpoint required before external release"
+      ]
+    },
+    {
+      "id": "PR59",
+      "title": "MCP Threat Model + Tool Spec v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "mcp-spec",
+      "depends_on": [
+        "PR58"
+      ],
+      "purpose": "Define MCP tool/resource schema, prompt injection threat model, allowed inputs/outputs, and Public API-only dependency. No live MCP server in this PR.",
+      "allowed_paths": [
+        "ops/contracts/mcp-boundary.json",
+        "docs/66_MCP_THREAT_MODEL_TOOL_SPEC_V0.md",
+        "scripts/check-mcp-threat-model.mjs",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "app/api/mcp/**",
+        "public MCP endpoint",
+        "direct Supabase access",
+        "payment",
+        "deploy",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR59",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "mcp_spec",
+        "public_api_dependency"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "spec-only",
+      "definition_of_done": [
+        "MCP reads Public API only",
+        "no direct Supabase access",
+        "no private fields",
+        "prompt injection risks documented",
+        "tool schema is strict",
+        "checker validates spec"
+      ]
+    },
+    {
+      "id": "PR60",
+      "title": "Read-only MCP Server + QA v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "mcp-server",
+      "depends_on": [
+        "PR59"
+      ],
+      "purpose": "Implement disabled or local-only read-only MCP wrapper around Public API boundary. It must not connect directly to Supabase, must not expose pending, scouted, quarantined, admin, payment, or private fields, and must not be publicly exposed without human approval.",
+      "allowed_paths": [
+        "app/api/mcp/**",
+        "lib/mcp/**",
+        "scripts/check-read-only-mcp-server.mjs",
+        "docs/67_READ_ONLY_MCP_SERVER_QA_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "direct Supabase access",
+        "payment",
+        "deploy",
+        "external registry submission",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR60",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "mcp_server",
+        "public_api_dependency"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "disabled-or-local-only",
+      "definition_of_done": [
+        "MCP feature flag default disabled or local-only",
+        "MCP reads Public API boundary only",
+        "no private fields",
+        "no prompt injection unsafe descriptions",
+        "no public exposure without human checkpoint",
+        "checker validates boundary",
+        "QA instructions included"
       ]
     }
   ],
