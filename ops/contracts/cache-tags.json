@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "tags": {
+    "project:{slug}": {
+      "scope": "single project page and related public API payload"
+    },
+    "category:{category_slug}": {
+      "scope": "single category hub"
+    },
+    "stack:{tech_slug}": {
+      "scope": "single stack or technology hub"
+    },
+    "vertical:{vertical_slug}": {
+      "scope": "single vertical hub"
+    },
+    "collection:{collection_slug}": {
+      "scope": "single collection page"
+    },
+    "report:{report_slug}": {
+      "scope": "single report page"
+    },
+    "home:featured": {
+      "scope": "home page featured placement only"
+    },
+    "sitemap:public": {
+      "scope": "published public sitemap"
+    }
+  },
+  "forbidden": [
+    "global revalidatePath root",
+    "unscoped full-site invalidation",
+    "admin staging invalidating public pages before publish"
+  ],
+  "rules": [
+    "cache invalidation must name a bounded tag",
+    "published state changes may invalidate sitemap:public",
+    "review-only state changes must stay admin-scoped"
+  ]
+}

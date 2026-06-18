@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "default": "opt-in-only",
+  "github_action_default": false,
+  "publish_flag_required": "publish_to_88cn",
+  "publish_flag_value": true,
+  "forbidden": [
+    "secrets",
+    "environment_values",
+    "logs",
+    "private_repo_data",
+    "private_founder_data",
+    "request_body_with_credentials"
+  ],
+  "mcp": {
+    "allowed": "aggregate counters only",
+    "forbidden": [
+      "raw prompts",
+      "private identifiers",
+      "admin review payloads"
+    ]
+  },
+  "rules": [
+    "local checks do not publish telemetry by default",
+    "CI checks do not publish telemetry unless explicitly enabled",
+    "telemetry must not affect product behavior"
+  ]
+}

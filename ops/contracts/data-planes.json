@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "planes": {
+    "public_web": {
+      "purpose": "Human-readable published 88CN pages.",
+      "may_read": [
+        "published",
+        "claimed",
+        "owner_verified"
+      ],
+      "must_not_read": [
+        "submitted",
+        "pending_review",
+        "quarantined",
+        "private_founder_data",
+        "admin_metadata"
+      ]
+    },
+    "admin_staging": {
+      "purpose": "Admin-only review, quarantine, and moderation workspace.",
+      "may_read": [
+        "submitted",
+        "pending_review",
+        "quarantined",
+        "audit_events"
+      ],
+      "public_exposure": false
+    },
+    "open_data_repo": {
+      "purpose": "Public cold data for project discovery.",
+      "allowed_fields": [
+        "project_name",
+        "official_site",
+        "category_slug",
+        "short_description",
+        "public_github",
+        "public_docs",
+        "public_pricing",
+        "public_launch_url",
+        "public_founder_social"
+      ],
+      "excludes": [
+        "private_founder_data",
+        "emails",
+        "billing_material",
+        "analytics_exports",
+        "login_credentials"
+      ]
+    },
+    "internal_signals": {
+      "purpose": "Reviewed internal signal snapshots and explainable scoring inputs.",
+      "public_exposure": "through reviewed pages only"
+    },
+    "commercial_feed": {
+      "purpose": "Future paid or partner feed.",
+      "public_exposure": "human-visible placement only",
+      "machine_data_layer": false
+    },
+    "public_api": {
+      "purpose": "Published-only machine-readable API.",
+      "must_not_read": [
+        "submitted",
+        "pending_review",
+        "quarantined",
+        "private_founder_data",
+        "admin_metadata",
+        "payment_data"
+      ]
+    },
+    "mcp": {
+      "purpose": "Future assistant read interface backed by Public API only.",
+      "source": "public_api",
+      "direct_database_access": false
+    }
+  },
+  "rules": [
+    "submitted records cannot enter public_api, mcp, or sitemap",
+    "pending_review records cannot enter public_api, mcp, or sitemap",
+    "quarantined records cannot enter public_api, mcp, or sitemap",
+    "featured placement cannot enter machine data layer",
+    "open_data_repo is public cold data and excludes private founder data"
+  ]
+}
