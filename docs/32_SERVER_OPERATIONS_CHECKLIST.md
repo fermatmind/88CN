@@ -122,7 +122,7 @@ tail -100 /var/log/nginx/access.log
 
 ## Pull Latest Code
 
-Preferred method once GitHub SSH deploy key access is fixed:
+Preferred method uses the server-local read-only GitHub deploy key for this repo. The key is stored only on the server and registered in GitHub as read-only access for `fermatmind/88CN`.
 
 ```bash
 cd /var/www/88cn
@@ -131,7 +131,9 @@ git checkout main
 git pull --ff-only origin main
 ```
 
-Current fallback method:
+Do not use password-based GitHub access, credential-bearing archive URLs, or writable deploy keys for routine deployment.
+
+Fallback method only when GitHub SSH access is temporarily unavailable:
 
 1. Generate a short-lived GitHub source archive URL from an authenticated local workstation.
 2. Download it on the server without committing or recording the URL.
@@ -141,7 +143,56 @@ Current fallback method:
 
 Do not write archive URLs, GitHub credential material, SSH private keys, `.env.production`, SSL certificates, or server IPs into git.
 
-## Run Build
+## Standard Production Deploy
+
+Every live deployment must name the exact target commit SHA. Deploy the current `origin/main` only after confirming the target SHA locally:
+
+```bash
+git fetch origin
+git rev-parse origin/main
+```
+
+Then run the production deploy script on the server:
+
+```bash
+cd /var/www/88cn
+scripts/agent/deploy-production.sh --confirm --commit <target-sha>
+```
+
+The script performs:
+
+- `git fetch origin`
+- `git switch main`
+- `git pull --ff-only origin main`
+- target SHA checkout and verification
+- `npm ci`
+- `npm run verify:day0`
+- `npm run policy:scan`
+- `npm run third-party:check`
+- `npm run build:production`
+- `pm2 restart 88cn-web`
+- `pm2 save`
+- `pm2 status`
+- `nginx -t`
+- `systemctl reload nginx`
+- local smoke against `http://127.0.0.1:3000`
+- live smoke against `https://88cn.com`
+- final deployed SHA verification
+
+For PR-specific live QA, add extra paths and required sitemap URLs:
+
+```bash
+cd /var/www/88cn
+EXTRA_PATHS="/reports/example-report /new-public-page" \
+REQUIRED_SITEMAP_PATHS="/reports/example-report" \
+scripts/agent/deploy-production.sh --confirm --commit <target-sha>
+```
+
+Keep server IPs, SSH private keys, `.env.production`, certificate files, and credential-bearing URLs out of git and out of PR descriptions.
+
+## Manual Build
+
+Use this only for diagnosis or when the deploy script is intentionally not running:
 
 ```bash
 cd /var/www/88cn
