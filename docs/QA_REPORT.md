@@ -5,7 +5,7 @@
 - Date: 2026-06-18
 - Scope: OPS-1Q Agent Operating System QA
 - Role: Codex-QA read-only acceptance
-- Result: PARTIAL
+- Result: PASS
 - Blocked: No
 
 See `docs/OPS1_AGENT_OS_QA.md` for the full report.
@@ -13,8 +13,9 @@ See `docs/OPS1_AGENT_OS_QA.md` for the full report.
 Summary:
 
 - OPS1 file existence, roadmap JSON, package scripts, contracts, core gates, agent gates, shell syntax, deploy dry-run, redaction negative test, and scope negative test were verified.
-- Finding P1: `OPS1Q.allowed_paths` does not include `docs/OPS1_AGENT_OS_QA.md`, so final `npm run agent:scope:check -- OPS1Q` fails after the required QA report exists.
-- Finding P3: `ops/tasks/current.json` still points to OPS1 after merge.
+- Original finding P1: `OPS1Q.allowed_paths` did not include `docs/OPS1_AGENT_OS_QA.md`; remediated in PR #32.
+- Original finding P3: `ops/tasks/current.json` still pointed to OPS1; remediated in PR #32.
+- Final `npm run agent:scope:check -- OPS1Q` now passes.
 
 ---
 
