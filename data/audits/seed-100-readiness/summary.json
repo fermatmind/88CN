@@ -1,0 +1,78 @@
+{
+  "total_projects": 100,
+  "audited_projects": 100,
+  "outcome_counts": {
+    "dns_error": 1,
+    "http_4xx": 9,
+    "ok": 88,
+    "redirect_limit": 2
+  },
+  "category_counts": {
+    "ai-agents": 12,
+    "ai-coding": 14,
+    "ai-design-tools": 6,
+    "ai-microsaas": 10,
+    "ai-seo-tools": 6,
+    "ai-video-tools": 7,
+    "chinese-ai-builders": 10,
+    "local-llm": 7,
+    "open-source-ai": 18,
+    "rag-tools": 10
+  },
+  "jsonld_present_count": 38,
+  "software_application_schema_present_count": 21,
+  "canonical_present_count": 54,
+  "meta_description_present_count": 82,
+  "robots_available_count": 87,
+  "sitemap_available_count": 71,
+  "html_fetch_failure_count": 12,
+  "top_issue_codes": [
+    {
+      "code": "missing_jsonld",
+      "count": 50
+    },
+    {
+      "code": "missing_canonical",
+      "count": 34
+    },
+    {
+      "code": "sitemap_unavailable",
+      "count": 20
+    },
+    {
+      "code": "missing_open_graph",
+      "count": 14
+    },
+    {
+      "code": "low_readable_text",
+      "count": 10
+    },
+    {
+      "code": "http_4xx",
+      "count": 9
+    },
+    {
+      "code": "robots_unavailable",
+      "count": 8
+    },
+    {
+      "code": "missing_meta_description",
+      "count": 6
+    },
+    {
+      "code": "redirect_limit",
+      "count": 2
+    },
+    {
+      "code": "dns_error",
+      "count": 1
+    },
+    {
+      "code": "missing_title",
+      "count": 1
+    }
+  ],
+  "generated_at": "2026-06-18T05:54:48.243Z",
+  "data_repo_commit": "1fb09e31b291d490981fe097a51da2c53dab2894",
+  "main_repo_commit": "fdcedcf08af8ba25105114ae656b9db4f2a31fb9"
+}
