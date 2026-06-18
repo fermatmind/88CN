@@ -9,6 +9,7 @@ import {
   RefreshCw,
   LogOut,
   SearchCheck,
+  BarChart3,
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -98,6 +99,14 @@ export default async function AdminPage() {
             icon={SearchCheck}
             title="Scouted Profiles"
             description="Review observed public-source profiles and intent records."
+            tag="Active"
+          />
+        </Link>
+        <Link href="/admin/metrics" className="block">
+          <AdminCard
+            icon={BarChart3}
+            title="Conversion Metrics"
+            description="Review aggregate counters and Day 30/60/100 pivot gates."
             tag="Active"
           />
         </Link>

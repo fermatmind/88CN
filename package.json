@@ -27,6 +27,7 @@
     "editorial-copy:check": "node scripts/check-editorial-copy-guard.mjs",
     "brand-voice:check": "node scripts/check-brand-voice.mjs",
     "scouted-profile:check": "node scripts/check-scouted-profile-engine.mjs",
+    "conversion-metrics:check": "node scripts/check-conversion-metrics.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",
