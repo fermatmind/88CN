@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "name": "88CN Brand Voice and Public Copy Guard",
+  "scope": "public source copy and synthetic claim probes",
+  "public_surface_roots": [
+    "app",
+    "components",
+    "lib"
+  ],
+  "public_surface_extensions": [
+    ".ts",
+    ".tsx",
+    ".mdx",
+    ".json"
+  ],
+  "ignored_path_prefixes": [
+    "app/api/",
+    "app/auth/",
+    "lib/validation/",
+    "lib/security/",
+    "lib/supabase/",
+    "lib/auth/",
+    "lib/admin/"
+  ],
+  "brand_voice": {
+    "tone": [
+      "data-terminal",
+      "factual",
+      "founder-useful",
+      "non-promissory",
+      "evidence-first"
+    ],
+    "preferred_language": [
+      "public growth signals",
+      "machine-readable signals",
+      "editorial review",
+      "founder claim",
+      "source confidence",
+      "readiness check",
+      "not verified"
+    ],
+    "avoid_language": [
+      "outcome promises",
+      "ranking claims",
+      "traffic claims",
+      "AI citation claims",
+      "paid placement framing",
+      "link-exchange framing"
+    ]
+  },
+  "restricted_public_claims": [
+    {
+      "id": "link_exchange_claim",
+      "severity": "P1",
+      "phrases": [
+        "dofollow",
+        "backlink",
+        "SEO juice",
+        "paid link",
+        "link marketplace"
+      ],
+      "allow_negated_context": false
+    },
+    {
+      "id": "ranking_promise",
+      "severity": "P1",
+      "phrases": [
+        "guaranteed ranking",
+        "ranking guarantee",
+        "ranking guarantees",
+        "rank boost",
+        "guaranteed rank"
+      ],
+      "allow_negated_context": true
+    },
+    {
+      "id": "traffic_promise",
+      "severity": "P1",
+      "phrases": [
+        "traffic promise",
+        "traffic promises",
+        "traffic guarantee",
+        "traffic guarantees",
+        "guaranteed traffic"
+      ],
+      "allow_negated_context": true
+    },
+    {
+      "id": "ai_citation_promise",
+      "severity": "P1",
+      "phrases": [
+        "AI citation promise",
+        "AI citation promises",
+        "AI citation guarantee",
+        "AI citation guarantees",
+        "guaranteed AI citation"
+      ],
+      "allow_negated_context": true
+    },
+    {
+      "id": "generic_outcome_promise",
+      "severity": "P2",
+      "phrases": [
+        "guaranteed outcomes",
+        "guaranteed inclusion",
+        "guaranteed visibility"
+      ],
+      "allow_negated_context": true
+    }
+  ],
+  "positive_probes": [
+    "88CN shows public growth signals and source confidence for reviewed AI projects.",
+    "The checker is heuristic and does not guarantee search ranking, traffic, indexing, or AI citations.",
+    "No ranking guarantees, traffic promises, or SEO benefits are attached to the Genesis Badge.",
+    "The index is a public discovery tool based on growth signals, not an outcome guarantee."
+  ],
+  "negative_probes": [
+    "Claim your profile for guaranteed ranking in AI search.",
+    "This public page gives founders a traffic promise.",
+    "Add the badge for a guaranteed AI citation.",
+    "Join the link marketplace for a paid link.",
+    "88CN gives every listed company SEO juice."
+  ]
+}

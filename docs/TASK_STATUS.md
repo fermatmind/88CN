@@ -31,9 +31,11 @@
 | Founder Intent Report QA + Live Deploy | Complete | PR35 live QA rerun passes after production redeploy: the live PR34 report route returns 200 and the live sitemap includes the report URL. |
 | PR36-PR41 roadmap registration | Complete | PR36-PR41 now have full task objects in `ops/tasks/roadmap.json` and can proceed sequentially after PR35 live pass. |
 | Founder Intent Report Archive + Index Hardening | Complete | PR36 adds a published report registry used by the reports archive and sitemap, with checks preventing Seed 100 item-level route exposure. |
+| Founder Intent Report Archive QA + Live Smoke | Complete | PR37 deployed the PR36 merge SHA with OPS-3 scripts, verified live report archive URLs, sitemap inclusion, headers, and screenshots. |
+| Brand Voice and Public Copy Guard | Complete | PR38 adds machine-readable brand voice rules, `brand-voice:check`, positive/negative probes, and policy-source allowlist entries without changing public page copy. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR37 Founder Intent Report QA + Live Smoke.
+Next: PR39 Brand Voice and Public Copy Guard QA.
