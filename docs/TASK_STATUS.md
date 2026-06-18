@@ -27,9 +27,10 @@
 | Tool and plugin registry QA | Complete | OPS2 registry QA verified positive checks, negative probes, policy docs, ignored local config, and scope remediation (OPS2Q). |
 | External import quarantine summary | Complete | PR31 adds accepted/quarantined/duplicate/rejected classification and admin-only reason summaries. |
 | Seed 100 machine-readability audit dataset | Complete | PR33 generates a sanitized local audit dataset for 100 Seed projects with bounded official-site, robots, and sitemap checks. |
+| First Founder Intent Signal Report | Complete | PR34 publishes a static aggregate report page from the PR33 Seed 100 machine-readability audit dataset. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR34 First Founder Intent Signal Report v0 using the PR33 audit dataset as deterministic input.
+Next: PR35 Founder Intent Report QA + Live Deploy.

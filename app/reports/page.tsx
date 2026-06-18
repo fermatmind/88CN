@@ -2,6 +2,12 @@ import { demoReports } from "@/lib/demo-reports";
 import ReportCard from "@/components/report-card";
 import { itemListJSONLD } from "@/lib/structured-data";
 import { siteTitle, siteDescription } from "@/lib/seo";
+import {
+  FOUNDER_INTENT_REPORT_PATH,
+  FOUNDER_INTENT_REPORT_SUBTITLE,
+  FOUNDER_INTENT_REPORT_TITLE,
+} from "@/lib/reports/seed-100-readiness-report";
+import Link from "next/link";
 import { FileText } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -18,10 +24,16 @@ export default function ReportsPage() {
     process.env.APP_URL ?? "http://localhost:3000";
 
   const reportsLD = itemListJSONLD(
-    demoReports.map((r) => ({
-      url: `${baseUrl}/reports/${r.slug}`,
-      name: r.title,
-    }))
+    [
+      {
+        url: `${baseUrl}${FOUNDER_INTENT_REPORT_PATH}`,
+        name: FOUNDER_INTENT_REPORT_TITLE,
+      },
+      ...demoReports.map((r) => ({
+        url: `${baseUrl}/reports/${r.slug}`,
+        name: r.title,
+      })),
+    ]
   );
 
   return (
@@ -44,6 +56,23 @@ export default function ReportsPage() {
         <p className="text-sm text-terminal-dim">
           Data-driven snapshots of AI project growth signals. All reports are
           based on public signals from reviewed snapshots.
+        </p>
+      </div>
+
+      <div className="mb-4 rounded-lg border border-terminal-border bg-terminal-surface p-5">
+        <div className="mb-2 text-[10px] font-mono uppercase tracking-widest text-terminal-dim">
+          Latest report
+        </div>
+        <h2 className="text-sm font-semibold text-terminal-fg">
+          <Link
+            href={FOUNDER_INTENT_REPORT_PATH}
+            className="hover:text-terminal-muted"
+          >
+            {FOUNDER_INTENT_REPORT_TITLE}
+          </Link>
+        </h2>
+        <p className="mt-2 text-xs leading-relaxed text-terminal-dim">
+          {FOUNDER_INTENT_REPORT_SUBTITLE}
         </p>
       </div>
 

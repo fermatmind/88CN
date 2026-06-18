@@ -5,6 +5,9 @@ import { demoReports } from "@/lib/demo-reports";
 import { INDEXABLE_STATES } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
+const founderIntentReportPath =
+  "/reports/early-ai-project-machine-readability-2026";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
     process.env.APP_URL ?? "http://localhost:3000";
@@ -77,12 +80,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const reportEntries: MetadataRoute.Sitemap = demoReports.map((r) => ({
-    url: `${baseUrl}/reports/${r.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
+  const reportEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}${founderIntentReportPath}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    ...demoReports.map((r) => ({
+      url: `${baseUrl}/reports/${r.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
+  ];
 
   return [
     ...staticEntries,
