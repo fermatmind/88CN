@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": null,
+  "last_completed_train": "TRAIN-PR36-PR41",
   "next_recommended_train": "TRAIN-PR42-PR46",
-  "notes": "TRAIN-PR36-PR41 may already be running in a separate Codex session."
+  "notes": "OPS5A registered TRAIN-PR42-PR46 for the next sequential train after PR35 live pass and OPS4BQ pass."
 }
