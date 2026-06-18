@@ -8,6 +8,7 @@ import {
   Edit3,
   RefreshCw,
   LogOut,
+  SearchCheck,
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -89,6 +90,14 @@ export default async function AdminPage() {
             icon={RefreshCw}
             title="External Imports"
             description="Manage external project data imports from 88cn-index-data."
+            tag="Active"
+          />
+        </Link>
+        <Link href="/admin/scouted" className="block">
+          <AdminCard
+            icon={SearchCheck}
+            title="Scouted Profiles"
+            description="Review observed public-source profiles and intent records."
             tag="Active"
           />
         </Link>
