@@ -1,17 +1,6 @@
 # Flow Bugs
 
-PR32 Seed 100 Import Dry Run + Admin Staging QA originally found two P2 flow/coverage findings and two P3 process findings. PR36 remediation closes all four. See `docs/43_SEED_100_IMPORT_DRY_RUN_QA.md` for the full report.
+PR37 Founder Intent Report Archive QA + Live Smoke found no flow bugs.
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| P2 | External import dry run | CLI | N/A | Run `npm run external-import:seed-dry-run`. | Resolved: command reads local Seed 100 data, verifies summary shape, and passes negative probes without Supabase, network, or repo writes. | A first-class read-only dry-run command should make Seed 100 QA repeatable. | External import tooling | Fixed in PR36. |
-| P2 | `/admin/external-imports` | Admin | `../screenshots/qa/pr32-admin-external-imports-fixture.png` | Run dev server with `ADMIN_EXTERNAL_IMPORTS_FIXTURE=1`, open `/admin/external-imports`. | Resolved: non-production fixture renders summary cards and reason counts without real credentials. | A safe local/staging admin fixture should verify authenticated summary rendering. | Admin external imports QA fixture | Fixed in PR36. |
-| P3 | Agent gate | CLI | N/A | Run `npm run agent:gate`, then compare with PR32 required checks. | Resolved: `agent:gate` includes `external-import:quarantine:check` and `external-import:seed-dry-run`. | Broad gate should cover import quarantine and Seed 100 dry-run checks. | Agent gate script | Fixed in PR36. |
-| P3 | Browser QA | Desktop | `../screenshots/qa/pr32-admin-external-imports-fixture.png` | Run `npm run dev:qa`, then `PORT=3100 scripts/codex-preflight.sh`. | Resolved: QA has stable port 3100, while preflight keeps 3000 as default and supports `PORT`. | Browser QA should use an isolated port when 3000 is unstable. | Local QA environment | Fixed in PR36. |
-
-PR #28 AI Search Readiness Checker QA found two P2 flow / public-surface issues. Both are remediated in the PR #27 branch and need live redeploy verification after merge. See `docs/40_AI_SEARCH_READINESS_CHECKER_QA.md` for the full report.
-
-| Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| P2 | `/api/geo-checker` | API | `../screenshots/qa/pr28-live-geo-checker-result.png` | POST a URL containing embedded credentials to `/api/geo-checker`; locally also POST an IPv6 loopback URL sample. | Original deployed snapshot returned HTTP 502 Problem Details for these samples. PR #27 branch now returns HTTP 400 Problem Details locally. | Guard-layer rejection should return HTTP 400 Problem Details before any fetch attempt. | `lib/geo-checker` SSRF guard / route validation ordering | Fixed in PR #27 branch; redeploy and rerun live smoke after merge. |
-| P2 | `/submit`, `/founders`, `/genesis` | Desktop | `../screenshots/qa/pr28-live-submit.png`; `../screenshots/qa/pr28-live-founders.png`; `../screenshots/qa/pr28-live-genesis.png` | Fetch public page HTML and scan for the PR #28 public-copy ban list. | Original deployed snapshot contained one restricted link-promise term on all three pages. PR #27 branch removes it from public UI files. | Public pages should use approved 88CN language only. | Public page copy | Fixed in PR #27 branch; redeploy and rerun live public-copy scan after merge. |
