@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FeaturedVerifiedSignals } from "@/components/featured/FeaturedVerifiedSignals";
 import { SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ChartBar, ArrowRight, PlusCircle } from "lucide-react";
@@ -68,6 +69,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <FeaturedVerifiedSignals surface="home" className="pb-12" />
     </div>
   );
 }

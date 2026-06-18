@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { FeaturedVerifiedSignals } from "@/components/featured/FeaturedVerifiedSignals";
 import { getCategoryBySlug, demoCategories } from "@/lib/demo-categories";
 import { getProjectBySlug, getPublishedProjects } from "@/lib/demo-projects";
 import { CategoryHub } from "@/components/category-hub";
@@ -63,6 +64,11 @@ export default function CategoryPage({ params }: CategoryPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLD) }}
+      />
+      <FeaturedVerifiedSignals
+        surface="category"
+        categorySlug={category.slug}
+        className="mb-10 px-0 sm:px-0"
       />
       <CategoryHub category={category} projects={projects} />
     </div>
