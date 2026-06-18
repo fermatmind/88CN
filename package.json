@@ -34,6 +34,7 @@
     "ad-payment-boundary:check": "node scripts/check-ad-payment-boundary.mjs",
     "ad-payment:check": "npm run ad-payment-boundary:check",
     "lifecycle-archive:check": "node scripts/check-lifecycle-archive.mjs",
+    "changelog-engine:check": "node scripts/check-changelog-engine.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",
