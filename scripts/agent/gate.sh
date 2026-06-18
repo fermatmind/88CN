@@ -9,6 +9,8 @@ checks=(
   "npm run public-surface:check"
   "npm run intake:check"
   "npm run external-import:check"
+  "npm run external-import:quarantine:check"
+  "npm run external-import:seed-dry-run"
   "npm run geo-checker:check"
   "npm run lint"
   "npm run typecheck"

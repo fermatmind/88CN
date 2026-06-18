@@ -2,11 +2,11 @@
 
 ## Result
 
-PASS_WITH_FINDINGS
+PASS_AFTER_REMEDIATION
 
 PR32 verified that Seed 100 data from `fermatmind/88cn-index-data` can be consumed by the PR31 external import classification layer without entering public 88CN surfaces.
 
-No P0 or P1 issues were found. PR33 can proceed after acknowledging the non-blocking findings below.
+PR36 remediation closes the original P2/P3 repeatability findings. PR33 can proceed.
 
 ## Repo State
 
@@ -48,17 +48,17 @@ Main repo path: `/Users/rainie/Desktop/88CN`
 | `npm run intake:check` | PASS |
 | `npm run external-import:check` | PASS |
 | `npm run external-import:quarantine:check` | PASS |
+| `npm run external-import:seed-dry-run` | PASS, 101 files, 100 seed manifest items, all probes PASS |
 | `npm run geo-checker:check` | PASS |
 | `npm run agent:redact:check` | PASS |
 | `npm run agent:tool:check` | PASS |
 | `npm run agent:mcp-config:check` | PASS |
 | `npm run agent:plugin-policy:check` | PASS |
+| `npm run agent:scope:check -- PR32` | PASS |
 | `npm run lint` | PASS |
 | `npm run typecheck` | PASS |
 | `npm run build` | PASS, 42 pages |
-| `npm run agent:gate` | PASS |
-
-Note: `agent:gate` still does not include `external-import:quarantine:check`; this was run separately and passed.
+| `npm run agent:gate` | PASS, includes quarantine and Seed 100 dry-run checks |
 
 ## PR31 Artifact Presence
 
@@ -82,15 +82,22 @@ Reason codes verified:
 - `malformed_payload`
 - `source_not_allowed`
 
-## Seed 100 Dry-Run Input Check
+## Seed 100 Dry-Run Command
 
-No dedicated Seed 100 dry-run command exists. To stay read-only and avoid adding scripts, QA temporarily compiled PR31 pure TypeScript import-classification helpers to `/tmp/88cn-pr32-ts` and ran a Node one-liner against `/Users/rainie/Desktop/88cn-index-data/data/projects`.
+PR36 adds a first-class read-only command:
+
+```bash
+npm run external-import:seed-dry-run
+```
+
+The command reads `/Users/rainie/Desktop/88cn-index-data`, temporarily compiles pure import-classification helpers to the system temp directory, and performs no Supabase access, network fetches, or repo writes.
 
 Result:
 
 ```json
 {
   "files": 101,
+  "seed_manifest_items": 100,
   "accepted": 101,
   "summary": {
     "total": 101,
@@ -99,8 +106,15 @@ Result:
     "rejected": 0,
     "duplicates": 0
   },
-  "duplicateProbe": "duplicate:duplicate_slug",
-  "invalidUrlProbe": "quarantined:invalid_url"
+  "probes": {
+    "duplicate_slug": "PASS",
+    "duplicate_fingerprint": "PASS",
+    "invalid_url": "PASS",
+    "invalid_category": "PASS",
+    "forbidden_field": "PASS",
+    "privacy_risk": "PASS",
+    "malformed_payload": "PASS"
+  }
 }
 ```
 
@@ -110,25 +124,34 @@ This confirms:
 - Import candidates can be formed.
 - Summary shape exists and includes accepted, quarantined, rejected, duplicates, and reasons.
 - Pure classification does not require Supabase env.
-- Structural probes produce expected duplicate and invalid URL reason codes.
+- Structural probes produce expected duplicate, URL, category, blocked-field, privacy-risk, and malformed payload reason codes.
 
-## Admin Route Unauth Protection
+## Admin Route Protection And Summary Rendering
 
-Dev server was started on `localhost:3000`, passed `scripts/codex-preflight.sh`, and then was restarted on `localhost:3100` after another local service occupied `3000`.
+PR36 adds a stable QA server command:
+
+```bash
+npm run dev:qa
+PORT=3100 scripts/codex-preflight.sh
+```
+
+`scripts/codex-preflight.sh` still defaults to port 3000, but now respects `PORT` when `APP_URL` is not set. Browser QA uses `localhost:3100` to avoid collisions with other local services.
 
 Checks on `localhost:3100`:
 
 | Request | Result |
 | --- | --- |
 | `GET /admin/external-imports` | PASS, renders Sign In Required page |
+| `GET /admin/external-imports` with `ADMIN_EXTERNAL_IMPORTS_FIXTURE=1` and non-production dev server | PASS, renders authenticated summary fixture |
 | `GET /api/admin/external-imports` | PASS, `401 application/problem+json` |
 | `POST /api/admin/external-imports/sync` dry run | PASS, `401 application/problem+json` |
 
-No staged import records, raw payloads, private data, stack traces, or admin metadata were exposed unauthenticated.
+No staged import records, raw payloads, private data, stack traces, or admin metadata were exposed unauthenticated. The fixture path is guarded by `NODE_ENV !== "production"` plus explicit `ADMIN_EXTERNAL_IMPORTS_FIXTURE=1`, so production cannot activate it.
 
-Screenshot:
+Screenshots:
 
 - `../screenshots/qa/pr32-admin-external-imports-unauth.png`
+- `../screenshots/qa/pr32-admin-external-imports-fixture.png`
 
 ## Sitemap Leakage Check
 
@@ -187,7 +210,7 @@ PASS. The pure summary helper and dry-run classification output include:
 
 All required reason code keys exist.
 
-Admin UI summary visibility could not be verified behind an authenticated admin session because QA did not log in or use real Supabase credentials. The unauthenticated boundary was verified.
+Admin UI summary visibility is verified through the non-production fixture path. The unauthenticated boundary remains verified separately.
 
 ## Privacy And Redaction
 
@@ -215,17 +238,17 @@ Public surface screenshots confirm `/projects` and `/geo-checker` remain reachab
 
 | Severity | Area | Finding | Impact | Recommendation |
 | --- | --- | --- | --- | --- |
-| P2 | Dry-run ergonomics | No dedicated Seed 100 dry-run command exists. QA used temporary `/tmp` compilation of pure functions. | QA remains possible, but repeatability is weaker than a first-class command. | Add a dedicated read-only Seed 100 dry-run command in a future build task. |
-| P2 | Admin UI visibility | Authenticated admin summary view was not verified because QA did not log in or use real Supabase credentials. API/code/static shape and unauth guard were verified. | Authenticated UI data rendering still needs a later admin-session QA pass. | Cover with an admin-staging QA task using a safe local/staging auth fixture. |
-| P3 | Agent gate coverage | `agent:gate` does not include `external-import:quarantine:check`. | Not blocking because the check passes when run separately. | Consider adding this check to the broader gate in a future ops task. |
-| P3 | Browser port | Port 3000 was taken by another local service after the first dev server exited. QA restarted 88CN on 3100. | Evidence remains valid, but report should note the port switch. | Prefer isolated QA port for future browser checks. |
+| P2 | Dry-run ergonomics | Resolved in PR36. `npm run external-import:seed-dry-run` is now first-class and read-only. | Repeatable Seed 100 dry-run is available. | Keep command in `agent:gate` unless runtime becomes excessive. |
+| P2 | Admin UI visibility | Resolved in PR36. Non-production fixture verifies authenticated summary rendering. | Summary cards and reason counts are now browser-verifiable without real credentials. | Keep fixture gated by non-production plus explicit env flag. |
+| P3 | Agent gate coverage | Resolved in PR36. `agent:gate` now includes quarantine and Seed 100 dry-run checks. | Broad gate covers PR31/PR32 import safety checks. | None. |
+| P3 | Browser port | Resolved in PR36. `dev:qa` uses 3100 and preflight supports `PORT=3100`. | Browser QA no longer depends on port 3000 availability. | None. |
 
 ## Scope Remediation
 
-Initial `npm run agent:scope:check -- PR32` failed because PR32 allowed paths did not include `docs/43_SEED_100_IMPORT_DRY_RUN_QA.md`, which this task explicitly required. QA performed narrow remediation by adding that report path and `ops/tasks/roadmap.json` to PR32 allowed paths only. No PR32 goal, product route, or forbidden implementation path was changed.
+Initial `npm run agent:scope:check -- PR32` failed because PR32 allowed paths did not include `docs/43_SEED_100_IMPORT_DRY_RUN_QA.md`, which this task explicitly required. PR36 later expanded PR32 into a narrow QA-remediation scope for the dedicated dry-run command, agent gate coverage, preflight port handling, and the non-production admin summary fixture. No public project route, sitemap, public API, Supabase migration, or deployment path was changed.
 
 ## Recommendation
 
 PR33 can proceed.
 
-The remaining findings are non-blocking and do not indicate Seed 100 sitemap leakage, public API leakage, unauthenticated admin data exposure, missing reason codes, or failed data validation.
+The original findings are resolved and do not indicate Seed 100 sitemap leakage, public API leakage, unauthenticated admin data exposure, missing reason codes, or failed data validation.
