@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: siteTitle("Genesis Badge"),
   description: siteDescription(
-    "The 88CN Genesis Badge recognizes early AI projects with established public growth signals and founder verification. Learn about badge criteria and eligibility."
+    "The 88CN Genesis Badge is an optional public signal display for early AI projects with reviewed public growth signals and founder verification."
   ),
   robots: { index: true, follow: true },
 };
@@ -20,7 +20,7 @@ export default function GenesisPage() {
   const webPageLD = webPageJSONLD(
     pageUrl,
     "Genesis Badge",
-    "The 88CN Genesis Badge recognizes early AI projects with established public growth signals and founder verification."
+    "The 88CN Genesis Badge is an optional public signal display for early AI projects with reviewed public growth signals and founder verification."
   );
 
   return (
@@ -38,9 +38,17 @@ export default function GenesisPage() {
           Genesis Badge
         </h1>
         <p className="text-sm text-terminal-dim leading-relaxed max-w-lg mx-auto">
-          A recognition for early AI projects that have established verifiable
-          public growth signals and completed founder verification on 88CN.
+          An optional public signal display for early AI projects that have
+          reviewed growth signals and completed founder verification on 88CN.
         </p>
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+          <span className="rounded border border-terminal-border bg-terminal-surface px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-terminal-muted">
+            Tracked by 88CN
+          </span>
+          <span className="rounded border border-terminal-border bg-terminal-surface px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-terminal-muted">
+            Founder Claimed
+          </span>
+        </div>
       </div>
 
       <GenesisBadgeExplainer />
@@ -50,10 +58,10 @@ export default function GenesisPage() {
           Genesis Badge Availability
         </h2>
         <p className="text-xs text-terminal-dim leading-relaxed max-w-md mx-auto">
-          The Genesis Badge is planned for a future phase of 88CN. Badge
-          eligibility, criteria, and display format are under development.
-          Dynamic badge rendering and embed functionality are not yet
-          available. This page describes the planned badge concept.
+          The Genesis Badge is planned for a future phase of 88CN. Eligibility,
+          review criteria, and display format are still under development.
+          Dynamic rendering and embed functionality are not yet available. This
+          page describes the planned badge concept and its limits.
         </p>
       </div>
     </div>

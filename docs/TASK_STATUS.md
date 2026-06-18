@@ -33,9 +33,11 @@
 | Founder Intent Report Archive + Index Hardening | Complete | PR36 adds a published report registry used by the reports archive and sitemap, with checks preventing Seed 100 item-level route exposure. |
 | Founder Intent Report Archive QA + Live Smoke | Complete | PR37 deployed the PR36 merge SHA with OPS-3 scripts, verified live report archive URLs, sitemap inclusion, headers, and screenshots. |
 | Brand Voice and Public Copy Guard | Complete | PR38 adds machine-readable brand voice rules, `brand-voice:check`, positive/negative probes, and policy-source allowlist entries without changing public page copy. |
+| Brand Voice and Public Copy Guard QA | Complete | PR39 verified positive and negative guard probes, public source scanning, and read-only QA scope. |
+| Genesis Badge Founder Explainer | Complete | PR40 clarifies the Genesis Badge as optional signal display, adds `Tracked by 88CN` and `Founder Claimed` status language, and avoids backend, API, payment, or sitemap changes. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR39 Brand Voice and Public Copy Guard QA.
+Next: PR41 Genesis Badge Founder Explainer QA + Live Smoke.

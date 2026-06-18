@@ -1,5 +1,12 @@
 import { cn } from "@/lib/utils";
-import { Shield, Globe, Users, Code, Link, TrendingUp } from "lucide-react";
+import {
+  BadgeCheck,
+  CircleSlash,
+  Globe,
+  Shield,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 
 interface GenesisBadgeExplainerProps {
   className?: string;
@@ -31,16 +38,16 @@ const ATTRIBUTES = [
       "The Genesis Badge reflects a project's signal profile across all six Signal Score dimensions. It indicates that a project has established observable public growth signals across multiple dimensions.",
   },
   {
-    icon: Code,
-    title: "Optional Embed Planned",
+    icon: BadgeCheck,
+    title: "Optional Display Planned",
     description:
-      "In a future phase, verified projects may embed a Genesis Badge on their own websites. This embed will be optional and will not require reciprocal links, payment, or any mandatory attribution format.",
+      "In a future phase, verified projects may display a Genesis Badge on their own websites. Display will be optional and will not require payment, reciprocal placement, or any mandatory attribution format.",
   },
   {
-    icon: Link,
-    title: "No Forced Link Placement",
+    icon: CircleSlash,
+    title: "No Obligation Loop",
     description:
-      "The Genesis Badge does not require, imply, or incentivize reciprocal links. There are no SEO obligations, link schemes, or ranking promises associated with the badge. Badge display is purely informational.",
+      "The Genesis Badge does not require, imply, or incentivize commercial obligations. Badge display is informational and separate from ordering, certification, payment, or external outcome claims.",
   },
 ];
 
@@ -54,9 +61,9 @@ export function GenesisBadgeExplainer({
           <Shield className="h-6 w-6 text-terminal-muted" />
         </div>
         <p className="text-xs text-terminal-dim leading-relaxed max-w-lg mx-auto">
-          The Genesis Badge recognizes early projects that have established
-          verifiable public growth signals and completed founder verification.
-          It is not a ranking, endorsement, or commercial certification.
+          The Genesis Badge is an optional signal display for early projects
+          with reviewed public growth signals and founder verification. It is
+          not a ranking, endorsement, or commercial certification.
         </p>
       </section>
 
@@ -84,8 +91,8 @@ export function GenesisBadgeExplainer({
         <ul className="space-y-1.5 text-xs text-terminal-dim">
           <li className="flex items-start gap-2">
             <span className="mt-0.5 h-1 w-1 shrink-0 rounded-full bg-terminal-dim" />
-            The Genesis Badge is not a ranking guarantee. It reflects public
-            signal status at the time of verification.
+            The Genesis Badge reflects public signal status at the time of
+            verification and does not promise external outcomes.
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-0.5 h-1 w-1 shrink-0 rounded-full bg-terminal-dim" />
@@ -99,8 +106,8 @@ export function GenesisBadgeExplainer({
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-0.5 h-1 w-1 shrink-0 rounded-full bg-terminal-dim" />
-            No ranking guarantees, traffic promises, or SEO benefits are
-            associated with the Genesis Badge.
+            The badge is optional and informational. It does not create a claim,
+            payment, restricted asset, or investment flow.
           </li>
         </ul>
       </div>

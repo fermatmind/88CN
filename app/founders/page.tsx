@@ -24,13 +24,13 @@ const VALUES = [
     icon: FileText,
     title: "Create a Clean, Structured Public Profile",
     description:
-      "A free AI project profile on 88CN gives your project a structured, search-indexed public page. The profile includes your project name, description, category, public sources, and growth signal indicators — all in one consistent format designed for discoverability by potential users and collaborators.",
+      "A free AI project profile on 88CN gives your project a structured public page. The profile includes your project name, description, category, public sources, and growth signal indicators in one consistent format for potential users and collaborators.",
   },
   {
     icon: Shield,
     title: "Improve Source Confidence",
     description:
-      "By claiming your project and linking verified public sources (official website, GitHub repository, documentation), you improve the source confidence level of your project's public profile. Higher source confidence means more reliable signal data and better representation in the index.",
+      "By claiming your project and connecting verified public sources such as an official website, GitHub repository, or documentation, you improve the source confidence level of your public profile. Higher source confidence means more reliable signal data and clearer representation in the index.",
   },
   {
     icon: Edit3,
@@ -40,21 +40,21 @@ const VALUES = [
   },
   {
     icon: TrendingUp,
-    title: "Prepare for Verified Signal Profile",
+    title: "Become Tracked by 88CN",
     description:
-      "As the 88CN Signal Score system matures, verified projects will benefit from more complete signal profiles. Early claiming establishes your project's presence in the index and positions it for future signal enhancements, editorial inclusion, and report coverage.",
+      "A claimed project can move from a basic listing into a more complete public signal profile. Tracked by 88CN means the profile is organized around reviewed public sources, lifecycle state, and visible growth-signal dimensions.",
   },
   {
     icon: Award,
     title: "Optional Genesis Badge",
     description:
-      "Verified projects may be eligible for the Genesis Badge, which recognizes early projects with established public growth signals. The badge is optional and informational — it is not a ranking, endorsement, or commercial certification. Display is voluntary and free of obligations.",
+      "Verified projects may become eligible for the Genesis Badge, an optional informational signal display for early projects with reviewed public growth signals. Founder Claimed status is one input, but the badge is not an endorsement or commercial certification.",
   },
   {
     icon: Ban,
     title: "What We Do Not Promise",
     description:
-      "88CN does not promise traffic, ranking improvements, SEO benefits, or link placement. The index is a public discovery tool based on growth signals — not a traffic-generation service. Project profiles are informational. There are no guaranteed outcomes from listing or claiming.",
+      "88CN does not promise external outcomes from listing, claiming, or badge display. The index is a public discovery tool based on reviewed growth signals. Project profiles and badges are informational.",
   },
 ];
 
@@ -84,8 +84,8 @@ export default function FoundersPage() {
           For Founders
         </h1>
         <p className="text-sm text-terminal-dim leading-relaxed max-w-lg mx-auto">
-          Why claim your AI project on 88CN and how a structured public profile
-          helps your project get discovered through public growth signals.
+          Why claim your AI project on 88CN, how public signal profiles work,
+          and what optional badge display does and does not mean.
         </p>
       </div>
 
@@ -127,7 +127,7 @@ export default function FoundersPage() {
           </ol>
           <p>
             All claims are subject to editorial review. Claiming a project is
-            free. There are no paid placement options, no sponsored rankings,
+            free. There are no paid placement options, no sponsored ordering,
             and no commercial obligations.
           </p>
         </div>
