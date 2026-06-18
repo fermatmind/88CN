@@ -8,6 +8,11 @@ import {
   FOUNDER_INTENT_REPORT_SUBTITLE,
   FOUNDER_INTENT_REPORT_TITLE,
 } from "@/lib/reports/seed-100-readiness-report";
+import {
+  SUBMISSION_CHANNELS_REPORT_PATH,
+  SUBMISSION_CHANNELS_REPORT_SUBTITLE,
+  SUBMISSION_CHANNELS_REPORT_TITLE,
+} from "@/lib/reports/submission-channels-report";
 import Link from "next/link";
 import { FileText } from "lucide-react";
 import type { Metadata } from "next";
@@ -49,7 +54,8 @@ export default function ReportsPage() {
         </p>
       </div>
 
-      <div className="mb-4 rounded-lg border border-terminal-border bg-terminal-surface p-5">
+      <div className="mb-4 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-lg border border-terminal-border bg-terminal-surface p-5">
         <div className="mb-2 text-[10px] font-mono uppercase tracking-widest text-terminal-dim">
           Latest report
         </div>
@@ -64,6 +70,23 @@ export default function ReportsPage() {
         <p className="mt-2 text-xs leading-relaxed text-terminal-dim">
           {FOUNDER_INTENT_REPORT_SUBTITLE}
         </p>
+      </div>
+        <div className="rounded-lg border border-terminal-border bg-terminal-surface p-5">
+          <div className="mb-2 text-[10px] font-mono uppercase tracking-widest text-terminal-dim">
+            Founder guide
+          </div>
+          <h2 className="text-sm font-semibold text-terminal-fg">
+            <Link
+              href={SUBMISSION_CHANNELS_REPORT_PATH}
+              className="hover:text-terminal-muted"
+            >
+              {SUBMISSION_CHANNELS_REPORT_TITLE}
+            </Link>
+          </h2>
+          <p className="mt-2 text-xs leading-relaxed text-terminal-dim">
+            {SUBMISSION_CHANNELS_REPORT_SUBTITLE}
+          </p>
+        </div>
       </div>
 
       {demoReports.length === 0 ? (

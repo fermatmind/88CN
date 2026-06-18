@@ -44,9 +44,10 @@
 | Scouted Profile QA | Complete | PR45 verifies scouted pages stay noindex/nofollow, sitemap excludes scouted routes, public API exposes no scouted fields, and admin scouted routes remain gated. |
 | Conversion Metrics + Pivot Gate | Complete | PR46 adds admin-only aggregate conversion counters, a guarded server-side write route, an admin metrics view, and Day 30/60/100 pivot gates. |
 | PR47-PR49 readiness registration | Complete | OPS5B registers full PR47-PR49 task objects, refreshes TRAIN-PR47-PR49, and records gate-maintenance sidecar as non-blocking. |
+| Submission Channels Report Page | Complete | PR47 adds an original founder guide to practical submission channels and validates public copy boundaries. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR47 Submission Channels Report Page v0.
+Next: proceed to PR48 Founder-Ready Submission FAQ + Structured Profile Onboarding v0.
