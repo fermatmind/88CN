@@ -3,39 +3,48 @@
 ## Latest Run
 
 - Date: 2026-06-18
-- Scope: PR35 Founder Intent Report QA + PR36-PR41 task registration refresh
-- Role: Codex-QA / roadmap readiness
-- Result: PARTIAL
-- Blocked: Yes
+- Scope: PR35 Founder Intent Report live QA rerun after production deploy
+- Role: Codex-QA / live smoke
+- Result: LIVE PASS
+- Blocked: No
 
-See `docs/PR36_41_BATCH_READINESS_SCAN.md` for the full readiness report.
+See `docs/PR36_41_BATCH_READINESS_SCAN.md` for the refreshed readiness status.
 
 ## Summary
 
-- PR36-PR41 are now registered as full roadmap task objects in `ops/tasks/roadmap.json`.
-- The previous `agent:scope:check` blocker for missing PR36-PR41 task definitions is resolved.
-- `npm run agent:smoke:live` passed against the generic live smoke endpoints.
-- PR35 is still not complete because the live founder intent report page returns 404.
-- The live sitemap does not include `early-ai-project-machine-readability-2026`.
-- No product code was modified by this QA refresh.
+- Production has been redeployed from current `origin/main`.
+- The PR35 founder intent report page now returns 200 on `88cn.com`.
+- The live sitemap now includes `https://88cn.com/reports/early-ai-project-machine-readability-2026`.
+- Generic live smoke and PR35-specific live smoke both pass.
+- No product code was modified by this QA rerun.
 
 ## PR35 Live QA Evidence
 
 | Check | Result |
 | --- | --- |
 | `npm run agent:smoke:live` | PASS |
-| `https://88cn.com/reports/early-ai-project-machine-readability-2026` | FAIL, 404 |
-| `https://88cn.com/sitemap.xml` includes report URL | FAIL, missing |
-| Security headers on live report response | PASS on 404 response |
+| `EXTRA_PATHS='/reports/early-ai-project-machine-readability-2026' REQUIRED_SITEMAP_PATHS='/reports/early-ai-project-machine-readability-2026' scripts/agent/smoke-live.sh` | PASS |
+| `https://88cn.com/reports/early-ai-project-machine-readability-2026` | PASS, 200 |
+| `https://88cn.com/sitemap.xml` | PASS, 200 |
+| `https://88cn.com/sitemap.xml` includes report URL | PASS |
+| Report page title | `Early AI Project Machine-Readability Report 2026 | 88CN | 88CN` |
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `npm run policy:scan` | PASS |
+| `npm run third-party:check` | PASS |
+| `npm run agent:smoke:live` | PASS |
+| `EXTRA_PATHS='/reports/early-ai-project-machine-readability-2026' REQUIRED_SITEMAP_PATHS='/reports/early-ai-project-machine-readability-2026' scripts/agent/smoke-live.sh` | PASS |
 
 ## Findings
 
 - P0: none
-- P1: PR35 live report route returns 404.
-- P1: PR35 report URL is missing from live sitemap.
-- P2: Generic `agent:smoke:live` does not include the PR35 report route, so PR35-specific checks must be run separately.
+- P1: none open
+- P2: none open
 - P3: none open
 
 ## Recommendation
 
-Redeploy `origin/main` to production, then rerun PR35 live QA. Start PR36 only after the live report route returns 200 and the live sitemap contains the published report URL.
+PR35 is complete. The PR36 train can proceed from this live QA gate, with future live QA tasks using PR-specific `EXTRA_PATHS` and `REQUIRED_SITEMAP_PATHS` checks when they add public indexable routes.
