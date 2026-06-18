@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Human-visible visual placement only.",
+  "allowed_surfaces": [
+    "home_ui",
+    "category_ui",
+    "admin_campaigns"
+  ],
+  "forbidden_surfaces": [
+    "sitemap",
+    "public_api",
+    "mcp_payload",
+    "signal_score",
+    "source_confidence",
+    "organic_sort",
+    "report_dataset"
+  ],
+  "external_link_rel": "sponsored noopener noreferrer",
+  "rules": [
+    "featured signals do not alter machine-readable datasets",
+    "featured signals do not alter public API order",
+    "featured signals must be visually distinguishable"
+  ]
+}

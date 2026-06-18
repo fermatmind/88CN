@@ -1,0 +1,587 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-18",
+  "tasks": [
+    {
+      "id": "OPS0",
+      "title": "Repo State Audit",
+      "type": "ops",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "operations",
+      "depends_on": [],
+      "allowed_paths": [
+        "docs/OPS0_REPO_STATE_AUDIT.md",
+        "docs/OPS0_PR31_READINESS.md",
+        "docs/OPS0_AGENT_OS_INPUTS.md",
+        "docs/BUILD_ERRORS.md"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web",
+        "admin_staging",
+        "open_data_repo",
+        "public_api"
+      ],
+      "telemetry": "none",
+      "cache": "none",
+      "events": "none",
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "repo boundary audit is current",
+        "known gaps are recorded",
+        "next tasks are ordered"
+      ]
+    },
+    {
+      "id": "OPS1",
+      "title": "Agent Operating System v1",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "operations",
+      "depends_on": [
+        "OPS0"
+      ],
+      "allowed_paths": [
+        "ops/**",
+        "scripts/agent/**",
+        "package.json",
+        "docs/OPS1_AGENT_OPERATING_SYSTEM_V1.md",
+        "docs/TASK_STATUS.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- OPS1",
+        "npm run agent:triage:check",
+        "npm run agent:cache-contract:check",
+        "npm run agent:telemetry-contract:check",
+        "npm run agent:event-contract:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web",
+        "admin_staging",
+        "open_data_repo",
+        "internal_signals",
+        "commercial_feed",
+        "public_api",
+        "mcp"
+      ],
+      "telemetry": "contract-only",
+      "cache": "contract-only",
+      "events": "contract-only",
+      "payments": "contract-only",
+      "mcp": "contract-only",
+      "definition_of_done": [
+        "agent roles are documented",
+        "roadmap registry exists",
+        "scope gate exists",
+        "redaction gate exists",
+        "triage gate exists",
+        "cache contract exists",
+        "telemetry contract exists",
+        "event contract exists",
+        "no product behavior is changed"
+      ]
+    },
+    {
+      "id": "OPS1Q",
+      "title": "Agent Operating System QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "operations",
+      "depends_on": [
+        "OPS1"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "screenshots/qa/**"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- OPS1",
+        "npm run agent:triage:check",
+        "npm run agent:cache-contract:check",
+        "npm run agent:telemetry-contract:check",
+        "npm run agent:event-contract:check"
+      ],
+      "data_planes": [
+        "admin_staging"
+      ],
+      "telemetry": "none",
+      "cache": "none",
+      "events": "none",
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "OPS1 files pass contract checks",
+        "QA output uses allowed paths only",
+        "no implementation files are modified"
+      ]
+    },
+    {
+      "id": "OPS2",
+      "title": "Codex Tool & Plugin Registry v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "operations",
+      "depends_on": [
+        "OPS1Q"
+      ],
+      "allowed_paths": [
+        "ops/**",
+        "scripts/agent/**",
+        "package.json",
+        "docs/**"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run agent:scope:check -- OPS2",
+        "npm run agent:redact:check",
+        "npm run policy:scan"
+      ],
+      "data_planes": [
+        "admin_staging"
+      ],
+      "telemetry": "contract-only",
+      "cache": "none",
+      "events": "none",
+      "payments": "none",
+      "mcp": "registry-only",
+      "definition_of_done": [
+        "tool registry is documented",
+        "plugin boundaries are explicit",
+        "no product behavior is changed"
+      ]
+    },
+    {
+      "id": "OPS2Q",
+      "title": "Codex Tool & Plugin Registry QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "operations",
+      "depends_on": [
+        "OPS2"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "screenshots/qa/**"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run agent:redact:check",
+        "npm run policy:scan"
+      ],
+      "data_planes": [
+        "admin_staging"
+      ],
+      "telemetry": "none",
+      "cache": "none",
+      "events": "none",
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "registry behavior is verified",
+        "QA stays read-only"
+      ]
+    },
+    {
+      "id": "PR31",
+      "title": "External Import Consumer Quarantine Summary v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "external-import",
+      "depends_on": [
+        "OPS1",
+        "OPS1Q",
+        "OPS2",
+        "OPS2Q"
+      ],
+      "allowed_paths": [
+        "app/admin/external-imports/**",
+        "app/api/admin/external-imports/**",
+        "components/admin/**",
+        "lib/index-data/**",
+        "lib/admin/**",
+        "scripts/check-external-import-integration.mjs",
+        "docs/**",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "app/projects/**",
+        "app/sitemap.ts",
+        "app/api/projects/**",
+        "middleware.ts",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run external-import:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "open_data_repo",
+        "admin_staging"
+      ],
+      "telemetry": "none",
+      "cache": "admin-only",
+      "events": "none",
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "external import sync produces quarantine summary",
+        "structural import failures are quarantined, not published",
+        "quarantine handles invalid_url, invalid_category, duplicate_slug, duplicate_fingerprint, forbidden_field, privacy_risk, malformed_payload",
+        "no runtime website fetch is performed in import sync",
+        "quarantined records are not written to projects",
+        "quarantined records are not added to sitemap",
+        "quarantined records are not exposed through public API",
+        "admin route can view quarantine summary",
+        "external-import quarantine check exists"
+      ]
+    },
+    {
+      "id": "PR32",
+      "title": "Seed 100 Import Dry Run + Admin Staging QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "external-import",
+      "depends_on": [
+        "PR31"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "screenshots/qa/**"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run external-import:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "open_data_repo",
+        "admin_staging"
+      ],
+      "telemetry": "none",
+      "cache": "none",
+      "events": "none",
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "Seed 100 data repo checks PASS",
+        "Seed 100 imports remain staged",
+        "no seed slug enters sitemap",
+        "no seed slug enters public API",
+        "unauthenticated admin external imports do not leak data",
+        "quarantine summary is visible in admin-only path",
+        "QA report and screenshots only"
+      ]
+    },
+    {
+      "id": "PR33",
+      "title": "Seed 100 Machine-Readability Audit Dataset v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "audit-dataset",
+      "depends_on": [
+        "PR32"
+      ],
+      "allowed_paths": [
+        "lib/**",
+        "scripts/**",
+        "docs/**",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "app/sitemap.ts",
+        "middleware.ts",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "open_data_repo",
+        "admin_staging",
+        "internal_signals"
+      ],
+      "telemetry": "opt-in-only",
+      "cache": "admin-only",
+      "events": "outbox-required-if-written",
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "runtime availability checks are separated from import sync",
+        "audit output is admin-staged",
+        "failed website checks do not publish projects"
+      ]
+    },
+    {
+      "id": "PR34",
+      "title": "First Founder Intent Signal Report v0",
+      "type": "product",
+      "role": "gpt",
+      "repo": "88CN",
+      "phase": "reports",
+      "depends_on": [
+        "PR33"
+      ],
+      "allowed_paths": [
+        "docs/**",
+        "app/reports/**",
+        "lib/**",
+        "components/**"
+      ],
+      "forbidden_paths": [
+        "supabase/**",
+        ".env*",
+        "deploy/**"
+      ],
+      "validations": [
+        "npm run policy:scan",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "public_web",
+        "internal_signals"
+      ],
+      "telemetry": "none",
+      "cache": "report:{report_slug}",
+      "events": "none",
+      "payments": "none",
+      "mcp": "published-only",
+      "definition_of_done": [
+        "report uses verified public signals only",
+        "copy avoids restricted public claims",
+        "human review gate is documented"
+      ]
+    },
+    {
+      "id": "PR35",
+      "title": "Founder Intent Report QA + Live Deploy",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "reports",
+      "depends_on": [
+        "PR34"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "screenshots/qa/**"
+      ],
+      "forbidden_paths": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "package.json",
+        "deploy/**",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run agent:smoke:live",
+        "npm run policy:scan",
+        "npm run third-party:check"
+      ],
+      "data_planes": [
+        "public_web",
+        "public_api"
+      ],
+      "telemetry": "none",
+      "cache": "report:{report_slug}",
+      "events": "none",
+      "payments": "none",
+      "mcp": "published-only",
+      "definition_of_done": [
+        "live report page returns 200",
+        "sitemap includes only published report URL",
+        "QA evidence is recorded"
+      ]
+    }
+  ],
+  "skeletons": [
+    {
+      "range": "PR36-PR60",
+      "level": "task",
+      "status": "reserved",
+      "purpose": "post-seed product and QA expansion after PR35",
+      "ids": [
+        "PR36",
+        "PR37",
+        "PR38",
+        "PR39",
+        "PR40",
+        "PR41",
+        "PR42",
+        "PR43",
+        "PR44",
+        "PR45",
+        "PR46",
+        "PR47",
+        "PR48",
+        "PR49",
+        "PR50",
+        "PR51",
+        "PR52",
+        "PR53",
+        "PR54",
+        "PR55",
+        "PR56",
+        "PR57",
+        "PR58",
+        "PR59",
+        "PR60"
+      ],
+      "default_rule": "register a full task object before implementation"
+    },
+    {
+      "range": "PR61-PR75",
+      "level": "phase",
+      "status": "reserved",
+      "purpose": "public API and MCP read surface growth",
+      "default_rule": "published-only data, contract checks required"
+    },
+    {
+      "range": "PR76-PR90",
+      "level": "phase",
+      "status": "reserved",
+      "purpose": "founder workflow and editorial operations",
+      "default_rule": "admin staging before public exposure"
+    },
+    {
+      "range": "PR91-PR105",
+      "level": "phase",
+      "status": "reserved",
+      "purpose": "signal reports and human-reviewed discovery surfaces",
+      "default_rule": "verified public signals only"
+    },
+    {
+      "range": "PR106-PR121",
+      "level": "phase",
+      "status": "reserved",
+      "purpose": "commercial feed and featured placement boundaries",
+      "default_rule": "visual placement never changes machine data"
+    }
+  ]
+}

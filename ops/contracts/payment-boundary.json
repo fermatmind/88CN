@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "payment_can_change": [
+    "paid_pending_admin_review",
+    "admin campaign queue",
+    "billing audit event"
+  ],
+  "payment_must_not_change": [
+    "Signal Score",
+    "Source Confidence",
+    "sitemap inclusion",
+    "public API ordering",
+    "MCP payload",
+    "organic sort",
+    "report dataset"
+  ],
+  "rules": [
+    "payment success only creates paid_pending_admin_review",
+    "admin approval is required before any visible placement",
+    "paid state never changes score math"
+  ]
+}

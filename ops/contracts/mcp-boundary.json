@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "source": "public_api",
+  "direct_supabase_access": false,
+  "required": [
+    "request_id",
+    "published-only payloads",
+    "field allowlist"
+  ],
+  "forbidden": [
+    "pending records",
+    "quarantined records",
+    "founder email",
+    "admin metadata",
+    "payment data",
+    "direct database query"
+  ],
+  "rules": [
+    "MCP reads Public API only",
+    "MCP cannot bypass lifecycle gates",
+    "MCP payload shape follows public-api-boundary"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "source_of_truth": "Supabase",
+  "future_consumers": [
+    "Laravel",
+    "Redis workers"
+  ],
+  "rules": [
+    "future consumers read event outbox rows or reviewed snapshots",
+    "webhook delivery is never the sole fact source",
+    "receivers must be idempotent",
+    "failed events must be replayable",
+    "full-table cron sync is forbidden"
+  ],
+  "required_event_fields": [
+    "event_id",
+    "event_type",
+    "aggregate_type",
+    "aggregate_id",
+    "occurred_at",
+    "payload_version",
+    "payload"
+  ],
+  "forbidden_patterns": [
+    "direct full-table mirror",
+    "non-replayable webhook-only update",
+    "receiver mutation without idempotency key"
+  ]
+}

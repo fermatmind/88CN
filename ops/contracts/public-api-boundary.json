@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "visibility": "published-only",
+  "allowed_fields": [
+    "slug",
+    "name",
+    "short_description",
+    "category_slug",
+    "official_site",
+    "public_sources",
+    "signal_score",
+    "source_confidence",
+    "lifecycle_state",
+    "updated_at"
+  ],
+  "forbidden_fields": [
+    "submitted",
+    "pending_review",
+    "quarantined",
+    "founder_email",
+    "admin_notes",
+    "reviewer_id",
+    "payment_data",
+    "private_import_payload"
+  ],
+  "rules": [
+    "unknown or non-public records return RFC 9457 errors",
+    "public API must not expose admin staging rows",
+    "public API must include request_id"
+  ]
+}
