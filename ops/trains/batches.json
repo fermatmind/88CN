@@ -47,13 +47,13 @@
         "PR35 live gate passed",
         "PR36 through PR41 roadmap tasks exist",
         "worktree is isolated from active PR36-PR41 train sessions",
-        "tool registry still forbids gh pr merge"
+        "tool registry allows gh pr merge only when merge gates pass"
       ],
       "allowed_roles": ["codex-build", "codex-qa"],
       "notes": [
         "Status: already_in_progress_or_recent.",
         "PR37 and PR41 are live-smoke-only checkpoints, not server-config-change tasks.",
-        "Auto merge remains false because current repo policy and tool registry keep final merge human-owned."
+        "Auto merge remains false unless the batch and roadmap task explicitly allow train-driven merge."
       ]
     },
     {

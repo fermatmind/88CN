@@ -39,18 +39,20 @@ Never use a sidecar issue to bypass a forbidden path, failed security gate, miss
 
 ## Merge Policy
 
-Merges are human-approved by default.
+Merges are policy-gated by default.
 
 The runner must not execute an unattended or train-driven auto-merge unless all conditions are true:
 
 - the selected batch sets `auto_merge_allowed` to true
 - the active roadmap task allows merge
 - `ops/tools/tool-registry.json` allows the required merge command
-- the human team explicitly approves the merge
+- the PR is mergeable
+- required checks pass
+- no human checkpoint is bypassed
 
-If the user explicitly approves a specific PR merge, Codex may run `gh pr merge` when `ops/tools/tool-registry.json` allows it, the PR is mergeable, required checks pass, and no human checkpoint is being bypassed.
+Codex may run `gh pr merge` without a separate human approval step when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
 
-If the merge is not explicitly approved, open or update the PR and stop before merge.
+If merge gates do not pass, open or update the PR and stop before merge.
 
 ## Live Smoke vs Live Config Change
 

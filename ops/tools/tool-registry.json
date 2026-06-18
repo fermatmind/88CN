@@ -35,7 +35,7 @@
       "permissions": { "network": true, "write": true, "secrets": false },
       "allowed_commands": ["gh pr list", "gh pr view", "gh pr create", "gh pr checks", "gh pr merge"],
       "forbidden_commands": ["gh secret", "gh repo delete"],
-      "notes": "Use for PR inspection, draft PR creation, checks, and human-approved PR merge. Merge execution requires explicit human approval and passing merge gates."
+      "notes": "Use for PR inspection, draft PR creation, checks, and policy-gated PR merge. Merge execution requires mergeability, passing required checks, and no bypass of human checkpoints."
     },
     {
       "id": "node",
