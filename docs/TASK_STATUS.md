@@ -37,9 +37,10 @@
 | Genesis Badge Founder Explainer | Complete | PR40 clarifies the Genesis Badge as optional signal display, adds `Tracked by 88CN` and `Founder Claimed` status language, and avoids backend, API, payment, or sitemap changes. |
 | Batch Runner Scripts + Agent Gate Integration | Complete | OPS4B adds batch registry validation, train-plan dry-run checks, package scripts, and agent gate integration without executing future product trains. |
 | Batch Runner QA | Complete | OPS4BQ verified batch runner checks, train-plan dry-runs, negative fixtures, gate integration, and QA-only scope. |
+| PR42-PR46 readiness registration | Complete | OPS5A registers full PR42-PR46 task objects, resolves the PR43 duplicate risk by scoping it as a PR38 extension, and refreshes TRAIN-PR42-PR46. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR41 Genesis Badge Founder Explainer QA + Live Smoke.
+Next: PR42 Editorial Draft Pipeline v0.

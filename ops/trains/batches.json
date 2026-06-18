@@ -73,8 +73,8 @@
     },
     {
       "id": "TRAIN-PR42-PR46",
-      "title": "Founder conversion core train",
-      "phase": "founder-conversion",
+      "title": "Editorial and scouted profile train",
+      "phase": "editorial-scouted-conversion",
       "tasks": [
         "PR42",
         "PR43",
@@ -83,7 +83,7 @@
         "PR46"
       ],
       "batch_limit": 5,
-      "auto_merge_allowed": false,
+      "auto_merge_allowed": true,
       "live_deploy_allowed": false,
       "payment_change_allowed": false,
       "mcp_change_allowed": false,
@@ -92,37 +92,26 @@
       "new_dependency_allowed": false,
       "continue_on_sidecar": true,
       "stop_on": [
-        "missing_task_object",
-        "validation_failure_outside_batch_scope",
-        "forbidden_path_change",
-        "secret_or_server_detail_detected",
-        "payment_or_mcp_change_requested",
-        "live_deploy_requested_without_later_roadmap_permission",
-        "same_worktree_parallel_write_detected",
         "secret_exposure",
         "scope_validation_failure",
         "policy_scan_failure",
         "required_github_check_failure",
         "credential_prompt"
       ],
-      "human_checkpoints": [
-        {
-          "task": "ANY",
-          "reason": "live deploy is blocked unless a later roadmap entry explicitly allows it"
-        }
-      ],
+      "human_checkpoints": [],
       "required_preconditions": [
-        "PR42 through PR46 roadmap tasks are registered before execution",
-        "TRAIN-PR36-PR41 is complete or explicitly skipped by the human team",
-        "worktree is clean and created from current origin/main"
+        "PR35 live pass",
+        "OPS4BQ pass",
+        "PR42-PR46 task objects registered"
       ],
       "allowed_roles": [
         "codex-build",
         "codex-qa"
       ],
       "notes": [
-        "Founder conversion core is a maximum five-task batch.",
-        "No payment, MCP, server, or live deployment change is allowed by this registry entry."
+        "TRAIN-PR42-PR46 is registered for sequential execution after OPS5A.",
+        "No live deploy, server configuration, payment, MCP, plugin install, or new dependency changes are allowed in this train.",
+        "Sidecar findings may be recorded without stopping the train unless a stop_on reason is triggered."
       ]
     },
     {

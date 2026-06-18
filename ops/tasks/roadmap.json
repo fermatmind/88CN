@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-18",
+  "updated_at": "2026-06-18T00:00:00Z",
   "tasks": [
     {
       "id": "OPS0",
@@ -1112,6 +1112,448 @@
         "OPS4B scripts and package gates are verified from QA scope",
         "negative and positive QA evidence is recorded",
         "QA does not modify scripts, package files, product code, or deployment configuration"
+      ]
+    },
+    {
+      "id": "OPS5A",
+      "title": "TRAIN-PR42-PR46 Readiness Scan + Roadmap Registration v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "agent-os",
+      "depends_on": [
+        "OPS4BQ",
+        "PR41"
+      ],
+      "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "docs/OPS5A_PR42_46_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package.json",
+        "package-lock.json",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5A",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "PR42 through PR46 task objects exist and are complete",
+        "duplicate or superseded task risks are resolved or documented",
+        "TRAIN-PR42-PR46 batch exists and passes train-plan dry run",
+        "human checkpoint flags are correct",
+        "no product code is modified",
+        "PR42 implementation can proceed after this PR"
+      ]
+    },
+    {
+      "id": "OPS5AQ",
+      "title": "TRAIN-PR42-PR46 Readiness Scan QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "agent-os",
+      "depends_on": [
+        "OPS5A"
+      ],
+      "allowed_paths": [
+        "docs/OPS5A_PR42_46_READINESS_QA.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package.json",
+        "package-lock.json",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS5AQ"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "OPS5A registration report is reviewed from QA scope",
+        "TRAIN-PR42-PR46 dry-run evidence is verified",
+        "QA does not modify roadmap implementation beyond current task marker"
+      ]
+    },
+    {
+      "id": "PR42",
+      "title": "Editorial Draft Pipeline v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "editorial",
+      "depends_on": [
+        "PR41",
+        "OPS5A"
+      ],
+      "allowed_paths": [
+        "app/admin/**",
+        "app/api/admin/**",
+        "components/admin/**",
+        "lib/editorial/**",
+        "lib/admin/**",
+        "supabase/migrations/**",
+        "scripts/check-editorial-draft-pipeline.mjs",
+        "docs/49_EDITORIAL_DRAFT_PIPELINE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/projects/**",
+        "app/reports/**",
+        "app/api/projects/**",
+        "app/api/geo-checker/**",
+        "app/sitemap.ts",
+        "components/reports/**",
+        "lib/reports/**",
+        "lib/geo-checker/**",
+        "lib/index-data/**",
+        "middleware.ts",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR42",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "admin_only",
+        "draft_editorial"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "editorial output is draft-only",
+        "admin review is required before publication",
+        "no direct project publication path is introduced",
+        "no sitemap, public API, or MCP exposure is introduced",
+        "checker script validates boundaries",
+        "PR43 can proceed"
+      ]
+    },
+    {
+      "id": "PR43",
+      "title": "Editorial + Scouted Public Copy Guard Extension v1",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "governance",
+      "depends_on": [
+        "PR42",
+        "PR38"
+      ],
+      "allowed_paths": [
+        "ops/copy/**",
+        "scripts/check-brand-voice.mjs",
+        "scripts/check-editorial-copy-guard.mjs",
+        "docs/50_EDITORIAL_SCOUTED_COPY_GUARD_EXTENSION_V1.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "supabase/**",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run brand-voice:check",
+        "npm run agent:scope:check -- PR43",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "governance_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "guard blocks restricted link, return, placement, and citation promise wording",
+        "guard explicitly covers editorial, scouted, claim, correct, and remove surfaces",
+        "negative probes fail closed",
+        "task extends PR38 instead of rebuilding the base guard",
+        "does not modify product copy in this task",
+        "PR44 can proceed"
+      ]
+    },
+    {
+      "id": "PR44",
+      "title": "Scouted Profile Engine v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "scouted-profiles",
+      "depends_on": [
+        "PR43"
+      ],
+      "allowed_paths": [
+        "app/admin/**",
+        "app/api/admin/**",
+        "app/scouted/**",
+        "components/scouted/**",
+        "components/admin/**",
+        "lib/scouted/**",
+        "lib/index-data/**",
+        "lib/seo/**",
+        "supabase/migrations/**",
+        "scripts/check-scouted-profile-engine.mjs",
+        "docs/51_SCOUTED_PROFILE_ENGINE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/api/projects/**",
+        "app/sitemap.ts",
+        "app/reports/**",
+        "components/reports/**",
+        "lib/reports/**",
+        "middleware.ts",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR44",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "admin_only",
+        "scouted_profiles"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "scouted profiles default to noindex and nofollow behavior",
+        "scouted profiles do not enter sitemap",
+        "scouted profiles do not enter public API or MCP payloads",
+        "claim, correct, and remove intent is admin-reviewed intent, not automatic mutation",
+        "private fields are never exposed",
+        "checker validates boundaries",
+        "PR45 QA can proceed"
+      ]
+    },
+    {
+      "id": "PR45",
+      "title": "Scouted Profile QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "scouted-profiles",
+      "depends_on": [
+        "PR44"
+      ],
+      "allowed_paths": [
+        "docs/QA_REPORT.md",
+        "docs/VISUAL_BUGS.md",
+        "docs/FLOW_BUGS.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/52_SCOUTED_PROFILE_QA.md",
+        "screenshots/qa/pr45-*.png",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "middleware.ts",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR45"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "scouted routes or pages remain noindex if present",
+        "sitemap has zero scouted slugs",
+        "public API exposes zero scouted metadata",
+        "private fields are not leaked",
+        "QA report is written",
+        "no product code is modified",
+        "PR46 can proceed"
+      ]
+    },
+    {
+      "id": "PR46",
+      "title": "Conversion Metrics + Pivot Gate v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "conversion-metrics",
+      "depends_on": [
+        "PR45"
+      ],
+      "allowed_paths": [
+        "lib/metrics/**",
+        "app/api/metrics/**",
+        "app/admin/**",
+        "components/admin/**",
+        "supabase/migrations/**",
+        "scripts/check-conversion-metrics.mjs",
+        "docs/53_CONVERSION_METRICS_PIVOT_GATE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/projects/**",
+        "app/reports/**",
+        "app/sitemap.ts",
+        "components/reports/**",
+        "lib/reports/**",
+        "middleware.ts",
+        "deploy/**",
+        "public/**",
+        "package-lock.json",
+        ".env*"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run public-surface:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR46",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "admin_only",
+        "aggregate_metrics"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "definition_of_done": [
+        "report view counter exists or is planned behind a safe server-side route",
+        "geo-checker run counter exists or is planned behind a safe server-side route",
+        "submit and claim count aggregation boundary exists",
+        "Day 30, Day 60, and Day 100 pivot gate definitions are documented",
+        "no private founder data is collected",
+        "no third-party tracking script is added",
+        "no public launch automation is added",
+        "checker validates boundaries"
       ]
     }
   ],
