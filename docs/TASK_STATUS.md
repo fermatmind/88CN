@@ -51,9 +51,10 @@
 | Premium Featured Signals UI | Complete | PR50 adds a feature-flagged, human-visible Featured Signals component with no sitemap, public API, MCP, score, source confidence, payment, or organic ordering changes. |
 | Ad Payment Feature Flag + Commercial Boundary Shell | Complete | PR51 adds disabled commercial feature flags, a disabled checkout route, future state types, and an admin orders placeholder. No live checkout, payment account, API keys, sitemap, public API, MCP, score, source confidence, or organic ordering changes. |
 | PR52-PR60 readiness registration | Complete | OPS5D registers full PR52-PR60 roadmap objects, deprecates the broad PR52-PR55 and PR56-PR60 placeholders, splits the next phase into lifecycle, OSS evidence, Public API, and MCP trains, and keeps PR58/PR60 human-checkpointed. PR59 is spec-only but human-checkpointed by conservative MCP risk detection. |
+| Signal Alert + Soft Archive | Complete | PR52 adds lifecycle archive boundaries, disabled signal alert rules, admin-only boundary pages, and `lifecycle-archive:check`. No real email, external notification provider, Public API, MCP, payment, sitemap, deploy, or private founder data exposure. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: `TRAIN-PR52-PR54-LIFECYCLE` can proceed after OPS5D merges and post-merge validation is clean. Do not start PR52 automatically from OPS5D.
+Next: PR53 Changelog Engine v0 can proceed after PR52 merges and post-merge validation is clean.
