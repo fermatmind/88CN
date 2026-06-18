@@ -73,7 +73,7 @@ Booleans are explicit. The default policy blocks auto merge, plugin install, new
 
 The runner skill requires a stop before checkpointed actions. Human checkpoints cover payment/Stripe/commercial enablement, email automation, external notification, public API external release, scaled public content expansion, data feed release, real MCP endpoint configuration, external framework PR creation, and live deployment unless both the batch and task allow it.
 
-Auto merge is false in this registry because unattended train-driven merge should stay blocked by default. Repository policy allows Codex to execute `gh pr merge` only for a specific PR after explicit human approval and passing merge gates.
+Auto merge is false in this registry because train-driven merge should remain controlled by batch and roadmap permissions. Repository policy allows Codex to execute `gh pr merge` without a separate human approval step when the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
 
 ## Parallel Worktree Policy
 

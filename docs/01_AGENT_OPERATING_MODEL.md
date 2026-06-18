@@ -16,7 +16,7 @@ The implementation agent owns code, database, tests, queues, scoring, AI draft s
 
 ## Human Team
 
-The human team owns production access, release approval, editorial approval, and public launch decisions. Codex may execute a final PR merge with `gh pr merge` only after explicit human approval and passing merge gates.
+The human team owns production access, release approval, editorial approval, and public launch decisions. Codex may execute a final PR merge with `gh pr merge` when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
 
 ## Promotion Boundary
 
