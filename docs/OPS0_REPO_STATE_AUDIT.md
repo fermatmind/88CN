@@ -2,9 +2,9 @@
 
 ## Result
 
-PARTIAL.
+PASS_WITH_RISK.
 
-The main repo and data repo are synchronized with their remote `main` branches, the data repo passes all checks, and the main repo builds successfully. The only blocking gate found in the main repo is `policy:scan`, which currently fails on `README.md:190` because that line contains a restricted public-copy term.
+The main repo and data repo are synchronized with their remote `main` branches, and all requested main/data repo checks pass after PR #30 resolved the README public-copy policy blocker. The remaining risk is product-process readiness: external import consumer-side quarantine summary support is still missing, and no dedicated seed slug sitemap leakage check exists yet.
 
 ## Main Repo Summary
 
@@ -16,12 +16,14 @@ Branch under audit: `codex/ops0-repo-state-audit`
 
 Remote: `git@github.com:fermatmind/88CN.git`
 
-Current commit: `ccbf878`
+Current `origin/main` commit: `13f4dd9`
 
-Current branch state: branch created from latest `origin/main`; `main` was fast-forwarded before branch creation.
+Current branch state: PR #29 branch rebased onto latest `origin/main` after PR #30 merge.
 
 Recent merge context:
 
+- PR #30 merged: README public-copy policy unblock.
+- PR #29 open: OPS-0 repo state audit refresh.
 - PR #28 merged: Geo Checker remediation live QA.
 - PR #27 merged: AI Search Readiness Checker QA.
 - PR #26 merged: AI Search Readiness Checker v0.
@@ -135,8 +137,8 @@ Main repo check results:
 
 | Check | Result |
 | --- | --- |
-| `npm run verify:day0` | FAIL, blocked by `policy:scan` |
-| `npm run policy:scan` | FAIL, `README.md:190` restricted term |
+| `npm run verify:day0` | PASS |
+| `npm run policy:scan` | PASS |
 | `npm run third-party:check` | PASS |
 | `npm run db:schema:check` | PASS, 23 tables verified |
 | `npm run public-surface:check` | PASS |
@@ -305,25 +307,24 @@ No current implementation of commercial placement, featured-signal ranking, paid
 
 ## Public Copy Risk Scan
 
-PARTIAL.
+PASS.
 
 Current scan result:
 
+- README policy blocker resolved by PR #30.
+- Current `npm run policy:scan` passes.
 - `app/**`, `components/**`, and product UI files did not show the PR #28 public-copy regression.
 - Policy and QA documents contain allowed historical/policy references.
-- `README.md:190` contains a restricted public-copy term and currently fails `npm run policy:scan`.
-
-This must be fixed or intentionally allowlisted before treating the repo as fully green.
 
 ## Known Gaps
 
-1. Main repo `policy:scan` fails on `README.md:190`.
-2. No explicit quarantine status or quarantine summary support was found for imported seed records.
-3. No dedicated automated check proves seed slugs stay out of sitemap output after import; current protection comes from staging-only import and static sitemap code.
-4. OPS-1 contracts do not yet exist for telemetry, cache tags, event outbox, redaction, featured signals, public API, MCP, and payment boundaries.
+1. Consumer-side quarantine summary support is missing for imported seed records.
+2. No dedicated automated check proves seed slugs stay out of sitemap output after import; current protection comes from staging-only import and static sitemap code.
+3. OPS-1 contracts do not yet exist for telemetry, cache tags, event outbox, redaction, featured signals, public API, MCP, and payment boundaries.
 
 ## Recommended Next Action
 
-1. Fix the current README public-copy blocker in a narrow PR or explicitly update scanner policy if the wording is intentionally documentary.
-2. Proceed to PR31 only as READY_WITH_RISK: include a P1 finding for missing consumer-side quarantine summary and create the quarantine follow-up before PR32.
-3. Start OPS-1 by formalizing agent gates and boundary contracts from `docs/OPS0_AGENT_OS_INPUTS.md`.
+1. Merge OPS-0 after this refresh.
+2. Build OPS-1 Agent Operating System v1.
+3. Implement PR31 External Import Consumer Quarantine Summary v0.
+4. Run PR32 Seed 100 Import Dry Run + Admin Staging QA.

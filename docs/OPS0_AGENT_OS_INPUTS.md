@@ -69,16 +69,19 @@ Recommended data repo gate:
 5. `npm run seed:check`
 6. `npm test`
 
-Current caveat: main repo gate is not fully green until the README public-copy blocker is resolved.
+Current caveat: main repo gate is green after PR #30, but quarantine summary support is still missing for external import consumer flows.
 
 ## Roadmap Tasks To Register
 
 | Task | Proposed focus |
 | --- | --- |
-| PR31 | Seed 100 staged import QA with quarantine finding |
-| PR32 | Consumer-side quarantine summary and import-safety fix |
-| PR33 | Agent gate script and OPS runbook |
-| PR34 | Boundary contracts and redaction policy enforcement |
+| OPS1 | Agent Operating System v1 |
+| OPS1Q | Agent OS QA |
+| PR31 | External Import Consumer Quarantine Summary v0 |
+| PR32 | Seed 100 Import Dry Run + Admin Staging QA |
+| PR33 | Seed 100 Machine-Readability Audit Dataset v0 |
+| PR34 | First Founder Intent Signal Report v0 |
+| PR35 | Founder Intent Report QA + Live Deploy |
 
 ## Contracts For OPS-1
 
