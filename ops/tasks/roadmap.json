@@ -444,25 +444,52 @@
         "PR32"
       ],
       "allowed_paths": [
-        "lib/**",
-        "scripts/**",
-        "docs/**",
+        "data/audits/seed-100-readiness/**",
+        "docs/44_SEED_100_MACHINE_READABILITY_AUDIT_DATASET_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "scripts/agent/gate.sh",
+        "scripts/audit-seed-100-readiness.mjs",
+        "scripts/check-seed-100-readiness-audit.mjs",
         "package.json"
       ],
       "forbidden_paths": [
-        "app/sitemap.ts",
+        "README.md",
+        "app/**",
+        "components/**",
         "middleware.ts",
+        "supabase/**",
+        "app/sitemap.ts",
         "deploy/**",
         "public/**",
+        "package-lock.json",
         ".env*"
       ],
       "validations": [
         "npm run verify:day0",
         "npm run policy:scan",
         "npm run third-party:check",
+        "npm run db:schema:check",
+        "npm run public-surface:check",
+        "npm run intake:check",
+        "npm run external-import:check",
+        "npm run external-import:quarantine:check",
+        "npm run external-import:seed-dry-run",
+        "npm run geo-checker:check",
+        "npm run seed-audit:run",
+        "npm run seed-audit:check",
+        "npm run agent:redact:check",
+        "npm run agent:tool:check",
+        "npm run agent:mcp-config:check",
+        "npm run agent:plugin-policy:check",
+        "npm run agent:scope:check -- PR33",
         "npm run lint",
         "npm run typecheck",
-        "npm run build"
+        "npm run build",
+        "npm run agent:gate"
       ],
       "data_planes": [
         "open_data_repo",
@@ -476,8 +503,11 @@
       "mcp": "none",
       "definition_of_done": [
         "runtime availability checks are separated from import sync",
-        "audit output is admin-staged",
-        "failed website checks do not publish projects"
+        "audit output is local and sanitized",
+        "failed website checks are recorded per item",
+        "no raw HTML or headers are stored",
+        "no projects are published",
+        "PR34 has deterministic dataset input"
       ]
     },
     {

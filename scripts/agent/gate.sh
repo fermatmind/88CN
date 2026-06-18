@@ -12,6 +12,7 @@ checks=(
   "npm run external-import:quarantine:check"
   "npm run external-import:seed-dry-run"
   "npm run geo-checker:check"
+  "npm run seed-audit:check"
   "npm run lint"
   "npm run typecheck"
   "npm run build"
