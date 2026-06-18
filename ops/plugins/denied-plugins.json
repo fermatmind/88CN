@@ -1,0 +1,77 @@
+{
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "id": "browser-cookie-reader",
+      "reason": "Would access user browser session data.",
+      "risk": "private session exposure",
+      "denied_by_default": true
+    },
+    {
+      "id": "password-manager-reader",
+      "reason": "Would access private saved credentials.",
+      "risk": "credential exposure",
+      "denied_by_default": true
+    },
+    {
+      "id": "seo-rank-tracker",
+      "reason": "Not needed for Phase 1 and can create misleading traffic claims.",
+      "risk": "unreviewed external data and public-copy drift",
+      "denied_by_default": true
+    },
+    {
+      "id": "auto-social-poster",
+      "reason": "Automated public posting is outside Codex scope.",
+      "risk": "unreviewed public communication",
+      "denied_by_default": true
+    },
+    {
+      "id": "cloud-provider-write-plugin",
+      "reason": "Cloud writes require human approval.",
+      "risk": "production infrastructure mutation",
+      "denied_by_default": true
+    },
+    {
+      "id": "stripe-live-payment-plugin",
+      "reason": "Live payment operations are human-owned.",
+      "risk": "real-money side effects",
+      "denied_by_default": true
+    },
+    {
+      "id": "supabase-production-write-plugin",
+      "reason": "Production database writes are human-owned.",
+      "risk": "production data mutation",
+      "denied_by_default": true
+    },
+    {
+      "id": "unrestricted-filesystem-mcp",
+      "reason": "Unbounded file access violates repo boundary controls.",
+      "risk": "private file exposure",
+      "denied_by_default": true
+    },
+    {
+      "id": "browser-extension-installer",
+      "reason": "Browser extensions can read user session data.",
+      "risk": "browser profile exposure",
+      "denied_by_default": true
+    },
+    {
+      "id": "keychain-reader",
+      "reason": "System credential stores are out of scope.",
+      "risk": "credential exposure",
+      "denied_by_default": true
+    },
+    {
+      "id": "email-blast-plugin",
+      "reason": "Bulk email is not part of Codex tasks.",
+      "risk": "unreviewed outbound communication",
+      "denied_by_default": true
+    },
+    {
+      "id": "social-dm-automation-plugin",
+      "reason": "Automated direct messages are outside Codex scope.",
+      "risk": "unreviewed outbound communication",
+      "denied_by_default": true
+    }
+  ]
+}

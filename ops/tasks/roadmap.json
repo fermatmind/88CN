@@ -186,10 +186,20 @@
         "OPS1Q"
       ],
       "allowed_paths": [
-        "ops/**",
-        "scripts/agent/**",
+        "ops/tools/**",
+        "ops/plugins/**",
+        "ops/mcp/**",
+        ".codex/README.md",
+        ".codex/config.example.toml",
+        "scripts/agent/tool-check.mjs",
+        "scripts/agent/mcp-config-check.mjs",
+        "scripts/agent/plugin-policy-check.mjs",
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
         "package.json",
-        "docs/**"
+        "docs/OPS2_TOOL_PLUGIN_REGISTRY_V0.md",
+        "docs/TASK_STATUS.md",
+        ".gitignore"
       ],
       "forbidden_paths": [
         "app/**",
@@ -202,9 +212,17 @@
         ".env*"
       ],
       "validations": [
-        "npm run agent:scope:check -- OPS2",
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
         "npm run agent:redact:check",
-        "npm run policy:scan"
+        "npm run agent:scope:check -- OPS2",
+        "npm run agent:tool:check",
+        "npm run agent:mcp-config:check",
+        "npm run agent:plugin-policy:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
       ],
       "data_planes": [
         "admin_staging"
@@ -215,8 +233,14 @@
       "payments": "none",
       "mcp": "registry-only",
       "definition_of_done": [
-        "tool registry is documented",
-        "plugin boundaries are explicit",
+        "tool registry exists",
+        "plugin approved/denied registries exist",
+        "MCP example config contains no secrets",
+        "tool-check passes",
+        "mcp-config-check passes",
+        "plugin-policy-check passes",
+        "no real plugins installed",
+        "no production credentials introduced",
         "no product behavior is changed"
       ]
     },

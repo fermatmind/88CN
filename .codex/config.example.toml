@@ -1,0 +1,14 @@
+# This is an example only.
+# Do not copy sensitive values into this file.
+# Do not commit .codex/config.toml.
+# Project MCP servers are disabled by default.
+
+[mcp_servers.example_88cn_public_api]
+disabled = true
+command = "node"
+args = ["examples/mcp-disabled-placeholder.js"]
+cwd = "/path/to/88CN"
+base_url = "https://example.invalid"
+
+[mcp_servers.example_88cn_public_api.env]
+MODE = "disabled"

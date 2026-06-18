@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "id": "codex-build-skill",
+      "reason": "Repo-native build instructions for scoped implementation tasks.",
+      "scope": "ops/skills/codex-build.md",
+      "allowed_phase": ["OPS", "product build"],
+      "permissions": ["read repo", "write allowed paths", "run local validation"]
+    },
+    {
+      "id": "codex-qa-skill",
+      "reason": "Repo-native read-only QA instructions.",
+      "scope": "ops/skills/codex-qa.md",
+      "allowed_phase": ["QA"],
+      "permissions": ["read repo", "write QA docs", "write screenshots"]
+    },
+    {
+      "id": "live-deploy-skill",
+      "reason": "Repo-native live smoke and deployment boundary card.",
+      "scope": "ops/skills/live-deploy.md",
+      "allowed_phase": ["explicit live deploy task"],
+      "permissions": ["dry-run first", "redacted report"]
+    },
+    {
+      "id": "post-merge-cleanup-skill",
+      "reason": "Repo-native strict cleanup checklist.",
+      "scope": "ops/skills/post-merge-cleanup.md",
+      "allowed_phase": ["post-merge cleanup"],
+      "permissions": ["git branch cleanup", "remote branch cleanup when allowed"]
+    }
+  ]
+}

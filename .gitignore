@@ -25,3 +25,5 @@ research/upstream/
 *.cert
 secrets/
 deploy/scripts/deploy-rsync.sh
+.codex/config.toml
+.codex/*.local.toml
