@@ -29,6 +29,7 @@
     "scouted-profile:check": "node scripts/check-scouted-profile-engine.mjs",
     "conversion-metrics:check": "node scripts/check-conversion-metrics.mjs",
     "submission-channels:check": "node scripts/check-submission-channels-page.mjs",
+    "founder-onboarding:check": "node scripts/check-founder-onboarding-copy.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",

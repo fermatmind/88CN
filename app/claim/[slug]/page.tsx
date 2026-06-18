@@ -3,6 +3,7 @@ import { CLAIM_METHODS } from "@/lib/constants";
 import { siteTitle, siteDescription, noIndex } from "@/lib/seo";
 import { ShieldCheck } from "lucide-react";
 import ClaimForm from "@/components/claim-form";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 interface ClaimPageProps {
@@ -42,6 +43,12 @@ export default function ClaimPage({ params }: ClaimPageProps) {
             ? `Verify your ownership of ${project.name} to manage this free AI project profile and its public growth signals.`
             : "Verify ownership of this project to manage its free AI project profile and public growth signals."}
         </p>
+        <Link
+          href="/founding-slots"
+          className="mt-4 inline-flex rounded-md border border-terminal-border px-3 py-2 text-xs text-terminal-muted transition-colors hover:bg-terminal-surface hover:text-terminal-fg"
+        >
+          Review correction and removal guidance
+        </Link>
       </div>
 
       <div className="mb-10">

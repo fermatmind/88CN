@@ -1,6 +1,7 @@
 import { FounderValueCard } from "@/components/founder-value-card";
 import { webPageJSONLD } from "@/lib/structured-data";
 import { siteTitle, siteDescription } from "@/lib/seo";
+import Link from "next/link";
 import {
   FileText,
   Shield,
@@ -129,6 +130,16 @@ export default function FoundersPage() {
             All claims are subject to editorial review. Claiming a project is
             free. There are no paid placement options, no sponsored ordering,
             and no commercial obligations.
+          </p>
+          <p>
+            Founders can also review the{" "}
+            <Link
+              href="/founding-slots"
+              className="text-terminal-muted underline underline-offset-4 hover:text-terminal-fg"
+            >
+              submission FAQ and correction workflow
+            </Link>{" "}
+            before sending a project or claim request.
           </p>
         </div>
       </div>

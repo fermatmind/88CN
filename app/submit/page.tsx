@@ -1,6 +1,7 @@
 import { siteTitle, siteDescription, noIndex } from "@/lib/seo";
 import { PlusCircle, FileText, Search, ShieldCheck } from "lucide-react";
 import SubmitForm from "@/components/submit-form";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -47,6 +48,12 @@ export default function SubmitPage() {
           growth index. Submissions are reviewed for public growth signals and
           editorial quality.
         </p>
+        <Link
+          href="/founding-slots"
+          className="mt-4 inline-flex rounded-md border border-terminal-border px-3 py-2 text-xs text-terminal-muted transition-colors hover:bg-terminal-surface hover:text-terminal-fg"
+        >
+          Read the founder submission FAQ
+        </Link>
       </div>
 
       <div className="mb-12 grid gap-4 sm:grid-cols-3">
