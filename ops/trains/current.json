@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR47-PR49",
-  "next_recommended_train": "TRAIN-PR50-FEATURED-UI",
-  "notes": "OPS5C splits the commercial-lite phase: PR50 can proceed as UI-only, while PR51 requires explicit human payment/Stripe/commercial checkpoint."
+  "last_completed_train": "TRAIN-PR51-PAYMENT-FLAG",
+  "next_recommended_train": "TRAIN-PR52-PR54-LIFECYCLE",
+  "notes": "OPS5D registers PR52-PR60 and splits the next phase into lifecycle, OSS evidence, Public API, and MCP trains. PR58 and PR60 are high-risk human-checkpoint trains; PR59 is spec-only but checkpointed by conservative MCP risk detection."
 }

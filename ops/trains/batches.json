@@ -211,7 +211,7 @@
     },
     {
       "id": "TRAIN-PR52-PR55",
-      "title": "Lifecycle and retention train",
+      "title": "Deprecated lifecycle and retention train",
       "phase": "lifecycle-retention",
       "tasks": [
         "PR52",
@@ -227,13 +227,12 @@
       "server_change_allowed": false,
       "plugin_install_allowed": false,
       "new_dependency_allowed": false,
-      "continue_on_sidecar": true,
+      "continue_on_sidecar": false,
       "stop_on": [
         "missing_task_object",
-        "validation_failure_outside_batch_scope",
+        "validation_failure",
         "forbidden_path_change",
         "secret_or_server_detail_detected",
-        "external_notification_requested_without_checkpoint",
         "same_worktree_parallel_write_detected",
         "secret_exposure",
         "scope_validation_failure",
@@ -244,25 +243,25 @@
       "human_checkpoints": [
         {
           "task": "ANY",
-          "reason": "email automation or external notification must pause for human review"
+          "reason": "Deprecated broad train; use split OPS5D trains instead."
         }
       ],
       "required_preconditions": [
-        "PR52 through PR55 roadmap tasks are registered before execution",
-        "notification and retention boundaries are documented in the roadmap task",
-        "worktree is clean and created from current origin/main"
+        "Deprecated: do not use for one-click execution",
+        "Use TRAIN-PR52-PR54-LIFECYCLE then TRAIN-PR55-PR56-OSS-EVIDENCE"
       ],
       "allowed_roles": [
-        "codex-build",
-        "codex-qa"
+        "codex-build"
       ],
       "notes": [
-        "Lifecycle and retention changes must not create uncontrolled external outreach."
-      ]
+        "Deprecated by OPS5D.",
+        "PR55 is separated from lifecycle surfaces because it touches OSS maintainer automation boundaries."
+      ],
+      "status": "deprecated"
     },
     {
       "id": "TRAIN-PR56-PR60",
-      "title": "Public API boundary train",
+      "title": "Deprecated combined public API and MCP train",
       "phase": "public-api",
       "tasks": [
         "PR56",
@@ -285,34 +284,33 @@
         "validation_failure",
         "forbidden_path_change",
         "secret_or_server_detail_detected",
-        "public_api_external_release_requested",
-        "unreviewed_external_data_exposure",
         "same_worktree_parallel_write_detected",
         "secret_exposure",
         "scope_validation_failure",
         "policy_scan_failure",
         "required_github_check_failure",
-        "credential_prompt"
+        "credential_prompt",
+        "public_api_external_release_requested",
+        "unreviewed_external_data_exposure"
       ],
       "human_checkpoints": [
         {
           "task": "ANY",
-          "reason": "public API external release requires human checkpoint"
+          "reason": "Deprecated combined train; PR57 through PR60 require split boundary or endpoint checkpoints."
         }
       ],
       "required_preconditions": [
-        "PR56 through PR60 roadmap tasks are registered before execution",
-        "public API boundary contract is reviewed",
-        "worktree is clean and created from current origin/main"
+        "Deprecated: do not use for one-click execution",
+        "Use OPS5D split trains for API and MCP work"
       ],
       "allowed_roles": [
-        "codex-build",
-        "codex-qa"
+        "codex-build"
       ],
       "notes": [
-        "Public API boundary work may build internal contracts before external release.",
-        "External release must pause for human checkpoint."
-      ]
+        "Deprecated by OPS5D.",
+        "Do not batch public API implementation with MCP specification or server work."
+      ],
+      "status": "deprecated"
     },
     {
       "id": "TRAIN-PR61-PR80",
@@ -724,6 +722,299 @@
         "PR51 is registered but cannot be auto-run or auto-merged by the train runner.",
         "Payment flags must default off and live Stripe must remain disabled without explicit human approval.",
         "Payment success must never activate Featured Signals without admin review."
+      ]
+    },
+    {
+      "id": "TRAIN-PR52-PR54-LIFECYCLE",
+      "title": "Lifecycle, retention, changelog, and backers landing train",
+      "phase": "lifecycle-retention",
+      "tasks": [
+        "PR52",
+        "PR53",
+        "PR54"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "external_notification_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "PR51 complete",
+        "OPS5D complete",
+        "PR52 through PR54 full task objects registered",
+        "worktree is clean and created from current origin/main"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "Medium-low risk train.",
+        "Avoid real email automation, restricted financial claims, and private data collection.",
+        "TRAIN-PR52-PR54-LIFECYCLE can proceed after OPS5D if validations pass."
+      ]
+    },
+    {
+      "id": "TRAIN-PR55-PR56-OSS-EVIDENCE",
+      "title": "OSS maintainer automation and evidence dossier train",
+      "phase": "oss-maintainer-evidence",
+      "tasks": [
+        "PR55",
+        "PR56"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "external_llm_api_requested",
+        "external_auto_comment_requested"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "TRAIN-PR52-PR54-LIFECYCLE complete",
+        "PR55 and PR56 full task objects registered",
+        "worktree is clean and created from current origin/main"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "Medium risk train.",
+        "Must not auto-submit applications, auto-comment externally, or use LLM APIs without explicit approval."
+      ]
+    },
+    {
+      "id": "TRAIN-PR57-PUBLIC-API-BOUNDARY",
+      "title": "Public API boundary and threat model train",
+      "phase": "public-api-boundary",
+      "tasks": [
+        "PR57"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "TRAIN-PR55-PR56-OSS-EVIDENCE complete",
+        "public-api-boundary contract reviewed from local registry",
+        "worktree is clean and created from current origin/main"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "Boundary/spec only.",
+        "No public endpoint implementation release in PR57."
+      ]
+    },
+    {
+      "id": "TRAIN-PR58-PUBLIC-API-V0",
+      "title": "Public read-only API v0 train",
+      "phase": "public-api-v0",
+      "tasks": [
+        "PR58"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": false,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "public_api_external_release_requested",
+        "unreviewed_external_data_exposure"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR58",
+          "reason": "public_api_external_release"
+        },
+        {
+          "task": "PR58",
+          "reason": "data_boundary"
+        }
+      ],
+      "required_preconditions": [
+        "TRAIN-PR57-PUBLIC-API-BOUNDARY complete",
+        "published-only field allowlist has passed",
+        "human checkpoint completed before any external release"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "High-risk train.",
+        "Auto-merge disabled.",
+        "Implementation must remain feature-flagged or otherwise non-released until approved."
+      ]
+    },
+    {
+      "id": "TRAIN-PR59-MCP-SPEC",
+      "title": "MCP threat model and tool spec train",
+      "phase": "mcp-spec",
+      "tasks": [
+        "PR59"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR59",
+          "reason": "spec-only MCP boundary review required by conservative train-plan risk detection"
+        }
+      ],
+      "required_preconditions": [
+        "TRAIN-PR58-PUBLIC-API-V0 complete or explicitly approved as dependency input",
+        "MCP boundary contract remains Public API-only",
+        "worktree is clean and created from current origin/main"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "Spec-only train.",
+        "Existing train-plan risk detection treats MCP task text conservatively, so PR59 is checkpointed even though no endpoint is exposed."
+      ]
+    },
+    {
+      "id": "TRAIN-PR60-MCP-SERVER",
+      "title": "Read-only MCP server train",
+      "phase": "mcp-server",
+      "tasks": [
+        "PR60"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": true,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "continue_on_sidecar": false,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "public_endpoint_requested",
+        "external_agent_surface_requested"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR60",
+          "reason": "mcp"
+        },
+        {
+          "task": "PR60",
+          "reason": "external_agent_surface"
+        },
+        {
+          "task": "PR60",
+          "reason": "public_endpoint"
+        }
+      ],
+      "required_preconditions": [
+        "TRAIN-PR59-MCP-SPEC complete",
+        "public endpoint release is explicitly approved",
+        "MCP remains disabled or local-only until approved"
+      ],
+      "allowed_roles": [
+        "codex-build"
+      ],
+      "notes": [
+        "High-risk train.",
+        "Auto-merge disabled.",
+        "No external exposure without human checkpoint."
       ]
     }
   ]
