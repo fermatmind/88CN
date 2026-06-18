@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "labels": [
+    {
+      "name": "needs-maintainer-review",
+      "description": "Maintainer should review source, category, and privacy boundary before accepting."
+    },
+    {
+      "name": "needs-source-check",
+      "description": "Official site, public repository, documentation, or launch page needs manual verification."
+    },
+    {
+      "name": "privacy-boundary-check",
+      "description": "Payload should be checked for private contact, credential, customer, analytics, or billing material."
+    },
+    {
+      "name": "duplicate-review",
+      "description": "Maintainer should compare slug, official site, and public source fingerprint with existing records."
+    },
+    {
+      "name": "ready-for-human-import-review",
+      "description": "Validation summary is clean enough for a maintainer to inspect manually."
+    }
+  ],
+  "application_mode": "suggest_only",
+  "automatic_application_allowed": false
+}

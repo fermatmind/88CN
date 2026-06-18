@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "mode": "maintainer_controlled",
+  "scope": "open_data_workflow_guidance",
+  "default_actions": {
+    "validate_payloads": true,
+    "emit_local_check_summary": true,
+    "suggest_labels": true,
+    "write_external_comments": false,
+    "approve_changes": false,
+    "merge_changes": false,
+    "call_external_model_api": false,
+    "mutate_data_repo": false
+  },
+  "allowed_outputs": [
+    "local_stdout_summary",
+    "local_markdown_summary",
+    "label_suggestions",
+    "maintainer_checklist"
+  ],
+  "forbidden_outputs": [
+    "external_pr_comment",
+    "external_issue_creation",
+    "approval_event",
+    "merge_event",
+    "credential_request",
+    "data_repo_write",
+    "payment_event",
+    "mcp_surface"
+  ],
+  "required_review_boundaries": [
+    "human_review_before_label_application",
+    "human_review_before_any_external_comment",
+    "human_review_before_data_repo_change",
+    "human_review_before_publication"
+  ]
+}
