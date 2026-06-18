@@ -1,11 +1,8 @@
 # Visual Bugs
 
-PR37 Founder Intent Report Archive QA + Live Smoke found no visual bugs.
+PR39 Brand Voice and Public Copy Guard QA found no visual bugs.
 
-Screenshots:
-
-- `../screenshots/qa/pr37-reports-archive.png`
-- `../screenshots/qa/pr37-founder-intent-report.png`
+No browser QA or screenshots were required because PR39 verifies governance scripts and copy-policy probes only.
 
 | Severity | Page | Viewport | Screenshot Path | Reproduction Steps | Observed Behavior | Expected Behavior | Suspected Component | Suggested Fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
