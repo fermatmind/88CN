@@ -7389,6 +7389,81 @@
       ]
     },
     {
+      "id": "OPS9A",
+      "title": "Non-PR Task Batch Runner Compatibility Scan v0",
+      "type": "ops-readiness",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "traffic-runner-readiness",
+      "depends_on": [
+        "TRAFFIC2C"
+      ],
+      "purpose": "Scan current batch runner and train-plan compatibility for non-PR task IDs before any TRAFFIC or GROWTH train registration.",
+      "allowed_paths": [
+        "docs/OPS9A_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**",
+        "ops/tasks/current.json",
+        "ops/trains/current.json",
+        "ops/trains/batches.json"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS9A"
+      ],
+      "data_planes": [
+        "docs_only",
+        "runner_readiness",
+        "roadmap_metadata"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "non-PR task batch compatibility scanned",
+        "batch-check restriction documented",
+        "train-plan current-train dependency documented",
+        "TRAFFIC and GROWTH train registration risk documented",
+        "implementation boundary recommended",
+        "no runner scripts modified",
+        "no train batch registered",
+        "no product/runtime code modified"
+      ],
+      "notes": [
+        "OPS9A is a scan only. Do not modify scripts, package metadata, train registry, current train state, app runtime, deployment files, or data repository files.",
+        "Do not register TRAIN-TRAFFIC3-TRAFFIC7 or any GROWTH train in OPS9A.",
+        "Leave ops/tasks/current.json unchanged because the current landscape checker remains TRAFFIC2B-phase scoped."
+      ]
+    },
+    {
       "id": "TRAFFIC3",
       "title": "Sector Density / Market Map v0",
       "type": "research",
