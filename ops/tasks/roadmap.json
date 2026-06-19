@@ -7464,6 +7464,93 @@
       ]
     },
     {
+      "id": "OPS9A2",
+      "title": "Non-PR Task Batch Runner Compatibility Implementation v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "traffic-runner-readiness",
+      "depends_on": [
+        "OPS9A"
+      ],
+      "purpose": "Implement narrow batch/train runner compatibility for explicitly allowlisted non-PR task IDs while preserving existing PR-number train behavior.",
+      "allowed_paths": [
+        "scripts/agent/batch-check.mjs",
+        "scripts/agent/train-plan-check.mjs",
+        "scripts/agent/gate.sh",
+        "scripts/check-landscape-boundary.mjs",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "docs/OPS9A2_NON_PR_TASK_BATCH_RUNNER_COMPATIBILITY_IMPLEMENTATION.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS9A2",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs",
+        "npm run landscape:check"
+      ],
+      "data_planes": [
+        "runner_compatibility",
+        "roadmap_metadata",
+        "docs_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "existing PR-number train validation preserved",
+        "allowlisted non-PR task ID families supported",
+        "non-PR tasks require full roadmap registration",
+        "skeleton-only non-PR tasks rejected",
+        "non-PR batch risk flags enforced",
+        "train-plan output handles non-PR tasks safely",
+        "landscape checker accepts later current tasks without weakening surface checks",
+        "positive and negative probes documented",
+        "no product/runtime code modified",
+        "no deploy",
+        "OPS9A2 did not start TRAFFIC3 or TRAFFIC3B"
+      ],
+      "notes": [
+        "Do not run TRAFFIC3, TRAIN-TRAFFIC3-TRAFFIC7, TRAFFIC3B, GROWTH0, BETA1, I18N0, OPS9B, or PR101 in OPS9A2.",
+        "Do not modify product pages, runtime routes, Supabase, deployment files, package-lock, or the data repository.",
+        "Non-PR train support must remain explicit allowlist plus full roadmap registration only."
+      ]
+    },
+    {
       "id": "TRAFFIC3",
       "title": "Sector Density / Market Map v0",
       "type": "research",

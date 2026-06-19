@@ -2,8 +2,6 @@
 
 Open sidecar issues:
 
-- OPS9A P3 sidecar: `scripts/check-landscape-boundary.mjs` remains lifecycle-scoped to `TRAFFIC2B/PASS` in `ops/tasks/current.json`. OPS9A leaves `ops/tasks/current.json` unchanged and records the runner compatibility scan in `docs/OPS9A_NON_PR_TASK_BATCH_RUNNER_COMPATIBILITY_SCAN.md` and `docs/TASK_STATUS.md`. A later checker-maintenance or OPS9A implementation task should make `landscape:check` validate the `/landscape` surface without requiring the current task to remain `TRAFFIC2B`.
-- TRAFFIC2C P3 sidecar: `scripts/check-landscape-boundary.mjs` remains TRAFFIC2B-phase scoped because it asserts `ops/tasks/current.json` is `TRAFFIC2B` with `PASS` or `PASS_WITH_FINDINGS`. TRAFFIC2C scope forbids `scripts/**`, so TRAFFIC2C records status in `docs/traffic/TRAFFIC2C_DEMAND_SIDE_TRAFFIC_TRAIN_SPLIT_READINESS.md` and `docs/TASK_STATUS.md` while leaving `ops/tasks/current.json` at the TRAFFIC2B/PASS state required by the existing checker. A later checker-maintenance task can make `landscape:check` lifecycle-aware for post-TRAFFIC2B readiness tasks.
 - OPS8A P3 sidecar: existing `scripts/agent/smoke-live.sh` covers generic public/admin/sitemap/robots live smoke, but does not by itself assert disabled-route 503 Problem Details for Public API, MCP, payment checkout, API key shell, or buyer-interest shell. OPS8A records an expanded OPS8B checklist instead of modifying scripts because OPS8A scope forbids `scripts/**`.
 - PR98 P3 sidecar: `scripts/check-alpha-feed-landing.mjs` is PR95-phase scoped and fails after PR96 because the Alpha Feed page now includes a disabled/no-write buyer-interest preview form. The current PR96 `scripts/check-data-buyer-interest.mjs` checker passes, so this is lifecycle-aware checker debt rather than an active leakage issue.
 - PR98 P3 sidecar: `scripts/check-laravel-gateway.mjs --root .` fixture mode rejects existing repository `supabase/migrations`, deploy examples, and `.env.example`; this direct mode is not suitable for whole-repo PR98 QA. Existing `agent:gate` passes and PR98 does not modify gateway/runtime files.
@@ -24,6 +22,7 @@ Open sidecar issues:
 
 Resolved sidecar issues:
 
+- OPS9A2 resolved the OPS9A and TRAFFIC2C P3 landscape checker lifecycle sidecars by updating `scripts/check-landscape-boundary.mjs` so it still validates the `/landscape` surface, forbidden routes, forbidden imports/fields/copy, package/sitemap boundaries, and data-repo cleanliness while no longer requiring `ops/tasks/current.json` to remain permanently at `TRAFFIC2B/PASS`.
 - OPS7C resolved the OPS7B/PR91 P2 PR92 checker-path scope conflict by keeping `scripts/check-laravel-gateway.mjs` as the exact allowed checker path and removing the broad overlapping `scripts/**` forbid from PR92. PR92 remains human-checkpointed, disabled-scaffold only, and not started.
 - PR86 resolved the PR85 P3 sidecar by validating `ops/contracts/data-cleansing-freshness.json` and the PR84 exporter behavior within QA-only scope. No checker script, package metadata, product code, runtime route, external write, or data repository mutation was added.
 - OPS5E resolved the PR46 `conversion-metrics:check` gate-maintenance sidecar by wiring it into `agent:gate`.

@@ -3,5 +3,5 @@
   "status": "idle",
   "last_completed_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
   "next_recommended_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
-  "notes": "PR98-PR100 merged and cleaned. OPS8A is the current readiness/status task. Exact next task after OPS8A, if GO_DEPLOY_RC holds, is OPS8B Production Deploy + Live Smoke as a human-checkpointed operation. Do not start PR101 directly. next_recommended_train is retained for train-plan checker compatibility because OPS8B is not a PR-number train task."
+  "notes": "OPS9A2 adds compatibility for explicit non-PR train batches while preserving PR-number train behavior. next_recommended_train is intentionally retained as the last PR-number train for default train-plan compatibility. No non-PR train is registered in OPS9A2 because TRAFFIC3 already merged on origin/main; registering TRAIN-TRAFFIC3-TRAFFIC7 would be stale. Exact next task follows current main: TRAFFIC3B."
 }
