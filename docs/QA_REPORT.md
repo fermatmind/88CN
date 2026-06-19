@@ -223,3 +223,57 @@ PR80 can merge after required checks pass. After PR80 merge and cleanup, start O
 ## Recommendation
 
 PR86 can merge after required checks pass. After PR86 merge and cleanup, stop before PR87.
+
+# PR98 B2B Feed Leakage QA v0
+
+- Date: 2026-06-19
+- Scope: PR98 B2B Feed Leakage QA v0
+- Role: Codex-QA
+- Result: PASS
+- Blocked: No
+
+## Summary
+
+- PR98 reviewed the closed PR81-PR97 B2B Alpha Feed boundary for leakage risk.
+- Private founder/contact fields, admin/review notes, payment state, API
+  credential material, raw database rows, private telemetry, internal scoring
+  internals, and non-public lifecycle states remain denied by docs/contracts.
+- Alpha Feed runtime remains static/disabled; no customer access, live feed,
+  API credential runtime, metering runtime, Laravel runtime, Supabase write,
+  external delivery, or data repository mutation was enabled.
+- Existing lifecycle-scoped checker debt remains non-blocking: the PR95 landing
+  checker does not account for the later PR96 disabled/no-write form shell, and
+  the Laravel checker fixture mode is not suitable for the full current repo.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `npm run verify:day0` | PASS |
+| `npm run policy:scan` | PASS |
+| `npm run third-party:check` | PASS |
+| `npm run agent:redact:check` | PASS |
+| `npm run agent:tool:check` | PASS |
+| `npm run agent:mcp-config:check` | PASS |
+| `npm run agent:plugin-policy:check` | PASS |
+| `npm run agent:batch:check` | PASS |
+| `npm run agent:train-plan:check` | PASS |
+| `node scripts/agent/train-plan-check.mjs --batch TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS` | PASS |
+| `npm run agent:scope:check -- PR98` | PASS |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS |
+| `npm run agent:gate` | PASS |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: none introduced by PR98
+- P3: lifecycle-aware checker wiring debt remains as recorded in
+  `docs/SIDECAR_ISSUES.md`
+
+## Recommendation
+
+PR98 can merge after required checks pass. After PR98 merge and cleanup, proceed
+to PR99 as docs/ops-only pivot-gate work.
