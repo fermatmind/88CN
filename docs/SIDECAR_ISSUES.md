@@ -2,6 +2,7 @@
 
 Open sidecar issues:
 
+- PR131 P3 sidecar: `npm run landscape:check` is stale after PR123 because `scripts/check-landscape-boundary.mjs` still expects `app/tasks` to be absent and `app/sitemap.ts` not to include `/tasks`. PR123 intentionally added finite `/tasks/[slug]`, PR124 QA passed, and `node scripts/check-task-discovery-boundary.mjs` now owns the finite task boundary. PR131 is QA-only and forbids `scripts/**`, so no checker update is made here.
 - OPS8A P3 sidecar: existing `scripts/agent/smoke-live.sh` covers generic public/admin/sitemap/robots live smoke, but does not by itself assert disabled-route 503 Problem Details for Public API, MCP, payment checkout, API key shell, or buyer-interest shell. OPS8A records an expanded OPS8B checklist instead of modifying scripts because OPS8A scope forbids `scripts/**`.
 - PR98 P3 sidecar: `scripts/check-alpha-feed-landing.mjs` is PR95-phase scoped and fails after PR96 because the Alpha Feed page now includes a disabled/no-write buyer-interest preview form. The current PR96 `scripts/check-data-buyer-interest.mjs` checker passes, so this is lifecycle-aware checker debt rather than an active leakage issue.
 - PR98 P3 sidecar: `scripts/check-laravel-gateway.mjs --root .` fixture mode rejects existing repository `supabase/migrations`, deploy examples, and `.env.example`; this direct mode is not suitable for whole-repo PR98 QA. Existing `agent:gate` passes and PR98 does not modify gateway/runtime files.
