@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "task_id": "PR85",
+  "title": "Data Cleansing Rules + Freshness Model v0",
+  "contract_name": "alpha_feed_data_cleansing_freshness",
+  "release_posture": {
+    "rules_only": true,
+    "runtime_feed_allowed": false,
+    "endpoint_allowed": false,
+    "db_migration_allowed": false,
+    "data_repo_mutation_allowed": false,
+    "external_write_allowed": false,
+    "customer_output_allowed": false
+  },
+  "source_scope": {
+    "records": "reviewed local public records only",
+    "required_status": "published",
+    "raw_database_rows_allowed": false,
+    "private_fields_allowed": false,
+    "source_confidence_internal_export_allowed": false,
+    "signal_score_internal_export_allowed": false
+  },
+  "dedupe_policy": {
+    "duplicate_slugs": {
+      "rule": "fail_closed",
+      "action": "exclude conflicting records from snapshot candidates until reviewed",
+      "public_output": "do not emit duplicates"
+    },
+    "duplicate_canonical_urls": {
+      "rule": "review_required",
+      "action": "choose no winner automatically when canonical URLs collide across slugs",
+      "public_output": "emit only records already resolved in reviewed source data"
+    },
+    "source_conflict": {
+      "rule": "prefer_reviewed_local_record",
+      "action": "do not infer facts from conflicting source links",
+      "public_output": "use unknown when conflict is unresolved"
+    }
+  },
+  "canonicalization_policy": {
+    "slug": {
+      "allowed_pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "case": "lowercase",
+      "separator": "hyphen",
+      "invalid_action": "exclude_until_reviewed"
+    },
+    "url": {
+      "http_https_normalization": "prefer https when reviewed canonical source supports it",
+      "trailing_slash_normalization": "remove trailing slash except origin root",
+      "tracking_query_removal": [
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_term",
+        "utm_content",
+        "gclid",
+        "fbclid",
+        "mc_cid",
+        "mc_eid"
+      ],
+      "fragment_removal": true,
+      "lowercase_host": true,
+      "invalid_action": "exclude_until_reviewed"
+    }
+  },
+  "freshness_policy": {
+    "fresh": {
+      "max_age_days": 90,
+      "public_label": "recently reviewed"
+    },
+    "watch": {
+      "max_age_days": 180,
+      "public_label": "review aging"
+    },
+    "stale": {
+      "min_age_days": 181,
+      "public_label": "stale review",
+      "snapshot_action": "include only if lifecycle remains published and public fields remain safe"
+    },
+    "unknown": {
+      "public_label": "review date unavailable",
+      "snapshot_action": "include only if required public fields pass validation"
+    }
+  },
+  "http_source_handling": {
+    "redirect_chains": {
+      "max_hops": 5,
+      "same_origin_preferred": true,
+      "cross_origin_action": "review_required"
+    },
+    "dns_failure": {
+      "snapshot_action": "mark source stale; keep last reviewed public fields if lifecycle remains published",
+      "must_not": "zero out public scores or invent replacement facts"
+    },
+    "http_404": {
+      "snapshot_action": "mark source unavailable and require review before future snapshot inclusion"
+    },
+    "http_410": {
+      "snapshot_action": "treat as removed source and require review before future snapshot inclusion"
+    },
+    "http_5xx": {
+      "snapshot_action": "temporary source failure; keep last reviewed public fields if still published"
+    },
+    "malformed_url": {
+      "snapshot_action": "exclude affected source link until corrected"
+    }
+  },
+  "lifecycle_handling": {
+    "archived_project": {
+      "snapshot_action": "exclude by default"
+    },
+    "renamed_project": {
+      "snapshot_action": "emit reviewed canonical slug only after redirect or alias review"
+    },
+    "merged_project": {
+      "snapshot_action": "emit surviving reviewed public record only"
+    },
+    "removed_project": {
+      "snapshot_action": "exclude from future snapshots"
+    }
+  },
+  "source_confidence_boundary": {
+    "public_safe_values": [
+      "public_signals",
+      "source_unavailable",
+      "not_enough_data"
+    ],
+    "denied_internals": [
+      "source_confidence_inputs",
+      "source_confidence_internal",
+      "hidden_score_weights",
+      "reviewer_notes",
+      "raw_evidence_payload"
+    ],
+    "rule": "public labels may be emitted only when already reviewed for public display; internal inputs stay private"
+  },
+  "denied_fields": [
+    "founder_email",
+    "submitter_email",
+    "claim_email",
+    "contact_email",
+    "admin_notes",
+    "review_notes",
+    "review_comments",
+    "reviewer_id",
+    "payment_state",
+    "payment_data",
+    "commercial_order_state",
+    "api_key",
+    "customer_key",
+    "metering_ledger",
+    "raw_payload",
+    "raw_supabase_row",
+    "private_telemetry",
+    "source_confidence_internal",
+    "source_confidence_inputs",
+    "signal_score_internal",
+    "signal_score_inputs",
+    "hidden_score_weights"
+  ],
+  "validation_expectations": [
+    "Snapshot candidates must be published-only.",
+    "Duplicate slugs must fail closed.",
+    "Duplicate canonical URLs require review.",
+    "Malformed URLs must be excluded until corrected.",
+    "Redirect chains must be bounded.",
+    "Stale source states must not erase last reviewed public fields.",
+    "Archived and removed projects are excluded by default.",
+    "Private, admin, payment, API key, metering, raw row, Source Confidence internal, and Signal Score internal fields are denied.",
+    "No runtime feed, endpoint, DB migration, customer output, external write, or data repository mutation is allowed by PR85."
+  ]
+}
