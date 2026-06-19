@@ -401,3 +401,48 @@ PR100 can merge after required checks pass. After PR100 merge and cleanup, the
 PR81-PR100 B2B Alpha phase is complete. Stop before PR101. Recommended next
 separate task: OPS8A Production Release Candidate + Internal Beta Readiness
 Scan.
+
+# PR127 Alternatives Expansion QA v0
+
+- Date: 2026-06-20
+- Scope: PR127 Alternatives Expansion QA v0
+- Role: Codex-QA
+- Result: PASS
+- Blocked: No
+
+## Summary
+
+- PR127 verifies the PR126 curated alternatives expansion as QA-only work.
+- The published alternatives registry contains exactly four canonical routes.
+- Build output includes `/alternatives/aurora-code-vs-vectorbase`.
+- Sitemap output contains exactly four canonical alternatives URLs and does not
+  contain `/alternatives/vectorbase-vs-aurora-code`.
+- No product code, app route, script, package, deploy config, external write, or
+  data repo mutation is introduced by PR127.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `node scripts/check-alternatives-canonical.mjs` | PASS |
+| `npm run verify:day0` | PASS |
+| `npm run policy:scan` | PASS |
+| `npm run third-party:check` | PASS |
+| `npm run agent:redact:check` | PASS |
+| `npm run agent:scope:check -- PR127` | PASS |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS |
+| `npm run agent:gate` | PASS |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: none
+- P3: no new PR127 sidecar
+
+## Recommendation
+
+PR127 can merge after required checks pass. After PR127 merge and cleanup,
+proceed to PR128 / TRAFFIC6A as a boundary-only report distribution pack task.
