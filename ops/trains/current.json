@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR87-PR90-API-KEY-METERING-SHELL",
-  "next_recommended_train": "TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC",
-  "notes": "OPS7C recommends GO_PR92_ONLY after scope remediation. Start PR92 only after OPS7C merges and cleanup completes. PR92 remains human-checkpointed, disabled-scaffold only, and must not auto-merge."
+  "last_completed_train": "TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE",
+  "next_recommended_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
+  "notes": "OPS7D recommends GO_TRAIN_PR98_PR100 from clean main after OPS7D merge and cleanup. Keep PR98 QA-only, PR99 docs/contract-only, and PR100 readiness-report-only. After PR100, run OPS8A Production Release Candidate + Internal Beta Readiness Scan instead of starting PR101 directly."
 }

@@ -6090,6 +6090,91 @@
       ]
     },
     {
+      "id": "OPS7D",
+      "title": "PR98-PR100 B2B Alpha QA Readiness Deep Scan v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "b2b-alpha-qa-readiness-scan",
+      "depends_on": [
+        "PR97"
+      ],
+      "purpose": "Deep-scan PR98-PR100 readiness, risk posture, train decision, and post-PR100 recommendation before starting PR98.",
+      "allowed_paths": [
+        "docs/OPS7D_PR98_100_B2B_ALPHA_QA_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json",
+        "ops/trains/batches.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        "gateway/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS7D",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS"
+      ],
+      "data_planes": [
+        "qa_only",
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "PR98-PR100 scanned",
+        "PR98-PR100 risk levels classified",
+        "human checkpoint posture confirmed",
+        "train dry-run recorded",
+        "exact next task/train recommended",
+        "post-PR100 OPS8A recommendation recorded",
+        "no product/runtime code modified",
+        "no dependency added",
+        "no deploy",
+        "PR98 not started"
+      ],
+      "notes": [
+        "OPS7D is readiness/deep-scan only before TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS.",
+        "Do not implement PR98, PR99, or PR100 in OPS7D.",
+        "After PR100, recommend OPS8A Production Release Candidate + Internal Beta Readiness Scan rather than starting PR101 directly."
+      ]
+    },
+    {
       "id": "OPS7AQ",
       "title": "PR81-PR100 B2B Alpha Roadmap Registration QA v0",
       "type": "qa",
