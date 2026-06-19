@@ -1,0 +1,44 @@
+[
+  {
+    "canonicalSlug": "aurora-code-vs-nucleus-ml",
+    "title": "Aurora Code and Nucleus ML Alternatives",
+    "summary": "A neutral comparison of two published 88CN project profiles with public source links and builder-facing AI workflow context.",
+    "status": "published",
+    "sitemapEligible": true,
+    "lastReviewed": "2026-06-19",
+    "leftProjectSlug": "aurora-code",
+    "rightProjectSlug": "nucleus-ml",
+    "canonicalPath": "/alternatives/aurora-code-vs-nucleus-ml",
+    "neutralRationale": "Aurora Code and Nucleus ML both appear in local published records and support AI builder workflows from different product angles.",
+    "sourceNotes": "Uses only reviewed local project profile fields and public source links already attached to the two project records.",
+    "boundaryNote": "This page is for project discovery. It does not order, endorse, or predict outcomes for either project."
+  },
+  {
+    "canonicalSlug": "nucleus-ml-vs-vectorbase",
+    "title": "Nucleus ML and VectorBase Alternatives",
+    "summary": "A neutral comparison of two published infrastructure-oriented 88CN project profiles from reviewed local records.",
+    "status": "published",
+    "sitemapEligible": true,
+    "lastReviewed": "2026-06-19",
+    "leftProjectSlug": "nucleus-ml",
+    "rightProjectSlug": "vectorbase",
+    "canonicalPath": "/alternatives/nucleus-ml-vs-vectorbase",
+    "neutralRationale": "Nucleus ML and VectorBase are both published local records with public sources and model or search infrastructure context.",
+    "sourceNotes": "Uses reviewed profile metadata, public source links, and visible Signal Score fields already present in local project records.",
+    "boundaryNote": "This page is a factual discovery aid and does not recommend one project over the other."
+  },
+  {
+    "canonicalSlug": "complykit-vs-pulse-analytics",
+    "title": "ComplyKit and Pulse Analytics Alternatives",
+    "summary": "A neutral comparison of two published operations-oriented 88CN project profiles with public product context.",
+    "status": "published",
+    "sitemapEligible": true,
+    "lastReviewed": "2026-06-19",
+    "leftProjectSlug": "complykit",
+    "rightProjectSlug": "pulse-analytics",
+    "canonicalPath": "/alternatives/complykit-vs-pulse-analytics",
+    "neutralRationale": "ComplyKit and Pulse Analytics are both published local records with operations-oriented product context and public sources.",
+    "sourceNotes": "Uses only local published profile fields and public source links. It does not verify readiness outcomes, customer adoption, revenue, or formal review status.",
+    "boundaryNote": "Operations and compliance-related context is discovery-only and does not provide regulated guidance, assurance, or implementation steps."
+  }
+]

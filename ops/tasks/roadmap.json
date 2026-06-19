@@ -3897,10 +3897,11 @@
         "docs/SIDECAR_ISSUES.md",
         "docs/TASK_STATUS.md",
         "ops/tasks/current.json",
-        "ops/tasks/roadmap.json",
-        "app/alternatives/**",
-        "lib/alternatives/**",
-        "scripts/check-alternatives-canonical.mjs"
+      "ops/tasks/roadmap.json",
+      "app/alternatives/**",
+      "app/sitemap.ts",
+      "lib/alternatives/**",
+      "scripts/check-alternatives-canonical.mjs"
       ],
       "forbidden_paths": [
         "README.md",
