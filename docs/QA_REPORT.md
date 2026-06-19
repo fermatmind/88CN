@@ -3,6 +3,50 @@
 ## Latest Run
 
 - Date: 2026-06-19
+- Scope: PR94 Gateway + Sync Boundary QA v0
+- Role: Codex-QA
+- Result: PASS_WITH_P2_SIDECAR
+- Blocked: No P0/P1 blocker; train policy still forbids auto-merge
+
+## Summary
+
+- PR94 verifies PR91, PR92, and PR93 as a closed Laravel gateway and Supabase sync boundary train.
+- PR91 remains docs/contracts/spec only with disabled Laravel gateway posture, dependency boundaries, denied fields/statuses, payment separation, and human checkpoint triggers.
+- PR92 remains static disabled scaffold only; runtime flags are false and `/tmp` negative probes reject Composer, Laravel, PHP, Supabase migration, deploy/env, runtime flag, and data-repo marker fixtures.
+- PR93 remains contract/spec only with disabled Supabase webhook sync posture, one-way event model, event allow/deny lists, payload denylist, idempotency, retry/backoff, and drift handling.
+- Static runtime leak scan found no Composer files, Laravel root, PHP runtime, Supabase webhook/sync migration, webhook runtime/secret, Redis production config, or gateway server/deploy config.
+- Data repository remained clean.
+- PR95 was not started.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `npm run agent:batch:check` | PASS |
+| `npm run agent:train-plan:check` | PASS |
+| `node scripts/agent/train-plan-check.mjs --batch TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC` | PASS |
+| `npm run agent:gate` | PASS |
+| Contract validation via Node standard library | PASS |
+| Required file existence check | PASS |
+| Static runtime leak scan | PASS |
+| PR92 negative probes via `/tmp` fixtures | PASS |
+| `node scripts/agent/train-plan-check.mjs --batch TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE` | PASS_WITH_WARNING |
+| `node scripts/check-laravel-gateway.mjs` | FAIL_P2: final PR94 diff includes valid PR94 QA paths outside the checker's PR92 allowlist |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: `scripts/check-laravel-gateway.mjs` is not lifecycle-aware for PR94 because it checks the committed diff against PR92-only changed paths.
+- P3: PR95-PR97 dry-run is ready, with PR96 still human-checkpointed while the batch allows auto-merge.
+
+## Recommendation
+
+PR94 can be reviewed as QA-only evidence. Because `TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC` has `auto_merge_allowed=false`, stop at MERGE_READY and do not auto-merge. After PR94 merges and cleanup completes, PR95 may be planned next; do not start PR95 from PR94.
+
+## Previous Run: PR90 API Key + Metering QA v0
+
+- Date: 2026-06-19
 - Scope: PR90 API Key + Metering QA v0
 - Role: Codex-QA
 - Result: PASS_WITH_SIDECAR
