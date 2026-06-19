@@ -86,9 +86,10 @@
 | Alpha Data Feed Boundary + Threat Model | Validation passed | PR81 defines the Alpha Feed boundary contract and threat model only. No runtime feed, customer access, export endpoint, API key runtime, metering runtime, payment or billing, Laravel runtime, Supabase schema change, Redis production use, external delivery, or data repo mutation. |
 | Published Signal Snapshot Schema | Validation passed | PR82 defines NDJSON and CSV snapshot schema contracts using published-only public signal fields. No exporter runtime, raw database row dump, private founder data, admin fields, payment fields, internal Signal Score or Source Confidence internals, endpoint, external delivery, or data repo mutation. |
 | Event Outbox + One-way Sync Contract | Validation passed | PR83 defines a one-way async event outbox contract for future downstream feed sync. No Supabase trigger migration, webhook runtime, webhook credential, Laravel runtime, Redis production config, server config, full-table sync, request-time polling, external service connection, or data repo mutation. |
+| Local Snapshot Exporter Dry Run | Validation passed | PR84 adds a local-only dry-run Alpha Feed snapshot exporter and checker. Output is restricted to `/tmp/88cn-alpha-snapshot-*`; repo paths, data repo paths, external destinations, non-local sources, endpoints, customer access, secrets, and data repo mutation are rejected. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Complete PR83, run final train validation, and stop before PR84.
+Next: Complete PR84, then continue to PR85 only after PR84 is merged, cleaned, and post-merge validation passes.
