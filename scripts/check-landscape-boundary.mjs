@@ -100,22 +100,25 @@ if (
   fail("package.json missing landscape:check script");
 }
 
-try {
-  const basePackageJson = JSON.parse(
-    execFileSync("git", ["show", "origin/main:package.json"], {
-      cwd: root,
-      encoding: "utf8",
-    })
-  );
-  const currentWithoutLandscape = structuredClone(packageJson);
-  delete currentWithoutLandscape.scripts?.["landscape:check"];
-  if (
-    JSON.stringify(currentWithoutLandscape) !== JSON.stringify(basePackageJson)
-  ) {
-    fail("package.json changes must be limited to landscape:check script registration");
+if (changed.includes("package.json")) {
+  try {
+    const basePackageJson = JSON.parse(
+      execFileSync("git", ["show", "origin/main:package.json"], {
+        cwd: root,
+        encoding: "utf8",
+      })
+    );
+    const currentWithoutLandscape = structuredClone(packageJson);
+    delete currentWithoutLandscape.scripts?.["landscape:check"];
+    if (
+      JSON.stringify(currentWithoutLandscape) !==
+      JSON.stringify(basePackageJson)
+    ) {
+      fail("package.json changes must be limited to landscape:check script registration");
+    }
+  } catch {
+    // origin/main may be unavailable in isolated local checks; scope gate covers diffs.
   }
-} catch {
-  // origin/main may be unavailable in isolated local checks; scope gate covers diffs.
 }
 
 const sourceFiles = [
