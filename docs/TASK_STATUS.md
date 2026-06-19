@@ -85,9 +85,10 @@
 | PR81-PR100 B2B Alpha Readiness Registration | Validation passed | OPS7A registers full PR81-PR100 task objects, deprecates the broad PR81-PR100 umbrella as an executable train, splits the next phase into Alpha Feed boundary, data cleansing snapshot, API key/metering shell, Laravel gateway sync, Alpha Feed landing/evidence, and B2B Alpha QA trains, and checkpoints payment/API key/Laravel/Supabase/server/customer/data-feed risks. Registration docs only; no product code, deploy, external service, secret, Supabase schema, data repo, PR81, payment, Stripe, API key runtime, Laravel runtime, or B2B feed runtime. |
 | Alpha Data Feed Boundary + Threat Model | Validation passed | PR81 defines the Alpha Feed boundary contract and threat model only. No runtime feed, customer access, export endpoint, API key runtime, metering runtime, payment or billing, Laravel runtime, Supabase schema change, Redis production use, external delivery, or data repo mutation. |
 | Published Signal Snapshot Schema | Validation passed | PR82 defines NDJSON and CSV snapshot schema contracts using published-only public signal fields. No exporter runtime, raw database row dump, private founder data, admin fields, payment fields, internal Signal Score or Source Confidence internals, endpoint, external delivery, or data repo mutation. |
+| Event Outbox + One-way Sync Contract | Validation passed | PR83 defines a one-way async event outbox contract for future downstream feed sync. No Supabase trigger migration, webhook runtime, webhook credential, Laravel runtime, Redis production config, server config, full-table sync, request-time polling, external service connection, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Complete PR82, then continue to PR83 only after PR82 is merged, cleaned, and post-merge validation passes.
+Next: Complete PR83, run final train validation, and stop before PR84.
