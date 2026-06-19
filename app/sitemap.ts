@@ -5,6 +5,7 @@ import { getPublishedStackClusters } from "@/lib/stacks/tech-stack-clusters";
 import { getPublishedCuratedCollections } from "@/lib/collections/curated-collections";
 import { getPublishedVerticalAssetGrids } from "@/lib/verticals/vertical-asset-grids";
 import { getPublishedCuratedAlternatives } from "@/lib/alternatives/curated-alternatives";
+import { getPublishedTaskDiscoveryEntries } from "@/lib/tasks/task-discovery";
 import { INDEXABLE_STATES } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
@@ -112,6 +113,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }));
 
+  const taskDiscoveryEntries: MetadataRoute.Sitemap =
+    getPublishedTaskDiscoveryEntries().map((entry) => ({
+      url: `${baseUrl}/tasks/${entry.slug}`,
+      lastModified: new Date(entry.lastReviewed),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+
   return [
     ...staticEntries,
     ...projectEntries,
@@ -120,6 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...stackEntries,
     ...verticalEntries,
     ...alternativesEntries,
+    ...taskDiscoveryEntries,
     ...reportListEntries,
     ...reportEntries,
   ];
