@@ -6175,6 +6175,676 @@
       ]
     },
     {
+      "id": "OPS8A",
+      "title": "Production Release Candidate + Internal Beta Readiness Scan v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "production-rc-internal-beta-readiness",
+      "depends_on": [
+        "PR100"
+      ],
+      "purpose": "Scan v0.1-alpha release-candidate and internal beta readiness after PR100 without deploying or modifying runtime code.",
+      "allowed_paths": [
+        "docs/OPS8A_PRODUCTION_RELEASE_CANDIDATE_INTERNAL_BETA_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json",
+        "ops/trains/batches.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "composer.json",
+        "composer.lock",
+        "artisan",
+        "bootstrap/**",
+        "routes/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS8A",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate"
+      ],
+      "data_planes": [
+        "readiness_only",
+        "release_candidate_scan"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "PR81-PR100 completion verified",
+        "local main clean and buildable",
+        "data repo clean",
+        "release candidate readiness scanned",
+        "feature flag matrix documented",
+        "disabled surfaces documented",
+        "sitemap and robots readiness documented",
+        "OPS8B live smoke checklist exists",
+        "internal beta readiness gate documented",
+        "PR101 pause recommendation documented",
+        "exact next task defined",
+        "no product/runtime code modified",
+        "no deploy",
+        "no data repo mutation",
+        "validations pass",
+        "OPS8B not started"
+      ],
+      "notes": [
+        "Readiness, roadmap, and status only. Do not deploy, run live smoke, enable feature flags, modify app runtime, or start OPS8B/PR101."
+      ]
+    },
+    {
+      "id": "OPS8B",
+      "title": "Production Deploy + Live Smoke v0",
+      "type": "ops",
+      "role": "human-team",
+      "repo": "88CN",
+      "phase": "production-rc-internal-beta-readiness",
+      "depends_on": [
+        "OPS8A"
+      ],
+      "purpose": "Human-checkpointed production release-candidate deploy and live smoke at an exact approved origin/main SHA.",
+      "allowed_paths": [
+        "docs/OPS8B_*.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- OPS8B"
+      ],
+      "data_planes": [
+        "human_checkpoint",
+        "live_smoke"
+      ],
+      "deployment": "live-deploy",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "exact SHA approved by human",
+        "production deploy script used",
+        "live smoke completed",
+        "disabled route smoke completed",
+        "sitemap and robots verified",
+        "server details redacted",
+        "no product changes"
+      ],
+      "notes": [
+        "Codex must not execute OPS8B without explicit human deployment approval naming an exact origin/main SHA."
+      ]
+    },
+    {
+      "id": "OPS8C",
+      "title": "Internal Beta Test Plan + Manual Feedback Protocol v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "internal-beta-planning",
+      "depends_on": [
+        "OPS8B"
+      ],
+      "purpose": "Define internal beta test plan, feedback protocol, issue triage, and manual evidence format without automation or outreach execution.",
+      "allowed_paths": [
+        "docs/OPS8C_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- OPS8C"
+      ],
+      "data_planes": [
+        "docs_only",
+        "manual_feedback_protocol"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "internal beta test plan documented",
+        "manual feedback protocol documented",
+        "no CRM or email automation",
+        "no outreach executed"
+      ],
+      "notes": [
+        "Docs/ops only. Do not automate feedback collection or send messages."
+      ]
+    },
+    {
+      "id": "BETA1",
+      "title": "Founder / Data Buyer Internal Test Run v0",
+      "type": "human-manual",
+      "role": "human-team",
+      "repo": "88CN",
+      "phase": "internal-beta",
+      "depends_on": [
+        "OPS8C"
+      ],
+      "purpose": "Human-owned internal beta test run with founders and data-buyer reviewers.",
+      "allowed_paths": [
+        "docs/BETA1_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- BETA1"
+      ],
+      "data_planes": [
+        "human_manual",
+        "feedback_review"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "manual testers selected by human team",
+        "outreach executed by human team only",
+        "private feedback redacted before repo entry",
+        "no Codex outreach"
+      ],
+      "notes": [
+        "Codex must not execute outreach or collect private beta feedback directly."
+      ]
+    },
+    {
+      "id": "I18N0",
+      "title": "Internationalization Boundary Scan v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "internationalization-readiness",
+      "depends_on": [
+        "BETA1"
+      ],
+      "purpose": "Scan i18n boundary, route strategy, sitemap/hreflang risk, and copy scope before translation work.",
+      "allowed_paths": [
+        "docs/I18N0_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- I18N0"
+      ],
+      "data_planes": [
+        "readiness_only",
+        "i18n_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "i18n boundary documented",
+        "translation scope deferred",
+        "hreflang and sitemap risks identified",
+        "no translation implemented"
+      ],
+      "notes": [
+        "Start i18n after BETA1 feedback unless the human team explicitly reprioritizes."
+      ]
+    },
+    {
+      "id": "I18N1",
+      "title": "Core i18n Infrastructure v0",
+      "type": "implementation-checkpointed",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "internationalization-infrastructure",
+      "depends_on": [
+        "I18N0"
+      ],
+      "purpose": "Future core i18n infrastructure task with no mass translation.",
+      "allowed_paths": [
+        "docs/I18N1_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- I18N1"
+      ],
+      "data_planes": [
+        "i18n_infrastructure"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "implementation scope reviewed",
+        "no mass translation",
+        "no sitemap expansion without QA"
+      ],
+      "notes": [
+        "Code scope must be re-opened by a later checkpoint before implementation."
+      ]
+    },
+    {
+      "id": "I18N2",
+      "title": "Core Public Pages zh-CN v0",
+      "type": "copy-checkpointed",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "internationalization-content",
+      "depends_on": [
+        "I18N1"
+      ],
+      "purpose": "Future limited zh-CN copy for core public pages only.",
+      "allowed_paths": [
+        "docs/I18N2_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- I18N2"
+      ],
+      "data_planes": [
+        "i18n_copy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "core page list approved",
+        "regulated-language guard applied",
+        "no mass translation"
+      ],
+      "notes": [
+        "Limit to approved core pages after I18N0/I18N1."
+      ]
+    },
+    {
+      "id": "I18N3",
+      "title": "hreflang / Canonical / Sitemap QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "internationalization-qa",
+      "depends_on": [
+        "I18N2"
+      ],
+      "purpose": "QA hreflang, canonical, sitemap, robots, and noindex behavior for i18n surfaces.",
+      "allowed_paths": [
+        "docs/I18N3_*.md",
+        "docs/QA_REPORT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- I18N3"
+      ],
+      "data_planes": [
+        "qa_only",
+        "i18n_indexability"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "hreflang QA completed",
+        "canonical QA completed",
+        "sitemap QA completed",
+        "noindex boundaries verified"
+      ],
+      "notes": [
+        "QA-only after approved i18n implementation/copy tasks."
+      ]
+    },
+    {
+      "id": "I18N4",
+      "title": "Chinese Founder Copy QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "internationalization-copy-qa",
+      "depends_on": [
+        "I18N2"
+      ],
+      "purpose": "QA zh-CN founder-facing copy for public-language, claims, and privacy boundaries.",
+      "allowed_paths": [
+        "docs/I18N4_*.md",
+        "docs/QA_REPORT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- I18N4"
+      ],
+      "data_planes": [
+        "qa_only",
+        "i18n_copy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "Chinese founder copy QA completed",
+        "restricted claim language rejected",
+        "privacy boundaries verified"
+      ],
+      "notes": [
+        "QA-only copy guard after approved zh-CN copy work."
+      ]
+    },
+    {
+      "id": "OPS8D",
+      "title": "Beta Feedback Triage + Roadmap Recut v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "post-beta-triage",
+      "depends_on": [
+        "BETA1"
+      ],
+      "purpose": "Triage beta feedback and recut roadmap without exposing private feedback or executing outreach.",
+      "allowed_paths": [
+        "docs/OPS8D_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json",
+        "ops/trains/batches.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- OPS8D"
+      ],
+      "data_planes": [
+        "docs_only",
+        "roadmap_recut"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "beta feedback triaged with private details redacted",
+        "roadmap recut documented",
+        "no product/runtime code modified"
+      ],
+      "notes": [
+        "Run after BETA1 evidence is manually prepared by the human team."
+      ]
+    },
+    {
       "id": "OPS7AQ",
       "title": "PR81-PR100 B2B Alpha Roadmap Registration QA v0",
       "type": "qa",
