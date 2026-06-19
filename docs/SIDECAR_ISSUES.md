@@ -7,6 +7,7 @@ Open sidecar issues:
 - OPS6A P3 sidecar: consider a small OPS6B gate-maintenance task to wire `read-only-mcp:check` into `agent:gate` before heavy PR64+ product trains, and preferably before PR61 if the team wants all post-PR60 checks in the default gate.
 - OPS7A P3 sidecar: `agent:gate` still does not run `read-only-mcp:check`, `sitemap-notification:check`, direct tech-stack/curated-collections/vertical-asset-grids/alternatives-canonical checkers, or GitHub profile mirror dry-run coverage. These checks pass independently where run, and OPS7A does not modify `scripts/agent/gate.sh`; consider a dedicated gate-maintenance PR before heavier PR84+ or runtime-adjacent B2B Alpha work.
 - PR87 P3 sidecar: PR87 roadmap scope forbids `scripts/**` and `package.json`, so `scripts/check-api-key-metering-boundary.mjs` and an npm checker script cannot be added in PR87. PR87 uses contract/doc validation and temp-fixture negative probes instead. The contract also uses `claim_secret` and `session_secret` denied fields because the repo-wide public wording scanner forbids the credential-word literal requested in the external task brief.
+- PR88 P3 sidecar: `scripts/check-api-key-shell.mjs` is added, but PR88 roadmap scope forbids `package.json` and `scripts/agent/gate.sh`, so no npm script or agent-gate wiring is added in PR88. Run the checker directly with `node scripts/check-api-key-shell.mjs`.
 
 Resolved sidecar issues:
 
