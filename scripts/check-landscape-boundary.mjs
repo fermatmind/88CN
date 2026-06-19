@@ -251,11 +251,28 @@ for (const file of statusDocs) {
 
 if (exists("ops/tasks/current.json")) {
   const current = JSON.parse(read("ops/tasks/current.json"));
-  if (current.current_task !== "TRAFFIC2B") {
-    fail("ops/tasks/current.json must mark TRAFFIC2B as current task");
-  }
-  if (!["PASS", "PASS_WITH_FINDINGS"].includes(current.result)) {
-    fail("ops/tasks/current.json must record PASS or PASS_WITH_FINDINGS");
+  if (current.current_task === "TRAFFIC2B") {
+    if (!["PASS", "PASS_WITH_FINDINGS"].includes(current.result)) {
+      fail("ops/tasks/current.json must record PASS or PASS_WITH_FINDINGS for TRAFFIC2B");
+    }
+  } else {
+    if (!exists("ops/tasks/roadmap.json")) {
+      fail("ops/tasks/roadmap.json is missing");
+    } else {
+      const roadmap = JSON.parse(read("ops/tasks/roadmap.json"));
+      const roadmapTaskIds = new Set((roadmap.tasks || []).map((task) => task.id));
+      if (!roadmapTaskIds.has(current.current_task)) {
+        fail(`ops/tasks/current.json current_task ${current.current_task} must be registered in roadmap`);
+      }
+    }
+
+    const taskStatus = read("docs/TASK_STATUS.md");
+    if (!taskStatus.includes("| TRAFFIC2B AI Project Landscape Landing Implementation | Validation passed |")) {
+      fail("docs/TASK_STATUS.md must record TRAFFIC2B landscape implementation validation before later current tasks");
+    }
+    if (!["validation_passed", "in_progress", "blocked"].includes(current.status)) {
+      fail("ops/tasks/current.json status must be a known lifecycle state after TRAFFIC2B");
+    }
   }
 }
 

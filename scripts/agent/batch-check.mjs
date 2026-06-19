@@ -50,6 +50,38 @@ const booleanFields = [
   'continue_on_sidecar'
 ];
 
+const optionalRiskBooleanFields = [
+  'external_service_allowed',
+  'data_repo_mutation_allowed',
+  'public_api_release_allowed',
+  'customer_access_allowed',
+  'pii_collection_allowed',
+  'social_posting_allowed',
+  'outreach_automation_allowed'
+];
+
+const nonPrTaskRequiredFields = [
+  'id',
+  'title',
+  'role',
+  'type',
+  'repo',
+  'allowed_paths',
+  'forbidden_paths',
+  'validations',
+  'definition_of_done',
+  'deployment',
+  'human_checkpoint'
+];
+
+const nonPrTaskIdPatterns = [
+  /^TRAFFIC\d+[A-Z]?$/,
+  /^GROWTH\d+[A-Z]?$/,
+  /^OPS\d+[A-Z]?\d?$/,
+  /^I18N\d+[A-Z]?$/,
+  /^BETA\d+[A-Z]?$/
+];
+
 function parseArgs(argv) {
   const options = {
     registry: path.join(root, 'ops/trains/batches.json'),
@@ -93,6 +125,13 @@ function taskNumber(taskId) {
   return match ? Number(match[1]) : null;
 }
 
+function taskKind(taskId) {
+  if (typeof taskId !== 'string') return 'invalid';
+  if (taskNumber(taskId) !== null) return 'pr';
+  if (nonPrTaskIdPatterns.some((pattern) => pattern.test(taskId))) return 'non_pr';
+  return 'invalid';
+}
+
 function expandRange(range) {
   const match = /^PR(\d+)-PR(\d+)$/.exec(range || '');
   if (!match) return [];
@@ -126,7 +165,88 @@ function textIncludes(values, pattern) {
   return values.some((value) => pattern.test(String(value).toLowerCase()));
 }
 
-function validateBatch(batch, failures, roadmapTaskIds, skeletonTaskIds) {
+function taskNeedsCheckpoint(task) {
+  const values = [
+    task.id,
+    task.title,
+    task.type,
+    task.phase,
+    task.deployment,
+    task.payments,
+    task.mcp,
+    task.public_pages,
+    task.data_repo,
+    ...(task.data_planes || []),
+    ...(task.notes || [])
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+
+  return (
+    task.human_checkpoint === true ||
+    /checkpointed|human-manual|live-deploy|live deploy|server-config|server config|payment|stripe|mcp|external write|external-write|data repo mutation|data_repo mutation|customer access|pii|outreach|social posting|email send|dm send|crm write/.test(values)
+  );
+}
+
+function validateNonPrTask(task, batch, failures, roadmapTaskIds, skeletonTaskIds) {
+  const label = `${batch.id} task ${task?.id || '<missing id>'}`;
+  for (const field of nonPrTaskRequiredFields) {
+    add(failures, Object.hasOwn(task, field), `${label} missing required roadmap field ${field}`);
+  }
+
+  add(failures, Array.isArray(task.allowed_paths), `${label} allowed_paths must be array`);
+  add(failures, Array.isArray(task.forbidden_paths), `${label} forbidden_paths must be array`);
+  add(failures, Array.isArray(task.validations), `${label} validations must be array`);
+  add(failures, Array.isArray(task.definition_of_done), `${label} definition_of_done must be array`);
+
+  if (Array.isArray(task.depends_on)) {
+    for (const dependency of task.depends_on) {
+      add(
+        failures,
+        roadmapTaskIds.has(dependency) || skeletonTaskIds.has(dependency),
+        `${label} dependency ${dependency} missing from roadmap and skeletons`
+      );
+    }
+  }
+
+  if (Array.isArray(batch.allowed_roles) && task.role) {
+    add(failures, batch.allowed_roles.includes(task.role), `${label} role ${task.role} missing from batch allowed_roles`);
+  }
+
+  if (taskNeedsCheckpoint(task) && batch.auto_merge_allowed === true) {
+    add(failures, false, `${label} requires checkpoint but ${batch.id} auto_merge_allowed=true`);
+  }
+}
+
+function validateNonPrBatchRisk(batch, failures) {
+  const label = batch?.id || '<missing id>';
+  const riskFields = [
+    'live_deploy_allowed',
+    'server_change_allowed',
+    'payment_change_allowed',
+    'mcp_change_allowed',
+    'plugin_install_allowed',
+    'new_dependency_allowed',
+    ...optionalRiskBooleanFields
+  ];
+
+  for (const field of optionalRiskBooleanFields) {
+    add(failures, Object.hasOwn(batch, field), `${label} non-PR batch missing ${field}`);
+    if (Object.hasOwn(batch, field)) {
+      add(failures, typeof batch[field] === 'boolean', `${label} ${field} must be boolean`);
+    }
+  }
+
+  for (const field of riskFields) {
+    if (batch[field] === true) {
+      add(failures, batch.auto_merge_allowed === false, `${label} ${field}=true requires auto_merge_allowed=false`);
+      add(failures, hasCheckpoint(batch, null), `${label} ${field}=true requires explicit human checkpoint`);
+    }
+  }
+}
+
+function validateBatch(batch, failures, roadmapTasksById, roadmapTaskIds, skeletonTaskIds) {
   const label = batch?.id || '<missing id>';
   for (const field of requiredBatchFields) {
     add(failures, Object.hasOwn(batch, field), `${label} missing ${field}`);
@@ -136,6 +256,11 @@ function validateBatch(batch, failures, roadmapTaskIds, skeletonTaskIds) {
 
   for (const field of booleanFields) {
     add(failures, typeof batch[field] === 'boolean', `${label} ${field} must be boolean`);
+  }
+  for (const field of optionalRiskBooleanFields) {
+    if (Object.hasOwn(batch, field)) {
+      add(failures, typeof batch[field] === 'boolean', `${label} ${field} must be boolean`);
+    }
   }
 
   add(failures, Array.isArray(batch.tasks), `${label} tasks must be array`);
@@ -148,15 +273,31 @@ function validateBatch(batch, failures, roadmapTaskIds, skeletonTaskIds) {
 
   if (Array.isArray(batch.tasks)) {
     const taskIds = new Set();
+    let nonPrTaskCount = 0;
     for (const taskId of batch.tasks) {
       add(failures, typeof taskId === 'string', `${label} task id must be string`);
       add(failures, !taskIds.has(taskId), `${label} duplicate task id ${taskId}`);
       taskIds.add(taskId);
-      add(
-        failures,
-        roadmapTaskIds.has(taskId) || skeletonTaskIds.has(taskId),
-        `${label} task ${taskId} missing from roadmap and skeletons`
-      );
+
+      const kind = taskKind(taskId);
+      add(failures, kind !== 'invalid', `${label} task ${taskId} must use PR<number> or allowlisted non-PR id family`);
+
+      if (kind === 'pr') {
+        add(
+          failures,
+          roadmapTaskIds.has(taskId) || skeletonTaskIds.has(taskId),
+          `${label} task ${taskId} missing from roadmap and skeletons`
+        );
+      }
+
+      if (kind === 'non_pr') {
+        nonPrTaskCount += 1;
+        add(failures, roadmapTaskIds.has(taskId), `${label} non-PR task ${taskId} must be fully registered in roadmap`);
+        add(failures, !skeletonTaskIds.has(taskId), `${label} non-PR task ${taskId} must not be skeleton-only`);
+        if (roadmapTasksById.has(taskId)) {
+          validateNonPrTask(roadmapTasksById.get(taskId), batch, failures, roadmapTaskIds, skeletonTaskIds);
+        }
+      }
     }
 
     add(
@@ -164,6 +305,10 @@ function validateBatch(batch, failures, roadmapTaskIds, skeletonTaskIds) {
       batch.tasks.length <= batch.batch_limit,
       `${label} tasks.length ${batch.tasks.length} exceeds batch_limit ${batch.batch_limit}`
     );
+
+    if (nonPrTaskCount > 0) {
+      validateNonPrBatchRisk(batch, failures);
+    }
   }
 
   if (Array.isArray(batch.stop_on)) {
@@ -212,6 +357,7 @@ function main() {
   }
 
   const roadmapTaskIds = new Set((roadmap.tasks || []).map((task) => task.id));
+  const roadmapTasksById = new Map((roadmap.tasks || []).map((task) => [task.id, task]));
   const skeletonTaskIds = skeletonIds(roadmap);
   const batchIds = new Set();
 
@@ -221,12 +367,7 @@ function main() {
       add(failures, !batchIds.has(batch.id), `duplicate batch id ${batch.id}`);
       batchIds.add(batch.id);
     }
-    validateBatch(batch, failures, roadmapTaskIds, skeletonTaskIds);
-
-    if (Array.isArray(batch.tasks)) {
-      const numbers = batch.tasks.map(taskNumber).filter((value) => value !== null);
-      add(failures, numbers.length === batch.tasks.length, `${batch.id} tasks must use PR<number> ids`);
-    }
+    validateBatch(batch, failures, roadmapTasksById, roadmapTaskIds, skeletonTaskIds);
   }
 
   if (current.next_recommended_train !== null) {
