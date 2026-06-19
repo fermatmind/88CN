@@ -41,6 +41,7 @@
     "public-api:v0:check": "node scripts/check-public-api-v0.mjs",
     "mcp-threat-model:check": "node scripts/check-mcp-threat-model.mjs",
     "read-only-mcp:check": "node scripts/check-read-only-mcp-server.mjs",
+    "sitemap-notification:check": "node scripts/check-sitemap-notification-boundary.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",
