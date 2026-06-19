@@ -3,18 +3,32 @@
 ## Latest Run
 
 - Date: 2026-06-19
-- Scope: PR74 Alternatives Canonical QA
+- Scope: PR77 GitHub Profile Mirror QA
 - Role: Codex-QA
 - Result: PASS
 - Blocked: No
 
 ## Summary
 
-- PR74 verifies that curated alternatives pages and sitemap entries are generated from the PR73 finite canonical registry.
-- The published route set is limited to `aurora-code-vs-nucleus-ml`, `nucleus-ml-vs-vectorbase`, and `complykit-vs-pulse-analytics`.
-- Reversed, unknown, non-published, non-sitemap-eligible, or non-allowlisted alternatives slugs return `notFound()` and do not enter sitemap output.
-- Project cards are resolved through local `status: "published"` records only.
-- No external indexing call, Public API exposure, MCP exposure, payment behavior, deploy step, dependency change, screenshot write, or data repo mutation was introduced.
+- PR77 verifies the PR75 mirror spec and PR76 local-only generator boundary.
+- The generator dry-run produced 6 markdown files under `/tmp/88cn-github-profile-mirror-pr77`.
+- Generator output reported `externalWrite: false` and `dataRepoMutation: false`.
+- Negative probes confirmed repo output paths and remote sources are rejected with non-zero exits.
+- No generated mirror markdown was committed, and `/Users/rainie/Desktop/88cn-index-data` remained clean.
+- No external indexing call, Public API exposure, MCP exposure, payment behavior, deploy step, dependency change, screenshot write, external repository write, GitHub Pages deploy, or data repo mutation was introduced.
+
+## GitHub Profile Mirror Evidence
+
+| Check | Result |
+| --- | --- |
+| PR75 mirror spec exists and defines reviewed-public source boundary | PASS |
+| PR76 generator exists after merge on `main` | PASS |
+| Local dry-run with `--dry-run --source local --out /tmp/88cn-github-profile-mirror-pr77 --no-write-external` generated 6 markdown files | PASS |
+| Output path under repo was rejected | PASS |
+| Remote source was rejected | PASS |
+| Generated markdown did not include email, `sourceConfidence`, `signalScore`, external write fields, or data mutation fields | PASS |
+| Generated markdown used public-signal labels and approved unknown labels | PASS |
+| Data repository remained clean | PASS |
 
 ## Alternatives Page Evidence
 
@@ -51,17 +65,16 @@
 
 ## Screenshots
 
-None. PR74 forbids `screenshots/**`, so QA used source inspection, checker output, and build route evidence.
+None. PR77 forbids `screenshots/**`, so QA used source inspection, generator output inspection, command output, and repository state checks.
 
 ## Validation Commands
 
 | Command | Result |
 | --- | --- |
-| `node scripts/check-alternatives-canonical.mjs` | PASS |
-| `npm run agent:scope:check -- PR74` | PASS |
-| `node scripts/check-vertical-asset-grids.mjs` | PASS |
-| `npm run agent:scope:check -- PR71` | PASS |
-| `node scripts/check-curated-collections.mjs` | PASS |
+| `node scripts/generate-github-profile-mirror.mjs --dry-run --source local --out /tmp/88cn-github-profile-mirror-pr77 --no-write-external` | PASS |
+| `node scripts/generate-github-profile-mirror.mjs --dry-run --source local --out /Users/rainie/Desktop/88CN/generated/github-profile-mirror --no-write-external` | PASS, rejected with non-zero exit |
+| `node scripts/generate-github-profile-mirror.mjs --dry-run --source remote --out /tmp/88cn-github-profile-mirror-pr77 --no-write-external` | PASS, rejected with non-zero exit |
+| `npm run agent:scope:check -- PR77` | PASS |
 | `npm run verify:day0` | PASS |
 | `npm run policy:scan` | PASS |
 | `npm run third-party:check` | PASS |
@@ -78,4 +91,4 @@ None. PR74 forbids `screenshots/**`, so QA used source inspection, checker outpu
 
 ## Recommendation
 
-PR74 can merge after full gate passes. TRAIN-PR72-PR74 can close after post-merge cleanup and final train validation. Do not start PR75 from this train.
+PR77 can merge after full gate passes. TRAIN-PR75-PR77 can close after PR77 post-merge cleanup and final train validation. Do not start PR78 from this train.
