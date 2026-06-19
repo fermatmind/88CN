@@ -378,7 +378,7 @@
       "server_change_allowed": false,
       "plugin_install_allowed": false,
       "new_dependency_allowed": false,
-      "continue_on_sidecar": true,
+      "continue_on_sidecar": false,
       "stop_on": [
         "missing_task_object",
         "validation_failure_outside_sub_batch_scope",
@@ -397,6 +397,10 @@
         {
           "task": "ANY",
           "reason": "scaled public content expansion or indexability change must pause for human review"
+        },
+        {
+          "task": "ANY",
+          "reason": "Deprecated broad train; use OPS6A split trains."
         }
       ],
       "required_preconditions": [
@@ -411,9 +415,11 @@
       ],
       "notes": [
         "This train must be split into sub-batches of four.",
-        "Do not create scaled public content or indexability changes without explicit human checkpoint."
+        "Do not create scaled public content or indexability changes without explicit human checkpoint.",
+        "Deprecated by OPS6A. Use the split PR61-PR80 trains instead of one broad auto-running train."
       ],
-      "sub_batch_limit": 4
+      "sub_batch_limit": 4,
+      "status": "deprecated"
     },
     {
       "id": "TRAIN-PR81-PR100",
@@ -1015,6 +1021,401 @@
         "High-risk train.",
         "Auto-merge disabled.",
         "No external exposure without human checkpoint."
+      ]
+    },
+    {
+      "id": "TRAIN-PR61-PR63-INTENT-GOVERNANCE",
+      "title": "Intent governance, route registry, and QA train",
+      "phase": "global-intent-governance",
+      "tasks": [
+        "PR61",
+        "PR62",
+        "PR63"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "PR60 complete",
+        "scaled-content boundary is reviewed before public routes"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "Governance-only train; no product runtime or external calls."
+      ]
+    },
+    {
+      "id": "TRAIN-PR64-PR66-TECH-STACK-CLUSTERS",
+      "title": "Tech stack cluster model, pages, and QA train",
+      "phase": "tech-stack-clusters",
+      "tasks": [
+        "PR64",
+        "PR65",
+        "PR66"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "TRAIN-PR61-PR63-INTENT-GOVERNANCE complete",
+        "published-only cluster thresholds defined"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "Cluster pages must be allowlisted and thresholded; no arbitrary stack pages."
+      ]
+    },
+    {
+      "id": "TRAIN-PR67-PR68-CURATED-COLLECTIONS",
+      "title": "Curated collections registry and pages train",
+      "phase": "curated-collections",
+      "tasks": [
+        "PR67",
+        "PR68"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "TRAIN-PR64-PR66-TECH-STACK-CLUSTERS complete"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "Collections must be manual and allowlisted; no arbitrary query pages."
+      ]
+    },
+    {
+      "id": "TRAIN-PR69-PR71-VERTICAL-ASSET-GRIDS",
+      "title": "Vertical asset grid taxonomy, pages, and QA train",
+      "phase": "vertical-asset-grids",
+      "tasks": [
+        "PR69",
+        "PR70",
+        "PR71"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "TRAIN-PR67-PR68-CURATED-COLLECTIONS complete"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "Vertical pages are project discovery grids, not legal, financial, or medical advice."
+      ]
+    },
+    {
+      "id": "TRAIN-PR72-PR74-ALTERNATIVES-CANONICAL",
+      "title": "Alternatives canonical policy, limited pages, and QA train",
+      "phase": "alternatives-canonical",
+      "tasks": [
+        "PR72",
+        "PR73",
+        "PR74"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "TRAIN-PR69-PR71-VERTICAL-ASSET-GRIDS complete",
+        "route count cap is explicit before implementation"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "N-squared route generation and arbitrary alternatives pages are forbidden."
+      ]
+    },
+    {
+      "id": "TRAIN-PR75-PR77-GITHUB-PROFILE-MIRROR",
+      "title": "GitHub profile mirror spec, generator, and QA train",
+      "phase": "github-profile-mirror",
+      "tasks": [
+        "PR75",
+        "PR76",
+        "PR77"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": false,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR76",
+          "reason": "data_repo_write"
+        },
+        {
+          "task": "PR76",
+          "reason": "external_repo_write"
+        }
+      ],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "TRAIN-PR72-PR74-ALTERNATIVES-CANONICAL complete",
+        "external writes are explicitly approved before generator output is pushed"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "Auto-merge disabled because later generator work may request data repo or external repo writes."
+      ]
+    },
+    {
+      "id": "TRAIN-PR78-PR79-SITEMAP-INDEXNOW",
+      "title": "Sitemap notification and IndexNow boundary QA train",
+      "phase": "sitemap-indexnow-boundary",
+      "tasks": [
+        "PR78",
+        "PR79"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": false,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR78",
+          "reason": "external_index_ping"
+        },
+        {
+          "task": "PR79",
+          "reason": "external_index_ping"
+        }
+      ],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "TRAIN-PR75-PR77-GITHUB-PROFILE-MIRROR complete",
+        "external search engine notifications are explicitly approved before live ping"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "Google Indexing API is forbidden; IndexNow remains dry-run unless separately approved."
+      ]
+    },
+    {
+      "id": "TRAIN-PR80-GLOBAL-INTENT-WEB-QA",
+      "title": "Global intent web QA and readiness train",
+      "phase": "global-intent-web-qa",
+      "tasks": [
+        "PR80"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_index_ping_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS6A complete",
+        "worktree is clean and created from current origin/main",
+        "TRAIN-PR78-PR79-SITEMAP-INDEXNOW complete"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
+        "QA-only train may auto-merge when no deploy is requested. Live smoke or deploy requires a separate checkpoint."
       ]
     }
   ]

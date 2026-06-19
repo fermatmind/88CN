@@ -2919,6 +2919,1500 @@
         "local disabled smoke passes if feasible",
         "agent:gate sidecar recorded if read-only-mcp:check is not wired into the gate"
       ]
+    },
+    {
+      "id": "OPS6A",
+      "title": "TRAIN-PR61-PR80 Global Intent Interception Readiness Scan + Roadmap Registration v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "global-intent-readiness-registration",
+      "depends_on": [
+        "PR60"
+      ],
+      "purpose": "Scan, de-duplicate, risk-classify, and register PR61 through PR80 for the Global Intent Interception Web phase without implementing product work.",
+      "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "docs/OPS6A_PR61_80_GLOBAL_INTENT_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS6A",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR61-PR63-INTENT-GOVERNANCE",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR64-PR66-TECH-STACK-CLUSTERS",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR67-PR68-CURATED-COLLECTIONS",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR69-PR71-VERTICAL-ASSET-GRIDS",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR72-PR74-ALTERNATIVES-CANONICAL",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR75-PR77-GITHUB-PROFILE-MIRROR",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR78-PR79-SITEMAP-INDEXNOW",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR80-GLOBAL-INTENT-WEB-QA"
+      ],
+      "data_planes": [
+        "roadmap_registry",
+        "train_registry",
+        "scaled_content_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "PR61 through PR80 full task objects exist",
+        "PR61 through PR80 are split into bounded trains",
+        "scaled-content abuse rules are encoded in tasks",
+        "public pages must be published-only, curated, and thresholded",
+        "arbitrary pSEO route generation is forbidden",
+        "Google Indexing API is forbidden",
+        "live IndexNow ping is checkpointed",
+        "data repo mutation is checkpointed",
+        "no product code is modified",
+        "no live deploy is performed",
+        "first executable train after OPS6A is identified"
+      ],
+      "notes": [
+        "Registration only. Do not start PR61 from OPS6A."
+      ]
+    },
+    {
+      "id": "OPS6AQ",
+      "title": "TRAIN-PR61-PR80 Global Intent Interception Readiness QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "global-intent-readiness-registration",
+      "depends_on": [
+        "OPS6A"
+      ],
+      "purpose": "QA the OPS6A PR61-PR80 roadmap registration, split train registry, scaled-content boundaries, and checkpoint routing.",
+      "allowed_paths": [
+        "docs/OPS6A_PR61_80_GLOBAL_INTENT_READINESS_QA.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS6AQ"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "OPS6A registration report is reviewed from QA scope",
+        "split train dry-run evidence is verified",
+        "scaled-content abuse boundaries are verified",
+        "QA output uses allowed paths only",
+        "no implementation files are modified"
+      ],
+      "notes": []
+    },
+    {
+      "id": "PR61",
+      "title": "Global Intent Taxonomy + Scaled Content Boundary v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "global-intent-governance",
+      "depends_on": [
+        "OPS6A"
+      ],
+      "purpose": "Define machine-readable taxonomy for intent pages and hard boundaries against scaled content abuse.",
+      "allowed_paths": [
+        "docs/PR61_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR61"
+      ],
+      "data_planes": [
+        "intent_taxonomy",
+        "scaled_content_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "intent taxonomy exists",
+        "route creation thresholds defined",
+        "arbitrary pSEO route generation forbidden",
+        "AI-generated filler forbidden",
+        "Google Indexing API forbidden",
+        "checker or docs specify boundaries"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR62",
+      "title": "Intent Route Registry v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "global-intent-governance",
+      "depends_on": [
+        "PR61"
+      ],
+      "purpose": "Create allowlisted route registry for future intent pages. No pages implemented.",
+      "allowed_paths": [
+        "docs/PR62_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR62"
+      ],
+      "data_planes": [
+        "route_registry",
+        "publication_thresholds"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "route registry format exists",
+        "registry supports status: draft, noindex, and published",
+        "minimum evidence thresholds exist",
+        "no runtime page generation",
+        "no sitemap inclusion unless published"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR63",
+      "title": "Intent Governance QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "global-intent-governance",
+      "depends_on": [
+        "PR62"
+      ],
+      "purpose": "QA PR61 and PR62 boundaries.",
+      "allowed_paths": [
+        "docs/PR63_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR63"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "verifies no arbitrary pSEO route",
+        "verifies no sitemap leak",
+        "verifies no forbidden public claims",
+        "QA docs only"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR64",
+      "title": "Tech Stack Cluster Data Model v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "tech-stack-clusters",
+      "depends_on": [
+        "PR63"
+      ],
+      "purpose": "Define tech stack cluster data model and published-only eligibility.",
+      "allowed_paths": [
+        "docs/PR64_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/contracts/tech-stack-cluster-boundary.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR64"
+      ],
+      "data_planes": [
+        "published_only_clusters"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "stack cluster model exists",
+        "published-only source rule defined",
+        "no unreviewed or scouted records",
+        "no dynamic arbitrary stack pages",
+        "checker validates threshold"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR65",
+      "title": "Tech Stack Cluster Pages v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "tech-stack-clusters",
+      "depends_on": [
+        "PR64"
+      ],
+      "purpose": "Implement limited allowlisted stack cluster pages for high-signal clusters.",
+      "allowed_paths": [
+        "docs/PR65_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "app/stacks/**",
+        "lib/stacks/**",
+        "scripts/check-tech-stack-clusters.mjs"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR65"
+      ],
+      "data_planes": [
+        "published_only_pages",
+        "sitemap_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "allowlisted_static_pages",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "pages are allowlisted",
+        "no arbitrary params",
+        "sitemap includes only approved stack pages",
+        "pages use published-only projects",
+        "no traffic or ranking promises"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR66",
+      "title": "Tech Stack Cluster QA + Sitemap Boundary",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "tech-stack-clusters",
+      "depends_on": [
+        "PR65"
+      ],
+      "purpose": "QA stack pages, sitemap, mobile, policy, and noindex rules.",
+      "allowed_paths": [
+        "docs/PR66_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR66"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "QA report exists",
+        "sitemap verification exists",
+        "no unreviewed slugs",
+        "no app code modification"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR67",
+      "title": "Curated Collections Registry v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "curated-collections",
+      "depends_on": [
+        "PR66"
+      ],
+      "purpose": "Create curated collection registry for limited high-intent pages.",
+      "allowed_paths": [
+        "docs/PR67_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/contracts/curated-collections-boundary.json",
+        "lib/collections/**",
+        "scripts/check-curated-collections.mjs"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR67"
+      ],
+      "data_planes": [
+        "curated_registry"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "collection registry exists",
+        "all collections are manual and allowlisted",
+        "minimum published project threshold exists",
+        "no arbitrary query pages",
+        "checker exists"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR68",
+      "title": "Curated Collections Pages + QA v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "curated-collections",
+      "depends_on": [
+        "PR67"
+      ],
+      "purpose": "Implement and QA limited collection pages from the curated registry.",
+      "allowed_paths": [
+        "docs/PR68_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "app/collections/**",
+        "lib/collections/**",
+        "scripts/check-curated-collections.mjs",
+        "docs/QA_REPORT.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR68"
+      ],
+      "data_planes": [
+        "curated_pages",
+        "qa"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "allowlisted_static_pages",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "collection pages use registry only",
+        "sitemap only includes published collections",
+        "no scaled content",
+        "no forbidden public claims"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR69",
+      "title": "Vertical Asset Grid Taxonomy v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "vertical-asset-grids",
+      "depends_on": [
+        "PR68"
+      ],
+      "purpose": "Define vertical grids for AI project discovery by domain.",
+      "allowed_paths": [
+        "docs/PR69_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR69"
+      ],
+      "data_planes": [
+        "vertical_taxonomy",
+        "advice_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "domains are project categories, not advice categories",
+        "no legal, financial, or medical advice",
+        "no regulated claims",
+        "threshold policy defined"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR70",
+      "title": "Vertical Asset Grid Pages v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "vertical-asset-grids",
+      "depends_on": [
+        "PR69"
+      ],
+      "purpose": "Implement limited vertical grid pages from the taxonomy.",
+      "allowed_paths": [
+        "docs/PR70_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "app/verticals/**",
+        "lib/verticals/**",
+        "scripts/check-vertical-asset-grids.mjs"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR70"
+      ],
+      "data_planes": [
+        "vertical_pages",
+        "published_only_pages"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "allowlisted_static_pages",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "only allowlisted verticals",
+        "published-only projects",
+        "no autogenerated filler",
+        "no professional advice",
+        "no investment, medical, or legal advice",
+        "sitemap boundary respected"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR71",
+      "title": "Vertical Asset Grid QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "vertical-asset-grids",
+      "depends_on": [
+        "PR70"
+      ],
+      "purpose": "QA vertical grid boundaries.",
+      "allowed_paths": [
+        "docs/PR71_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR71"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "validates no advice language",
+        "validates no unreviewed records",
+        "validates sitemap and noindex rules",
+        "QA docs and screenshots only"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR72",
+      "title": "Alternatives Canonical Policy v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "alternatives-canonical",
+      "depends_on": [
+        "PR71"
+      ],
+      "purpose": "Define comparison and alternatives canonical policy without N-squared route explosion.",
+      "allowed_paths": [
+        "docs/PR72_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR72"
+      ],
+      "data_planes": [
+        "canonical_policy",
+        "route_cap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "slug ordering rule exists",
+        "duplicate route prevention defined",
+        "canonical mapping exists",
+        "max comparison route cap exists",
+        "no arbitrary alternatives pages",
+        "no competitor defamation"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR73",
+      "title": "Curated Alternatives Pages v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "alternatives-canonical",
+      "depends_on": [
+        "PR72"
+      ],
+      "purpose": "Implement a very small allowlisted set of alternatives pages.",
+      "allowed_paths": [
+        "docs/PR73_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "app/alternatives/**",
+        "lib/alternatives/**",
+        "scripts/check-alternatives-canonical.mjs"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR73"
+      ],
+      "data_planes": [
+        "curated_comparison_pages",
+        "canonical_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "allowlisted_static_pages",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "route count capped",
+        "all pairs allowlisted",
+        "no arbitrary params",
+        "no N-squared generation",
+        "neutral factual language",
+        "no ranking guarantees"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR74",
+      "title": "Alternatives Canonical QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "alternatives-canonical",
+      "depends_on": [
+        "PR73"
+      ],
+      "purpose": "QA alternatives canonical behavior.",
+      "allowed_paths": [
+        "docs/PR74_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR74"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "canonical redirects checked",
+        "duplicate route prevention verified",
+        "no sitemap explosion",
+        "no forbidden public claims"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR75",
+      "title": "GitHub Structured Profile Mirror Spec v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "github-profile-mirror",
+      "depends_on": [
+        "PR74"
+      ],
+      "purpose": "Define GitHub markdown profile mirror strategy. No data repo mutation.",
+      "allowed_paths": [
+        "docs/PR75_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR75"
+      ],
+      "data_planes": [
+        "mirror_spec",
+        "external_repo_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "mirror spec exists",
+        "no external push",
+        "no GitHub Pages deploy",
+        "no data repo mutation",
+        "no backlink or ranking promise"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR76",
+      "title": "GitHub Profile Mirror Generator v0",
+      "type": "product/tooling",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "github-profile-mirror",
+      "depends_on": [
+        "PR75"
+      ],
+      "purpose": "Generate local markdown profile files from published allowlisted data.",
+      "allowed_paths": [
+        "docs/PR76_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "scripts/generate-github-profile-mirror.mjs",
+        "generated/github-profile-mirror/**"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR76"
+      ],
+      "data_planes": [
+        "local_generator",
+        "published_only_data"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "local-only generator",
+        "generated files not committed unless separately allowed",
+        "no external write",
+        "no private data",
+        "no auto PR to another repo"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR77",
+      "title": "GitHub Profile Mirror QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "github-profile-mirror",
+      "depends_on": [
+        "PR76"
+      ],
+      "purpose": "QA GitHub profile mirror dry-run boundaries.",
+      "allowed_paths": [
+        "docs/PR77_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR77"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "local generator dry-run",
+        "privacy check",
+        "no external writes",
+        "QA docs only"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR78",
+      "title": "Sitemap Notification + IndexNow Boundary v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "sitemap-indexnow-boundary",
+      "depends_on": [
+        "PR77"
+      ],
+      "purpose": "Define safe sitemap notification and IndexNow strategy.",
+      "allowed_paths": [
+        "docs/PR78_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR78"
+      ],
+      "data_planes": [
+        "sitemap_notification_boundary",
+        "external_ping_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "checkpointed",
+      "data_repo": "none",
+      "definition_of_done": [
+        "Google Indexing API forbidden",
+        "IndexNow external ping disabled by default",
+        "sitemap update logic documented",
+        "no live ping in PR78",
+        "no deploy"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR79",
+      "title": "IndexNow Dry Run + Sitemap Notification QA",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "sitemap-indexnow-boundary",
+      "depends_on": [
+        "PR78"
+      ],
+      "purpose": "QA dry-run only sitemap notification and IndexNow boundaries.",
+      "allowed_paths": [
+        "docs/PR79_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR79"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "checkpointed",
+      "data_repo": "none",
+      "definition_of_done": [
+        "dry-run only",
+        "no external ping unless explicitly approved",
+        "sitemap behavior verified",
+        "QA docs only"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed."
+      ]
+    },
+    {
+      "id": "PR80",
+      "title": "Global Intent Web QA + Readiness Report v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "global-intent-web-qa",
+      "depends_on": [
+        "PR79"
+      ],
+      "purpose": "Review all PR61 through PR79 intent surfaces.",
+      "allowed_paths": [
+        "docs/PR80_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR80"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_index_ping": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "route inventory",
+        "sitemap inventory",
+        "noindex inventory",
+        "scaled content abuse review",
+        "forbidden claim review",
+        "mobile screenshots if needed",
+        "no product code change"
+      ],
+      "notes": [
+        "No live deploy in this task.",
+        "No Google Indexing API call.",
+        "No live IndexNow ping unless a later task has an explicit human checkpoint.",
+        "No 88cn-index-data mutation unless explicitly checkpointed.",
+        "If live smoke or deploy is requested, stop for a separate human checkpoint."
+      ]
     }
   ],
   "skeletons": [

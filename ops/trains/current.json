@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR51-PAYMENT-FLAG",
-  "next_recommended_train": "TRAIN-PR52-PR54-LIFECYCLE",
-  "notes": "OPS5D registers PR52-PR60 and splits the next phase into lifecycle, OSS evidence, Public API, and MCP trains. PR58 and PR60 are high-risk human-checkpoint trains; PR59 is spec-only but checkpointed by conservative MCP risk detection."
+  "last_completed_train": "TRAIN-PR60-MCP-SERVER",
+  "next_recommended_train": "TRAIN-PR61-PR63-INTENT-GOVERNANCE",
+  "notes": "OPS6A registers PR61-PR80 and splits Global Intent Interception Web into bounded trains. Start with TRAIN-PR61-PR63-INTENT-GOVERNANCE after OPS6A merge and cleanup. Do not start PR61 automatically."
 }
