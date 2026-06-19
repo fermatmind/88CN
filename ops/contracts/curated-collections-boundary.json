@@ -1,0 +1,73 @@
+{
+  "version": "PR67-v0",
+  "surface": "curated-collections",
+  "route_prefix": "/collections",
+  "route_source": "finite_allowlist_only",
+  "allowed_page_type": "curated_collection",
+  "lifecycle_statuses": [
+    "draft",
+    "noindex",
+    "published",
+    "archived"
+  ],
+  "published_only_source_rule": {
+    "eligible_project_statuses": [
+      "published"
+    ],
+    "excluded_project_statuses": [
+      "submitted",
+      "pending_review",
+      "approved",
+      "claimed",
+      "owner_verified",
+      "archived",
+      "scouted",
+      "quarantined",
+      "rejected"
+    ],
+    "source_of_truth": "local_reviewed_project_records"
+  },
+  "route_generation": {
+    "dynamic_params": false,
+    "catch_all_routes": false,
+    "query_generated_pages": false,
+    "max_published_collections_v0": 4,
+    "requires_literal_slug_registry": true
+  },
+  "evidence_thresholds": {
+    "minimum_published_projects": 2,
+    "minimum_public_sources_per_project": 1,
+    "requires_manual_allowlist": true,
+    "requires_human_review_before_publication": true,
+    "requires_sitemap_review": true
+  },
+  "sitemap_policy": {
+    "published_only": true,
+    "requires_sitemap_eligible": true,
+    "draft_noindex_archived_excluded": true
+  },
+  "forbidden_patterns": [
+    "query_param_collection_pages",
+    "tag_cartesian_product_pages",
+    "unbounded_slug_generation",
+    "ai_filler_copy",
+    "runtime_external_source_crawl",
+    "google_indexing_api",
+    "live_indexnow_ping",
+    "traffic_or_ranking_promises",
+    "backlink_or_citation_promises",
+    "public_api_exposure",
+    "mcp_exposure",
+    "payment_or_checkout_behavior",
+    "data_repo_mutation"
+  ],
+  "checker_expectations": [
+    "Every collection slug must be literal and unique.",
+    "Every collection must declare a supported lifecycle status.",
+    "Published collections must be sitemap eligible.",
+    "Published collections must meet the minimum published project threshold.",
+    "Every referenced project must exist in local reviewed project records with status published.",
+    "Collection pages must use the registry and reject unknown slugs.",
+    "Sitemap entries must come from published registry entries only."
+  ]
+}
