@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR80-GLOBAL-INTENT-WEB-QA",
-  "next_recommended_train": "TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY",
-  "notes": "OPS7A registers PR81-PR100 into bounded B2B Alpha split trains. Start with TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY after OPS7A merge and cleanup. Do not start PR81 automatically."
+  "last_completed_train": "TRAIN-PR87-PR90-API-KEY-METERING-SHELL",
+  "next_recommended_train": "TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC",
+  "notes": "OPS7B recommends GO_PR91_ONLY. Start PR91 only as docs/contracts/spec after explicit instruction. Do not batch PR92-PR94 with PR91, and do not start PR91 automatically."
 }

@@ -4514,6 +4514,92 @@
       ]
     },
     {
+      "id": "OPS7B",
+      "title": "PR91-PR94 Laravel Gateway + Sync Readiness Scan v0",
+      "type": "ops/readiness",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr91-pr94-laravel-gateway-sync-readiness",
+      "depends_on": [
+        "PR90"
+      ],
+      "purpose": "Scan PR91 through PR94 Laravel gateway and Supabase sync readiness before any implementation, classify checkpoints, and recommend the next safe task.",
+      "allowed_paths": [
+        "docs/OPS7B_PR91_94_LARAVEL_GATEWAY_SYNC_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**",
+        "composer.json",
+        "composer.lock",
+        "gateway/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS7B",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC"
+      ],
+      "data_planes": [
+        "roadmap_registry",
+        "train_registry",
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_service": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "PR91 through PR94 scanned",
+        "Laravel, Composer, server, Supabase, webhook, Redis, dependency, deployment, and data repo risks classified",
+        "train dry-run recorded",
+        "exact next task recommended",
+        "no runtime or product code modified",
+        "no dependencies added",
+        "no deployment performed",
+        "PR91 not started"
+      ],
+      "notes": [
+        "Readiness scan only. Do not start PR91 from OPS7B.",
+        "Expected recommendation is GO_PR91_ONLY unless scan evidence blocks PR91.",
+        "Do not implement Laravel runtime, Composer setup, Supabase migration, webhook runtime, webhook secret, Redis production use, server config, deploy, external service, or data repo mutation."
+      ]
+    },
+    {
       "id": "PR81",
       "title": "Alpha Data Feed Boundary + Threat Model v0",
       "type": "ops",
