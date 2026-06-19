@@ -91,9 +91,10 @@
 | Snapshot Export + Cleansing QA | Validation passed | PR86 validates PR84 local-only snapshot dry-run output and PR85 data cleansing rules. QA docs only; no product code, script, schema, package, runtime route, endpoint, deploy, external write, or data repo mutation. |
 | API Key Boundary + Metering Threat Model | Validation passed | PR87 defines disabled-by-default API key and metering boundary rules. Contract/docs only; no key issuance, metering runtime, customer access, billing, payment, deploy, Supabase migration, Laravel runtime, dependency, external service, or data repo mutation. Human review required before merge. |
 | Disabled API Key Shell | Validation passed | PR88 adds a disabled API key shell route, admin placeholder, feature flags, and checker. No real key issuance, customer access, live metering, billing, payment, Supabase migration, Laravel runtime, dependency, external service, deploy, or data repo mutation. Human review required before merge. |
+| Metering Ledger Contract | Validation passed | PR89 defines an append-only, idempotent, disabled-by-default usage-accounting ledger contract. No live metering, billing, payment, Stripe, customer access, API key issuance, Supabase migration, Laravel runtime, Redis production config, dependency, external service, deploy, or data repo mutation. Human review required before merge. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Human review PR88. Do not auto-merge and do not start PR89.
+Next: Human review PR89. Do not auto-merge and do not start PR90.
