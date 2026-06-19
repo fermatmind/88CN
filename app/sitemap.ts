@@ -4,6 +4,7 @@ import { getPublishedReportSitemapEntries } from "@/lib/reports/published-report
 import { getPublishedStackClusters } from "@/lib/stacks/tech-stack-clusters";
 import { getPublishedCuratedCollections } from "@/lib/collections/curated-collections";
 import { getPublishedVerticalAssetGrids } from "@/lib/verticals/vertical-asset-grids";
+import { getPublishedCuratedAlternatives } from "@/lib/alternatives/curated-alternatives";
 import { INDEXABLE_STATES } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
@@ -97,6 +98,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }));
 
+  const alternativesEntries: MetadataRoute.Sitemap =
+    getPublishedCuratedAlternatives().map((entry) => ({
+      url: `${baseUrl}${entry.canonicalPath}`,
+      lastModified: new Date(entry.lastReviewed),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+
   return [
     ...staticEntries,
     ...projectEntries,
@@ -104,6 +113,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...collectionEntries,
     ...stackEntries,
     ...verticalEntries,
+    ...alternativesEntries,
     ...reportListEntries,
     ...reportEntries,
   ];
