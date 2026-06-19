@@ -3,6 +3,7 @@ import { demoCategories } from "@/lib/demo-categories";
 import { getPublishedReportSitemapEntries } from "@/lib/reports/published-reports";
 import { getPublishedStackClusters } from "@/lib/stacks/tech-stack-clusters";
 import { getPublishedCuratedCollections } from "@/lib/collections/curated-collections";
+import { getPublishedVerticalAssetGrids } from "@/lib/verticals/vertical-asset-grids";
 import { INDEXABLE_STATES } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
@@ -88,12 +89,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const verticalEntries: MetadataRoute.Sitemap =
+    getPublishedVerticalAssetGrids().map((grid) => ({
+      url: `${baseUrl}/verticals/${grid.slug}`,
+      lastModified: new Date(grid.lastReviewed),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+
   return [
     ...staticEntries,
     ...projectEntries,
     ...categoryEntries,
     ...collectionEntries,
     ...stackEntries,
+    ...verticalEntries,
     ...reportListEntries,
     ...reportEntries,
   ];
