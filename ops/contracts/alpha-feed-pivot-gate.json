@@ -1,0 +1,116 @@
+{
+  "id": "alpha-feed-pivot-gate-v0",
+  "task": "PR99",
+  "status": "docs_ops_only",
+  "runtime_collection_enabled": false,
+  "customer_access_enabled": false,
+  "payment_enabled": false,
+  "external_service_enabled": false,
+  "supabase_write_enabled": false,
+  "data_repo_mutation_enabled": false,
+  "purpose": "Define internal Day30, Day60, and Day100 operating thresholds for B2B Alpha Feed viability without implementing analytics, payment, customer access, runtime delivery, or external integrations.",
+  "required_language": "Pivot gates are internal operating thresholds, not guarantees, investment signals, financial advice, ranking promises, funding promises, or customer acquisition promises.",
+  "safe_metric_policy": {
+    "use_only_if_existing_and_verified": true,
+    "private_contact_fields_allowed": false,
+    "manual_private_details_allowed": false,
+    "fabrication_allowed": false,
+    "live_tracking_required": false,
+    "allowed_metric_sources": [
+      "existing report views if already available",
+      "existing geo-checker runs if already available",
+      "existing valid submissions if already available",
+      "existing claim attempts if already available",
+      "buyer-interest shell interactions only if no-write and measured by existing safe logs",
+      "manual feedback counts if documented without private details",
+      "data buyer replies if manually documented and non-private",
+      "bug count",
+      "P0/P1 incidents"
+    ],
+    "forbidden_metric_sources": [
+      "new analytics integration",
+      "new tracking runtime",
+      "Supabase writes",
+      "CRM or email provider collection",
+      "payment or checkout state",
+      "customer signup",
+      "invented metrics",
+      "private contact fields",
+      "private buyer messages",
+      "revenue claims",
+      "capital-market demand claims"
+    ]
+  },
+  "checkpoints": [
+    {
+      "day": 30,
+      "name": "Day30 signal sanity check",
+      "continue_if": [
+        "zero P0/P1 privacy, payment, runtime, or restricted-copy incidents",
+        "at least two safe signal categories are available or manually documented",
+        "no evidence source requires PII collection, payment, live feed delivery, external service, or Supabase write"
+      ],
+      "pause_if": [
+        "only one safe signal category is available",
+        "review evidence is too sparse for interpretation",
+        "non-blocking P2/P3 sidecar issues need cleanup before wider readiness review"
+      ],
+      "pivot_if": [
+        "manual feedback shows the current framing is unclear",
+        "safe evidence favors another audience, report bundle, or public-signal packaging"
+      ],
+      "kill_if": [
+        "P0/P1 privacy, payment, runtime, restricted-copy, or data-mutation issue is confirmed",
+        "the concept cannot be evaluated without PII collection, payment, live delivery, external services, or unsafe claims"
+      ]
+    },
+    {
+      "day": 60,
+      "name": "Day60 viability review",
+      "continue_if": [
+        "Day30 conditions still hold",
+        "three or more safe signal categories are available or manually documented",
+        "evidence supports a bounded OPS8A readiness scan without enabling runtime delivery"
+      ],
+      "pause_if": [
+        "safe signal quality is mixed",
+        "key evidence depends on manual review that has not been completed",
+        "non-runtime docs or checker maintenance should land before production-readiness planning"
+      ],
+      "pivot_if": [
+        "safe evidence points to a narrower report, QA pack, or waitlist-style evidence loop",
+        "buyer-interest language needs repositioning away from access or commercial entitlement"
+      ],
+      "kill_if": [
+        "continued evaluation would require unsafe collection, payment coupling, live feed delivery, or external service dependency"
+      ]
+    },
+    {
+      "day": 100,
+      "name": "Day100 phase decision",
+      "continue_if": [
+        "zero P0/P1 incidents across the observation window",
+        "safe evidence supports internal beta readiness planning",
+        "OPS8A can define release-candidate prerequisites without starting PR101"
+      ],
+      "pause_if": [
+        "readiness evidence is incomplete but still safe to gather manually",
+        "gate-maintenance debt should be resolved before any release-candidate scan"
+      ],
+      "pivot_if": [
+        "evidence supports a docs/report product but not a feed delivery surface",
+        "audience or packaging needs to shift before internal beta planning"
+      ],
+      "kill_if": [
+        "the Alpha Feed concept depends on private data, unsafe commercial claims, live delivery, payment, or external services to be credible"
+      ]
+    }
+  ],
+  "review": {
+    "owner": "human team",
+    "codex_role": "prepare evidence and readiness summary only",
+    "review_frequency": "Day30, Day60, Day100",
+    "pr100_consumption": "PR100 should verify this contract exists, confirm it is docs/ops-only, and summarize how the gate informs B2B Alpha readiness.",
+    "ops8a_consumption": "OPS8A should use this gate as an input to release-candidate and internal beta readiness scanning, without treating it as launch approval."
+  }
+}
