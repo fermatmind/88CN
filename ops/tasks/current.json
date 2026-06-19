@@ -3,7 +3,8 @@
   "current_repo": "88CN",
   "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "GO_TRAFFIC4_TRAIN",
-  "next_recommended_task": "TRAFFIC4A",
-  "next_recommended_train": "TRAIN-TRAFFIC4-TASK-DISCOVERY"
+  "result": "GO_PR122_TRAIN",
+  "next_recommended_task": "PR122",
+  "next_recommended_train": "TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY",
+  "next_non_pr_task": "TRAFFIC4A"
 }

@@ -162,6 +162,47 @@ OPS9A2 compatibility is sufficient for these trains:
 - `node scripts/agent/train-plan-check.mjs --batch TRAIN-TRAFFIC5-ALTERNATIVES-EXPANSION` passes.
 - `node scripts/agent/train-plan-check.mjs --batch TRAIN-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA` passes.
 
+## PR-Numbered Execution Registration
+
+Follow-up registration maps the 10-step demand-side chain to 10 PR-numbered tasks. Existing `PR101-PR121` remain reserved for the MCP and agent ecosystem train, so the demand-side chain starts at `PR122`.
+
+| PR | Traffic task | Title | Type |
+| --- | --- | --- | --- |
+| PR122 | TRAFFIC4A | Task-to-Project Discovery Boundary v0 | research |
+| PR123 | TRAFFIC4B | Finite Task Pages Implementation v0 | implementation |
+| PR124 | TRAFFIC4Q | Task Pages QA v0 | qa |
+| PR125 | TRAFFIC5A | Alternatives Expansion Boundary v0 | research |
+| PR126 | TRAFFIC5B | Alternatives Expansion Implementation v0 | implementation |
+| PR127 | TRAFFIC5Q | Alternatives Expansion QA v0 | qa |
+| PR128 | TRAFFIC6A | Report Distribution Pack Boundary v0 | research |
+| PR129 | TRAFFIC6B | Report Distribution Pack Generator v0 | implementation |
+| PR130 | TRAFFIC6Q | Report Distribution Pack QA v0 | qa |
+| PR131 | TRAFFIC7 | Demand-Side Traffic QA v0 | qa |
+
+Registered PR trains:
+
+| Train | Tasks | Mirrors |
+| --- | --- | --- |
+| TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY | PR122, PR123, PR124 | TRAIN-TRAFFIC4-TASK-DISCOVERY |
+| TRAIN-PR125-PR127-TRAFFIC5-ALTERNATIVES-EXPANSION | PR125, PR126, PR127 | TRAIN-TRAFFIC5-ALTERNATIVES-EXPANSION |
+| TRAIN-PR128-PR131-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA | PR128, PR129, PR130, PR131 | TRAIN-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA |
+
+The PR-numbered chain keeps the same boundaries as the TRAFFIC task chain:
+
+- no live deploy;
+- no server config;
+- no payment, MCP, public API release, or customer access;
+- no plugin install or new dependency by train default;
+- no external service write;
+- no data repo mutation;
+- no PII collection, social posting, or outreach automation.
+
+Exact next PR task: `PR122`.
+
+Exact next PR train: `TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY`.
+
+Do not start `PR122` or the PR train from this registration step.
+
 ## Deployment Timing Recommendation
 
 Deployment remains after TRAFFIC7. TRAFFIC4R registers planning and train metadata only, and does not change deployment readiness.
@@ -208,11 +249,13 @@ Data repository cleanliness passed:
 
 ## Exact Next Task / Train
 
-Exact next task: TRAFFIC4A Task-to-Project Discovery Boundary v0.
+Exact next task: PR122 Task-to-Project Discovery Boundary v0.
 
-Exact next train: TRAIN-TRAFFIC4-TASK-DISCOVERY.
+Traffic alias: TRAFFIC4A.
 
-Do not start TRAFFIC4A or the train inside TRAFFIC4R.
+Exact next train: TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY.
+
+Do not start PR122, TRAFFIC4A, or the train inside TRAFFIC4R.
 
 ## What This PR Does Not Do
 

@@ -1947,6 +1947,184 @@
         "TRAFFIC6A must define draft-only distribution boundaries before any generator work.",
         "No auto posting, email send, DM send, social API write, platform login, CRM write, PII collection, browser session export, external write, deploy, or data repo mutation is allowed."
       ]
+    },
+    {
+      "id": "TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY",
+      "title": "PR122-PR124 Task discovery boundary, implementation, and QA train",
+      "phase": "pr122-pr124-traffic4-task-discovery",
+      "tasks": [
+        "PR122",
+        "PR123",
+        "PR124"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "public_api_release_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "PR122-PR131 registration merged and cleaned up",
+        "worktree is clean and created from current origin/main",
+        "all task IDs in this train are fully registered roadmap tasks",
+        "no live deploy, server config, payment, MCP, plugin install, new dependency, external service, customer access, PII collection, outreach automation, social posting, or data repo mutation is requested"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-research",
+        "codex-qa"
+      ],
+      "notes": [
+        "PR-numbered mirror of TRAIN-TRAFFIC4-TASK-DISCOVERY.",
+        "PR122 maps to TRAFFIC4A, PR123 maps to TRAFFIC4B, and PR124 maps to TRAFFIC4Q.",
+        "Auto merge remains false because the train includes public route implementation scope."
+      ]
+    },
+    {
+      "id": "TRAIN-PR125-PR127-TRAFFIC5-ALTERNATIVES-EXPANSION",
+      "title": "PR125-PR127 Alternatives boundary, expansion, and QA train",
+      "phase": "pr125-pr127-traffic5-alternatives-expansion",
+      "tasks": [
+        "PR125",
+        "PR126",
+        "PR127"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "public_api_release_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "PR122-PR131 registration merged and cleaned up",
+        "worktree is clean and created from current origin/main",
+        "all task IDs in this train are fully registered roadmap tasks",
+        "no live deploy, server config, payment, MCP, plugin install, new dependency, external service, customer access, PII collection, outreach automation, social posting, or data repo mutation is requested"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-research",
+        "codex-qa"
+      ],
+      "notes": [
+        "PR-numbered mirror of TRAIN-TRAFFIC5-ALTERNATIVES-EXPANSION.",
+        "PR125 maps to TRAFFIC5A, PR126 maps to TRAFFIC5B, and PR127 maps to TRAFFIC5Q.",
+        "No N-by-N pair generation, reverse duplicates, superiority claims, sponsored bias, external write, deploy, or data repo mutation is allowed."
+      ]
+    },
+    {
+      "id": "TRAIN-PR128-PR131-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA",
+      "title": "PR128-PR131 Report distribution and final demand-side QA train",
+      "phase": "pr128-pr131-traffic6-traffic7-distribution-qa",
+      "tasks": [
+        "PR128",
+        "PR129",
+        "PR130",
+        "PR131"
+      ],
+      "batch_limit": 4,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "public_api_release_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "PR122-PR131 registration merged and cleaned up",
+        "worktree is clean and created from current origin/main",
+        "all task IDs in this train are fully registered roadmap tasks",
+        "no live deploy, server config, payment, MCP, plugin install, new dependency, external service, customer access, PII collection, outreach automation, social posting, or data repo mutation is requested"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-research",
+        "codex-qa"
+      ],
+      "notes": [
+        "PR-numbered mirror of TRAIN-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA.",
+        "PR128 maps to TRAFFIC6A, PR129 maps to TRAFFIC6B, PR130 maps to TRAFFIC6Q, and PR131 maps to TRAFFIC7.",
+        "No auto posting, email send, DM send, social API write, platform login, CRM write, PII collection, browser session export, external write, deploy, or data repo mutation is allowed."
+      ]
     }
   ]
 }
