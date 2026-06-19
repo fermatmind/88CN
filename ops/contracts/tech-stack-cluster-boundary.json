@@ -1,0 +1,66 @@
+{
+  "version": "PR64-v0",
+  "surface": "tech-stack-clusters",
+  "route_prefix": "/stacks",
+  "status_values": ["draft", "noindex", "published", "archived"],
+  "default_status": "draft",
+  "allowed_page_type": "stack",
+  "route_source": "finite_allowlist_only",
+  "published_only_source_rule": {
+    "eligible_project_statuses": ["published"],
+    "excluded_project_statuses": [
+      "submitted",
+      "pending_review",
+      "approved",
+      "claimed",
+      "owner_verified",
+      "archived",
+      "scouted",
+      "quarantined",
+      "rejected"
+    ],
+    "private_data_allowed": false,
+    "external_data_repo_runtime_read_allowed": false
+  },
+  "minimum_evidence_threshold": {
+    "minimum_published_projects": 1,
+    "minimum_public_sources_per_project": 1,
+    "requires_cluster_rationale": true,
+    "requires_literal_route_path": true,
+    "requires_sitemap_review": true
+  },
+  "sitemap_policy": {
+    "draft": false,
+    "noindex": false,
+    "published": "allowed_only_when_sitemap_eligible_true",
+    "archived": false
+  },
+  "forbidden_patterns": [
+    "catch_all_stack_routes",
+    "unbounded_slug_generation",
+    "technology_tag_cartesian_product",
+    "runtime_external_source_crawl",
+    "google_indexing_api",
+    "live_indexnow_ping",
+    "ai_filler_copy",
+    "traffic_or_ranking_promises",
+    "backlink_or_citation_promises",
+    "public_api_exposure",
+    "mcp_exposure",
+    "payment_or_checkout_behavior",
+    "data_repo_mutation"
+  ],
+  "v0_allowlist_contract": {
+    "maximum_published_routes": 4,
+    "candidate_slugs": ["nextjs", "supabase", "local-llm", "mcp"],
+    "publication_requirement": "A candidate slug may become published only when the local implementation can map it to at least one status=published project with reviewed public sources."
+  },
+  "checker_expectations": [
+    "Every cluster slug must be listed in v0_allowlist_contract.candidate_slugs or a later reviewed contract.",
+    "Every public cluster route must have status=published.",
+    "Every project shown on a public cluster route must have status=published.",
+    "Sitemap entries must be derived from published clusters only.",
+    "Unknown stack slugs must return notFound or a noindex equivalent.",
+    "No external indexing API or ping is allowed."
+  ]
+}
