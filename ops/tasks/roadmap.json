@@ -7149,15 +7149,15 @@
     },
     {
       "id": "TRAFFIC2",
-      "title": "AI Project Landscape Landing v0",
-      "type": "implementation-checkpointed",
+      "title": "AI Project Landscape Landing Boundary v0",
+      "type": "docs-boundary",
       "role": "codex-build",
       "repo": "88CN",
       "phase": "traffic-landscape",
       "depends_on": [
         "TRAFFIC1"
       ],
-      "purpose": "Plan or implement a bounded AI project landscape landing surface only after finite taxonomy is approved.",
+      "purpose": "Define the docs-only product boundary, content architecture, safe data requirements, copy rules, indexability rules, sitemap rules, and implementation handoff for a future /landscape page.",
       "allowed_paths": [
         "docs/traffic/TRAFFIC2_*.md",
         "docs/SIDECAR_ISSUES.md",
@@ -7203,13 +7203,108 @@
       "data_repo": "none",
       "definition_of_done": [
         "landscape boundary documented",
+        "target audiences documented",
+        "page architecture documented",
+        "safe data source requirements documented",
+        "allowed and forbidden fields documented",
+        "lifecycle-state policy documented",
+        "indexability sitemap and canonical policy documented",
+        "CTA policy documented",
+        "monetization boundary documented",
+        "empty low-data state documented",
+        "TRAFFIC2B implementation handoff documented",
         "reviewed project set requirement documented",
-        "no unbounded categories"
+        "no unbounded categories",
+        "no pages implemented"
       ],
       "notes": [
         "No product/runtime implementation in this task.",
         "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
-        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation.",
+        "Do not implement /landscape in TRAFFIC2. Use TRAFFIC2B for the future implementation handoff."
+      ]
+    },
+    {
+      "id": "TRAFFIC2B",
+      "title": "AI Project Landscape Landing Implementation v0",
+      "type": "implementation-checkpointed",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "traffic-landscape",
+      "depends_on": [
+        "TRAFFIC2"
+      ],
+      "purpose": "Implement a bounded /landscape page from the TRAFFIC2 boundary, using reviewed public-safe project signals and a dedicated landscape boundary checker.",
+      "allowed_paths": [
+        "app/landscape/page.tsx",
+        "components/landscape/**",
+        "lib/landscape/**",
+        "lib/seo/**",
+        "app/sitemap.ts",
+        "scripts/check-landscape-boundary.mjs",
+        "docs/traffic/TRAFFIC2B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**",
+        "app/tasks/**",
+        "app/zh-CN/**",
+        "app/api/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC2B",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs"
+      ],
+      "data_planes": [
+        "public_safe_project_signals",
+        "reviewed_reports",
+        "route_safe_aggregates"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "landscape_only",
+      "data_repo": "none",
+      "definition_of_done": [
+        "/landscape implemented from TRAFFIC2 boundary",
+        "landscape boundary checker added and passing",
+        "reviewed public-safe data only",
+        "no forbidden fields rendered",
+        "safe low-data state implemented",
+        "sitemap inclusion follows checker result",
+        "no /tasks routes implemented",
+        "no /zh-CN routes implemented",
+        "no API MCP payment or customer routes implemented",
+        "no data repo mutation"
+      ],
+      "notes": [
+        "Do not start TRAFFIC2B until TRAFFIC2 is merged and clean.",
+        "Keep /landscape as a reviewed public-signal navigation hub, not a broad directory, ranking page, paid placement page, data feed, buyer-interest form, or customer signup page.",
+        "If package.json is modified, it must only register an existing no-dependency local checker script."
       ]
     },
     {
