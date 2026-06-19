@@ -67,9 +67,10 @@
 | Intent Governance QA | Validation passed | PR63 verifies PR61 and PR62 governance boundaries, confirms no arbitrary pSEO route, sitemap leak, forbidden public claims, app/runtime change, external index ping, Public API, MCP, payment, deploy, or data repo mutation. QA docs only. |
 | Tech Stack Cluster Data Model | Validation passed | PR64 defines the tech-stack cluster contract, published-only eligibility, status lifecycle, sitemap eligibility, evidence thresholds, and forbidden arbitrary stack-route patterns. No public stack pages, sitemap changes, external calls, Public API, MCP, payment, deploy, or data repo mutation. |
 | Tech Stack Cluster Pages | Validation passed | PR65 adds finite allowlisted `/stacks/*` pages, published-only project filtering, sitemap inclusion for approved stack pages only, and a local checker. No arbitrary params, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
+| Tech Stack Cluster QA + Sitemap Boundary | Validation passed | PR66 verifies PR65 stack pages, sitemap boundaries, published-only eligibility, unknown slug handling, and no app-code modification. QA docs only; no screenshots, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Merge and clean PR65 before starting PR66 QA. Do not start PR67 from this train.
+Next: Merge and clean PR66, then run final TRAIN-PR64-PR66 validation. Do not start PR67 from this train.
