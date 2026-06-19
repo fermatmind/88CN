@@ -1,0 +1,228 @@
+{
+  "version": "1.0",
+  "schema_version": "1.0",
+  "task_id": "PR89",
+  "title": "Metering Ledger Contract v0",
+  "purpose": "Define the future Alpha Feed API key usage-accounting ledger contract without enabling live metering, customer access, billing, payment, or runtime delivery.",
+  "default_disabled_posture": {
+    "contract_only": true,
+    "runtime_implemented": false,
+    "database_schema_implemented": false,
+    "customer_access_implemented": false,
+    "billing_or_payment_implemented": false,
+    "external_service_connected": false,
+    "production_secret_required": false,
+    "default_flags": {
+      "METERING_LEDGER_ENABLED": false,
+      "METERING_RUNTIME_ENABLED": false,
+      "BILLING_RUNTIME_ENABLED": false,
+      "CUSTOMER_ACCESS_ENABLED": false,
+      "API_KEY_RUNTIME_ENABLED": false
+    }
+  },
+  "prohibited_runtime_behavior": [
+    "live_metering_runtime",
+    "billing_runtime",
+    "payment_runtime",
+    "stripe_integration",
+    "api_key_issuance",
+    "api_key_runtime_validation",
+    "customer_access",
+    "supabase_schema_migration",
+    "laravel_gateway_runtime",
+    "redis_production_usage",
+    "external_service_delivery",
+    "production_secret_creation",
+    "real_usage_event_recording",
+    "customer_identifying_data_collection",
+    "invoice_generation",
+    "payment_state_write"
+  ],
+  "future_event_types": [
+    "api_request_counted",
+    "api_request_rejected",
+    "quota_window_started",
+    "quota_window_reset",
+    "rate_limit_applied",
+    "key_revoked",
+    "key_suspended",
+    "key_expired",
+    "snapshot_export_counted",
+    "feed_access_rejected"
+  ],
+  "future_event_fields": [
+    {
+      "name": "event_id",
+      "required": true,
+      "description": "Opaque ledger event identifier."
+    },
+    {
+      "name": "event_type",
+      "required": true,
+      "description": "One of the allowed future_event_types."
+    },
+    {
+      "name": "occurred_at",
+      "required": true,
+      "description": "UTC event occurrence timestamp."
+    },
+    {
+      "name": "idempotency_key",
+      "required": true,
+      "description": "Stable deduplication key for replay-safe append attempts."
+    },
+    {
+      "name": "actor_type",
+      "required": true,
+      "description": "Coarse actor class such as system, admin, or future_api_key_reference."
+    },
+    {
+      "name": "key_id_reference",
+      "required": false,
+      "description": "Non-secret opaque API key reference only; never plaintext, bearer credential, hash, or hash internals."
+    },
+    {
+      "name": "project_scope",
+      "required": false,
+      "description": "Public-safe project or feed scope when needed, never private project data."
+    },
+    {
+      "name": "request_scope",
+      "required": false,
+      "description": "Public-safe route or feed scope, not raw request payloads."
+    },
+    {
+      "name": "units",
+      "required": true,
+      "description": "Non-negative usage count or quota unit for the event."
+    },
+    {
+      "name": "result",
+      "required": true,
+      "description": "Coarse accounting result such as accepted, rejected, limited, revoked, suspended, or expired."
+    }
+  ],
+  "idempotency_policy": {
+    "required": true,
+    "stable_idempotency_key_required": true,
+    "dedupe_scope": [
+      "event_type",
+      "idempotency_key"
+    ],
+    "replay_behavior": "A repeated append attempt with the same event_type and idempotency_key must resolve to the original accounting outcome and must not create a second ledger event.",
+    "unsafe_key_sources_denied": [
+      "raw_request_body",
+      "raw_response_body",
+      "plaintext_api_key",
+      "bearer_credential",
+      "session_credential",
+      "payment_identifier",
+      "customer_contact"
+    ],
+    "enablement_requires_human_checkpoint": true
+  },
+  "append_only_policy": {
+    "required": true,
+    "append_only": true,
+    "update_existing_events_allowed": false,
+    "delete_existing_events_allowed": false,
+    "correction_model": "Future corrections must append reversal or adjustment events; they must not mutate previous ledger rows.",
+    "ordering_model": "Future consumers must tolerate out-of-order arrival and use occurred_at plus idempotency_key for deterministic reconciliation.",
+    "enablement_requires_human_checkpoint": true
+  },
+  "retention_policy": {
+    "contract_only": true,
+    "default_runtime_retention": "not_applicable_until_human_checkpoint",
+    "future_minimization": "Retain only usage-accounting fields needed for quota, abuse review, and operational reconciliation.",
+    "private_data_retention_allowed": false,
+    "raw_payload_retention_allowed": false,
+    "payment_data_retention_allowed": false,
+    "future_retention_window_requires_human_checkpoint": true
+  },
+  "denied_fields": [
+    "api_key_plaintext",
+    "api_key_hash",
+    "api_key_hash_salt",
+    "bearer_credential",
+    "session_credential",
+    "service_role_key",
+    "founder_email",
+    "contact_email",
+    "admin_notes",
+    "review_notes",
+    "payment_state",
+    "stripe_customer_id",
+    "invoice_id",
+    "billing_address",
+    "raw_request_body",
+    "raw_response_body",
+    "raw_payload",
+    "private_telemetry",
+    "source_confidence_internal",
+    "signal_score_internal",
+    "claim_credential"
+  ],
+  "denied_statuses": [
+    "submitted",
+    "pending",
+    "pending_review",
+    "quarantined",
+    "scouted",
+    "rejected",
+    "needs_info",
+    "archived_private"
+  ],
+  "separation_from_billing_payment": {
+    "metering_is_usage_accounting_only": true,
+    "metering_events_are_not_invoices": true,
+    "metering_events_are_not_payments": true,
+    "metering_events_must_not_write_payment_state": true,
+    "metering_events_must_not_create_customer_billing_records": true,
+    "billing_or_payment_enablement_requires_separate_human_checkpoint": true
+  },
+  "separation_from_public_api_mcp_sitemap": {
+    "must_not_change_signal_score": true,
+    "must_not_change_source_confidence": true,
+    "must_not_change_sitemap_inclusion": true,
+    "must_not_change_public_api_ordering": true,
+    "must_not_change_mcp_payload_ordering": true,
+    "must_not_change_featured_signals_placement": true,
+    "must_not_change_editorial_review_result": true,
+    "must_not_expose_private_founder_data": true,
+    "must_not_expose_admin_notes": true,
+    "must_not_expose_payment_fields": true,
+    "must_not_expose_raw_database_rows": true,
+    "must_not_expose_api_key_plaintext": true,
+    "must_not_expose_api_key_hash_internals": true,
+    "must_not_expose_private_telemetry": true
+  },
+  "checkpoint_triggers": [
+    "real_metering_runtime",
+    "database_migration",
+    "customer_access",
+    "billing_or_payment",
+    "stripe_integration",
+    "production_secret",
+    "laravel_gateway_runtime",
+    "redis_production_usage",
+    "external_service_delivery"
+  ],
+  "PR90_QA_requirements": [
+    "Verify metering ledger defaults remain disabled.",
+    "Verify no metering runtime route exists.",
+    "Verify no billing or payment route is introduced.",
+    "Verify no Stripe integration is introduced.",
+    "Verify no Supabase migration is introduced.",
+    "Verify no Laravel runtime is introduced.",
+    "Verify no Redis production config is introduced.",
+    "Verify no env secret is introduced.",
+    "Verify no key-like committed fixture is introduced.",
+    "Verify denied fields and denied statuses remain blocked by contract.",
+    "Verify Public API, MCP, sitemap, Featured Signals, Signal Score, Source Confidence, and editorial review outcomes are not altered by metering."
+  ],
+  "relationships": {
+    "PR87": "Defines the broader API key and metering threat model. PR89 narrows the future usage-accounting ledger contract.",
+    "PR88": "Adds a disabled API key shell. PR89 does not enable that shell or issue keys.",
+    "PR90": "Must QA the disabled shell and metering ledger contract before any future enablement."
+  }
+}
