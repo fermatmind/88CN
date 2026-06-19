@@ -3,6 +3,61 @@
 ## Latest Run
 
 - Date: 2026-06-19
+- Scope: PR90 API Key + Metering QA v0
+- Role: Codex-QA
+- Result: PASS_WITH_SIDECAR
+- Blocked: No
+
+## Summary
+
+- PR90 verifies PR87, PR88, and PR89 as a closed API key and metering boundary train.
+- PR87 contract/docs keep API key issuance, customer access, live metering, billing, payment, Supabase migration, Laravel runtime, external service, and data repo mutation disabled.
+- PR88 disabled shell returns `503 application/problem+json` for GET/POST `/api/alpha-feed/api-keys` and exposes no key material fields.
+- PR89 contract defines disabled default flags, append-only ledger policy, idempotency policy, denied fields/statuses, billing/payment separation, and Public API/MCP/sitemap separation.
+- Runtime leak scan found no forbidden metering, usage, billing, customer, Supabase migration, Laravel, Redis production, Stripe, or key-generation implementation.
+- Data repository remained clean.
+- PR91 was not started.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `npm run verify:day0` | PASS |
+| `npm run policy:scan` | PASS |
+| `npm run third-party:check` | PASS |
+| `npm run agent:redact:check` | PASS |
+| `npm run agent:tool:check` | PASS |
+| `npm run agent:mcp-config:check` | PASS |
+| `npm run agent:plugin-policy:check` | PASS |
+| `npm run agent:batch:check` | PASS |
+| `npm run agent:train-plan:check` | PASS |
+| `node scripts/agent/train-plan-check.mjs --batch TRAIN-PR87-PR90-API-KEY-METERING-SHELL` | PASS |
+| `node scripts/agent/train-plan-check.mjs --batch TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC` | PASS |
+| `node scripts/check-api-key-shell.mjs` | PASS |
+| Contract validation via Node standard library | PASS |
+| Static runtime leak scan | PASS |
+| Disabled route local smoke | PASS |
+| `npm run agent:scope:check -- PR90` | PASS |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS |
+| `npm run agent:gate` | PASS |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: none
+- P3: PR89 denied-field naming uses repo-policy-safe credential equivalents for the credential-word literal forbidden by the public wording scanner.
+
+## Recommendation
+
+PR90 can merge under the explicit user approval for PR90 only. After merge and
+cleanup, stop before PR91.
+
+## Previous Run: PR80 Global Intent Web QA + Readiness Report v0
+
+- Date: 2026-06-19
 - Scope: PR80 Global Intent Web QA + Readiness Report v0
 - Role: Codex-QA
 - Result: PASS
