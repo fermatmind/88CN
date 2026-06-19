@@ -277,3 +277,54 @@ PR86 can merge after required checks pass. After PR86 merge and cleanup, stop be
 
 PR98 can merge after required checks pass. After PR98 merge and cleanup, proceed
 to PR99 as docs/ops-only pivot-gate work.
+
+# PR99 Alpha Feed Monetization Pivot Gate v0
+
+- Date: 2026-06-19
+- Scope: PR99 Alpha Feed Monetization Pivot Gate v0
+- Role: Codex-Build
+- Result: PASS
+- Blocked: No
+
+## Summary
+
+- PR99 defines Day30, Day60, and Day100 internal operating gates for B2B Alpha
+  Feed viability.
+- Continue, pause, pivot, and kill criteria are documented for each checkpoint.
+- Safe metric-source rules require existing verified evidence only and forbid
+  invented metrics, private details, live tracking, customer signup, payment,
+  external services, Supabase writes, and runtime delivery.
+- `ops/contracts/alpha-feed-pivot-gate.json` records the same gate in
+  machine-readable form for PR100 and OPS8A consumption.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `npm run verify:day0` | PASS |
+| `npm run policy:scan` | PASS |
+| `npm run third-party:check` | PASS |
+| `npm run agent:redact:check` | PASS |
+| `npm run agent:tool:check` | PASS |
+| `npm run agent:mcp-config:check` | PASS |
+| `npm run agent:plugin-policy:check` | PASS |
+| `npm run agent:batch:check` | PASS |
+| `npm run agent:train-plan:check` | PASS |
+| `node scripts/agent/train-plan-check.mjs --batch TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS` | PASS |
+| `npm run agent:scope:check -- PR99` | PASS |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS |
+| `npm run agent:gate` | PASS |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: none
+- P3: no new PR99 sidecar
+
+## Recommendation
+
+PR99 can merge after required checks pass. After PR99 merge and cleanup, proceed
+to PR100 as QA/readiness-only reporting.
