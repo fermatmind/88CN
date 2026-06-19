@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE",
+  "last_completed_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
   "next_recommended_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
-  "notes": "OPS7D recommends GO_TRAIN_PR98_PR100 from clean main after OPS7D merge and cleanup. Keep PR98 QA-only, PR99 docs/contract-only, and PR100 readiness-report-only. After PR100, run OPS8A Production Release Candidate + Internal Beta Readiness Scan instead of starting PR101 directly."
+  "notes": "PR98-PR100 merged and cleaned. OPS8A is the current readiness/status task. Exact next task after OPS8A, if GO_DEPLOY_RC holds, is OPS8B Production Deploy + Live Smoke as a human-checkpointed operation. Do not start PR101 directly. next_recommended_train is retained for train-plan checker compatibility because OPS8B is not a PR-number train task."
 }

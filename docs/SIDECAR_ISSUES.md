@@ -2,6 +2,7 @@
 
 Open sidecar issues:
 
+- OPS8A P3 sidecar: existing `scripts/agent/smoke-live.sh` covers generic public/admin/sitemap/robots live smoke, but does not by itself assert disabled-route 503 Problem Details for Public API, MCP, payment checkout, API key shell, or buyer-interest shell. OPS8A records an expanded OPS8B checklist instead of modifying scripts because OPS8A scope forbids `scripts/**`.
 - PR98 P3 sidecar: `scripts/check-alpha-feed-landing.mjs` is PR95-phase scoped and fails after PR96 because the Alpha Feed page now includes a disabled/no-write buyer-interest preview form. The current PR96 `scripts/check-data-buyer-interest.mjs` checker passes, so this is lifecycle-aware checker debt rather than an active leakage issue.
 - PR98 P3 sidecar: `scripts/check-laravel-gateway.mjs --root .` fixture mode rejects existing repository `supabase/migrations`, deploy examples, and `.env.example`; this direct mode is not suitable for whole-repo PR98 QA. Existing `agent:gate` passes and PR98 does not modify gateway/runtime files.
 - OPS7D P3 sidecar: `agent:gate` does not directly run several deterministic B2B Alpha checks such as the Alpha Feed landing checker, snapshot checker, API credential shell checker, Laravel gateway checker, buyer-interest shell checker, or an evidence-dossier-specific checker. OPS7D does not modify `scripts/agent/gate.sh`; this is non-blocking because OPS7D is readiness/docs-only and the relevant direct checks were run in their owning PR scopes where allowed.
