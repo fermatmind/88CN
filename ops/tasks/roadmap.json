@@ -2674,6 +2674,7 @@
         "app/api/public/**",
         "lib/public-api/**",
         "scripts/check-public-api-v0.mjs",
+        "scripts/check-public-api-boundary.mjs",
         "docs/65_PUBLIC_READ_ONLY_API_V0.md",
         "docs/SIDECAR_ISSUES.md",
         "docs/BUILD_ERRORS.md",

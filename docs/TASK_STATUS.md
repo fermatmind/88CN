@@ -57,9 +57,10 @@
 | OSS Maintainer Automation | Complete | PR55 adds maintainer-controlled open data workflow policy, label suggestions, local summary generation, and `oss-maintainer:check`. No external comments, auto approval, auto merge, model API calls, production credentials, GitHub secret changes, payment, MCP, deploy, or data repo mutation. |
 | OpenAI OSS Evidence Dossier | Complete | PR56 adds a docs-only factual evidence packet for future open infrastructure support conversations. No app code, external submission, endorsement claim, model API call, secret material, Public API, MCP, deploy, payment, or data repo mutation. |
 | Public API Data Boundary + Threat Model | Complete | PR57 defines a published-only Public API contract, denied fields/statuses, threat model, and `public-api-boundary:check`. No public API endpoint, app route, MCP, payment, deploy, server config, dependency, or data repo mutation. |
+| Public Read-only API v0 | Complete | PR58 adds a feature-flagged, disabled-by-default read-only Public API v0 shell with allowlist serialization and `public-api:v0:check`. No external release, auto-merge, deploy, MCP, payment, API keys, metering, server config, dependency, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: TRAIN-PR58-PUBLIC-API-V0 remains human-checkpointed. Do not start PR58 without separate approval.
+Next: PR58 requires human review before merge. Do not auto-merge and do not start PR59.
