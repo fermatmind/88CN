@@ -1,6 +1,10 @@
 import { getPublishedCuratedAlternatives } from "@/lib/alternatives/curated-alternatives";
 import { getPublishedCuratedCollections } from "@/lib/collections/curated-collections";
-import { getPublishedProjects, type DemoProject } from "@/lib/demo-projects";
+import {
+  getProjectBySlug,
+  getPublishedProjects,
+  type DemoProject,
+} from "@/lib/demo-projects";
 import { getPublishedReportRoutes } from "@/lib/reports/published-reports";
 import { getPublishedStackClusters } from "@/lib/stacks/tech-stack-clusters";
 import { getPublishedVerticalAssetGrids } from "@/lib/verticals/vertical-asset-grids";
@@ -23,11 +27,25 @@ export interface LandscapeSignal {
   description: string;
 }
 
+export interface SectorDensityCandidate {
+  slug: string;
+  title: string;
+  summary: string;
+  projectSlugs: readonly string[];
+  reviewedSampleCount: number;
+  thresholdLabel: "meets basic threshold" | "limited reviewed sample";
+  statusNote: string;
+  sourceEvidence: LandscapeMetric[];
+  projectExamples: DemoProject[];
+  methodologyNote: string;
+}
+
 export interface LandscapeSnapshot {
   projects: DemoProject[];
   metrics: LandscapeMetric[];
   browseLinks: LandscapeLink[];
   machineSignals: LandscapeSignal[];
+  sectorDensity: SectorDensityCandidate[];
 }
 
 export function getLandscapeSnapshot(): LandscapeSnapshot {
@@ -160,5 +178,98 @@ export function getLandscapeSnapshot(): LandscapeSnapshot {
         description: "A canonical URL is present for the public page.",
       },
     ],
+    sectorDensity: getSectorDensityCandidates(),
   };
+}
+
+const sectorCandidates = [
+  {
+    slug: "ai-builder-infrastructure",
+    title: "AI builder infrastructure",
+    summary:
+      "Builder-facing projects with reviewed local profiles, public source links, and infrastructure or workflow relevance.",
+    projectSlugs: ["aurora-code", "nucleus-ml", "vectorbase"],
+  },
+  {
+    slug: "model-and-search-infrastructure",
+    title: "Model and search infrastructure",
+    summary:
+      "Projects connected to model workflow, semantic search, and infrastructure review from local public-signal records.",
+    projectSlugs: ["nucleus-ml", "vectorbase"],
+  },
+  {
+    slug: "analytics-and-operations-tools",
+    title: "Analytics and operations tools",
+    summary:
+      "Operations-oriented projects with reviewed public product context and source-linked local profiles.",
+    projectSlugs: ["pulse-analytics", "complykit"],
+  },
+  {
+    slug: "local-on-device-productivity",
+    title: "Local and on-device productivity",
+    summary:
+      "A sparse reviewed sample for local-first productivity tooling. This is internal discovery context only.",
+    projectSlugs: ["scribe-ai"],
+  },
+] as const;
+
+function countSources(
+  projects: DemoProject[],
+  predicate: (source: string, project: DemoProject) => boolean
+): number {
+  return projects.filter((project) =>
+    project.publicSources.some((source) => predicate(source, project))
+  ).length;
+}
+
+function getSectorDensityCandidates(): SectorDensityCandidate[] {
+  return sectorCandidates.map((candidate) => {
+    const projectExamples = candidate.projectSlugs
+      .map((slug) => getProjectBySlug(slug))
+      .filter(
+        (project): project is DemoProject =>
+          project !== undefined &&
+          ["published", "claimed", "owner_verified"].includes(project.status)
+      );
+    const reviewedSampleCount = projectExamples.length;
+    const meetsBasicThreshold = reviewedSampleCount >= 3;
+    const githubLinkedCount = countSources(projectExamples, (source) =>
+      source.includes("github.com")
+    );
+    const docsLinkedCount = countSources(projectExamples, (source) =>
+      source.includes("docs.")
+    );
+    const websiteLinkedCount = projectExamples.filter(Boolean).length;
+
+    return {
+      ...candidate,
+      reviewedSampleCount,
+      thresholdLabel: meetsBasicThreshold
+        ? "meets basic threshold"
+        : "limited reviewed sample",
+      statusNote: meetsBasicThreshold
+        ? "Basic reviewed-sample threshold met. Density-framed pages still require a higher threshold and a separate route task."
+        : "Below the indexable sector-page threshold. Keep as internal landscape context only.",
+      sourceEvidence: [
+        {
+          label: "Source-linked websites",
+          value: websiteLinkedCount,
+          detail: "Official public site links in reviewed local records.",
+        },
+        {
+          label: "GitHub linked",
+          value: githubLinkedCount,
+          detail: "Public GitHub links in reviewed local records.",
+        },
+        {
+          label: "Docs linked",
+          value: docsLinkedCount,
+          detail: "Public documentation links in reviewed local records.",
+        },
+      ],
+      projectExamples,
+      methodologyNote:
+        "Counts are reviewed sample counts from finite local records, not global market estimates. Open-source/commercial split is not shown until source-backed fields exist.",
+    };
+  });
 }
