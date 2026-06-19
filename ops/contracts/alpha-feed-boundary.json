@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "task_id": "PR81",
+  "title": "Alpha Data Feed Boundary + Threat Model v0",
+  "product_surface": "alpha_data_feed",
+  "release_posture": {
+    "runtime_feed_allowed": false,
+    "customer_access_allowed": false,
+    "export_endpoint_allowed": false,
+    "api_key_runtime_allowed": false,
+    "metering_runtime_allowed": false,
+    "payment_or_billing_allowed": false,
+    "external_delivery_allowed": false,
+    "data_repo_mutation_allowed": false,
+    "supabase_schema_change_allowed": false,
+    "laravel_runtime_allowed": false,
+    "redis_production_allowed": false
+  },
+  "source_rules": {
+    "source_of_truth": "reviewed local public records only",
+    "allowed_record_states": [
+      "published"
+    ],
+    "denied_record_states": [
+      "submitted",
+      "pending_review",
+      "approved",
+      "archived",
+      "quarantined",
+      "rejected",
+      "scouted_unreviewed",
+      "admin_review"
+    ],
+    "raw_database_rows_allowed": false,
+    "request_time_external_crawling_allowed": false,
+    "hidden_score_input_export_allowed": false
+  },
+  "allowed_public_fields": [
+    "project_slug",
+    "project_name",
+    "canonical_url",
+    "category",
+    "short_description",
+    "public_source_links",
+    "technology_tags",
+    "published_at",
+    "updated_at",
+    "profile_status",
+    "public_profile_url",
+    "machine_readability_summary",
+    "public_changelog_summary"
+  ],
+  "denied_fields": [
+    "id",
+    "created_by",
+    "updated_by",
+    "founder_email",
+    "submitter_email",
+    "claim_email",
+    "contact_email",
+    "admin_notes",
+    "review_comments",
+    "reviewer_id",
+    "review_decision",
+    "review_queue_state",
+    "external_import_id",
+    "external_import_status",
+    "quarantine_reason",
+    "quarantine_details",
+    "raw_payload",
+    "raw_supabase_row",
+    "audit_events",
+    "notification_events",
+    "payment_data",
+    "payment_state",
+    "featured_payment_state",
+    "commercial_order_state",
+    "api_key",
+    "customer_key",
+    "metering_ledger",
+    "source_confidence_internal",
+    "source_confidence_inputs",
+    "signal_score_internal",
+    "signal_score_inputs",
+    "hidden_score_weights",
+    "private_founder_data",
+    "private_source_notes",
+    "scouted_review_state",
+    "scouted_unreviewed_payload",
+    "private_telemetry",
+    "claim_secret"
+  ],
+  "serialization_rules": [
+    "Any future Alpha Data Feed artifact must serialize from allowed_public_fields only.",
+    "Broad project rows and raw Supabase rows must not be passed through to feed artifacts.",
+    "Unknown or missing public facts must remain unknown and must not be inferred.",
+    "Only reviewed public source links may be referenced.",
+    "Source Confidence internals and Signal Score internals must stay private."
+  ],
+  "threat_model": {
+    "assets": [
+      "published public project metadata",
+      "review status boundary",
+      "founder private contact boundary",
+      "admin review boundary",
+      "payment and commercial-order boundary",
+      "Source Confidence and Signal Score internals"
+    ],
+    "primary_abuse_paths": [
+      "raw row export leaks private fields",
+      "non-published lifecycle states appear in feed artifacts",
+      "admin review notes leak through broad serialization",
+      "private contact fields leak through founder or claim metadata",
+      "payment or commercial-order state leaks through future buyer-facing surfaces",
+      "hidden scoring inputs are treated as public feed data",
+      "feed copy implies financial advice, guaranteed outcomes, or capital-product claims",
+      "runtime feed access is enabled before checkpoint approval"
+    ],
+    "required_controls": [
+      "explicit allowlist serialization",
+      "published-only lifecycle filter",
+      "denylist probes for private, admin, payment, key, and internal scoring fields",
+      "no raw row pass-through",
+      "no customer access or external delivery without checkpoint",
+      "no API key runtime or metering runtime without checkpoint",
+      "public copy review for financial-advice and guaranteed-outcome language"
+    ]
+  },
+  "copy_boundaries": {
+    "allowed_framing": [
+      "public signal snapshot",
+      "reviewed public metadata",
+      "research-oriented evidence",
+      "machine readability summary",
+      "growth readiness signal",
+      "future waitlist-style interest"
+    ],
+    "denied_framing": [
+      "financial advice",
+      "recommendation to buy or sell",
+      "guaranteed traffic, ranking, citation, revenue, profit, funding, customer, or buyer outcome",
+      "ownership-sale language",
+      "restricted capital-product language",
+      "payment-required customer access without checkpoint"
+    ]
+  },
+  "non_goals": [
+    "No runtime feed.",
+    "No export endpoint.",
+    "No customer-facing data delivery.",
+    "No API key issuance.",
+    "No live metering.",
+    "No payment or billing logic.",
+    "No Laravel gateway.",
+    "No Supabase migration.",
+    "No Redis production configuration.",
+    "No external service call.",
+    "No data repository mutation."
+  ]
+}
