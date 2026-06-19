@@ -39,6 +39,7 @@
     "oss-maintainer:check": "node scripts/oss/check-maintainer-automation.mjs",
     "public-api-boundary:check": "node scripts/check-public-api-boundary.mjs",
     "public-api:v0:check": "node scripts/check-public-api-v0.mjs",
+    "mcp-threat-model:check": "node scripts/check-mcp-threat-model.mjs",
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",

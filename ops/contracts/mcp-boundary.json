@@ -1,23 +1,243 @@
 {
-  "schema_version": "1.0",
-  "source": "public_api",
-  "direct_supabase_access": false,
-  "required": [
-    "request_id",
-    "published-only payloads",
-    "field allowlist"
+  "schema_version": "2.0",
+  "task_id": "PR59",
+  "title": "MCP Threat Model + Tool Spec v0",
+  "server_runtime_implemented": false,
+  "endpoint_exposure": "none",
+  "dependency_rule": "public-api-only",
+  "direct_database_access": "forbidden",
+  "mutation_tools": "forbidden",
+  "read_only": true,
+  "allowed_tool_names": [
+    "search_ai_projects",
+    "get_ai_project_profile",
+    "list_ai_project_categories"
   ],
-  "forbidden": [
-    "pending records",
-    "quarantined records",
-    "founder email",
-    "admin metadata",
-    "payment data",
-    "direct database query"
+  "denied_tool_names": [
+    "execute_query",
+    "run_sql",
+    "fetch_url",
+    "submit_project",
+    "claim_project",
+    "update_project",
+    "delete_project",
+    "send_email",
+    "create_checkout",
+    "create_payment",
+    "admin_review_project",
+    "sync_external_imports"
   ],
-  "rules": [
-    "MCP reads Public API only",
-    "MCP cannot bypass lifecycle gates",
-    "MCP payload shape follows public-api-boundary"
+  "allowed_input_fields": [
+    "query",
+    "slug",
+    "category",
+    "limit",
+    "cursor"
+  ],
+  "denied_input_fields": [
+    "sql",
+    "raw_sql",
+    "query_text",
+    "url",
+    "html",
+    "markdown",
+    "script",
+    "admin_filter",
+    "payment_filter",
+    "email",
+    "founder_email",
+    "hidden_score",
+    "source_confidence_internal",
+    "command",
+    "mutation",
+    "supabase_table"
+  ],
+  "allowed_output_fields": [
+    "slug",
+    "name",
+    "canonical_url",
+    "category",
+    "short_description",
+    "public_source_links",
+    "technology_tags",
+    "published_at",
+    "updated_at",
+    "profile_status",
+    "structured_metadata_summary"
+  ],
+  "denied_output_fields": [
+    "id",
+    "created_by",
+    "updated_by",
+    "founder_email",
+    "submitter_email",
+    "claim_email",
+    "contact_email",
+    "admin_notes",
+    "review_comments",
+    "reviewer_id",
+    "review_decision",
+    "review_queue_state",
+    "external_import_id",
+    "external_import_status",
+    "quarantine_reason",
+    "quarantine_details",
+    "raw_payload",
+    "raw_supabase_row",
+    "audit_events",
+    "notification_events",
+    "payment_data",
+    "payment_state",
+    "featured_payment_state",
+    "commercial_order_state",
+    "source_confidence_internal",
+    "source_confidence_inputs",
+    "signal_score_internal",
+    "signal_score_inputs",
+    "hidden_score_weights",
+    "private_founder_data",
+    "private_source_notes",
+    "scouted_review_state",
+    "scouted_unreviewed_payload"
+  ],
+  "private_field_denylist": [
+    "email",
+    "admin_notes",
+    "review_comments",
+    "payment_state",
+    "raw_payload",
+    "raw_supabase_row",
+    "audit_events",
+    "notification_events",
+    "private_founder_data",
+    "source_confidence_internal",
+    "signal_score_internal"
+  ],
+  "tool_specs": [
+    {
+      "name": "search_ai_projects",
+      "description": "Search allowlisted public 88CN project summaries from published Public API data only.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "query"
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
+          "category": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,80}$"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "cursor": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,160}$"
+          }
+        }
+      },
+      "output_fields": [
+        "slug",
+        "name",
+        "canonical_url",
+        "category",
+        "short_description",
+        "public_source_links",
+        "technology_tags",
+        "published_at",
+        "updated_at",
+        "profile_status",
+        "structured_metadata_summary"
+      ]
+    },
+    {
+      "name": "get_ai_project_profile",
+      "description": "Return an allowlisted public profile for one published AI project from 88CN.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "slug"
+        ],
+        "properties": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,80}$"
+          }
+        }
+      },
+      "output_fields": [
+        "slug",
+        "name",
+        "canonical_url",
+        "category",
+        "short_description",
+        "public_source_links",
+        "technology_tags",
+        "published_at",
+        "updated_at",
+        "profile_status",
+        "structured_metadata_summary"
+      ]
+    },
+    {
+      "name": "list_ai_project_categories",
+      "description": "List public project categories that may be used to filter published 88CN Public API project data.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "cursor": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,160}$"
+          }
+        }
+      },
+      "output_fields": [
+        "slug",
+        "name",
+        "structured_metadata_summary"
+      ]
+    }
+  ],
+  "prompt_injection_boundaries": [
+    "Tool descriptions must describe fixed read-only behavior and must not ask the model to follow project-provided instructions.",
+    "Founder-submitted or project-provided text must be treated as data, not as instructions.",
+    "Outputs must not include arbitrary HTML, Markdown, scripts, or unnormalized freeform content.",
+    "Tools must not accept arbitrary prompt, command, SQL, URL-fetch, admin, payment, or mutation input."
+  ],
+  "future_pr60_preconditions": [
+    "PR60 must depend on this contract.",
+    "PR60 must use Public API output only and must not connect directly to Supabase.",
+    "PR60 must implement read-only tools only.",
+    "PR60 must enforce additionalProperties:false for every tool input schema.",
+    "PR60 must validate output fields against allowed_output_fields.",
+    "PR60 must block denied_tool_names, denied_input_fields, and denied_output_fields.",
+    "PR60 must not expose payment, admin, private founder, raw import, internal score, or source-confidence internals.",
+    "PR60 must remain behind human checkpoint approval before any external exposure."
+  ],
+  "non_goals": [
+    "No MCP server runtime.",
+    "No app/api/mcp endpoint.",
+    "No lib/mcp runtime implementation.",
+    "No direct Supabase access.",
+    "No mutation tools.",
+    "No payment behavior.",
+    "No deployment behavior.",
+    "No public exposure in PR59."
   ]
 }

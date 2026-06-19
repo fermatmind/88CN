@@ -16,6 +16,7 @@ Open sidecar issues:
 - PR55 P3 sidecar: `agent:gate` does not yet run `oss-maintainer:check` because PR55 scope does not include `scripts/agent/gate.sh`. The PR55 task-specific checker runs independently and passes. A later gate-maintenance task should add PR55 specialized checks to the agent gate in one scoped update.
 - PR57 P3 sidecar: `agent:gate` does not yet run `public-api-boundary:check` because PR57 scope does not include `scripts/agent/gate.sh`. The PR57 task-specific checker runs independently and passes. A later gate-maintenance task should add PR57 specialized checks to the agent gate in one scoped update.
 - PR58 P3 sidecar: `agent:gate` does not yet run `public-api:v0:check` because PR58 scope does not include `scripts/agent/gate.sh`. The PR58 task-specific checker runs independently and passes. A later gate-maintenance task should add PR58 specialized checks to the agent gate in one scoped update.
+- PR59 P3 sidecar: `agent:gate` does not yet run `mcp-threat-model:check` because PR59 scope does not include `scripts/agent/gate.sh`. The PR59 task-specific checker runs independently and passes. A later gate-maintenance task should add PR59 specialized checks to the agent gate in one scoped update.
 
 Use this file for future PR-train findings that are outside the active task scope and allowed by the selected batch's `continue_on_sidecar` policy.
 
