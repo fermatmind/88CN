@@ -497,3 +497,59 @@ proceed to PR128 / TRAFFIC6A as a boundary-only report distribution pack task.
 
 PR130 can merge after required checks pass. After PR130 merge and cleanup,
 proceed to PR131 / TRAFFIC7 as the final demand-side traffic QA closer.
+
+# PR131 Demand-Side Traffic QA v0
+
+- Date: 2026-06-20
+- Scope: PR131 Demand-Side Traffic QA v0
+- Role: Codex-QA
+- Result: PASS_WITH_FINDING
+- Blocked: No
+
+## Summary
+
+- PR131 verifies the PR122-PR131 demand-side traffic chain as the final QA
+  closer.
+- Task discovery checker passes for the finite `/tasks/[slug]` route.
+- Alternatives canonical checker passes with 4 published canonical routes.
+- Report distribution pack dry-run passes with 4 source reports, 7 planned
+  files, and all external-write safety flags false.
+- Built sitemap output includes `/landscape`, exactly one task URL, 4 canonical
+  alternatives URLs, and 4 report URLs.
+- Built sitemap output does not include `/zh-CN`, `/landscape/sectors`, or the
+  reverse alternatives route.
+- Data repo remains clean.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `node scripts/check-task-discovery-boundary.mjs` | PASS |
+| `node scripts/check-alternatives-canonical.mjs` | PASS |
+| `npm run report-distribution-pack:generate -- --dry-run` | PASS |
+| sitemap artifact probe | PASS |
+| route absence probe | PASS |
+| data repo status probe | PASS |
+| `npm run verify:day0` | PASS |
+| `npm run policy:scan` | PASS |
+| `npm run third-party:check` | PASS |
+| `npm run agent:redact:check` | PASS |
+| `npm run agent:scope:check -- PR131` | PASS |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS |
+| `npm run agent:gate` | PASS |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: none
+- P3: `npm run landscape:check` is stale after PR123 because it still expects
+  `app/tasks` and `/tasks` sitemap entries to be absent. The finite task route
+  is intentionally owned by `scripts/check-task-discovery-boundary.mjs`.
+
+## Recommendation
+
+PR131 can merge after required checks pass. After PR131 merge and post-merge
+revalidation, the PR122-PR131 demand-side traffic chain is closed.
