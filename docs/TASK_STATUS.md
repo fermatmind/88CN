@@ -62,9 +62,10 @@
 | Agent Gate Maintenance | Validation passed | OPS5E wires eligible deterministic local-only specialized checkers into `agent:gate` and adds `agent:gate-coverage:check`. No product code, Public API runtime, MCP runtime, payment, deploy, server config, dependency, or data repo mutation. |
 | Read-only MCP Server + QA | Validation passed | PR60 adds a disabled-by-default, local-only read-only MCP shell and `read-only-mcp:check`. No external release, auto-merge, deploy, direct Supabase access, mutation tools, payment, server config, dependency, plugin, secret, Public API runtime change, or data repo mutation. |
 | PR61-PR80 Global Intent Readiness Registration | Validation passed | OPS6A registers full PR61-PR80 roadmap tasks, deprecates the broad PR61-PR80 train, and splits the next phase into bounded intent governance, cluster, collection, vertical, alternatives, mirror, IndexNow, and QA trains. No product code, public pages, app runtime, deploy, external ping, Public API, MCP, payment, package, or data repo mutation. |
+| Global Intent Taxonomy + Scaled Content Boundary | Validation passed | PR61 defines the machine-readable intent taxonomy, route creation thresholds, and scaled-content abuse boundary before future public intent routes. Governance docs only; no public pages, sitemap changes, external index ping, Public API, MCP, payment, deploy, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: TRAIN-PR61-PR63-INTENT-GOVERNANCE can proceed after OPS6A merges and cleanup completes. Do not start PR61 automatically from OPS6A.
+Next: Merge and clean PR61 before starting PR62. Do not start PR64 from this train.
