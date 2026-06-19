@@ -1,0 +1,12 @@
+{
+  "mode": "disabled_scaffold",
+  "runtime": "none",
+  "composer": "absent",
+  "php_runtime": "absent",
+  "server": "not_configured",
+  "supabase_sync": "disabled",
+  "redis": "disabled",
+  "customer_access": "disabled",
+  "api_key_runtime": "disabled",
+  "metering_runtime": "disabled"
+}
