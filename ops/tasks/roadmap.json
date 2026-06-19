@@ -7529,6 +7529,168 @@
       ]
     },
     {
+      "id": "TRAFFIC3B",
+      "title": "Sector Density / Market Map Implementation v0",
+      "type": "implementation-checkpointed",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "traffic-landscape",
+      "depends_on": [
+        "TRAFFIC3"
+      ],
+      "purpose": "Implement a constrained sector-density module on /landscape from the TRAFFIC3 boundary, without creating /landscape/sectors or individual sector pages.",
+      "allowed_paths": [
+        "app/landscape/page.tsx",
+        "components/landscape/**",
+        "lib/landscape/**",
+        "scripts/check-sector-density-boundary.mjs",
+        "docs/traffic/TRAFFIC3B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/landscape/sectors/**",
+        "app/tasks/**",
+        "app/zh-CN/**",
+        "app/api/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC3B",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs",
+        "npm run landscape:check",
+        "node scripts/check-sector-density-boundary.mjs"
+      ],
+      "data_planes": [
+        "public_safe_project_signals",
+        "reviewed_sample_counts",
+        "route_safe_aggregates"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "landscape_module_only",
+      "data_repo": "none",
+      "definition_of_done": [
+        "sector module implemented on /landscape only",
+        "sector candidates finite and allowlisted",
+        "reviewed sample count wording present",
+        "no fake global counts",
+        "no /landscape/sectors route",
+        "no individual sector pages",
+        "no /tasks routes",
+        "no /zh-CN routes",
+        "no sitemap runtime expansion for sectors",
+        "sector density checker added and passing",
+        "no data repo mutation"
+      ],
+      "notes": [
+        "TRAFFIC3B must implement only a /landscape sector module unless a new human-approved task changes the route boundary.",
+        "Current TRAFFIC3 finding: no sector reaches the preferred 5-project density threshold; only AI builder infrastructure reaches the 3-project basic threshold.",
+        "Do not start TRAFFIC3Q, TRAFFIC4, GROWTH0, BETA1, I18N0, or PR101 inside TRAFFIC3B."
+      ]
+    },
+    {
+      "id": "TRAFFIC3Q",
+      "title": "Sector Density / Market Map QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "traffic-landscape",
+      "depends_on": [
+        "TRAFFIC3B"
+      ],
+      "purpose": "Verify the TRAFFIC3B sector-density module, count labels, lifecycle filtering, sitemap boundary, and no-route/no-page guarantees after implementation.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC3Q_*.md",
+        "docs/QA_REPORT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC3Q",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs",
+        "npm run landscape:check",
+        "node scripts/check-sector-density-boundary.mjs"
+      ],
+      "data_planes": [
+        "qa_only",
+        "docs_only",
+        "public_surface_review"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "sector module QA documented",
+        "reviewed sample labels verified",
+        "forbidden count claims absent",
+        "no /landscape/sectors route verified",
+        "no /tasks or /zh-CN routes verified",
+        "sitemap excludes sector pages",
+        "data repo remains clean"
+      ],
+      "notes": [
+        "Do not run TRAFFIC3Q until TRAFFIC3B is merged and clean.",
+        "TRAFFIC3Q is QA-only and must not modify implementation files."
+      ]
+    },
+    {
       "id": "TRAFFIC4",
       "title": "Task-to-Project Discovery v0",
       "type": "research",
