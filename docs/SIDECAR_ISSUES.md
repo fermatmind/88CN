@@ -6,6 +6,7 @@ Open sidecar issues:
 - PR60 P3 sidecar: `agent:gate` does not yet run `read-only-mcp:check` because PR60 allowed scope does not include `scripts/agent/gate.sh`. The PR60 task-specific checker runs independently and passes. A later gate-maintenance task should add `read-only-mcp:check` to `agent:gate` in one scoped update.
 - OPS6A P3 sidecar: consider a small OPS6B gate-maintenance task to wire `read-only-mcp:check` into `agent:gate` before heavy PR64+ product trains, and preferably before PR61 if the team wants all post-PR60 checks in the default gate.
 - OPS7A P3 sidecar: `agent:gate` still does not run `read-only-mcp:check`, `sitemap-notification:check`, direct tech-stack/curated-collections/vertical-asset-grids/alternatives-canonical checkers, or GitHub profile mirror dry-run coverage. These checks pass independently where run, and OPS7A does not modify `scripts/agent/gate.sh`; consider a dedicated gate-maintenance PR before heavier PR84+ or runtime-adjacent B2B Alpha work.
+- PR85 P3 sidecar: data cleansing and freshness rules are machine-readable in `ops/contracts/data-cleansing-freshness.json`, but PR85 scope does not allow `scripts/**` or `package.json`, so no dedicated checker script is added in PR85. PR86 QA should validate the contract and PR84 exporter behavior within QA scope.
 
 Resolved sidecar issues:
 
