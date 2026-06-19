@@ -65,9 +65,10 @@
 | Global Intent Taxonomy + Scaled Content Boundary | Validation passed | PR61 defines the machine-readable intent taxonomy, route creation thresholds, and scaled-content abuse boundary before future public intent routes. Governance docs only; no public pages, sitemap changes, external index ping, Public API, MCP, payment, deploy, or data repo mutation. |
 | Intent Route Registry | Validation passed | PR62 defines the allowlisted route registry contract, status lifecycle, evidence thresholds, sitemap eligibility, canonical metadata, and safe owner/reviewer metadata. Registry docs only; no runtime page generation, sitemap inclusion, public pages, external calls, Public API, MCP, payment, deploy, or data repo mutation. |
 | Intent Governance QA | Validation passed | PR63 verifies PR61 and PR62 governance boundaries, confirms no arbitrary pSEO route, sitemap leak, forbidden public claims, app/runtime change, external index ping, Public API, MCP, payment, deploy, or data repo mutation. QA docs only. |
+| Tech Stack Cluster Data Model | Validation passed | PR64 defines the tech-stack cluster contract, published-only eligibility, status lifecycle, sitemap eligibility, evidence thresholds, and forbidden arbitrary stack-route patterns. No public stack pages, sitemap changes, external calls, Public API, MCP, payment, deploy, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Merge and clean PR63, then run final TRAIN-PR61-PR63 validation. Do not start PR64 from this train.
+Next: Merge and clean PR64 before starting PR65. Do not start PR67 from this train.
