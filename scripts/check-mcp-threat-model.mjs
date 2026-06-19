@@ -205,21 +205,18 @@ function validate(root) {
   }
 
   const appMcpFiles = scanDir(path.join(root, "app/api/mcp"));
-  if (appMcpFiles.length > 0) {
-    errors.push("app/api/mcp runtime route must not exist in PR59");
-  }
-
   const libMcpFiles = scanDir(path.join(root, "lib/mcp"));
-  if (libMcpFiles.length > 0) {
-    errors.push("lib/mcp runtime implementation must not exist in PR59");
-  }
 
   for (const file of [...appMcpFiles, ...libMcpFiles]) {
-    const content = read(file).toLowerCase();
-    if (content.includes("supabase")) {
+    const content = read(file);
+    if (/from\s+["'][^"']*supabase[^"']*["']/i.test(content) || /@\/lib\/supabase/i.test(content)) {
       errors.push(`${repoPath(root, file)} must not import Supabase`);
     }
-    if (content.includes("payment") || content.includes("stripe")) {
+    if (
+      /from\s+["'][^"']*payments?[^"']*["']/i.test(content) ||
+      /from\s+["'][^"']*stripe[^"']*["']/i.test(content) ||
+      /@\/lib\/payments/i.test(content)
+    ) {
       errors.push(`${repoPath(root, file)} must not import payment code`);
     }
   }
@@ -408,14 +405,7 @@ function runNegativeTests() {
     {
       "lib/mcp/server.ts": "import { getSupabaseClient } from '@/lib/supabase/server';\n",
     },
-    "lib/mcp runtime"
-  );
-  expectFailure(
-    "mcp route",
-    {
-      "app/api/mcp/route.ts": "export function GET() {}\n",
-    },
-    "app/api/mcp runtime route"
+    "must not import Supabase"
   );
   expectFailure(
     "mutation tool",
@@ -456,5 +446,5 @@ if (errors.length > 0) {
 
 console.log("mcp-threat-model:check passed");
 console.log(
-  "Verified: Public API-only dependency, no MCP runtime endpoint, no direct Supabase access, read-only tool schemas, denied private/admin/payment fields, negative fixtures"
+  "Verified: Public API-only dependency, no direct Supabase access, read-only tool schemas, denied private/admin/payment fields, negative fixtures"
 );

@@ -60,9 +60,10 @@
 | Public Read-only API v0 | Complete | PR58 adds a feature-flagged, disabled-by-default read-only Public API v0 shell with allowlist serialization and `public-api:v0:check`. No external release, auto-merge, deploy, MCP, payment, API keys, metering, server config, dependency, or data repo mutation. |
 | MCP Threat Model + Tool Spec | Complete | PR59 defines a Public API-only, read-only MCP boundary contract, strict tool schemas, threat model, and `mcp-threat-model:check`. No MCP server runtime, endpoint, direct Supabase access, Public API runtime change, payment, deploy, dependency, or data repo mutation. |
 | Agent Gate Maintenance | Validation passed | OPS5E wires eligible deterministic local-only specialized checkers into `agent:gate` and adds `agent:gate-coverage:check`. No product code, Public API runtime, MCP runtime, payment, deploy, server config, dependency, or data repo mutation. |
+| Read-only MCP Server + QA | Validation passed | PR60 adds a disabled-by-default, local-only read-only MCP shell and `read-only-mcp:check`. No external release, auto-merge, deploy, direct Supabase access, mutation tools, payment, server config, dependency, plugin, secret, Public API runtime change, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: TRAIN-PR60-MCP-SERVER remains human-checkpointed. Do not start PR60 without separate approval.
+Next: PR60 requires human review before merge. Do not auto-merge, do not deploy, and do not start any future task.

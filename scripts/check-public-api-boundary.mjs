@@ -215,17 +215,6 @@ if (publicRouteFiles.length > 0) {
   }
 }
 
-const mcpDirs = [
-  path.join(ROOT, "app/api/mcp"),
-  path.join(ROOT, "lib/mcp"),
-  path.join(ROOT, "mcp"),
-];
-for (const dir of mcpDirs) {
-  if (fs.existsSync(dir)) {
-    fail(`MCP runtime directory must not be introduced for PR57: ${path.relative(ROOT, dir)}`);
-  }
-}
-
 const filesToScanForActiveMcpEndpoint = [
   ...scanDir(path.join(ROOT, "app")),
   ...scanDir(path.join(ROOT, "lib")),
