@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0",
+  "task_id": "PR93",
+  "title": "Supabase Webhook Sync Boundary v0",
+  "contract_name": "supabase_webhook_sync_boundary",
+  "purpose": "Define the future boundary for one-way asynchronous Supabase event delivery into a checkpointed Laravel gateway and Redis cache layer without implementing runtime sync.",
+  "release_posture": {
+    "contract_only": true,
+    "disabled_by_default": true,
+    "supabase_webhook_sync_enabled": false,
+    "supabase_webhook_runtime_implemented": false,
+    "supabase_migration_implemented": false,
+    "webhook_secret_configured": false,
+    "laravel_sync_consumer_implemented": false,
+    "laravel_runtime_implemented": false,
+    "redis_production_config_implemented": false,
+    "server_config_implemented": false,
+    "live_deploy_implemented": false,
+    "external_service_connected": false,
+    "data_repo_mutation_allowed": false
+  },
+  "default_flags": {
+    "SUPABASE_WEBHOOK_SYNC_ENABLED": false,
+    "SUPABASE_WEBHOOK_RUNTIME_ENABLED": false,
+    "SUPABASE_WEBHOOK_SECRET_CONFIGURED": false,
+    "LARAVEL_SYNC_CONSUMER_ENABLED": false,
+    "REDIS_GATEWAY_CACHE_ENABLED": false,
+    "EVENT_DELIVERY_ENABLED": false
+  },
+  "sync_model": {
+    "direction": "one_way",
+    "delivery_model": "async_event_delivery_after_checkpoint",
+    "source_of_truth": "reviewed public 88CN data and PR83 event-outbox contract",
+    "future_consumer": "checkpointed Laravel gateway or Redis cache layer",
+    "request_time_sync_allowed": false,
+    "full_table_polling_allowed": false,
+    "io_heavy_bulk_sync_allowed": false,
+    "raw_database_row_delivery_allowed": false,
+    "public_route_side_effect_allowed": false,
+    "admin_route_side_effect_allowed": false
+  },
+  "relationship_to_prior_work": {
+    "PR83": {
+      "contract": "ops/contracts/event-outbox.json",
+      "rule": "Future webhook sync must derive from the one-way event-outbox model and must preserve idempotent, minimal, public-only payloads."
+    },
+    "PR91": {
+      "contract": "ops/contracts/laravel-gateway-boundary.json",
+      "rule": "Future Laravel gateway consumption remains checkpointed and disabled until a later approved runtime task."
+    },
+    "PR92": {
+      "contract": "gateway/disabled-scaffold.contract.json",
+      "rule": "The disabled scaffold remains non-executable; PR93 does not alter gateway files or create Laravel runtime."
+    }
+  },
+  "allowed_future_event_source_types": [
+    "project_published",
+    "project_archived",
+    "project_public_fields_updated",
+    "changelog_published",
+    "source_link_verified",
+    "profile_claimed_public",
+    "profile_removed_public",
+    "snapshot_ready"
+  ],
+  "denied_event_source_types": [
+    "submitted_private",
+    "pending_private",
+    "quarantined_private",
+    "scouted_private",
+    "admin_review_private",
+    "payment_private",
+    "api_key_private",
+    "metering_private",
+    "raw_database_row"
+  ],
+  "allowed_payload_rule": {
+    "minimal_payload_required": true,
+    "public_fields_only": true,
+    "raw_database_rows_allowed": false,
+    "unknown_fact_policy": "Missing or unverified facts remain unknown and must not be inferred by sync.",
+    "source_confidence_public_summary_allowed": true,
+    "source_confidence_internal_allowed": false,
+    "signal_score_public_summary_allowed": true,
+    "signal_score_internal_allowed": false
+  },
+  "denied_payload_fields": [
+    "founder_email",
+    "contact_email",
+    "admin_notes",
+    "review_notes",
+    "payment_state",
+    "stripe_customer_id",
+    "api_key_plaintext",
+    "api_key_hash",
+    "api_key_hash_salt",
+    "bearer_credential",
+    "session_credential",
+    "service_role_credential",
+    "webhook_credential",
+    "raw_database_row",
+    "raw_payload",
+    "private_telemetry",
+    "source_confidence_internal",
+    "signal_score_internal",
+    "claim_credential"
+  ],
+  "idempotency_policy": {
+    "required": true,
+    "key_shape": "event_source_type:public_record_ref:schema_version:public_change_revision",
+    "consumer_requirement": "Future consumers must treat duplicate idempotency keys as already processed.",
+    "producer_requirement": "Future producers must keep the same idempotency key for the same logical reviewed public change."
+  },
+  "retry_policy": {
+    "required": true,
+    "delivery_attempts": "bounded",
+    "maximum_attempts": 3,
+    "backoff": "exponential_with_jitter",
+    "failure_rule": "Failed delivery must not zero out public scores, delete reviewed public data, or replace the last successful snapshot."
+  },
+  "drift_handling": {
+    "source_wins": true,
+    "consumer_reconciliation": "Future consumers reconcile by public_record_ref, schema_version, and idempotency key history.",
+    "stale_marker": "A future consumer may mark a cached public record stale, but must not invent replacement facts.",
+    "full_resync": "Manual checkpointed operation only; no full-table polling or I/O-heavy bulk sync is authorized by PR93."
+  },
+  "webhook_secret_policy": {
+    "configured_in_PR93": false,
+    "stored_in_repo_allowed": false,
+    "placeholder_secret_allowed": false,
+    "future_secret_requires_checkpoint": true
+  },
+  "supabase_migration_boundary": {
+    "migration_allowed_in_PR93": false,
+    "schema_change_allowed_in_PR93": false,
+    "trigger_allowed_in_PR93": false,
+    "future_schema_change_requires_checkpoint": true
+  },
+  "redis_production_boundary": {
+    "production_config_allowed_in_PR93": false,
+    "cache_enabled_by_default": false,
+    "future_redis_usage_requires_checkpoint": true
+  },
+  "laravel_consumer_boundary": {
+    "consumer_allowed_in_PR93": false,
+    "runtime_allowed_in_PR93": false,
+    "php_files_allowed_in_PR93": false,
+    "future_consumer_requires_checkpoint": true
+  },
+  "server_deploy_boundary": {
+    "server_config_allowed_in_PR93": false,
+    "deploy_allowed_in_PR93": false,
+    "production_env_or_secret_allowed_in_PR93": false,
+    "future_server_or_deploy_change_requires_checkpoint": true
+  },
+  "checkpoint_triggers": [
+    "supabase_schema_change",
+    "supabase_webhook_runtime",
+    "supabase_webhook_secret",
+    "laravel_sync_consumer",
+    "redis_production_usage",
+    "server_config",
+    "live_deploy",
+    "external_service_connection",
+    "event_delivery_runtime",
+    "data_repo_mutation"
+  ],
+  "non_goals_for_PR93": [
+    "No Supabase webhook runtime.",
+    "No Supabase migration.",
+    "No webhook route.",
+    "No webhook secret.",
+    "No Redis production config.",
+    "No Laravel sync consumer.",
+    "No Laravel runtime.",
+    "No PHP files.",
+    "No server config.",
+    "No deploy.",
+    "No external service connection.",
+    "No event delivery runtime.",
+    "No full-table polling.",
+    "No I/O-heavy bulk sync.",
+    "No raw database row delivery.",
+    "No private founder, admin, payment, API-key, or metering fields.",
+    "No internal Signal Score or Source Confidence internals.",
+    "No data repo mutation."
+  ]
+}
