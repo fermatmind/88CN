@@ -2,21 +2,23 @@
 
 Open sidecar issues:
 
-- `agent:gate` does not yet run `conversion-metrics:check` because PR46 scope does not include `scripts/agent/gate.sh`. The task-specific check runs independently and passes. A later OPS gate-maintenance task should add PR42-PR46 specialized checks to the agent gate in one scoped update.
-- OPS5B triage: this is non-blocking for TRAIN-PR47-PR49 because each task keeps its own task-level validation and scope gate. Do not implement gate maintenance inside OPS5B.
-- `agent:gate` does not yet run `submission-channels:check` because PR47 scope does not include `scripts/agent/gate.sh`. The PR47 task-specific check runs independently and passes. A later gate-maintenance task should add PR47-PR49 specialized checks to the agent gate in one scoped update.
-- `agent:gate` does not yet run `founder-onboarding:check` because PR48 scope does not include `scripts/agent/gate.sh`. The PR48 task-specific check runs independently and passes. A later gate-maintenance task should add PR47-PR49 specialized checks to the agent gate in one scoped update.
-- `agent:gate` does not yet run `featured-signals:check` because PR50 scope does not include `scripts/agent/gate.sh`. The PR50 task-specific check runs independently and must pass before merge. A later gate-maintenance task should add PR50 specialized checks to the agent gate in one scoped update.
-- `agent:gate` does not yet run `ad-payment-boundary:check` because PR51 scope does not include `scripts/agent/gate.sh`. The PR51 task-specific check runs independently and must pass before merge review. A later gate-maintenance task should add PR51 specialized checks to the agent gate in one scoped update.
-- OPS5D triage: `agent:gate` passes, and PR52-PR60 tasks carry task-level validations, so gate maintenance is non-blocking for `TRAIN-PR52-PR54-LIFECYCLE`. A future scoped OPS task should wire PR42-PR51 specialized checks plus future PR52-PR60 checkers into the gate without mixing implementation work.
-- OPS5D triage: PR59 is spec-only, but the current train-plan checker treats MCP task text conservatively. PR59 is therefore human-checkpointed in the train registry rather than changing checker behavior in a roadmap-only PR.
-- PR52 P3 sidecar: `agent:gate` does not yet run `lifecycle-archive:check` because PR52 scope does not include `scripts/agent/gate.sh`. The PR52 task-specific checker runs independently and passes. A later gate-maintenance task should add PR52 specialized checks to the agent gate in one scoped update.
-- PR53 P3 sidecar: `agent:gate` does not yet run `changelog-engine:check` because PR53 scope does not include `scripts/agent/gate.sh`. The PR53 task-specific checker runs independently and passes. A later gate-maintenance task should add PR53 specialized checks to the agent gate in one scoped update.
-- PR54 P3 sidecar: `agent:gate` does not yet run `backers-landing:check` because PR54 scope does not include `scripts/agent/gate.sh`. The PR54 task-specific checker runs independently and passes. A later gate-maintenance task should add PR54 specialized checks to the agent gate in one scoped update.
-- PR55 P3 sidecar: `agent:gate` does not yet run `oss-maintainer:check` because PR55 scope does not include `scripts/agent/gate.sh`. The PR55 task-specific checker runs independently and passes. A later gate-maintenance task should add PR55 specialized checks to the agent gate in one scoped update.
-- PR57 P3 sidecar: `agent:gate` does not yet run `public-api-boundary:check` because PR57 scope does not include `scripts/agent/gate.sh`. The PR57 task-specific checker runs independently and passes. A later gate-maintenance task should add PR57 specialized checks to the agent gate in one scoped update.
-- PR58 P3 sidecar: `agent:gate` does not yet run `public-api:v0:check` because PR58 scope does not include `scripts/agent/gate.sh`. The PR58 task-specific checker runs independently and passes. A later gate-maintenance task should add PR58 specialized checks to the agent gate in one scoped update.
-- PR59 P3 sidecar: `agent:gate` does not yet run `mcp-threat-model:check` because PR59 scope does not include `scripts/agent/gate.sh`. The PR59 task-specific checker runs independently and passes. A later gate-maintenance task should add PR59 specialized checks to the agent gate in one scoped update.
+- OPS5D triage: PR59 is spec-only, but the train-plan checker treats MCP task text conservatively. PR59 remains human-checkpointed in the train registry. OPS5E does not change train-plan risk detection.
+
+Resolved sidecar issues:
+
+- OPS5E resolved the PR46 `conversion-metrics:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR47 `submission-channels:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR48 `founder-onboarding:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR50 `featured-signals:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR51 `ad-payment-boundary:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR52 `lifecycle-archive:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR53 `changelog-engine:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR54 `backers-landing:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR55 `oss-maintainer:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR57 `public-api-boundary:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR58 `public-api:v0:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the PR59 `mcp-threat-model:check` gate-maintenance sidecar by wiring it into `agent:gate`.
+- OPS5E resolved the broader OPS5D gate-maintenance triage item for PR42-PR51 and PR52-PR60 static local checkers by wiring the eligible deterministic checks into `agent:gate`.
 
 Use this file for future PR-train findings that are outside the active task scope and allowed by the selected batch's `continue_on_sidecar` policy.
 

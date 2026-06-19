@@ -2299,6 +2299,81 @@
       ]
     },
     {
+      "id": "OPS5E",
+      "title": "Agent Gate Maintenance + Specialized Checker Wiring v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "agent-gate-maintenance",
+      "depends_on": [
+        "PR59"
+      ],
+      "purpose": "Wire existing deterministic local-only specialized checkers into agent:gate before PR60 MCP server work begins. No product, Public API runtime, MCP runtime, payment, deploy, or server-config changes.",
+      "allowed_paths": [
+        "scripts/agent/gate.sh",
+        "scripts/agent/**",
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "docs/OPS5E_AGENT_GATE_MAINTENANCE_V0.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:tool:check",
+        "npm run agent:mcp-config:check",
+        "npm run agent:plugin-policy:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:gate-coverage:check",
+        "npm run agent:scope:check -- OPS5E",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR60-MCP-SERVER"
+      ],
+      "data_planes": [
+        "governance_only",
+        "gate_coverage"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "definition_of_done": [
+        "OPS5E task object exists",
+        "existing deterministic local-only specialized checkers are discovered",
+        "eligible checkers are wired into agent:gate",
+        "live, deploy, browser, external, and secret-dependent checks are excluded from agent:gate",
+        "old P3 gate-maintenance sidecars are updated",
+        "gate coverage documentation exists",
+        "agent:gate passes with the wired checks",
+        "no product code is modified",
+        "PR60 remains not started and human-checkpointed"
+      ]
+    },
+    {
       "id": "PR52",
       "title": "Signal Alert + Soft Archive v0",
       "type": "product",
