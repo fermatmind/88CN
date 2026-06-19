@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0",
+  "task_id": "PR87",
+  "title": "API Key Boundary + Metering Threat Model v0",
+  "purpose": "Define a disabled-by-default boundary for future Alpha Feed API key and metering work without implementing runtime behavior.",
+  "release_posture": {
+    "contract_only": true,
+    "api_key_issuance_implemented": false,
+    "api_key_runtime_implemented": false,
+    "customer_access_implemented": false,
+    "billing_or_payment_implemented": false,
+    "metering_runtime_implemented": false,
+    "supabase_schema_migration_implemented": false,
+    "laravel_gateway_implemented": false,
+    "production_secret_required": false,
+    "external_service_connected": false,
+    "data_repo_mutation_allowed": false
+  },
+  "default_flags": {
+    "API_KEYS_ENABLED": false,
+    "API_KEY_ISSUANCE_ENABLED": false,
+    "METERING_ENABLED": false,
+    "CUSTOMER_ACCESS_ENABLED": false,
+    "BILLING_ENABLED": false
+  },
+  "prohibited_runtime_behavior": [
+    "real_api_key_issuance",
+    "api_key_runtime_validation",
+    "customer_access",
+    "billing",
+    "payment",
+    "stripe_integration",
+    "live_metering",
+    "metering_runtime",
+    "supabase_schema_migration",
+    "laravel_runtime",
+    "production_secret_creation",
+    "external_service_connection",
+    "data_repo_mutation"
+  ],
+  "allowed_future_key_states": [
+    "disabled",
+    "created_pending_admin_review",
+    "active",
+    "revoked",
+    "expired",
+    "suspended"
+  ],
+  "human_checkpoint_triggers": [
+    "enable_api_key_runtime",
+    "enable_api_key_issuance",
+    "enable_customer_access",
+    "enable_billing_or_payment",
+    "create_production_secret_or_env",
+    "create_supabase_schema_migration",
+    "enable_laravel_gateway_runtime",
+    "connect_external_service",
+    "write_to_data_repository"
+  ],
+  "api_key_storage_policy": {
+    "plaintext_storage_allowed": false,
+    "committed_key_material_allowed": false,
+    "fake_key_like_fixture_allowed": false,
+    "future_storage": "hashed_only",
+    "initial_display": "one_time_display_only_after_future_human_checkpoint",
+    "after_initial_display": "plaintext_must_be_discarded",
+    "hashing_requirement": "future implementation must store only a non-reversible hash with reviewed salt or pepper handling outside public repositories"
+  },
+  "api_key_scope_policy": {
+    "scoped_keys_required": true,
+    "minimum_future_scopes": [
+      "alpha_feed_read_snapshot",
+      "alpha_feed_read_metadata"
+    ],
+    "broad_admin_scope_allowed": false,
+    "public_api_scope_separation_required": true,
+    "mcp_scope_separation_required": true
+  },
+  "api_key_revocation_policy": {
+    "revocable": true,
+    "revocation_must_be_auditable": true,
+    "revoked_keys_must_fail_closed": true,
+    "rotation_requires_admin_review": true
+  },
+  "rate_limit_policy": {
+    "rate_limits_required_before_enablement": true,
+    "default_without_checkpoint": "disabled",
+    "future_controls": [
+      "per_key_request_limit",
+      "per_window_quota",
+      "burst_limit",
+      "abuse_lockout",
+      "admin_review_for_limit_changes"
+    ]
+  },
+  "metering_event_policy": {
+    "runtime_enabled": false,
+    "payment_separated": true,
+    "allowed_future_event_types": [
+      "api_request_counted",
+      "api_request_rejected",
+      "quota_window_started",
+      "quota_window_reset",
+      "key_revoked",
+      "key_suspended"
+    ],
+    "event_payload_boundary": "future metering events may reference opaque key id, public route class, timestamp, status, and quota window only",
+    "raw_payload_capture_allowed": false,
+    "private_field_capture_allowed": false,
+    "billing_decision_allowed": false
+  },
+  "denied_fields": [
+    "founder_email",
+    "submitter_email",
+    "claim_email",
+    "contact_email",
+    "admin_notes",
+    "review_notes",
+    "review_comments",
+    "payment_state",
+    "payment_data",
+    "stripe_customer_id",
+    "api_key_plaintext",
+    "api_key_hash_salt",
+    "api_key_secret",
+    "customer_key",
+    "raw_payload",
+    "raw_supabase_row",
+    "private_telemetry",
+    "source_confidence_internal",
+    "source_confidence_inputs",
+    "signal_score_internal",
+    "signal_score_inputs",
+    "claim_secret",
+    "session_secret",
+    "service_role_key"
+  ],
+  "denied_statuses": [
+    "submitted",
+    "pending",
+    "pending_review",
+    "quarantined",
+    "scouted",
+    "scouted_unreviewed",
+    "rejected",
+    "needs_info",
+    "archived_private"
+  ],
+  "payment_separation_rule": {
+    "metering_is_not_billing": true,
+    "api_access_must_not_create_payment_state": true,
+    "payment_or_billing_enablement_requires_human_checkpoint": true,
+    "metering_events_must_not_drive_visible_placement": true
+  },
+  "public_api_mcp_sitemap_separation_rule": {
+    "must_not_change_signal_score": true,
+    "must_not_change_source_confidence": true,
+    "must_not_change_sitemap_inclusion": true,
+    "must_not_change_public_api_ordering": true,
+    "must_not_change_mcp_payload_ordering": true,
+    "must_not_change_featured_signals_placement": true,
+    "must_not_change_editorial_review_results": true
+  },
+  "alpha_feed_access_rule": {
+    "records": "published-only reviewed local public records",
+    "field_boundary": "PR82 published signal snapshot allowlist",
+    "private_founder_admin_payment_fields_allowed": false,
+    "source_confidence_internal_allowed": false,
+    "signal_score_internal_allowed": false
+  },
+  "future_pr_relationship": {
+    "PR88": "May define a disabled shell only after human review; must not issue real keys or enable customer access without a checkpoint.",
+    "PR89": "May define a metering ledger contract only; must keep metering separate from payment.",
+    "PR90": "Must QA the disabled shell and metering boundary before any future enablement.",
+    "PR87_merge_policy": "Human review required; do not auto-merge from this task."
+  }
+}

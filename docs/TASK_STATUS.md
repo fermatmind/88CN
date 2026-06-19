@@ -89,9 +89,10 @@
 | Local Snapshot Exporter Dry Run | Validation passed | PR84 adds a local-only dry-run Alpha Feed snapshot exporter and checker. Output is restricted to `/tmp/88cn-alpha-snapshot-*`; repo paths, data repo paths, external destinations, non-local sources, endpoints, customer access, secrets, and data repo mutation are rejected. |
 | Data Cleansing Rules + Freshness Model | Validation passed | PR85 defines dedupe, canonicalization, freshness, archive, source failure, source conflict, and public-safe Source Confidence boundary rules. Rules/spec only; no runtime feed, endpoint, DB migration, customer output, external write, or data repo mutation. |
 | Snapshot Export + Cleansing QA | Validation passed | PR86 validates PR84 local-only snapshot dry-run output and PR85 data cleansing rules. QA docs only; no product code, script, schema, package, runtime route, endpoint, deploy, external write, or data repo mutation. |
+| API Key Boundary + Metering Threat Model | Validation passed | PR87 defines disabled-by-default API key and metering boundary rules. Contract/docs only; no key issuance, metering runtime, customer access, billing, payment, deploy, Supabase migration, Laravel runtime, dependency, external service, or data repo mutation. Human review required before merge. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Stop before PR87. Run PR87-PR90 readiness only when explicitly requested.
+Next: Human review PR87. Do not auto-merge and do not start PR88.

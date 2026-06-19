@@ -4975,7 +4975,7 @@
         "b2b_alpha_boundary"
       ],
       "deployment": "none",
-      "human_checkpoint": false,
+      "human_checkpoint": true,
       "payments": "none",
       "mcp": "none",
       "public_pages": "none",
