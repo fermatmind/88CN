@@ -1,0 +1,233 @@
+{
+  "schema_version": "1.0",
+  "task_id": "PR91",
+  "title": "Laravel Gateway Boundary Spec v0",
+  "purpose": "Define the future Laravel 12 gateway boundary for 88CN B2B Alpha Data Feed access without implementing Laravel runtime, Composer setup, PHP runtime files, routes, Supabase webhook, Redis production, server config, customer access, payment, API key runtime, metering runtime, external service connections, or data repository mutation.",
+  "release_posture": {
+    "contract_only": true,
+    "disabled_by_default": true,
+    "laravel_runtime_implemented": false,
+    "composer_dependency_implemented": false,
+    "php_runtime_implemented": false,
+    "server_config_implemented": false,
+    "live_deploy_implemented": false,
+    "supabase_schema_migration_implemented": false,
+    "supabase_webhook_implemented": false,
+    "webhook_secret_required": false,
+    "redis_production_implemented": false,
+    "api_key_runtime_implemented": false,
+    "metering_runtime_implemented": false,
+    "customer_access_implemented": false,
+    "payment_or_billing_implemented": false,
+    "external_service_connected": false,
+    "data_repo_mutation_allowed": false
+  },
+  "default_flags": {
+    "LARAVEL_GATEWAY_ENABLED": false,
+    "LARAVEL_RUNTIME_ENABLED": false,
+    "ALPHA_FEED_GATEWAY_ENABLED": false,
+    "GATEWAY_CUSTOMER_ACCESS_ENABLED": false,
+    "GATEWAY_METERING_ENABLED": false,
+    "SUPABASE_WEBHOOK_SYNC_ENABLED": false,
+    "REDIS_GATEWAY_CACHE_ENABLED": false
+  },
+  "non_goals_for_PR91": [
+    "No Laravel runtime.",
+    "No Composer dependency or Composer lockfile.",
+    "No PHP runtime files.",
+    "No Laravel routes, bootstrap files, or artisan entrypoint.",
+    "No Supabase migration.",
+    "No Supabase webhook route or webhook secret.",
+    "No Redis production usage.",
+    "No server configuration.",
+    "No deployment.",
+    "No API key runtime.",
+    "No metering runtime.",
+    "No customer access.",
+    "No payment or billing coupling.",
+    "No external service connection.",
+    "No data repository mutation."
+  ],
+  "system_boundary": {
+    "nextjs_responsibilities": [
+      "Continue serving current public, admin, Public API, MCP, sitemap, Featured Signals, submission, claim, and report surfaces.",
+      "Remain the source of current route ownership until a later checkpoint explicitly authorizes a separate Laravel runtime.",
+      "Keep public pages, sitemap inclusion, Public API ordering, MCP payloads, Featured Signals placement, Signal Score, and Source Confidence behavior unchanged by PR91."
+    ],
+    "future_laravel_responsibilities_after_checkpoint": [
+      "Serve only sanitized Alpha Feed gateway data derived from reviewed public snapshots or approved one-way sync contracts.",
+      "Validate future API key runtime boundaries defined by PR87 and PR88 only after explicit checkpoint approval.",
+      "Record future usage-accounting events only through the PR89 metering ledger boundary after explicit checkpoint approval.",
+      "Consume PR82 published signal snapshots or PR83 one-way event outbox payloads only after explicit checkpoint approval.",
+      "Fail closed when required snapshot, key, metering, or sync prerequisites are unavailable."
+    ],
+    "separation_rules": {
+      "nextjs_laravel_coupling_allowed_in_PR91": false,
+      "shared_runtime_allowed_in_PR91": false,
+      "public_route_side_effect_allowed": false,
+      "admin_route_side_effect_allowed": false,
+      "sitemap_side_effect_allowed": false,
+      "mcp_side_effect_allowed": false,
+      "featured_signals_side_effect_allowed": false
+    }
+  },
+  "dependency_boundaries": {
+    "api_key_boundary": {
+      "depends_on": [
+        "PR87",
+        "PR88"
+      ],
+      "contract": "ops/contracts/api-key-metering-boundary.json",
+      "runtime_enabled_in_PR91": false,
+      "rule": "Future gateway access must not validate, issue, display, store, rotate, or revoke API keys until a later checkpoint approves API key runtime."
+    },
+    "metering_boundary": {
+      "depends_on": [
+        "PR89"
+      ],
+      "contract": "ops/contracts/metering-ledger-contract.json",
+      "runtime_enabled_in_PR91": false,
+      "rule": "Future gateway usage accounting must remain separate from billing and payment and must not record live events until a later checkpoint approves metering runtime."
+    },
+    "alpha_feed_snapshot_boundary": {
+      "depends_on": [
+        "PR81",
+        "PR82"
+      ],
+      "contracts": [
+        "ops/contracts/alpha-feed-boundary.json",
+        "ops/contracts/published-signal-snapshot-schema.json"
+      ],
+      "rule": "Future gateway output may only use reviewed public Alpha Feed snapshots and the PR82 field allowlist."
+    },
+    "event_outbox_boundary": {
+      "depends_on": [
+        "PR83"
+      ],
+      "contract": "ops/contracts/event-outbox.json",
+      "runtime_enabled_in_PR91": false,
+      "rule": "Future sync may only consume approved one-way event outbox payloads after checkpoint approval; PR91 creates no producer, consumer, trigger, webhook, or delivery runtime."
+    }
+  },
+  "data_source_boundary": {
+    "allowed_sources_after_future_checkpoint": [
+      "reviewed public Alpha Feed snapshots",
+      "PR82 published signal snapshot records",
+      "PR83 approved one-way event outbox payloads"
+    ],
+    "denied_sources": [
+      "raw Supabase table rows",
+      "direct database-table dumps",
+      "submitted records",
+      "pending review records",
+      "quarantined records",
+      "scouted unreviewed records",
+      "admin review queues",
+      "payment records",
+      "private telemetry",
+      "external services connected without checkpoint",
+      "data repository writes"
+    ],
+    "raw_database_rows_allowed": false,
+    "direct_table_dump_allowed": false,
+    "request_time_external_crawling_allowed": false,
+    "private_founder_admin_payment_fields_allowed": false,
+    "internal_score_export_allowed": false
+  },
+  "allowed_future_payload_rule": {
+    "records": "published-only reviewed public records",
+    "field_boundary": "PR82 published signal snapshot allowlist",
+    "unknown_fact_policy": "Unknown or missing public facts must remain unknown and must not be inferred.",
+    "sanitization_required": true
+  },
+  "denied_fields": [
+    "founder_email",
+    "contact_email",
+    "admin_notes",
+    "review_notes",
+    "payment_state",
+    "stripe_customer_id",
+    "api_key_plaintext",
+    "api_key_hash",
+    "api_key_hash_salt",
+    "bearer_credential",
+    "session_credential",
+    "service_role_key",
+    "raw_database_row",
+    "raw_payload",
+    "private_telemetry",
+    "source_confidence_internal",
+    "signal_score_internal",
+    "claim_credential"
+  ],
+  "denied_source_statuses": [
+    "submitted",
+    "pending",
+    "pending_review",
+    "quarantined",
+    "scouted",
+    "rejected",
+    "needs_info",
+    "archived_private"
+  ],
+  "separation_from_public_surfaces": {
+    "must_not_change_public_api_release_status": true,
+    "must_not_change_public_api_ordering": true,
+    "must_not_change_mcp_tools_or_payload_ordering": true,
+    "must_not_change_sitemap_inclusion": true,
+    "must_not_change_featured_signals_placement": true,
+    "must_not_change_signal_score": true,
+    "must_not_change_source_confidence": true,
+    "must_not_change_editorial_review_results": true,
+    "must_not_create_public_pages": true
+  },
+  "payment_separation_rule": {
+    "payment_or_billing_allowed_in_PR91": false,
+    "gateway_access_must_not_create_payment_state": true,
+    "metering_is_not_billing": true,
+    "billing_or_payment_enablement_requires_separate_human_checkpoint": true
+  },
+  "customer_access_boundary": {
+    "customer_access_allowed_in_PR91": false,
+    "future_customer_access_requires_checkpoint": true,
+    "future_customer_payload_must_use_sanitized_alpha_feed_fields_only": true
+  },
+  "supabase_boundary": {
+    "schema_change_allowed_in_PR91": false,
+    "migration_allowed_in_PR91": false,
+    "webhook_route_allowed_in_PR91": false,
+    "webhook_secret_allowed_in_PR91": false,
+    "direct_raw_supabase_exposure_allowed": false
+  },
+  "redis_boundary": {
+    "redis_production_allowed_in_PR91": false,
+    "redis_gateway_cache_enabled_by_default": false,
+    "future_redis_production_usage_requires_checkpoint": true
+  },
+  "server_deploy_boundary": {
+    "server_config_allowed_in_PR91": false,
+    "deploy_allowed_in_PR91": false,
+    "production_env_or_secret_allowed_in_PR91": false,
+    "future_server_or_deploy_change_requires_checkpoint": true
+  },
+  "checkpoint_triggers": [
+    "composer_dependency",
+    "laravel_runtime",
+    "php_runtime",
+    "server_config",
+    "live_deploy",
+    "supabase_schema_change",
+    "supabase_webhook_secret",
+    "redis_production_usage",
+    "customer_access",
+    "api_key_runtime",
+    "metering_runtime",
+    "external_service_connection",
+    "data_repo_mutation"
+  ],
+  "future_task_boundaries": {
+    "PR92": "Do not start until the checker-path scope conflict is resolved. Any Laravel runtime, Composer dependency, PHP runtime, server config, Redis production use, external service connection, or deploy remains checkpointed.",
+    "PR93": "May remain safe only as contract/spec. Any Supabase migration, webhook route, webhook secret, live delivery, Redis production use, or Laravel runtime remains checkpointed.",
+    "PR94": "QA-only expectation after PR91 through PR93 boundaries exist. It must not modify product runtime, server config, schema, routes, secrets, deploy settings, or data repositories."
+  }
+}

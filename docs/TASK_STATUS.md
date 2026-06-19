@@ -94,9 +94,10 @@
 | Metering Ledger Contract | Validation passed | PR89 defines an append-only, idempotent, disabled-by-default usage-accounting ledger contract. No live metering, billing, payment, Stripe, customer access, API key issuance, Supabase migration, Laravel runtime, Redis production config, dependency, external service, deploy, or data repo mutation. Human review required before merge. |
 | API Key + Metering QA | Validation passed | PR90 verifies PR87, PR88, and PR89 as a closed QA-only train. Disabled route smoke returns 503 Problem Details, runtime leak scan passes, negative probe coverage is reviewed, data repo remains clean, and no product code, API key issuance, live metering, billing, payment, Supabase migration, Laravel runtime, Redis production config, deploy, or PR91 work occurs. |
 | PR91-PR94 Laravel Gateway + Sync Readiness Scan | Validation passed | OPS7B scans the checkpointed Laravel gateway and Supabase sync train. Recommendation is GO_PR91_ONLY: run PR91 as docs/contracts/spec only, keep PR92/PR93 checkpointed, resolve PR92 checker path scope before PR92, and do not start PR91 from OPS7B. |
+| Laravel Gateway Boundary Spec | Validation passed | PR91 defines the future Laravel gateway boundary contract and spec only. No Laravel runtime, Composer files, PHP runtime, Supabase migration, webhook route, webhook secret, Redis production config, server config, API key runtime, metering runtime, customer access, payment, deploy, external service, PR92 work, or data repo mutation occurs. Human review required before merge. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: PR91 Laravel Gateway Boundary Spec v0 can be planned as docs/contracts/spec only after explicit instruction. Do not auto-start PR91.
+Next: PR91 Laravel Gateway Boundary Spec v0 is prepared as docs/contracts/spec only and requires human review before merge. Do not auto-start PR92.
