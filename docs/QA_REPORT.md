@@ -3,18 +3,29 @@
 ## Latest Run
 
 - Date: 2026-06-19
-- Scope: PR71 Vertical Asset Grid QA
+- Scope: PR74 Alternatives Canonical QA
 - Role: Codex-QA
 - Result: PASS
 - Blocked: No
 
 ## Summary
 
-- PR71 verifies that vertical asset grid pages and sitemap entries are generated from the PR70 finite registry.
-- The published route set is limited to `ai-builder-infrastructure`, `model-and-search-infrastructure`, and `analytics-and-operations-tools`.
-- Unknown, non-published, non-sitemap-eligible, or below-threshold vertical records return `notFound()`.
+- PR74 verifies that curated alternatives pages and sitemap entries are generated from the PR73 finite canonical registry.
+- The published route set is limited to `aurora-code-vs-nucleus-ml`, `nucleus-ml-vs-vectorbase`, and `complykit-vs-pulse-analytics`.
+- Reversed, unknown, non-published, non-sitemap-eligible, or non-allowlisted alternatives slugs return `notFound()` and do not enter sitemap output.
 - Project cards are resolved through local `status: "published"` records only.
 - No external indexing call, Public API exposure, MCP exposure, payment behavior, deploy step, dependency change, screenshot write, or data repo mutation was introduced.
+
+## Alternatives Page Evidence
+
+| Check | Result |
+| --- | --- |
+| `/alternatives/[slug]` uses `generateStaticParams()` from the finite canonical registry | PASS |
+| Unknown or ineligible alternatives slugs call `notFound()` | PASS |
+| Registry includes exactly three published, sitemap-eligible canonical routes | PASS |
+| Alternatives projects resolve only from local `status: "published"` records | PASS |
+| Sitemap uses `getPublishedCuratedAlternatives()` for alternatives entries | PASS |
+| Reversed slugs are absent from the registry, static params, and sitemap helper output | PASS |
 
 ## Vertical Page Evidence
 
@@ -40,12 +51,14 @@
 
 ## Screenshots
 
-None. PR71 forbids `screenshots/**`, so QA used source inspection, checker output, and build route evidence.
+None. PR74 forbids `screenshots/**`, so QA used source inspection, checker output, and build route evidence.
 
 ## Validation Commands
 
 | Command | Result |
 | --- | --- |
+| `node scripts/check-alternatives-canonical.mjs` | PASS |
+| `npm run agent:scope:check -- PR74` | PASS |
 | `node scripts/check-vertical-asset-grids.mjs` | PASS |
 | `npm run agent:scope:check -- PR71` | PASS |
 | `node scripts/check-curated-collections.mjs` | PASS |
@@ -65,4 +78,4 @@ None. PR71 forbids `screenshots/**`, so QA used source inspection, checker outpu
 
 ## Recommendation
 
-PR71 can merge after full gate passes. TRAIN-PR69-PR71 can close after post-merge cleanup and final train validation. Do not start PR72 from this train.
+PR74 can merge after full gate passes. TRAIN-PR72-PR74 can close after post-merge cleanup and final train validation. Do not start PR75 from this train.
