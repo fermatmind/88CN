@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "task_id": "PR82",
+  "title": "Published Signal Snapshot Schema v0",
+  "snapshot_name": "published_signal_snapshot",
+  "release_posture": {
+    "schema_only": true,
+    "export_runtime_allowed": false,
+    "endpoint_allowed": false,
+    "data_repo_write_allowed": false,
+    "external_delivery_allowed": false,
+    "customer_access_allowed": false,
+    "api_key_runtime_allowed": false,
+    "metering_runtime_allowed": false
+  },
+  "source_rule": {
+    "records": "reviewed local public records only",
+    "required_status": "published",
+    "denied_statuses": [
+      "submitted",
+      "pending_review",
+      "approved",
+      "archived",
+      "quarantined",
+      "rejected",
+      "scouted_unreviewed",
+      "admin_review"
+    ],
+    "raw_database_rows_allowed": false,
+    "request_time_external_crawling_allowed": false,
+    "inferred_private_facts_allowed": false
+  },
+  "formats": {
+    "ndjson": {
+      "media_type": "application/x-ndjson",
+      "record_separator": "newline",
+      "encoding": "utf-8",
+      "one_record_per_line": true,
+      "header_row": false
+    },
+    "csv": {
+      "media_type": "text/csv",
+      "encoding": "utf-8",
+      "header_row": true,
+      "delimiter": ",",
+      "quote_character": "\"",
+      "array_serialization": "pipe-delimited strings after value-level escaping"
+    }
+  },
+  "fields": [
+    {
+      "name": "snapshot_version",
+      "type": "string",
+      "required": true,
+      "description": "Version of this schema contract."
+    },
+    {
+      "name": "project_slug",
+      "type": "string",
+      "required": true,
+      "description": "Public project slug used by 88CN public routes."
+    },
+    {
+      "name": "project_name",
+      "type": "string",
+      "required": true,
+      "description": "Reviewed public project name."
+    },
+    {
+      "name": "canonical_url",
+      "type": "string",
+      "required": true,
+      "description": "Reviewed official or canonical public URL."
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": true,
+      "description": "Reviewed public category slug or label."
+    },
+    {
+      "name": "technology_tags",
+      "type": "array<string>",
+      "required": false,
+      "description": "Reviewed public technology tags already safe for public display."
+    },
+    {
+      "name": "published_status",
+      "type": "string",
+      "required": true,
+      "allowed_values": [
+        "published"
+      ],
+      "description": "Snapshot records must be published-only."
+    },
+    {
+      "name": "public_source_links",
+      "type": "array<string>",
+      "required": false,
+      "description": "Reviewed public official site, docs, repository, launch, or pricing links."
+    },
+    {
+      "name": "machine_readability_summary",
+      "type": "string",
+      "required": false,
+      "description": "Public summary of machine readability or public metadata coverage."
+    },
+    {
+      "name": "last_reviewed_at",
+      "type": "string",
+      "format": "date-time",
+      "required": false,
+      "description": "Time when the public metadata was last reviewed."
+    },
+    {
+      "name": "public_profile_url",
+      "type": "string",
+      "required": true,
+      "description": "Public 88CN profile URL."
+    },
+    {
+      "name": "public_changelog_summary",
+      "type": "string",
+      "required": false,
+      "description": "Public changelog summary only when already approved for public display."
+    }
+  ],
+  "denied_fields": [
+    "id",
+    "founder_email",
+    "submitter_email",
+    "claim_email",
+    "contact_email",
+    "admin_notes",
+    "review_notes",
+    "review_comments",
+    "reviewer_id",
+    "review_decision",
+    "payment_state",
+    "payment_data",
+    "stripe_customer_id",
+    "featured_payment_state",
+    "commercial_order_state",
+    "api_key",
+    "customer_key",
+    "metering_ledger",
+    "source_confidence_internal",
+    "source_confidence_inputs",
+    "signal_score_internal",
+    "signal_score_inputs",
+    "hidden_score_weights",
+    "raw_payload",
+    "raw_supabase_row",
+    "private_telemetry",
+    "claim_secret",
+    "external_import_status",
+    "quarantine_reason",
+    "quarantine_details"
+  ],
+  "validation_rules": [
+    "Every record must have published_status equal to published.",
+    "Every output field must be declared in fields.",
+    "Denied fields must not appear in NDJSON records or CSV headers.",
+    "Raw source rows must not be serialized directly.",
+    "Unknown facts must remain absent or null and must not be inferred.",
+    "Arrays in CSV must use deterministic pipe-delimited serialization after value-level escaping.",
+    "Snapshot generation must not write to the data repository in PR82.",
+    "Snapshot generation runtime is out of scope for PR82."
+  ],
+  "non_goals": [
+    "No exporter implementation.",
+    "No public endpoint.",
+    "No customer-facing file delivery.",
+    "No data repository mutation.",
+    "No private founder data.",
+    "No raw database row dump.",
+    "No admin, payment, API key, metering, Signal Score internal, or Source Confidence internal fields."
+  ]
+}
