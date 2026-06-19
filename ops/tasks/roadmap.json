@@ -7308,6 +7308,87 @@
       ]
     },
     {
+      "id": "TRAFFIC2C",
+      "title": "Demand-Side Traffic Train Split + Readiness Scan v0",
+      "type": "roadmap-readiness",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "traffic-readiness",
+      "depends_on": [
+        "TRAFFIC2B"
+      ],
+      "purpose": "Verify TRAFFIC2B closure, scan TRAFFIC3-TRAFFIC7 and GROWTH0-GROWTH3 readiness, classify risks, and recommend the next safe demand-side traffic task without implementing product routes.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC2C_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json",
+        "ops/trains/batches.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- TRAFFIC2C",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs",
+        "npm run landscape:check"
+      ],
+      "data_planes": [
+        "roadmap_metadata",
+        "readiness_scan",
+        "docs_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "TRAFFIC2B closure verified",
+        "TRAFFIC3-TRAFFIC7 scanned",
+        "GROWTH0-GROWTH3 scanned",
+        "risk classifications documented",
+        "split recommendation documented",
+        "batch runner compatibility assessed",
+        "exact next task documented",
+        "no product runtime changes"
+      ],
+      "notes": [
+        "Do not implement TRAFFIC3, GROWTH0, BETA1, I18N0, PR101, or any public route in TRAFFIC2C.",
+        "Do not modify batch runner scripts in TRAFFIC2C.",
+        "Do not register non-PR train batches unless current runner compatibility is proven by existing checks."
+      ]
+    },
+    {
       "id": "TRAFFIC3",
       "title": "Sector Density / Market Map v0",
       "type": "research",
