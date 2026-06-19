@@ -145,6 +145,57 @@ Do not write archive URLs, GitHub credential material, SSH private keys, `.env.p
 
 ## Standard Production Deploy
 
+### 88CN Standard Production Deploy Template
+
+Use this template for routine 88CN production deploys. It keeps local readiness,
+operator confirmation, and server execution separate.
+
+Step 1, local preparation only:
+
+```text
+准备，不部署
+```
+
+```bash
+cd /Users/rainie/Desktop/88CN
+npm run agent:deploy:prepare -- --prs <merge-sha> <merge-sha>
+```
+
+The prepare command runs `git fetch origin`, prints the current `origin/main`
+SHA, verifies every optional PR merge SHA is contained in `origin/main`, and
+prints the exact Workbench/SSH command for the production host.
+
+Step 2, deploy only after the operator confirms the exact target SHA:
+
+```text
+我确认部署 88CN origin/main SHA <target-sha> 到生产服务器，不启用任何新 env/payment/secret flag。
+```
+
+Step 3, run the printed command in Aliyun Workbench or SSH:
+
+```bash
+cd /var/www/88cn
+scripts/agent/deploy-production.sh --confirm --commit <target-sha>
+```
+
+The server-side script performs PM2 restart, Nginx validation/reload, local
+smoke, live smoke, and final SHA verification. Workbench and SSH should run the
+repo script, not hand-written deployment steps.
+
+Step 4, for current-PR-specific live QA, include extra public paths and sitemap
+requirements in the same server command:
+
+```bash
+cd /var/www/88cn
+EXTRA_PATHS="/reports/example-report /new-public-page" \
+REQUIRED_SITEMAP_PATHS="/reports/example-report" \
+scripts/agent/deploy-production.sh --confirm --commit <target-sha>
+```
+
+Never write server IPs, passwords, SSH private keys, GitHub tokens, `.env`
+values, certificate contents, or credential-bearing URLs into git, PR
+descriptions, issue comments, reports, or chat output.
+
 Every live deployment must name the exact target commit SHA. Deploy the current `origin/main` only after confirming the target SHA locally:
 
 ```bash
