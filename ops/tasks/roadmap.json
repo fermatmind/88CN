@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-19",
+  "updated_at": "2026-06-20T00:00:00+08:00",
   "tasks": [
     {
       "id": "OPS0",
@@ -6912,6 +6912,792 @@
       ],
       "notes": [
         "Registered by OPS7A as a follow-up QA task. Do not implement OPS7AQ inside OPS7A."
+      ]
+    },
+    {
+      "id": "TRAFFIC0",
+      "title": "Competitor Intent + China Gap Deep Research v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "traffic-strategy",
+      "depends_on": [
+        "OPS8C"
+      ],
+      "purpose": "Research competitor demand-side intent and Chinese AI directory gaps, then map safe route opportunities before traffic implementation.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC0_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC0"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "competitor intent analysis documented",
+        "China gap analysis documented",
+        "route opportunity map documented",
+        "follow-up TRAFFIC and GROWTH tasks registered or recommended",
+        "no product pages implemented"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "TRAFFIC1",
+      "title": "Demand-Side Search Intent Taxonomy v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "traffic-taxonomy",
+      "depends_on": [
+        "TRAFFIC0"
+      ],
+      "purpose": "Define finite demand-side search intent taxonomy for tasks, sectors, stacks, comparisons, reports, and Chinese founder education.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC1_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC1"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "finite intent taxonomy documented",
+        "route allowlist principles documented",
+        "no pages implemented"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "TRAFFIC2",
+      "title": "AI Project Landscape Landing v0",
+      "type": "implementation-checkpointed",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "traffic-landscape",
+      "depends_on": [
+        "TRAFFIC1"
+      ],
+      "purpose": "Plan or implement a bounded AI project landscape landing surface only after finite taxonomy is approved.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC2_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC2"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "landscape boundary documented",
+        "reviewed project set requirement documented",
+        "no unbounded categories"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "TRAFFIC3",
+      "title": "Sector Density / Market Map v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "traffic-landscape",
+      "depends_on": [
+        "TRAFFIC1"
+      ],
+      "purpose": "Define sector density and market-map rules from reviewed public signals without fake global counts.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC3_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC3"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "sector density rules documented",
+        "market map risk controls documented",
+        "sample counts labeled"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "TRAFFIC4",
+      "title": "Task-to-Project Discovery v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "traffic-discovery",
+      "depends_on": [
+        "TRAFFIC1"
+      ],
+      "purpose": "Map finite task intents to reviewed projects and public signal fields.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC4_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC4"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "task allowlist documented",
+        "project mapping rules documented",
+        "no mass pSEO"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "TRAFFIC5",
+      "title": "Alternatives Expansion Boundary v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "traffic-comparison",
+      "depends_on": [
+        "TRAFFIC1"
+      ],
+      "purpose": "Define safe canonical alternatives expansion using reviewed public-signal pairs only.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC5_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC5"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "canonical pair rules documented",
+        "N-by-N generation forbidden",
+        "no superiority claims"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "TRAFFIC6",
+      "title": "Report Distribution Pack Generator v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "traffic-distribution",
+      "depends_on": [
+        "TRAFFIC1"
+      ],
+      "purpose": "Define safe report distribution package generation for human-owned sharing without automated external writes.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC6_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC6"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "distribution package spec documented",
+        "human-owned sharing boundary documented",
+        "no sending or posting"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "TRAFFIC7",
+      "title": "Demand-Side Traffic QA v0",
+      "type": "research",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "traffic-qa",
+      "depends_on": [
+        "TRAFFIC2",
+        "TRAFFIC3",
+        "TRAFFIC4",
+        "TRAFFIC5",
+        "TRAFFIC6"
+      ],
+      "purpose": "QA demand-side traffic surfaces for policy, source, canonical, and public-signal boundaries.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC7_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- TRAFFIC7"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "traffic QA checklist documented",
+        "policy/source/canonical checks documented",
+        "no product changes"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "GROWTH0",
+      "title": "Growth Agent Boundary Scan v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-boundary",
+      "depends_on": [
+        "TRAFFIC0"
+      ],
+      "purpose": "Define growth-agent observation, draft, and reporting boundaries before any growth automation.",
+      "allowed_paths": [
+        "docs/growth/GROWTH0_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH0"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "growth agent boundaries documented",
+        "external write restrictions documented",
+        "no automation executed"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "GROWTH1",
+      "title": "Founder Acquisition Agent v0",
+      "type": "future-checkpointed",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-founder",
+      "depends_on": [
+        "GROWTH0"
+      ],
+      "purpose": "Future human-approved founder acquisition assistant plan limited to suggestions and drafts.",
+      "allowed_paths": [
+        "docs/growth/GROWTH1_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH1"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "founder acquisition draft-only boundary documented",
+        "human send requirement documented",
+        "no contact data stored"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "GROWTH2",
+      "title": "Report Distribution Agent v0",
+      "type": "future-checkpointed",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-distribution",
+      "depends_on": [
+        "GROWTH0"
+      ],
+      "purpose": "Future report distribution draft assistant plan with no platform posting or external writes.",
+      "allowed_paths": [
+        "docs/growth/GROWTH2_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH2"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "report distribution draft boundary documented",
+        "no auto posting documented",
+        "no external writes"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "GROWTH3",
+      "title": "Weekly Growth Review Generator v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-review",
+      "depends_on": [
+        "GROWTH0"
+      ],
+      "purpose": "Generate internal weekly growth review from repo-safe metrics and manually supplied aggregates.",
+      "allowed_paths": [
+        "docs/growth/GROWTH3_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH3"
+      ],
+      "data_planes": [
+        "docs_only",
+        "research_roadmap"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "weekly review inputs documented",
+        "manual aggregate boundary documented",
+        "no live analytics collection"
+      ],
+      "notes": [
+        "No product/runtime implementation in this task.",
+        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
       ]
     }
   ],
