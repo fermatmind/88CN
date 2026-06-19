@@ -77,9 +77,10 @@
 | Curated Alternatives Pages | Validation passed | PR73 implements three finite registry-backed `/alternatives/*` pages, canonical pair ordering, published-only project filtering, sitemap inclusion for canonical published alternatives routes only, and local checker coverage. No arbitrary params, N-squared generation, defamatory copy, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Alternatives Canonical QA | Validation passed | PR74 verifies alternatives canonical policy, finite allowlist, duplicate-route prevention via notFound, sitemap boundary, route cap, published-only project filtering, copy safety, and no external-index/API/MCP/payment/deploy/data mutation. QA docs only; no screenshots or product code changes. |
 | GitHub Structured Profile Mirror Spec | Validation passed | PR75 defines the GitHub markdown profile mirror strategy, reviewed-public data source boundary, markdown contract, and PR76 local-only generator boundary. No scripts, app code, external GitHub write, GitHub Pages deploy, generated profile commit, Public API, MCP, payment, deploy, or data repo mutation. |
+| GitHub Profile Mirror Generator | Validation passed | PR76 adds a local-only dry-run markdown generator that reads existing reviewed local project records and writes sanitized output only under `/tmp`. No generated profile commit, data repo mutation, external GitHub write, GitHub Pages deploy, Public API, MCP, payment, deploy, dependency, package, or server change. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Merge and clean PR75 after human approval, then evaluate the PR76 human checkpoint before any local-only generator work. Do not start PR76 until PR75 is merged and cleaned.
+Next: Merge and clean PR76 after human approval, then start PR77 QA. Do not start PR77 until PR76 is merged and cleaned.
