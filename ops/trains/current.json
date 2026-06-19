@@ -3,5 +3,5 @@
   "status": "idle",
   "last_completed_train": "TRAIN-PR87-PR90-API-KEY-METERING-SHELL",
   "next_recommended_train": "TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC",
-  "notes": "OPS7B recommends GO_PR91_ONLY. Start PR91 only as docs/contracts/spec after explicit instruction. Do not batch PR92-PR94 with PR91, and do not start PR91 automatically."
+  "notes": "OPS7C recommends GO_PR92_ONLY after scope remediation. Start PR92 only after OPS7C merges and cleanup completes. PR92 remains human-checkpointed, disabled-scaffold only, and must not auto-merge."
 }
