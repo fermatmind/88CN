@@ -423,8 +423,8 @@
     },
     {
       "id": "TRAIN-PR81-PR100",
-      "title": "B2B Alpha Data Feed train",
-      "phase": "b2b-alpha-data-feed",
+      "title": "Deprecated umbrella for PR81-PR100 B2B Alpha Data Feed phase",
+      "phase": "b2b-alpha-data-feed-deprecated-umbrella",
       "tasks": [
         "PR81",
         "PR82",
@@ -482,9 +482,9 @@
       "batch_limit": 20,
       "auto_merge_allowed": false,
       "live_deploy_allowed": false,
-      "payment_change_allowed": true,
+      "payment_change_allowed": false,
       "mcp_change_allowed": false,
-      "server_change_allowed": true,
+      "server_change_allowed": false,
       "plugin_install_allowed": false,
       "new_dependency_allowed": false,
       "continue_on_sidecar": false,
@@ -504,7 +504,11 @@
       "human_checkpoints": [
         {
           "task": "ANY",
-          "reason": "Laravel, API key, metering, payment, or data feed tasks require human checkpoint"
+          "reason": "broad umbrella train is deprecated; use split trains"
+        },
+        {
+          "task": "ANY",
+          "reason": "Laravel, API key, metering, payment, customer access, server, Supabase, or data-feed runtime requires checkpoint"
         }
       ],
       "required_preconditions": [
@@ -518,8 +522,9 @@
         "codex-qa"
       ],
       "notes": [
-        "This train can contain server and payment-adjacent work only after roadmap registration and human checkpoint.",
-        "Plugin install and new dependency changes remain false until a later registry update explicitly allows them."
+        "Deprecated umbrella only. Do not execute this broad train directly after OPS7A.",
+        "Use the split trains registered by OPS7A, beginning with TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY.",
+        "Laravel, API key, metering, payment, customer access, server, Supabase, and data-feed runtime work require explicit human checkpoints."
       ],
       "sub_batch_limit": 4
     },
@@ -1416,6 +1421,353 @@
       "notes": [
         "No live deploy, server configuration, payment, MCP exposure, plugin install, new dependency, external indexing ping, or data repo mutation is allowed by this train.",
         "QA-only train may auto-merge when no deploy is requested. Live smoke or deploy requires a separate checkpoint."
+      ]
+    },
+    {
+      "id": "TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY",
+      "title": "Alpha Feed boundary, snapshot schema, and event sync contract train",
+      "phase": "b2b-alpha-feed-boundary",
+      "tasks": [
+        "PR81",
+        "PR82",
+        "PR83"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS7A complete",
+        "worktree is clean and created from current origin/main",
+        "PR80 merged and cleaned",
+        "no live deploy, external service, secret, or data repo mutation without explicit checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "Docs/contracts only. No runtime feed, no API key runtime, no billing, no export endpoint, no Laravel runtime, no Supabase migration, no Redis production config."
+      ]
+    },
+    {
+      "id": "TRAIN-PR84-PR86-DATA-CLEANSING-SNAPSHOT",
+      "title": "Data cleansing and local-only snapshot dry-run train",
+      "phase": "b2b-alpha-data-cleansing-snapshot",
+      "tasks": [
+        "PR84",
+        "PR85",
+        "PR86"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS7A complete",
+        "worktree is clean and created from current origin/main",
+        "PR80 merged and cleaned",
+        "no live deploy, external service, secret, or data repo mutation without explicit checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "Local-only dry-run and QA. Output must stay under /tmp by default. No external write, customer access, secrets, or data repo mutation."
+      ]
+    },
+    {
+      "id": "TRAIN-PR87-PR90-API-KEY-METERING-SHELL",
+      "title": "API key and metering disabled shell train",
+      "phase": "b2b-alpha-api-key-metering-shell",
+      "tasks": [
+        "PR87",
+        "PR88",
+        "PR89",
+        "PR90"
+      ],
+      "batch_limit": 4,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": false,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "api_key_runtime_requested_without_checkpoint",
+        "customer_access_requested_without_checkpoint",
+        "billing_or_payment_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "ANY",
+          "reason": "api_key_runtime"
+        },
+        {
+          "task": "ANY",
+          "reason": "customer_access"
+        },
+        {
+          "task": "ANY",
+          "reason": "billing_or_payment"
+        },
+        {
+          "task": "ANY",
+          "reason": "production_secret"
+        }
+      ],
+      "required_preconditions": [
+        "OPS7A complete",
+        "worktree is clean and created from current origin/main",
+        "PR80 merged and cleaned",
+        "no live deploy, external service, secret, or data repo mutation without explicit checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No real key issuance, live metering, customer access, billing, payment, or production secret is allowed without a later human checkpoint."
+      ]
+    },
+    {
+      "id": "TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC",
+      "title": "Laravel gateway and Supabase sync boundary train",
+      "phase": "b2b-alpha-laravel-gateway-sync",
+      "tasks": [
+        "PR91",
+        "PR92",
+        "PR93",
+        "PR94"
+      ],
+      "batch_limit": 4,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": false,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "laravel_runtime_requested_without_checkpoint",
+        "supabase_schema_change_requested_without_checkpoint",
+        "webhook_secret_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "ANY",
+          "reason": "new_dependency"
+        },
+        {
+          "task": "ANY",
+          "reason": "laravel_runtime"
+        },
+        {
+          "task": "ANY",
+          "reason": "server_change"
+        },
+        {
+          "task": "ANY",
+          "reason": "supabase_schema_change"
+        },
+        {
+          "task": "ANY",
+          "reason": "webhook_secret"
+        },
+        {
+          "task": "ANY",
+          "reason": "redis_production"
+        }
+      ],
+      "required_preconditions": [
+        "OPS7A complete",
+        "worktree is clean and created from current origin/main",
+        "PR80 merged and cleaned",
+        "no live deploy, external service, secret, or data repo mutation without explicit checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "No Laravel runtime, new dependency, server config, Supabase migration, webhook secret, Redis production use, or deploy is allowed without a later human checkpoint."
+      ]
+    },
+    {
+      "id": "TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE",
+      "title": "Alpha Feed landing boundary and evidence dossier train",
+      "phase": "b2b-alpha-landing-evidence",
+      "tasks": [
+        "PR95",
+        "PR96",
+        "PR97"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR96",
+          "reason": "PII_collection"
+        },
+        {
+          "task": "PR96",
+          "reason": "customer_signup"
+        },
+        {
+          "task": "PR96",
+          "reason": "payment"
+        }
+      ],
+      "required_preconditions": [
+        "OPS7A complete",
+        "worktree is clean and created from current origin/main",
+        "PR80 merged and cleaned",
+        "no live deploy, external service, secret, or data repo mutation without explicit checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "Static/no-write copy and evidence can auto-merge. Contact collection, customer signup, payment, CRM/email integration, or Supabase writes require checkpoint. Investor, restricted capital-product, return-promise, and financial-advice language is forbidden."
+      ]
+    },
+    {
+      "id": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
+      "title": "B2B Alpha leakage QA, pivot gate, and readiness report train",
+      "phase": "b2b-alpha-qa-readiness",
+      "tasks": [
+        "PR98",
+        "PR99",
+        "PR100"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "OPS7A complete",
+        "worktree is clean and created from current origin/main",
+        "PR80 merged and cleaned",
+        "no live deploy, external service, secret, or data repo mutation without explicit checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-qa"
+      ],
+      "notes": [
+        "QA/docs-only train. Auto-merge is allowed only while no live deploy, customer enablement, external delivery, or data repo mutation is requested.",
+        "If live deploy or customer enablement becomes applicable, stop for a separate human checkpoint."
       ]
     }
   ]

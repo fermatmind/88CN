@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-18",
+  "updated_at": "2026-06-19",
   "tasks": [
     {
       "id": "OPS0",
@@ -3694,10 +3694,10 @@
         "docs/TASK_STATUS.md",
         "ops/tasks/current.json",
         "ops/tasks/roadmap.json",
-      "app/verticals/**",
-      "app/sitemap.ts",
-      "lib/verticals/**",
-      "scripts/check-vertical-asset-grids.mjs"
+        "app/verticals/**",
+        "app/sitemap.ts",
+        "lib/verticals/**",
+        "scripts/check-vertical-asset-grids.mjs"
       ],
       "forbidden_paths": [
         "README.md",
@@ -3897,11 +3897,11 @@
         "docs/SIDECAR_ISSUES.md",
         "docs/TASK_STATUS.md",
         "ops/tasks/current.json",
-      "ops/tasks/roadmap.json",
-      "app/alternatives/**",
-      "app/sitemap.ts",
-      "lib/alternatives/**",
-      "scripts/check-alternatives-canonical.mjs"
+        "ops/tasks/roadmap.json",
+        "app/alternatives/**",
+        "app/sitemap.ts",
+        "lib/alternatives/**",
+        "scripts/check-alternatives-canonical.mjs"
       ],
       "forbidden_paths": [
         "README.md",
@@ -4421,6 +4421,1553 @@
         "No live IndexNow ping unless a later task has an explicit human checkpoint.",
         "No 88cn-index-data mutation unless explicitly checkpointed.",
         "If live smoke or deploy is requested, stop for a separate human checkpoint."
+      ]
+    },
+    {
+      "id": "OPS7A",
+      "title": "PR81-PR100 B2B Data Cleansing + Alpha Monetization Readiness Scan + Roadmap Registration v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "b2b-alpha-readiness-registration",
+      "depends_on": [
+        "PR80"
+      ],
+      "purpose": "Scan, de-duplicate, risk-classify, and register PR81 through PR100 for the B2B Data Cleansing and Alpha Monetization phase without implementing product work.",
+      "allowed_paths": [
+        "ops/tasks/roadmap.json",
+        "ops/tasks/current.json",
+        "ops/trains/batches.json",
+        "ops/trains/current.json",
+        "docs/OPS7A_PR81_100_B2B_ALPHA_READINESS_SCAN.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "docs/QA_REPORT.md"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS7A",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR84-PR86-DATA-CLEANSING-SNAPSHOT",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR87-PR90-API-KEY-METERING-SHELL",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE",
+        "node scripts/agent/train-plan-check.mjs --batch TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS"
+      ],
+      "data_planes": [
+        "roadmap_registry",
+        "train_registry",
+        "commercial_boundary",
+        "b2b_alpha_readiness"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "external_service": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "PR81 through PR100 full task objects exist",
+        "PR81 through PR100 are split into bounded trains",
+        "payment, API key, Laravel, Supabase, server, data-feed, and customer-access risks are checkpointed",
+        "no implementation code is modified",
+        "no data repo mutation occurs",
+        "no live deploy is performed",
+        "no secret or environment file is required",
+        "investor, financial advice, restricted capital-product, and return-promise language is forbidden",
+        "first executable train after OPS7A is identified"
+      ],
+      "notes": [
+        "Registration only. Do not start PR81 from OPS7A.",
+        "Do not implement API key metering, Laravel gateway runtime, payment, Stripe, B2B feed export, customer portal, investor product, Supabase schema, or data repo writes."
+      ]
+    },
+    {
+      "id": "PR81",
+      "title": "Alpha Data Feed Boundary + Threat Model v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr81-pr83-alpha-feed-boundary",
+      "depends_on": [
+        "OPS7A"
+      ],
+      "purpose": "Define the data product boundary for 88CN Alpha Data Feed. No runtime feed.",
+      "allowed_paths": [
+        "docs/PR81_*.md",
+        "ops/contracts/alpha-feed-boundary.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR81"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "Alpha Feed boundary exists",
+        "allowed public fields defined",
+        "denied private/admin/payment/internal fields defined",
+        "investor/financial advice boundary exists",
+        "no customer data",
+        "no API key runtime",
+        "no billing",
+        "no export endpoint"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR82",
+      "title": "Published Signal Snapshot Schema v0",
+      "type": "ops/schema",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr81-pr83-alpha-feed-boundary",
+      "depends_on": [
+        "PR81"
+      ],
+      "purpose": "Define NDJSON/CSV snapshot schema using published-only public signals.",
+      "allowed_paths": [
+        "docs/PR82_*.md",
+        "ops/contracts/published-signal-snapshot-schema.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR82"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "snapshot schema exists",
+        "published-only source rule",
+        "no private founder data",
+        "no raw database rows",
+        "no internal Signal Score/Source Confidence internals",
+        "no export runtime"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR83",
+      "title": "Event Outbox + One-way Sync Contract v0",
+      "type": "ops/spec",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr81-pr83-alpha-feed-boundary",
+      "depends_on": [
+        "PR82"
+      ],
+      "purpose": "Define one-way async sync contract for future Supabase-to-Laravel/Redis feed without I/O-heavy polling.",
+      "allowed_paths": [
+        "docs/PR83_*.md",
+        "ops/contracts/event-outbox.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR83"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "event-outbox contract exists",
+        "one-way async flow defined",
+        "no Supabase trigger migration",
+        "no Laravel runtime",
+        "no Redis production config",
+        "data drift rules documented"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR84",
+      "title": "Local Snapshot Exporter Dry Run v0",
+      "type": "tooling",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr84-pr86-data-cleansing-snapshot",
+      "depends_on": [
+        "PR83"
+      ],
+      "purpose": "Create local-only dry-run snapshot exporter.",
+      "allowed_paths": [
+        "docs/PR84_*.md",
+        "scripts/export-alpha-feed-snapshot.mjs",
+        "scripts/check-alpha-feed-snapshot.mjs",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR84"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "outputs only to /tmp by default",
+        "no external write",
+        "no customer access",
+        "no secrets",
+        "no data repo mutation",
+        "checker validates privacy"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR84-PR86-DATA-CLEANSING-SNAPSHOT.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR85",
+      "title": "Data Cleansing Rules + Freshness Model v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr84-pr86-data-cleansing-snapshot",
+      "depends_on": [
+        "PR84"
+      ],
+      "purpose": "Define dedupe, canonicalization, freshness, archive, and source confidence boundary.",
+      "allowed_paths": [
+        "docs/PR85_*.md",
+        "ops/contracts/data-cleansing-freshness.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR85"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "cleansing rules exist",
+        "duplicate detection policy",
+        "canonical URL policy",
+        "freshness policy",
+        "archived stale handling",
+        "private fields denied"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR84-PR86-DATA-CLEANSING-SNAPSHOT.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR86",
+      "title": "Snapshot Export + Cleansing QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "pr84-pr86-data-cleansing-snapshot",
+      "depends_on": [
+        "PR85"
+      ],
+      "purpose": "QA local snapshot exporter and cleansing rules.",
+      "allowed_paths": [
+        "docs/PR86_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR86"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "dry-run output checked",
+        "no private fields",
+        "no external write",
+        "data repo clean",
+        "QA docs only"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR84-PR86-DATA-CLEANSING-SNAPSHOT.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR87",
+      "title": "API Key Boundary + Metering Threat Model v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr87-pr90-api-key-metering-shell",
+      "depends_on": [
+        "PR86"
+      ],
+      "purpose": "Define disabled-by-default API key and metering boundary.",
+      "allowed_paths": [
+        "docs/PR87_*.md",
+        "ops/contracts/api-key-metering-boundary.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR87"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "checkpointed",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "API key issuance not implemented",
+        "metering runtime not implemented",
+        "key storage policy defined",
+        "abuse limits defined",
+        "human checkpoint for real keys"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR87-PR90-API-KEY-METERING-SHELL.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Real API key issuance, live metering, customer access, billing, payment, and production secrets require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR88",
+      "title": "Disabled API Key Shell v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr87-pr90-api-key-metering-shell",
+      "depends_on": [
+        "PR87"
+      ],
+      "purpose": "Create disabled shell for future API key admin/customer flow.",
+      "allowed_paths": [
+        "docs/PR88_*.md",
+        "app/api/**",
+        "app/admin/**",
+        "lib/api-keys/**",
+        "scripts/check-api-key-shell.mjs",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR88"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "checkpointed_or_disabled",
+      "api_key_metering": "checkpointed",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "disabled by default",
+        "no real key issued",
+        "no customer login",
+        "no payment",
+        "returns Problem Details or placeholder",
+        "no secrets"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR87-PR90-API-KEY-METERING-SHELL.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Real API key issuance, live metering, customer access, billing, payment, and production secrets require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR89",
+      "title": "Metering Ledger Contract v0",
+      "type": "ops/schema",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr87-pr90-api-key-metering-shell",
+      "depends_on": [
+        "PR88"
+      ],
+      "purpose": "Define future request meter ledger contract.",
+      "allowed_paths": [
+        "docs/PR89_*.md",
+        "ops/contracts/metering-ledger-contract.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR89"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "checkpointed",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "no billing",
+        "no live metering",
+        "local schema/contract only",
+        "no production DB migration unless checkpointed",
+        "no payment coupling"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR87-PR90-API-KEY-METERING-SHELL.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Real API key issuance, live metering, customer access, billing, payment, and production secrets require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR90",
+      "title": "API Key + Metering QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "pr87-pr90-api-key-metering-shell",
+      "depends_on": [
+        "PR89"
+      ],
+      "purpose": "QA disabled API key and metering boundary.",
+      "allowed_paths": [
+        "docs/PR90_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR90"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "checkpointed",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "disabled behavior verified",
+        "no real keys",
+        "no billing",
+        "no secrets",
+        "QA docs only"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR87-PR90-API-KEY-METERING-SHELL.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Real API key issuance, live metering, customer access, billing, payment, and production secrets require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR91",
+      "title": "Laravel Gateway Boundary Spec v0",
+      "type": "ops/spec",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr91-pr94-laravel-gateway-sync",
+      "depends_on": [
+        "PR90"
+      ],
+      "purpose": "Define Laravel 12 gateway boundary for future B2B API. No runtime.",
+      "allowed_paths": [
+        "docs/PR91_*.md",
+        "ops/contracts/laravel-gateway-boundary.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR91"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "checkpointed",
+      "supabase_schema": "checkpointed",
+      "data_repo": "none",
+      "definition_of_done": [
+        "Laravel boundary exists",
+        "Next.js vs Laravel responsibilities separated",
+        "no runtime scaffold unless checkpointed",
+        "no server config",
+        "no deploy"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Laravel runtime, new dependencies, server config, Supabase schema change, webhook secrets, Redis production use, and deploy require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR92",
+      "title": "Laravel Gateway Disabled Scaffold v0",
+      "type": "product/scaffold",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr91-pr94-laravel-gateway-sync",
+      "depends_on": [
+        "PR91"
+      ],
+      "purpose": "Create disabled local-only gateway scaffold if allowed.",
+      "allowed_paths": [
+        "docs/PR92_*.md",
+        "gateway/**",
+        "scripts/check-laravel-gateway.mjs",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR92"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "checkpointed",
+      "supabase_schema": "checkpointed",
+      "data_repo": "none",
+      "definition_of_done": [
+        "disabled by default",
+        "no production route",
+        "no deploy",
+        "no secrets",
+        "no external service",
+        "no runtime coupling"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Laravel runtime, new dependencies, server config, Supabase schema change, webhook secrets, Redis production use, and deploy require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR93",
+      "title": "Supabase Webhook Sync Boundary v0",
+      "type": "ops/spec",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr91-pr94-laravel-gateway-sync",
+      "depends_on": [
+        "PR92"
+      ],
+      "purpose": "Define future Supabase webhook to Laravel/Redis sync boundary.",
+      "allowed_paths": [
+        "docs/PR93_*.md",
+        "ops/contracts/supabase-webhook-sync-boundary.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR93"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "checkpointed",
+      "supabase_schema": "checkpointed",
+      "data_repo": "none",
+      "definition_of_done": [
+        "webhook contract exists",
+        "no real webhook secret",
+        "no migration unless checkpointed",
+        "no production sync",
+        "drift handling documented"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Laravel runtime, new dependencies, server config, Supabase schema change, webhook secrets, Redis production use, and deploy require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR94",
+      "title": "Gateway + Sync Boundary QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "pr91-pr94-laravel-gateway-sync",
+      "depends_on": [
+        "PR93"
+      ],
+      "purpose": "QA Laravel gateway and sync boundaries.",
+      "allowed_paths": [
+        "docs/PR94_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR94"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "checkpointed",
+      "supabase_schema": "checkpointed",
+      "data_repo": "none",
+      "definition_of_done": [
+        "no server mutation",
+        "no env secrets",
+        "no migration",
+        "no live webhook",
+        "QA docs only"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR91-PR94-LARAVEL-GATEWAY-SYNC.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Laravel runtime, new dependencies, server config, Supabase schema change, webhook secrets, Redis production use, and deploy require a later human checkpoint."
+      ]
+    },
+    {
+      "id": "PR95",
+      "title": "Alpha Feed Landing Boundary v0",
+      "type": "product/copy",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr95-pr97-alpha-feed-landing-evidence",
+      "depends_on": [
+        "PR94"
+      ],
+      "purpose": "Create buyer-facing landing boundary for Alpha Feed interest. Static only.",
+      "allowed_paths": [
+        "docs/PR95_*.md",
+        "app/backers/**",
+        "app/alpha-feed/**",
+        "scripts/check-alpha-feed-landing.mjs",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR95"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "checkpointed_or_disabled",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "no financial advice",
+        "no investment recommendation",
+        "no restricted capital-product language",
+        "no guarantee of returns",
+        "no customer signup requiring payment",
+        "no private data",
+        "no API access"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Buyer-facing copy must not contain financial advice, investment recommendation, restricted capital-product language, return promises, or payment/customer signup without checkpoint."
+      ]
+    },
+    {
+      "id": "PR96",
+      "title": "Data Buyer Interest Form Shell v0",
+      "type": "product",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr95-pr97-alpha-feed-landing-evidence",
+      "depends_on": [
+        "PR95"
+      ],
+      "purpose": "Disabled or local-only interest form shell for future B2B buyers.",
+      "allowed_paths": [
+        "docs/PR96_*.md",
+        "app/alpha-feed/**",
+        "app/api/**",
+        "lib/alpha-feed/**",
+        "scripts/check-data-buyer-interest.mjs",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR96"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": true,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "checkpointed_or_disabled",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "disabled by default or no-write",
+        "no PII collection unless checkpointed",
+        "no external email/CRM",
+        "no Supabase write unless checkpointed"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Buyer-facing copy must not contain financial advice, investment recommendation, restricted capital-product language, return promises, or payment/customer signup without checkpoint."
+      ]
+    },
+    {
+      "id": "PR97",
+      "title": "Alpha Feed Evidence Dossier v0",
+      "type": "docs",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr95-pr97-alpha-feed-landing-evidence",
+      "depends_on": [
+        "PR96"
+      ],
+      "purpose": "Create evidence dossier summarizing public signal corpus, QA, privacy, and boundaries.",
+      "allowed_paths": [
+        "docs/PR97_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR97"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "public evidence only",
+        "no private customer data",
+        "no financial/investment promises",
+        "no external claims unsupported by repo evidence"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR95-PR97-ALPHA-FEED-LANDING-EVIDENCE.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope.",
+        "Buyer-facing copy must not contain financial advice, investment recommendation, restricted capital-product language, return promises, or payment/customer signup without checkpoint."
+      ]
+    },
+    {
+      "id": "PR98",
+      "title": "B2B Feed Leakage QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "pr98-pr100-b2b-alpha-qa-readiness",
+      "depends_on": [
+        "PR97"
+      ],
+      "purpose": "QA PR81-PR97 leakage and boundary.",
+      "allowed_paths": [
+        "docs/PR98_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR98"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "private fields denied",
+        "no secrets",
+        "no payment coupling",
+        "no investor advice",
+        "no customer access",
+        "QA docs only"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR99",
+      "title": "Alpha Feed Monetization Pivot Gate v0",
+      "type": "ops",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "pr98-pr100-b2b-alpha-qa-readiness",
+      "depends_on": [
+        "PR98"
+      ],
+      "purpose": "Define Day30/60/100 pivot gate for B2B feed viability.",
+      "allowed_paths": [
+        "docs/PR99_*.md",
+        "ops/contracts/alpha-feed-pivot-gate.json",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR99"
+      ],
+      "data_planes": [
+        "b2b_alpha_boundary"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "metrics thresholds defined",
+        "stop/continue criteria",
+        "no payment",
+        "no promises",
+        "no investor advice"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "PR100",
+      "title": "B2B Alpha Data Feed Readiness Report v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "pr98-pr100-b2b-alpha-qa-readiness",
+      "depends_on": [
+        "PR99"
+      ],
+      "purpose": "QA readiness report for PR81-PR99.",
+      "allowed_paths": [
+        "docs/PR100_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:scope:check -- PR100"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "api_key_metering": "none",
+      "laravel_runtime": "none",
+      "supabase_schema": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "readiness matrix",
+        "feed boundary review",
+        "API key/metering review",
+        "Laravel/sync review",
+        "monetization copy review",
+        "no implementation changes",
+        "next phase recommendation"
+      ],
+      "notes": [
+        "Registered by OPS7A in TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS.",
+        "No live deploy, secret/env creation, external service call, Supabase production mutation, or data repo mutation is allowed by this task unless a later explicit checkpoint changes scope."
+      ]
+    },
+    {
+      "id": "OPS7AQ",
+      "title": "PR81-PR100 B2B Alpha Roadmap Registration QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "b2b-alpha-readiness-registration-qa",
+      "depends_on": [
+        "OPS7A"
+      ],
+      "purpose": "QA the OPS7A PR81-PR100 roadmap registration, split-train boundaries, checkpoint posture, and no-implementation scope.",
+      "allowed_paths": [
+        "docs/OPS7AQ_*.md",
+        "docs/QA_REPORT.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS7AQ",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate"
+      ],
+      "data_planes": [
+        "qa_only"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "OPS7A registration matrix verified",
+        "split-train dry-runs verified",
+        "risk checkpoints verified",
+        "no implementation code change verified",
+        "QA docs only"
+      ],
+      "notes": [
+        "Registered by OPS7A as a follow-up QA task. Do not implement OPS7AQ inside OPS7A."
       ]
     }
   ],
