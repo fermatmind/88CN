@@ -8989,6 +8989,701 @@
       "notes": [
         "QA only. Browser or external-platform sessions must not be exported."
       ]
+    },
+    {
+      "id": "PR122",
+      "title": "Task-to-Project Discovery Boundary v0",
+      "type": "research",
+      "role": "codex-research",
+      "phase": "pr122-pr124-traffic4-task-discovery",
+      "depends_on": [
+        "TRAFFIC4R"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC4A: define finite task-to-project discovery policy before any /tasks implementation.",
+      "allowed_paths": [
+        "docs/PR122_*.md",
+        "docs/traffic/TRAFFIC4A_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR122"
+      ],
+      "data_planes": [
+        "docs_only",
+        "task_boundary"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "TRAFFIC4A boundary report exists",
+        "finite task slug allowlist defined",
+        "minimum reviewed-project threshold documented",
+        "arbitrary task pages forbidden",
+        "sitemap/noindex boundary documented"
+      ],
+      "notes": [
+        "Maps to TRAFFIC4A. Boundary only; do not create /tasks, runtime routes, components, lib modules, sitemap runtime changes, generated pages, or mass pSEO content."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC4A"
+    },
+    {
+      "id": "PR123",
+      "title": "Finite Task Pages Implementation v0",
+      "type": "implementation",
+      "role": "codex-build",
+      "phase": "pr122-pr124-traffic4-task-discovery",
+      "depends_on": [
+        "PR122"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC4B: implement only allowlisted finite task discovery pages if PR122/TRAFFIC4A confirms safe thresholds and route policy.",
+      "allowed_paths": [
+        "app/tasks/[slug]/page.tsx",
+        "components/tasks/**",
+        "lib/tasks/**",
+        "app/sitemap.ts",
+        "scripts/check-task-discovery-boundary.mjs",
+        "docs/PR123_*.md",
+        "docs/traffic/TRAFFIC4B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**",
+        "app/api/**",
+        "app/zh-CN/**",
+        "app/landscape/sectors/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR123",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "reviewed_local_data",
+        "finite_public_routes"
+      ],
+      "public_pages": "finite_allowlisted_tasks_only",
+      "definition_of_done": [
+        "finite /tasks route implementation passes checker",
+        "no arbitrary dynamic params",
+        "under-threshold pages excluded from sitemap",
+        "reviewed public-safe data only"
+      ],
+      "notes": [
+        "Maps to TRAFFIC4B. Implementation is allowed only after PR122/TRAFFIC4A. No query-param pages, arbitrary task pages, AI-for-X spam, copied descriptions, fake counts, or data repo mutation."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC4B"
+    },
+    {
+      "id": "PR124",
+      "title": "Task Pages QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "phase": "pr122-pr124-traffic4-task-discovery",
+      "depends_on": [
+        "PR123"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC4Q: verify finite task pages, copy boundaries, sitemap/noindex behavior, and no route drift after PR123.",
+      "allowed_paths": [
+        "docs/PR124_*.md",
+        "docs/traffic/TRAFFIC4Q_*.md",
+        "docs/QA_REPORT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR124",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "qa_only",
+        "public_surface_review"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "finite task route QA documented",
+        "forbidden task route drift absent",
+        "sitemap/noindex boundary verified",
+        "no product code modified"
+      ],
+      "notes": [
+        "Maps to TRAFFIC4Q. QA only; document defects instead of modifying product code unless a later scoped task allows fixes."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC4Q"
+    },
+    {
+      "id": "PR125",
+      "title": "Alternatives Expansion Boundary v0",
+      "type": "research",
+      "role": "codex-research",
+      "phase": "pr125-pr127-traffic5-alternatives-expansion",
+      "depends_on": [
+        "PR124"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC5A: define canonical pair policy and expansion limits before alternatives route growth.",
+      "allowed_paths": [
+        "docs/PR125_*.md",
+        "docs/traffic/TRAFFIC5A_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR125"
+      ],
+      "data_planes": [
+        "docs_only",
+        "comparison_boundary"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "canonical pair allowlist policy defined",
+        "reverse duplicates forbidden",
+        "N-by-N pair generation forbidden",
+        "superiority and defamatory copy forbidden"
+      ],
+      "notes": [
+        "Maps to TRAFFIC5A. Boundary only. Paid exposure must not affect organic comparison order or copy."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC5A"
+    },
+    {
+      "id": "PR126",
+      "title": "Alternatives Expansion Implementation v0",
+      "type": "implementation",
+      "role": "codex-build",
+      "phase": "pr125-pr127-traffic5-alternatives-expansion",
+      "depends_on": [
+        "PR125"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC5B: implement only approved canonical alternatives expansion after PR125/TRAFFIC5A.",
+      "allowed_paths": [
+        "app/alternatives/[slug]/page.tsx",
+        "components/alternatives/**",
+        "lib/alternatives/**",
+        "app/sitemap.ts",
+        "scripts/check-alternatives-canonical.mjs",
+        "docs/PR126_*.md",
+        "docs/traffic/TRAFFIC5B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**",
+        "app/api/**",
+        "app/tasks/**",
+        "app/zh-CN/**",
+        "app/landscape/sectors/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR126",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "reviewed_local_data",
+        "finite_public_routes"
+      ],
+      "public_pages": "finite_allowlisted_alternatives_only",
+      "definition_of_done": [
+        "approved pair expansion only",
+        "no reverse duplicates",
+        "no N-by-N generation",
+        "canonical/sitemap checks pass"
+      ],
+      "notes": [
+        "Maps to TRAFFIC5B. No superiority, defamatory, sponsored-bias, or paid-effect-on-organic-comparison claims. No new task or zh-CN routes."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC5B"
+    },
+    {
+      "id": "PR127",
+      "title": "Alternatives Expansion QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "phase": "pr125-pr127-traffic5-alternatives-expansion",
+      "depends_on": [
+        "PR126"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC5Q: verify canonical alternatives expansion, no reverse duplicates, copy boundaries, sitemap behavior, and data safety.",
+      "allowed_paths": [
+        "docs/PR127_*.md",
+        "docs/traffic/TRAFFIC5Q_*.md",
+        "docs/QA_REPORT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR127",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "qa_only",
+        "public_surface_review"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "alternatives QA documented",
+        "reverse duplicates absent",
+        "forbidden comparison copy absent",
+        "no product code modified"
+      ],
+      "notes": [
+        "Maps to TRAFFIC5Q. QA only; document defects rather than modifying product code."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC5Q"
+    },
+    {
+      "id": "PR128",
+      "title": "Report Distribution Pack Boundary v0",
+      "type": "research",
+      "role": "codex-research",
+      "phase": "pr128-pr131-traffic6-traffic7-distribution-qa",
+      "depends_on": [
+        "PR127"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC6A: define safe report distribution package boundaries before any generator implementation.",
+      "allowed_paths": [
+        "docs/PR128_*.md",
+        "docs/traffic/TRAFFIC6A_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR128"
+      ],
+      "data_planes": [
+        "docs_only",
+        "distribution_boundary"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "supported draft channels defined",
+        "no auto posting boundary documented",
+        "no email/DM/social/CRM/PII/browser-session-export policy documented"
+      ],
+      "notes": [
+        "Maps to TRAFFIC6A. Boundary only. No external write, platform login, outreach automation, CRM write, PII collection, or browser session export."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC6A"
+    },
+    {
+      "id": "PR129",
+      "title": "Report Distribution Pack Generator v0",
+      "type": "implementation",
+      "role": "codex-build",
+      "phase": "pr128-pr131-traffic6-traffic7-distribution-qa",
+      "depends_on": [
+        "PR128"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC6B: implement local draft report distribution package generation only after PR128/TRAFFIC6A.",
+      "allowed_paths": [
+        "lib/traffic-distribution/**",
+        "scripts/generate-report-distribution-pack.mjs",
+        "docs/PR129_*.md",
+        "docs/traffic/TRAFFIC6B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "package.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR129",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "local_draft_generation_only"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "local draft package generator implemented",
+        "no external writes",
+        "no posting or sending",
+        "no login or CRM integration"
+      ],
+      "notes": [
+        "Maps to TRAFFIC6B. Generator output must be local draft artifacts only. No email send, DM send, social API write, platform login, CRM record, PII storage, deploy, or data repo mutation."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC6B"
+    },
+    {
+      "id": "PR130",
+      "title": "Report Distribution Pack QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "phase": "pr128-pr131-traffic6-traffic7-distribution-qa",
+      "depends_on": [
+        "PR129"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC6Q: verify report distribution pack generator remains local draft-only and performs no external writes.",
+      "allowed_paths": [
+        "docs/PR130_*.md",
+        "docs/traffic/TRAFFIC6Q_*.md",
+        "docs/QA_REPORT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR130",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "qa_only",
+        "local_artifact_review"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "local draft-only QA documented",
+        "no external write paths found",
+        "no PII/CRM/outreach behavior found",
+        "no product code modified"
+      ],
+      "notes": [
+        "Maps to TRAFFIC6Q. QA only. Browser or external-platform sessions must not be exported."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC6Q"
+    },
+    {
+      "id": "PR131",
+      "title": "Demand-Side Traffic QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "phase": "pr128-pr131-traffic6-traffic7-distribution-qa",
+      "depends_on": [
+        "PR130"
+      ],
+      "purpose": "PR-numbered execution wrapper for TRAFFIC7: final QA closer for demand-side traffic surfaces after task pages, alternatives expansion, and report distribution pack work.",
+      "allowed_paths": [
+        "docs/PR131_*.md",
+        "docs/traffic/TRAFFIC7_*.md",
+        "docs/QA_REPORT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- PR131",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "data_planes": [
+        "qa_only",
+        "demand_side_final_review"
+      ],
+      "public_pages": "none",
+      "definition_of_done": [
+        "landscape and sector module QA verified",
+        "task pages QA verified if implemented",
+        "alternatives expansion QA verified if implemented",
+        "report distribution pack QA verified if implemented",
+        "sitemap/canonical/noindex and public copy boundaries verified",
+        "no product changes"
+      ],
+      "notes": [
+        "Maps to TRAFFIC7. Final QA closer only. Verify /landscape, sector module, task pages, alternatives expansion, report distribution pack, sitemap, canonical, noindex, mobile, public copy, API/MCP/payment/customer leakage, and data repo cleanliness."
+      ],
+      "repo": "88CN",
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "data_repo": "none",
+      "traffic_alias": "TRAFFIC7"
     }
   ],
   "skeletons": [

@@ -2,6 +2,6 @@
   "active_train": null,
   "status": "idle",
   "last_completed_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
-  "next_recommended_train": "TRAIN-TRAFFIC4-TASK-DISCOVERY",
-  "notes": "TRAFFIC4R registers split non-PR demand-side traffic trains after TRAFFIC3Q. The exact next executable unit is TRAIN-TRAFFIC4-TASK-DISCOVERY beginning with TRAFFIC4A, but TRAFFIC4R does not start that train. All new train risk flags are false; deployment, external writes, PII/outreach, customer access, API/MCP/payment, server changes, plugin installs, dependencies, and data repo mutation remain disallowed."
+  "next_recommended_train": "TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY",
+  "notes": "PR122-PR131 register the PR-numbered execution chain for the demand-side traffic work previously split as TRAFFIC4A through TRAFFIC7. The exact next executable PR train is TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY beginning with PR122 / TRAFFIC4A. PR101-PR121 remain reserved for the existing MCP and agent ecosystem train and are not reused."
 }
