@@ -4,6 +4,8 @@ import path from "node:path";
 const root = process.cwd();
 const registryPath = path.join(root, "lib/collections/curated-collections.json");
 const helperPath = path.join(root, "lib/collections/curated-collections.ts");
+const pagePath = path.join(root, "app/collections/[slug]/page.tsx");
+const sitemapPath = path.join(root, "app/sitemap.ts");
 const contractPath = path.join(
   root,
   "ops/contracts/curated-collections-boundary.json"
@@ -35,6 +37,12 @@ function readJson(filePath) {
 const registry = readJson(registryPath);
 const contract = readJson(contractPath);
 const helperSource = fs.readFileSync(helperPath, "utf8");
+const pageSource = fs.existsSync(pagePath)
+  ? fs.readFileSync(pagePath, "utf8")
+  : "";
+const sitemapSource = fs.existsSync(sitemapPath)
+  ? fs.readFileSync(sitemapPath, "utf8")
+  : "";
 const demoSource = fs.readFileSync(demoProjectsPath, "utf8");
 const minimumPublishedProjects =
   contract.evidence_thresholds?.minimum_published_projects ?? 2;
@@ -141,6 +149,42 @@ if (!helperSource.includes("collection.status === \"published\"")) {
 
 if (!helperSource.includes("minimumPublishedProjects")) {
   fail("curated collection helper must enforce minimumPublishedProjects");
+}
+
+if (pageSource) {
+  if (!pageSource.includes("generateStaticParams")) {
+    fail("collection page must define generateStaticParams");
+  }
+
+  if (!pageSource.includes("getPublishedCuratedCollections")) {
+    fail("collection page must use the finite published registry");
+  }
+
+  if (!pageSource.includes("notFound()")) {
+    fail("collection page must reject unknown or ineligible slugs");
+  }
+
+  if (pageSource.includes("demoCollections")) {
+    fail("collection page must not use demoCollections for route generation");
+  }
+
+  if (!pageSource.includes("getProjectsForCuratedCollection")) {
+    fail("collection page must use published-only project resolution");
+  }
+}
+
+if (sitemapSource) {
+  if (!sitemapSource.includes("getPublishedCuratedCollections")) {
+    fail("sitemap must use getPublishedCuratedCollections");
+  }
+
+  if (!sitemapSource.includes("/collections/")) {
+    fail("sitemap must include finite collection route URLs");
+  }
+
+  if (sitemapSource.includes("demoCollections")) {
+    fail("sitemap must not use demoCollections for collection entries");
+  }
 }
 
 if (errors.length > 0) {

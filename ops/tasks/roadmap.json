@@ -3559,6 +3559,7 @@
         "docs/TASK_STATUS.md",
         "ops/tasks/current.json",
         "ops/tasks/roadmap.json",
+        "app/sitemap.ts",
         "app/collections/**",
         "lib/collections/**",
         "scripts/check-curated-collections.mjs",

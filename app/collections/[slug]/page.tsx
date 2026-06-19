@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import {
-  getCollectionBySlug,
-  demoCollections,
-} from "@/lib/demo-collections";
-import { getProjectBySlug } from "@/lib/demo-projects";
+  getCuratedCollectionBySlug,
+  getProjectsForCuratedCollection,
+  getPublishedCuratedCollections,
+} from "@/lib/collections/curated-collections";
 import { CollectionGrid } from "@/components/collection-grid";
 import { collectionPageJSONLD } from "@/lib/structured-data";
 import { siteTitle, siteDescription } from "@/lib/seo";
@@ -14,43 +14,71 @@ interface CollectionPageProps {
 }
 
 export async function generateStaticParams() {
-  return demoCollections.map((c) => ({ slug: c.slug }));
+  return getPublishedCuratedCollections().map((collection) => ({
+    slug: collection.slug,
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: CollectionPageProps): Promise<Metadata> {
-  const collection = getCollectionBySlug(params.slug);
-  if (!collection) return { title: "Not Found" };
+  const collection = getCuratedCollectionBySlug(params.slug);
+  const projects = collection ? getProjectsForCuratedCollection(collection) : [];
+
+  if (
+    !collection ||
+    collection.status !== "published" ||
+    !collection.sitemapEligible ||
+    projects.length < collection.minimumPublishedProjects
+  ) {
+    return {
+      title: "Not Found",
+      robots: { index: false, follow: false },
+    };
+  }
 
   return {
     title: siteTitle(collection.title),
-    description: siteDescription(collection.editorialSummary.slice(0, 150)),
+    description: siteDescription(collection.summary.slice(0, 150)),
     robots: { index: true, follow: true },
   };
 }
 
 export default function CollectionPage({ params }: CollectionPageProps) {
-  const collection = getCollectionBySlug(params.slug);
-  if (!collection) notFound();
+  const collection = getCuratedCollectionBySlug(params.slug);
+  if (!collection || collection.status !== "published" || !collection.sitemapEligible) {
+    notFound();
+  }
+
+  const projects = getProjectsForCuratedCollection(collection);
+
+  if (projects.length < collection.minimumPublishedProjects) {
+    notFound();
+  }
 
   const baseUrl =
     process.env.APP_URL ?? "http://localhost:3000";
   const pageUrl = `${baseUrl}/collections/${collection.slug}`;
 
-  const projects = collection.projectSlugs
-    .map((slug) => getProjectBySlug(slug))
-    .filter((p): p is NonNullable<typeof p> => p !== undefined);
-
   const collectionLD = collectionPageJSONLD(
     pageUrl,
     collection.title,
-    collection.editorialSummary,
+    collection.summary,
     projects.map((p) => ({
       url: `${baseUrl}/projects/${p.slug}`,
       name: p.name,
     }))
   );
+
+  const collectionView = {
+    slug: collection.slug,
+    title: collection.title,
+    inclusionCriteria: collection.inclusionCriteria,
+    editorialSummary: collection.summary,
+    whyIncluded: collection.whyIncluded,
+    projectSlugs: collection.projectSlugs,
+    lastUpdated: collection.lastReviewed,
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
@@ -58,7 +86,7 @@ export default function CollectionPage({ params }: CollectionPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLD) }}
       />
-      <CollectionGrid collection={collection} projects={projects} />
+      <CollectionGrid collection={collectionView} projects={projects} />
     </div>
   );
 }
