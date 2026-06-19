@@ -5022,10 +5022,7 @@
       ],
       "forbidden_paths": [
         "README.md",
-        "app/**",
         "components/**",
-        "lib/**",
-        "scripts/**",
         "supabase/**",
         "deploy/**",
         "middleware.ts",

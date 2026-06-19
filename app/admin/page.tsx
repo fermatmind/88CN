@@ -10,6 +10,7 @@ import {
   LogOut,
   SearchCheck,
   BarChart3,
+  KeyRound,
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -108,6 +109,14 @@ export default async function AdminPage() {
             title="Conversion Metrics"
             description="Review aggregate counters and Day 30/60/100 pivot gates."
             tag="Active"
+          />
+        </Link>
+        <Link href="/admin/api-keys" className="block">
+          <AdminCard
+            icon={KeyRound}
+            title="API Key Access"
+            description="Review the disabled Alpha Data Feed API key shell."
+            tag="Disabled"
           />
         </Link>
       </div>
