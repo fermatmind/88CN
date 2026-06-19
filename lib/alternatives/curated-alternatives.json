@@ -40,5 +40,19 @@
     "neutralRationale": "ComplyKit and Pulse Analytics are both published local records with operations-oriented product context and public sources.",
     "sourceNotes": "Uses only local published profile fields and public source links. It does not verify readiness outcomes, customer adoption, revenue, or formal review status.",
     "boundaryNote": "Operations and compliance-related context is discovery-only and does not provide regulated guidance, assurance, or implementation steps."
+  },
+  {
+    "canonicalSlug": "aurora-code-vs-vectorbase",
+    "title": "Aurora Code and VectorBase Alternatives",
+    "summary": "A neutral comparison of two published 88CN project profiles that support AI builder infrastructure from different workflow layers.",
+    "status": "published",
+    "sitemapEligible": true,
+    "lastReviewed": "2026-06-20",
+    "leftProjectSlug": "aurora-code",
+    "rightProjectSlug": "vectorbase",
+    "canonicalPath": "/alternatives/aurora-code-vs-vectorbase",
+    "neutralRationale": "Aurora Code and VectorBase are both published local records with public source links and infrastructure-oriented AI builder context.",
+    "sourceNotes": "Uses reviewed local profile metadata, public source links, and visible Signal Score fields already present in local project records.",
+    "boundaryNote": "This page is a factual discovery aid and does not rank, endorse, or predict outcomes for either project."
   }
 ]

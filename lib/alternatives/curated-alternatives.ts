@@ -1,7 +1,7 @@
 import { getProjectBySlug, type DemoProject } from "@/lib/demo-projects";
 import registry from "./curated-alternatives.json";
 
-export const ALTERNATIVES_ROUTE_CAP_V0 = 3;
+export const ALTERNATIVES_ROUTE_CAP_V0 = 4;
 
 export const CURATED_ALTERNATIVES_STATUSES = [
   "draft",
