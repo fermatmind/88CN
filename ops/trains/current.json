@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR60-MCP-SERVER",
-  "next_recommended_train": "TRAIN-PR61-PR63-INTENT-GOVERNANCE",
-  "notes": "OPS6A registers PR61-PR80 and splits Global Intent Interception Web into bounded trains. Start with TRAIN-PR61-PR63-INTENT-GOVERNANCE after OPS6A merge and cleanup. Do not start PR61 automatically."
+  "last_completed_train": "TRAIN-PR80-GLOBAL-INTENT-WEB-QA",
+  "next_recommended_train": "TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY",
+  "notes": "OPS7A registers PR81-PR100 into bounded B2B Alpha split trains. Start with TRAIN-PR81-PR83-ALPHA-FEED-BOUNDARY after OPS7A merge and cleanup. Do not start PR81 automatically."
 }
