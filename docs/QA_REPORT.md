@@ -81,3 +81,46 @@ None. PR80 forbids `screenshots/**`, so QA used source inspection, command outpu
 ## Recommendation
 
 PR80 can merge after required checks pass. After PR80 merge and cleanup, start OPS7A / PR81-PR100 readiness scan before any PR81 implementation.
+
+# PR86 Snapshot Export + Cleansing QA v0
+
+- Date: 2026-06-19
+- Scope: PR86 Snapshot Export + Cleansing QA v0
+- Role: Codex-QA
+- Result: PASS
+- Blocked: No
+
+## Summary
+
+- PR86 validates PR84 local-only dry-run snapshot export and PR85 data cleansing rules.
+- Positive dry-run generated 5 published-only records under `/tmp/88cn-alpha-snapshot-pr86-qa`.
+- CSV and NDJSON fields matched the PR82 allowlist.
+- Denied private/admin/payment/customer/metering/raw/internal fields were absent.
+- Negative probes confirmed missing dry-run, repository output, data repository output, external destination, and remote source all fail closed.
+- `/Users/rainie/Desktop/88cn-index-data` remained clean.
+- No product code, script, schema, package, runtime route, endpoint, deploy, external write, or data repository mutation occurred.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `node scripts/check-alpha-feed-snapshot.mjs` | PASS |
+| `node scripts/export-alpha-feed-snapshot.mjs --dry-run --out /tmp/88cn-alpha-snapshot-pr86-qa --source local --no-external-write` | PASS |
+| Snapshot manifest/NDJSON/CSV field inspection | PASS |
+| Missing `--dry-run` negative probe | PASS |
+| Repository output negative probe | PASS |
+| Data repository output negative probe | PASS |
+| External destination negative probe | PASS |
+| Remote source negative probe | PASS |
+| Data repository clean check | PASS |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: none
+- P3: none
+
+## Recommendation
+
+PR86 can merge after required checks pass. After PR86 merge and cleanup, stop before PR87.

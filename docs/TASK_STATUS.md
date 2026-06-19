@@ -88,9 +88,10 @@
 | Event Outbox + One-way Sync Contract | Validation passed | PR83 defines a one-way async event outbox contract for future downstream feed sync. No Supabase trigger migration, webhook runtime, webhook credential, Laravel runtime, Redis production config, server config, full-table sync, request-time polling, external service connection, or data repo mutation. |
 | Local Snapshot Exporter Dry Run | Validation passed | PR84 adds a local-only dry-run Alpha Feed snapshot exporter and checker. Output is restricted to `/tmp/88cn-alpha-snapshot-*`; repo paths, data repo paths, external destinations, non-local sources, endpoints, customer access, secrets, and data repo mutation are rejected. |
 | Data Cleansing Rules + Freshness Model | Validation passed | PR85 defines dedupe, canonicalization, freshness, archive, source failure, source conflict, and public-safe Source Confidence boundary rules. Rules/spec only; no runtime feed, endpoint, DB migration, customer output, external write, or data repo mutation. |
+| Snapshot Export + Cleansing QA | Validation passed | PR86 validates PR84 local-only snapshot dry-run output and PR85 data cleansing rules. QA docs only; no product code, script, schema, package, runtime route, endpoint, deploy, external write, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Merge and clean PR85, then continue to PR86 QA only after PR85 post-merge validation passes.
+Next: Stop before PR87. Run PR87-PR90 readiness only when explicitly requested.
