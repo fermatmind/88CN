@@ -2,6 +2,7 @@ import { getPublishedProjects } from "@/lib/demo-projects";
 import { demoCategories } from "@/lib/demo-categories";
 import { demoCollections } from "@/lib/demo-collections";
 import { getPublishedReportSitemapEntries } from "@/lib/reports/published-reports";
+import { getPublishedStackClusters } from "@/lib/stacks/tech-stack-clusters";
 import { INDEXABLE_STATES } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
@@ -79,11 +80,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const reportEntries = getPublishedReportSitemapEntries(baseUrl);
 
+  const stackEntries: MetadataRoute.Sitemap = getPublishedStackClusters().map(
+    (cluster) => ({
+      url: `${baseUrl}/stacks/${cluster.slug}`,
+      lastModified: new Date(cluster.lastReviewed),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })
+  );
+
   return [
     ...staticEntries,
     ...projectEntries,
     ...categoryEntries,
     ...collectionEntries,
+    ...stackEntries,
     ...reportListEntries,
     ...reportEntries,
   ];

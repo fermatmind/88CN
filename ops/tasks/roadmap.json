@@ -3359,6 +3359,7 @@
         "docs/TASK_STATUS.md",
         "ops/tasks/current.json",
         "ops/tasks/roadmap.json",
+        "app/sitemap.ts",
         "app/stacks/**",
         "lib/stacks/**",
         "scripts/check-tech-stack-clusters.mjs"
