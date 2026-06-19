@@ -75,9 +75,10 @@
 | Vertical Asset Grid QA | Validation passed | PR71 verifies vertical pages, sitemap boundaries, published-only project filtering, notFound handling, no claimed-record leakage, and no advice-copy violations. QA docs only; no screenshots, app code, script, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Alternatives Canonical Policy | Validation passed | PR72 defines docs-only alternatives canonical policy, deterministic pair ordering, duplicate-route prevention, route cap, allowlist rules, sitemap boundary, neutral-copy rules, and anti-defamation boundaries. No app code, public page, sitemap, script, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Curated Alternatives Pages | Validation passed | PR73 implements three finite registry-backed `/alternatives/*` pages, canonical pair ordering, published-only project filtering, sitemap inclusion for canonical published alternatives routes only, and local checker coverage. No arbitrary params, N-squared generation, defamatory copy, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
+| Alternatives Canonical QA | Validation passed | PR74 verifies alternatives canonical policy, finite allowlist, duplicate-route prevention via notFound, sitemap boundary, route cap, published-only project filtering, copy safety, and no external-index/API/MCP/payment/deploy/data mutation. QA docs only; no screenshots or product code changes. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Merge and clean PR73, then proceed to PR74. Do not start PR75 from this train.
+Next: Merge and clean PR74, then run final TRAIN-PR72-PR74 validation. Do not start PR75 from this train.
