@@ -6982,6 +6982,96 @@
       ]
     },
     {
+      "id": "TRAFFIC0R",
+      "title": "Competitor Page Pattern + China/Global SEO Deep Scan v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "traffic-strategy",
+      "depends_on": [
+        "TRAFFIC0"
+      ],
+      "purpose": "Perform deeper public page-pattern, China/global SEO, CTA, and public monetization-boundary analysis before TRAFFIC1 taxonomy work.",
+      "allowed_paths": [
+        "docs/traffic/TRAFFIC0R_COMPETITOR_PAGE_PATTERN_SEO_DEEP_SCAN.md",
+        "docs/traffic/COMPETITOR_PAGE_PATTERN_MATRIX.md",
+        "docs/traffic/CHINA_GLOBAL_SEO_GAP_MAP.md",
+        "docs/traffic/PUBLIC_MONETIZATION_BOUNDARY_AUDIT.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "composer.json",
+        "composer.lock",
+        "artisan",
+        "bootstrap/**",
+        "routes/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- TRAFFIC0R",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate"
+      ],
+      "data_planes": [
+        "docs_only",
+        "public_page_research",
+        "roadmap_readiness"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "competitor page-pattern analysis exists",
+        "China/global SEO gap analysis exists",
+        "public monetization boundary audit exists",
+        "route opportunity map exists",
+        "SEO safety rules exist",
+        "TRAFFIC1 input requirements exist",
+        "no product/runtime code modified",
+        "no competitor scraping at scale",
+        "no external writes",
+        "no PII",
+        "no data repo mutation",
+        "validations pass"
+      ],
+      "notes": [
+        "Docs/research/roadmap only. Do not implement TRAFFIC1 or any product routes.",
+        "Use public browser observation only; no login, form submission, account creation, paywall bypass, external write, PII, or scraping at scale.",
+        "TRAFFIC1 remains the exact next recommended task after TRAFFIC0R if validation passes."
+      ]
+    },
+    {
       "id": "TRAFFIC1",
       "title": "Demand-Side Search Intent Taxonomy v0",
       "type": "research",
