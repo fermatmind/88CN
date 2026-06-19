@@ -2,46 +2,34 @@
 
 ## Latest Run
 
-- Date: 2026-06-18
-- Scope: PR49 Submission Channels + Founder Onboarding QA v0
+- Date: 2026-06-19
+- Scope: PR63 Intent Governance QA
 - Role: Codex-QA
 - Result: PASS
 - Blocked: No
 
 ## Summary
 
-- PR49 verified the PR47 submission channels report and PR48 founder onboarding surfaces after both merges.
-- Local QA ran on `http://localhost:3100` after `PORT=3100 scripts/codex-preflight.sh` passed.
-- `/reports/ai-project-submission-channels-2026`, `/founding-slots`, `/submit`, `/claim/aurora-code`, `/founders`, `/sitemap.xml`, and `/robots.txt` returned 200 locally.
-- Public copy scan on the checked HTML found no restricted public-copy phrases.
-- Sitemap includes the intended PR47 report URL and does not expose scouted, pending, quarantine, or submitted paths.
-- Desktop and mobile screenshots were recorded under `../screenshots/qa/`.
-- No product code was modified by PR49.
+- PR63 verified the PR61 taxonomy boundary and PR62 route registry contract.
+- PR61 and PR62 changed only docs/status/current files after OPS6A; no product runtime paths changed.
+- No public intent pages, dynamic routes, sitemap changes, external indexing calls, Public API exposure, MCP exposure, payment behavior, deploy steps, or data repo mutation were introduced.
+- `npm run policy:scan` and `npm run agent:scope:check -- PR63` passed.
+- No product code was modified by PR63 QA.
 
-## Runtime Evidence
+## Governance Evidence
 
 | Check | Result |
 | --- | --- |
-| `GET /reports/ai-project-submission-channels-2026` | 200 |
-| `GET /founding-slots` | 200 |
-| `GET /submit` | 200 |
-| `GET /claim/aurora-code` | 200 |
-| `GET /founders` | 200 |
-| `GET /sitemap.xml` | 200 |
-| `GET /robots.txt` | 200 |
-| Sitemap contains `/reports/ai-project-submission-channels-2026` | PASS |
-| Sitemap excludes scouted/pending/quarantine/submitted paths | PASS |
-| Checked public HTML avoids restricted public-copy phrases | PASS |
+| PR61 taxonomy doc exists | PASS |
+| PR62 route registry doc exists | PASS |
+| PR61-PR62 changed files stay docs/status/current only | PASS |
+| Product/runtime paths unchanged by PR61-PR62 | PASS |
+| Sitemap and robots runtime unchanged | PASS |
+| Data repo mutation absent | PASS |
 
 ## Screenshots
 
-| Page | Viewport | Screenshot |
-| --- | --- | --- |
-| `/reports/ai-project-submission-channels-2026` | Desktop 1440px | `../screenshots/qa/pr49-submission-channels-desktop.png` |
-| `/founding-slots` | Desktop 1440px | `../screenshots/qa/pr49-founder-onboarding-desktop.png` |
-| `/founding-slots` | Mobile 390px | `../screenshots/qa/pr49-founder-onboarding-mobile.png` |
-| `/submit` | Mobile 390px | `../screenshots/qa/pr49-submit-mobile.png` |
-| `/claim/aurora-code` | Mobile 390px | `../screenshots/qa/pr49-claim-mobile.png` |
+None. PR63 is governance QA only and did not open a browser.
 
 ## Validation Commands
 
@@ -50,18 +38,22 @@
 | `npm run verify:day0` | PASS |
 | `npm run policy:scan` | PASS |
 | `npm run third-party:check` | PASS |
-| `npm run public-surface:check` | PASS |
 | `npm run agent:redact:check` | PASS |
-| `npm run agent:scope:check -- PR49` | PASS |
-| `PORT=3100 scripts/codex-preflight.sh` | PASS |
+| `npm run agent:batch:check` | PASS |
+| `npm run agent:train-plan:check` | PASS |
+| `npm run agent:scope:check -- PR63` | PASS |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS |
+| `npm run agent:gate` | PASS |
 
 ## Findings
 
 - P0: none
 - P1: none
 - P2: none
-- P3: none
+- P3: existing non-blocking `read-only-mcp:check` gate wiring sidecar remains outside PR63 scope
 
 ## Recommendation
 
-PR49 can merge. TRAIN-PR47-PR49 can close after post-merge cleanup and final main validation.
+PR63 can merge. TRAIN-PR61-PR63 can close after post-merge cleanup and final train validation.
