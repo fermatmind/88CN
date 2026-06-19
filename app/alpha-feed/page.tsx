@@ -4,6 +4,7 @@ import {
   Archive,
   ArrowRight,
   Database,
+  MailX,
   FileText,
   Lock,
   ShieldCheck,
@@ -55,6 +56,12 @@ const notIncluded = [
   "Payment or account data",
   "Live API delivery",
   "Customer signup",
+];
+
+const disabledFields = [
+  "Work identity",
+  "Team context",
+  "Use case note",
 ];
 
 export default function AlphaFeedPage() {
@@ -177,6 +184,53 @@ export default function AlphaFeedPage() {
             <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
+      </section>
+
+      <section className="mt-6 grid gap-4 rounded-md border border-terminal-border bg-terminal-surface p-5 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <div className="mb-3 flex items-center gap-2">
+            <MailX className="h-4 w-4 text-terminal-muted" />
+            <h2 className="text-sm font-semibold text-terminal-fg">
+              Buyer interest shell
+            </h2>
+          </div>
+          <p className="text-xs leading-relaxed text-terminal-dim">
+            Future Alpha Feed interest is shown as a disabled preview only.
+            88CN is not collecting private contact details, company details,
+            buyer messages, customer signup requests, payment details, API key
+            requests, or live feed access requests here.
+          </p>
+        </div>
+
+        <form
+          aria-label="Disabled Alpha Feed buyer interest preview"
+          className="grid gap-3"
+        >
+          {disabledFields.map((label) => (
+            <label key={label} className="grid gap-1 text-xs text-terminal-dim">
+              <span>{label}</span>
+              <input
+                aria-label={`${label} disabled preview`}
+                className="rounded-md border border-terminal-border bg-terminal-elevated px-3 py-2 text-xs text-terminal-muted"
+                disabled
+                placeholder="Disabled preview"
+                readOnly
+                type="text"
+              />
+            </label>
+          ))}
+          <button
+            className="rounded-md border border-terminal-border bg-terminal-elevated px-3 py-2 text-xs text-terminal-muted"
+            disabled
+            type="button"
+          >
+            Interest collection disabled
+          </button>
+          <p className="text-[11px] leading-relaxed text-terminal-muted">
+            The matching API route returns a disabled Problem Details response
+            and does not parse request bodies.
+          </p>
+        </form>
       </section>
     </main>
   );
