@@ -72,9 +72,10 @@
 | Curated Collections Pages + QA | Validation passed | PR68 implements finite registry-backed `/collections/*` pages, published-only project filtering, sitemap inclusion for registry-published collections only, and QA evidence. No arbitrary query pages, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Vertical Asset Grid Taxonomy | Validation passed | PR69 defines docs-only vertical discovery taxonomy, lifecycle, threshold policy, route-generation boundary, and regulated-language constraints. No app code, public page, sitemap, script, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Vertical Asset Grid Pages | Validation passed | PR70 implements finite registry-backed `/verticals/*` pages, published-only project filtering, sitemap inclusion for registry-published vertical grids only, and local checker coverage. No arbitrary query pages, professional advice, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
+| Vertical Asset Grid QA | Validation passed | PR71 verifies vertical pages, sitemap boundaries, published-only project filtering, notFound handling, no claimed-record leakage, and no advice-copy violations. QA docs only; no screenshots, app code, script, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Merge and clean PR70, then proceed to PR71. Do not start PR72 from this train.
+Next: Merge and clean PR71, then run final TRAIN-PR69-PR71 validation. Do not start PR72 from this train.
