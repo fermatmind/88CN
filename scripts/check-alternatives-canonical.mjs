@@ -9,12 +9,13 @@ const sitemapPath = path.join(root, "app/sitemap.ts");
 const demoProjectsPath = path.join(root, "lib/demo-projects.ts");
 
 const errors = [];
-const routeCap = 3;
+const routeCap = 4;
 const allowedStatuses = new Set(["draft", "noindex", "published", "archived"]);
 const requiredCanonicalSlugs = new Set([
   "aurora-code-vs-nucleus-ml",
   "nucleus-ml-vs-vectorbase",
   "complykit-vs-pulse-analytics",
+  "aurora-code-vs-vectorbase",
 ]);
 const forbiddenCopyPatterns = [
   /guaranteed/i,
@@ -109,7 +110,7 @@ for (const entry of registry) {
   }
 
   if (!requiredCanonicalSlugs.has(canonicalSlug)) {
-    fail(`alternatives route is outside the PR73 allowlist: ${canonicalSlug}`);
+    fail(`alternatives route is outside the PR126 allowlist: ${canonicalSlug}`);
   }
 
   const expectedCanonicalSlug = canonicalSlugFor(leftProjectSlug, rightProjectSlug);
@@ -161,8 +162,8 @@ for (const entry of registry) {
   }
 }
 
-if (!helperSource.includes("ALTERNATIVES_ROUTE_CAP_V0 = 3")) {
-  fail("alternatives helper must define route cap 3");
+if (!helperSource.includes("ALTERNATIVES_ROUTE_CAP_V0 = 4")) {
+  fail("alternatives helper must define route cap 4");
 }
 
 if (!helperSource.includes('project.status === "published"')) {
