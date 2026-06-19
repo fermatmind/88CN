@@ -2,6 +2,7 @@
 
 Open sidecar issues:
 
+- PR95 P3 sidecar: `scripts/check-alpha-feed-landing.mjs` validates the new static Alpha Feed landing boundary, but PR95 roadmap scope does not allow `package.json` or `scripts/agent/gate.sh`, so no npm script or `agent:gate` wiring is added in PR95. Run it directly with `node scripts/check-alpha-feed-landing.mjs`.
 - PR94 P2 sidecar: `scripts/check-laravel-gateway.mjs` remains PR92-phase scoped when run directly during PR94. It compares committed changed files against the PR92 implementation allowlist, so valid PR94 QA paths such as `docs/PR94_GATEWAY_SYNC_BOUNDARY_QA_V0.md` and `docs/QA_REPORT.md` fail the checker. It is useful for PR92 fixture rejection but not lifecycle-aware as a PR94 validation command. PR94 verified its negative probes through `--root` fixtures and did not modify the checker because PR94 forbids `scripts/**`.
 - OPS5D triage: PR59 is spec-only, but the train-plan checker treats MCP task text conservatively. PR59 remains human-checkpointed in the train registry. OPS5E does not change train-plan risk detection.
 - PR60 P3 sidecar: `agent:gate` does not yet run `read-only-mcp:check` because PR60 allowed scope does not include `scripts/agent/gate.sh`. The PR60 task-specific checker runs independently and passes. A later gate-maintenance task should add `read-only-mcp:check` to `agent:gate` in one scoped update.
