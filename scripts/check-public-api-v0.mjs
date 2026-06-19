@@ -182,14 +182,6 @@ function validate(root) {
     }
   }
 
-  const changedForbiddenPaths = scanDir(path.join(root, "app/api/mcp"))
-    .concat(scanDir(path.join(root, "lib/mcp")))
-    .concat(scanDir(path.join(root, "lib/payments")))
-    .concat(scanDir(path.join(root, "deploy")));
-  if (changedForbiddenPaths.some((file) => repoPath(file).startsWith("app/api/mcp"))) {
-    errors.push("MCP API code must not be present in PR58");
-  }
-
   if (!fs.existsSync(docPath)) {
     errors.push("Missing docs/65_PUBLIC_READ_ONLY_API_V0.md");
   } else {

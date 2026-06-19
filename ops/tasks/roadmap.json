@@ -2867,6 +2867,9 @@
         "app/api/mcp/**",
         "lib/mcp/**",
         "scripts/check-read-only-mcp-server.mjs",
+        "scripts/check-mcp-threat-model.mjs",
+        "scripts/check-public-api-boundary.mjs",
+        "scripts/check-public-api-v0.mjs",
         "docs/67_READ_ONLY_MCP_SERVER_QA_V0.md",
         "docs/SIDECAR_ISSUES.md",
         "docs/BUILD_ERRORS.md",
@@ -2887,6 +2890,10 @@
         "npm run policy:scan",
         "npm run third-party:check",
         "npm run public-surface:check",
+        "npm run public-api-boundary:check",
+        "npm run public-api:v0:check",
+        "npm run mcp-threat-model:check",
+        "npm run read-only-mcp:check",
         "npm run agent:redact:check",
         "npm run agent:scope:check -- PR60",
         "npm run lint",
@@ -2908,7 +2915,9 @@
         "no prompt injection unsafe descriptions",
         "no public exposure without human checkpoint",
         "checker validates boundary",
-        "QA instructions included"
+        "QA instructions included",
+        "local disabled smoke passes if feasible",
+        "agent:gate sidecar recorded if read-only-mcp:check is not wired into the gate"
       ]
     }
   ],
