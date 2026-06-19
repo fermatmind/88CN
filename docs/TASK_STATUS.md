@@ -69,9 +69,10 @@
 | Tech Stack Cluster Pages | Validation passed | PR65 adds finite allowlisted `/stacks/*` pages, published-only project filtering, sitemap inclusion for approved stack pages only, and a local checker. No arbitrary params, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Tech Stack Cluster QA + Sitemap Boundary | Validation passed | PR66 verifies PR65 stack pages, sitemap boundaries, published-only eligibility, unknown slug handling, and no app-code modification. QA docs only; no screenshots, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Curated Collections Registry | Validation passed | PR67 defines a finite curated collection registry, lifecycle, published-only threshold, sitemap eligibility metadata, and local checker. No public page implementation, sitemap change, arbitrary query pages, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
+| Curated Collections Pages + QA | Validation passed | PR68 implements finite registry-backed `/collections/*` pages, published-only project filtering, sitemap inclusion for registry-published collections only, and QA evidence. No arbitrary query pages, external index ping, Public API, MCP, payment, deploy, dependency, or data repo mutation. |
 | Public surface hardening | Complete | P1 API validation ordering fix, monetization field interception, .strict() schemas, query noindex middleware (PR #15). |
 | Aliyun HK deployment | Complete | Nginx config, PM2 setup, deploy scripts, health check, environment variable docs, production runbook (PR #17). |
 | Dependencies | Not started | Intentionally out of Day 0 scope. |
 | Production config | Complete | Deployment runtime, environment variables, and production runbook documented (PR #17). |
 
-Next: Merge and clean PR67 before starting PR68. Do not start PR69 from this train.
+Next: Merge and clean PR68, then run final TRAIN-PR67-PR68 validation. Do not start PR69 from this train.

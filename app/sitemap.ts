@@ -1,8 +1,8 @@
 import { getPublishedProjects } from "@/lib/demo-projects";
 import { demoCategories } from "@/lib/demo-categories";
-import { demoCollections } from "@/lib/demo-collections";
 import { getPublishedReportSitemapEntries } from "@/lib/reports/published-reports";
 import { getPublishedStackClusters } from "@/lib/stacks/tech-stack-clusters";
+import { getPublishedCuratedCollections } from "@/lib/collections/curated-collections";
 import { INDEXABLE_STATES } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
@@ -60,14 +60,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const collectionEntries: MetadataRoute.Sitemap = demoCollections.map(
-    (c) => ({
-      url: `${baseUrl}/collections/${c.slug}`,
+  const collectionEntries: MetadataRoute.Sitemap =
+    getPublishedCuratedCollections().map((collection) => ({
+      url: `${baseUrl}/collections/${collection.slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.7,
-    })
-  );
+    }));
 
   const reportListEntries: MetadataRoute.Sitemap = [
     {
