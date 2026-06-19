@@ -7075,13 +7075,14 @@
       "id": "TRAFFIC1",
       "title": "Demand-Side Search Intent Taxonomy v0",
       "type": "research",
-      "role": "codex-research",
+      "role": "codex-build",
       "repo": "88CN",
       "phase": "traffic-taxonomy",
       "depends_on": [
-        "TRAFFIC0"
+        "TRAFFIC0",
+        "TRAFFIC0R"
       ],
-      "purpose": "Define finite demand-side search intent taxonomy for tasks, sectors, stacks, comparisons, reports, and Chinese founder education.",
+      "purpose": "Define finite demand-side search intent taxonomy, route-family rules, indexability policy, sitemap policy, copy boundary, Chinese mapping, monetization boundary, and TRAFFIC2 launch gates.",
       "allowed_paths": [
         "docs/traffic/TRAFFIC1_*.md",
         "docs/SIDECAR_ISSUES.md",
@@ -7128,12 +7129,22 @@
       "definition_of_done": [
         "finite intent taxonomy documented",
         "route allowlist principles documented",
+        "route family taxonomy documented",
+        "indexability policy documented",
+        "sitemap policy documented",
+        "canonical policy documented",
+        "Chinese mapping documented",
+        "copy boundaries documented",
+        "monetization boundary documented",
+        "route priority model documented",
+        "TRAFFIC2 input requirements documented",
         "no pages implemented"
       ],
       "notes": [
         "No product/runtime implementation in this task.",
         "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
-        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+        "Use finite reviewed route plans only; no scraping at scale and no mass page generation.",
+        "Use TRAFFIC0R as the immediate input; do not start TRAFFIC2, GROWTH0, BETA1, I18N0, or PR101 inside TRAFFIC1."
       ]
     },
     {
