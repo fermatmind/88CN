@@ -3,84 +3,65 @@
 ## Latest Run
 
 - Date: 2026-06-19
-- Scope: PR77 GitHub Profile Mirror QA
+- Scope: PR79 IndexNow Dry Run + Sitemap Notification QA
 - Role: Codex-QA
 - Result: PASS
 - Blocked: No
 
 ## Summary
 
-- PR77 verifies the PR75 mirror spec and PR76 local-only generator boundary.
-- The generator dry-run produced 6 markdown files under `/tmp/88cn-github-profile-mirror-pr77`.
-- Generator output reported `externalWrite: false` and `dataRepoMutation: false`.
-- Negative probes confirmed repo output paths and remote sources are rejected with non-zero exits.
-- No generated mirror markdown was committed, and `/Users/rainie/Desktop/88cn-index-data` remained clean.
-- No external indexing call, Public API exposure, MCP exposure, payment behavior, deploy step, dependency change, screenshot write, external repository write, GitHub Pages deploy, or data repo mutation was introduced.
+- PR79 verifies the PR78 sitemap notification and IndexNow boundary as QA-only dry-run evidence.
+- The boundary document, machine-readable contract, checker wiring, sitemap runtime boundary, and train/task metadata were inspected.
+- Local negative probes confirmed fake Google Indexing API allowance, fake IndexNow live ping enablement, fake endpoint references, fake key-like material, denied URL source allowance, and fake indexing network calls are rejected.
+- No live IndexNow ping, Google Indexing API call, Bing/Yandex/Seznam endpoint call, deploy, production config change, Public API change, MCP change, payment change, dependency change, screenshot write, or `88cn-index-data` mutation occurred.
 
-## GitHub Profile Mirror Evidence
+## Sitemap Notification Evidence
 
 | Check | Result |
 | --- | --- |
-| PR75 mirror spec exists and defines reviewed-public source boundary | PASS |
-| PR76 generator exists after merge on `main` | PASS |
-| Local dry-run with `--dry-run --source local --out /tmp/88cn-github-profile-mirror-pr77 --no-write-external` generated 6 markdown files | PASS |
-| Output path under repo was rejected | PASS |
-| Remote source was rejected | PASS |
-| Generated markdown did not include email, `sourceConfidence`, `signalScore`, external write fields, or data mutation fields | PASS |
-| Generated markdown used public-signal labels and approved unknown labels | PASS |
+| PR78 boundary document exists | PASS |
+| PR78 boundary contract exists | PASS |
+| `npm run sitemap-notification:check` passes | PASS |
+| Google Indexing API remains forbidden | PASS |
+| IndexNow live ping remains disabled by default | PASS |
+| Live external ping requires human checkpoint | PASS |
+| No runtime IndexNow or Google indexing endpoint call site | PASS |
+| No committed IndexNow key material | PASS |
+| Allowed URL sources remain published sitemap pages and future published allowlisted intent registry entries | PASS |
+| Denied URL sources include submitted, pending, quarantined, scouted, rejected, admin, api, mcp, and payment | PASS |
+| `app/sitemap.ts` remains bounded and read-only inspected | PASS |
 | Data repository remained clean | PASS |
 
-## Alternatives Page Evidence
+## Negative Probe Evidence
 
 | Check | Result |
 | --- | --- |
-| `/alternatives/[slug]` uses `generateStaticParams()` from the finite canonical registry | PASS |
-| Unknown or ineligible alternatives slugs call `notFound()` | PASS |
-| Registry includes exactly three published, sitemap-eligible canonical routes | PASS |
-| Alternatives projects resolve only from local `status: "published"` records | PASS |
-| Sitemap uses `getPublishedCuratedAlternatives()` for alternatives entries | PASS |
-| Reversed slugs are absent from the registry, static params, and sitemap helper output | PASS |
-
-## Vertical Page Evidence
-
-| Check | Result |
-| --- | --- |
-| `/verticals/[slug]` uses `generateStaticParams()` from the finite registry | PASS |
-| Unknown or ineligible vertical slugs call `notFound()` | PASS |
-| Registry includes exactly three published, sitemap-eligible vertical grids | PASS |
-| Vertical grid projects resolve only from local `status: "published"` records | PASS |
-| Sitemap uses `getPublishedVerticalAssetGrids()` for vertical entries | PASS |
-| Source grep found no `scribe-ai` or claimed-record inclusion in vertical routes, registry helper, or sitemap | PASS |
-
-## Collection Page Evidence
-
-| Check | Result |
-| --- | --- |
-| `/collections/[slug]` uses `generateStaticParams()` from the finite registry | PASS |
-| Unknown or ineligible collection slugs call `notFound()` | PASS |
-| Registry includes exactly three published, sitemap-eligible collections | PASS |
-| Collection projects resolve only from local `status: "published"` records | PASS |
-| Sitemap uses `getPublishedCuratedCollections()` for collection entries | PASS |
-| Collection route and sitemap no longer use `demoCollections` for collection routing | PASS |
+| Fake Google Indexing API allowance rejected | PASS |
+| Fake IndexNow live ping default true rejected | PASS |
+| Fake live ping without checkpoint rejected | PASS |
+| Fake `scouted` and `pending` URL source allowance rejected | PASS |
+| Fake Google indexing endpoint reference rejected | PASS |
+| Fake IndexNow endpoint reference rejected | PASS |
+| Fake IndexNow key-like material rejected | PASS |
+| Fake indexing network call rejected | PASS |
 
 ## Screenshots
 
-None. PR77 forbids `screenshots/**`, so QA used source inspection, generator output inspection, command output, and repository state checks.
+None. PR79 forbids `screenshots/**`, so QA used source inspection, command output, temporary `/tmp` negative probes, and repository state checks.
 
 ## Validation Commands
 
 | Command | Result |
 | --- | --- |
-| `node scripts/generate-github-profile-mirror.mjs --dry-run --source local --out /tmp/88cn-github-profile-mirror-pr77 --no-write-external` | PASS |
-| `node scripts/generate-github-profile-mirror.mjs --dry-run --source local --out /Users/rainie/Desktop/88CN/generated/github-profile-mirror --no-write-external` | PASS, rejected with non-zero exit |
-| `node scripts/generate-github-profile-mirror.mjs --dry-run --source remote --out /tmp/88cn-github-profile-mirror-pr77 --no-write-external` | PASS, rejected with non-zero exit |
-| `npm run agent:scope:check -- PR77` | PASS |
+| `npm run sitemap-notification:check` | PASS |
+| `npm run agent:batch:check` | PASS |
+| `npm run agent:train-plan:check` | PASS |
+| `node scripts/agent/train-plan-check.mjs --batch TRAIN-PR78-PR79-SITEMAP-INDEXNOW` | PASS |
 | `npm run verify:day0` | PASS |
 | `npm run policy:scan` | PASS |
 | `npm run third-party:check` | PASS |
-| `npm run lint` | PASS |
-| `npm run typecheck` | PASS |
-| `npm run build` | PASS |
+| `npm run public-surface:check` | PASS |
+| `npm run agent:gate` | PASS |
 
 ## Findings
 
