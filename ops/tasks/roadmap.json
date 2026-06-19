@@ -4227,23 +4227,25 @@
       "purpose": "Define safe sitemap notification and IndexNow strategy.",
       "allowed_paths": [
         "docs/PR78_*.md",
+        "docs/81_SITEMAP_NOTIFICATION_INDEXNOW_BOUNDARY_V0.md",
         "docs/QA_REPORT.md",
         "docs/BUILD_ERRORS.md",
         "docs/SIDECAR_ISSUES.md",
         "docs/TASK_STATUS.md",
+        "ops/indexing/**",
+        "scripts/check-sitemap-notification-boundary.mjs",
         "ops/tasks/current.json",
-        "ops/tasks/roadmap.json"
+        "ops/tasks/roadmap.json",
+        "package.json"
       ],
       "forbidden_paths": [
         "README.md",
         "app/**",
         "components/**",
         "lib/**",
-        "scripts/**",
         "supabase/**",
         "deploy/**",
         "middleware.ts",
-        "package.json",
         "package-lock.json",
         "public/**",
         ".env*",
@@ -4255,6 +4257,7 @@
         "npm run verify:day0",
         "npm run policy:scan",
         "npm run third-party:check",
+        "npm run sitemap-notification:check",
         "npm run agent:scope:check -- PR78"
       ],
       "data_planes": [
@@ -4272,6 +4275,8 @@
         "Google Indexing API forbidden",
         "IndexNow external ping disabled by default",
         "sitemap update logic documented",
+        "sitemap notification checker exists and passes",
+        "negative boundary probes pass",
         "no live ping in PR78",
         "no deploy"
       ],

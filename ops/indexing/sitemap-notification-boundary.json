@@ -1,0 +1,49 @@
+{
+  "$schema": "https://88cn.example/schemas/sitemap-notification-boundary-v0.json",
+  "task_id": "PR78",
+  "title": "Sitemap Notification + IndexNow Boundary v0",
+  "google_indexing_api_allowed": false,
+  "google_indexing_api_policy": "forbidden_for_normal_88cn_project_report_collection_profile_routes",
+  "indexnow_live_ping_default": false,
+  "live_ping_requires_human_checkpoint": true,
+  "dry_run_allowed": true,
+  "external_network_calls_in_pr78": false,
+  "sitemap_runtime_change_allowed_in_pr78": false,
+  "allowed_url_sources": [
+    "sitemap_published_pages_only",
+    "allowlisted_intent_registry_published_only"
+  ],
+  "denied_url_sources": [
+    "submitted",
+    "pending",
+    "quarantined",
+    "scouted",
+    "rejected",
+    "admin",
+    "api",
+    "mcp",
+    "payment"
+  ],
+  "future_key_storage_policy": {
+    "commit_keys": false,
+    "env_secret_required_in_pr78": false,
+    "allowed_after_checkpoint": "human-managed secret storage outside the repository",
+    "rotation_owner": "human team"
+  },
+  "future_pr79_dry_run_policy": {
+    "dry_run_only": true,
+    "live_ping_allowed": false,
+    "external_search_engine_contact_allowed": false,
+    "requires_human_checkpoint_for_live_ping": true
+  },
+  "idempotency_policy": {
+    "required": true,
+    "dedupe_key": "normalized_url_plus_sitemap_lastmod",
+    "retry_policy": "future bounded queue only, no request-time ping"
+  },
+  "allowlist_policy": {
+    "required": true,
+    "source": "published sitemap entries or future published intent registry entries only",
+    "runtime_expansion_forbidden": true
+  }
+}
