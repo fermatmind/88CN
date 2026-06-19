@@ -4749,7 +4749,6 @@
         "app/**",
         "components/**",
         "lib/**",
-        "scripts/**",
         "supabase/**",
         "deploy/**",
         "middleware.ts",
