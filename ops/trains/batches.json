@@ -1769,6 +1769,184 @@
         "QA/docs-only train. Auto-merge is allowed only while no live deploy, customer enablement, external delivery, or data repo mutation is requested.",
         "If live deploy or customer enablement becomes applicable, stop for a separate human checkpoint."
       ]
+    },
+    {
+      "id": "TRAIN-TRAFFIC4-TASK-DISCOVERY",
+      "title": "Task discovery boundary, implementation, and QA train",
+      "phase": "traffic-task-discovery",
+      "tasks": [
+        "TRAFFIC4A",
+        "TRAFFIC4B",
+        "TRAFFIC4Q"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "public_api_release_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "TRAFFIC4R merged and cleaned up",
+        "worktree is clean and created from current origin/main",
+        "all task IDs in this train are fully registered roadmap tasks",
+        "no live deploy, server config, payment, MCP, plugin install, new dependency, external service, customer access, PII collection, outreach automation, social posting, or data repo mutation is requested"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-research",
+        "codex-qa"
+      ],
+      "notes": [
+        "Sequential train only. Auto merge remains false because it includes public route implementation.",
+        "TRAFFIC4A must complete before any /tasks implementation.",
+        "No live deploy, external write, PII, outreach, CRM, Supabase, API/MCP/payment/customer route, or data repo mutation is allowed."
+      ]
+    },
+    {
+      "id": "TRAIN-TRAFFIC5-ALTERNATIVES-EXPANSION",
+      "title": "Alternatives boundary, expansion, and QA train",
+      "phase": "traffic-alternatives-expansion",
+      "tasks": [
+        "TRAFFIC5A",
+        "TRAFFIC5B",
+        "TRAFFIC5Q"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "public_api_release_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "TRAFFIC4R merged and cleaned up",
+        "worktree is clean and created from current origin/main",
+        "all task IDs in this train are fully registered roadmap tasks",
+        "no live deploy, server config, payment, MCP, plugin install, new dependency, external service, customer access, PII collection, outreach automation, social posting, or data repo mutation is requested"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-research",
+        "codex-qa"
+      ],
+      "notes": [
+        "Sequential train only. Auto merge remains false because it includes public route expansion.",
+        "TRAFFIC5A must define canonical pair policy before implementation.",
+        "No N-by-N pair generation, reverse duplicates, superiority claims, sponsored bias, external write, deploy, or data repo mutation is allowed."
+      ]
+    },
+    {
+      "id": "TRAIN-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA",
+      "title": "Report distribution boundary, generator, QA, and final traffic QA train",
+      "phase": "traffic-distribution-final-qa",
+      "tasks": [
+        "TRAFFIC6A",
+        "TRAFFIC6B",
+        "TRAFFIC6Q",
+        "TRAFFIC7"
+      ],
+      "batch_limit": 4,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "server_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "public_api_release_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "TRAFFIC4R merged and cleaned up",
+        "worktree is clean and created from current origin/main",
+        "all task IDs in this train are fully registered roadmap tasks",
+        "no live deploy, server config, payment, MCP, plugin install, new dependency, external service, customer access, PII collection, outreach automation, social posting, or data repo mutation is requested"
+      ],
+      "allowed_roles": [
+        "codex-build",
+        "codex-research",
+        "codex-qa"
+      ],
+      "notes": [
+        "Sequential train only. Auto merge remains false because it includes a generator task and final cross-surface QA.",
+        "TRAFFIC6A must define draft-only distribution boundaries before any generator work.",
+        "No auto posting, email send, DM send, social API write, platform login, CRM write, PII collection, browser session export, external write, deploy, or data repo mutation is allowed."
+      ]
     }
   ]
 }

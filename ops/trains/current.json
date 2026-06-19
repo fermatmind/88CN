@@ -2,6 +2,6 @@
   "active_train": null,
   "status": "idle",
   "last_completed_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
-  "next_recommended_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
-  "notes": "OPS9A2 adds compatibility for explicit non-PR train batches while preserving PR-number train behavior. next_recommended_train is intentionally retained as the last PR-number train for default train-plan compatibility. No non-PR train is registered in OPS9A2 because TRAFFIC3 already merged on origin/main; registering TRAIN-TRAFFIC3-TRAFFIC7 would be stale. Exact next task follows current main: TRAFFIC3B."
+  "next_recommended_train": "TRAIN-TRAFFIC4-TASK-DISCOVERY",
+  "notes": "TRAFFIC4R registers split non-PR demand-side traffic trains after TRAFFIC3Q. The exact next executable unit is TRAIN-TRAFFIC4-TASK-DISCOVERY beginning with TRAFFIC4A, but TRAFFIC4R does not start that train. All new train risk flags are false; deployment, external writes, PII/outreach, customer access, API/MCP/payment, server changes, plugin installs, dependencies, and data repo mutation remain disallowed."
 }
