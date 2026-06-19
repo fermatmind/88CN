@@ -45,6 +45,7 @@
     "agent:gate": "bash scripts/agent/gate.sh",
     "agent:smoke:local": "bash scripts/agent/smoke-local.sh",
     "agent:smoke:live": "bash scripts/agent/smoke-live.sh",
+    "agent:deploy:prepare": "node scripts/agent/prepare-live-deploy.mjs",
     "agent:deploy:production": "bash scripts/agent/deploy-production.sh",
     "agent:redact:check": "node scripts/agent/redact-check.mjs",
     "agent:scope:check": "node scripts/agent/scope-check.mjs",
