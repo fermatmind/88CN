@@ -7,6 +7,7 @@ import {
   Database,
   FileText,
   GitBranch,
+  Map,
   SearchCheck,
   ShieldCheck,
   UserCheck,
@@ -193,6 +194,96 @@ export default function LandscapePage() {
             Future task and sector routes remain planned work. They are not
             generated or linked from this implementation.
           </p>
+        </div>
+      </section>
+
+      <section className="pb-10">
+        <div className="rounded-md border border-terminal-border bg-terminal-surface p-5">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <div className="mb-3 flex items-center gap-2">
+                <Map className="h-4 w-4 text-terminal-muted" />
+                <h2 className="text-sm font-semibold text-terminal-fg">
+                  Sector density map
+                </h2>
+              </div>
+              <p className="max-w-3xl text-xs leading-relaxed text-terminal-dim">
+                Sector groups are finite internal discovery aids built from
+                reviewed local project records. Counts are reviewed sample
+                counts, not global market estimates, and sparse sectors stay
+                labeled as limited reviewed samples.
+              </p>
+            </div>
+            <span className="rounded-sm border border-terminal-border px-2 py-1 font-mono text-[10px] uppercase text-terminal-dim">
+              Module only
+            </span>
+          </div>
+
+          <div className="grid gap-3 lg:grid-cols-2">
+            {snapshot.sectorDensity.map((sector) => (
+              <article
+                key={sector.slug}
+                className="rounded-md border border-terminal-border p-4"
+              >
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h3 className="text-sm font-semibold text-terminal-fg">
+                      {sector.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-terminal-dim">
+                      {sector.summary}
+                    </p>
+                  </div>
+                  <span className="shrink-0 rounded-sm border border-terminal-border px-2 py-1 font-mono text-[10px] uppercase text-terminal-dim">
+                    {sector.thresholdLabel}
+                  </span>
+                </div>
+
+                <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                  <div className="rounded-md border border-terminal-border px-3 py-3">
+                    <div className="font-mono text-lg font-semibold text-terminal-fg">
+                      {sector.reviewedSampleCount}
+                    </div>
+                    <div className="mt-1 text-[11px] text-terminal-dim">
+                      Reviewed sample count
+                    </div>
+                  </div>
+                  {sector.sourceEvidence.map((metric) => (
+                    <div
+                      key={`${sector.slug}-${metric.label}`}
+                      className="rounded-md border border-terminal-border px-3 py-3"
+                    >
+                      <div className="font-mono text-lg font-semibold text-terminal-fg">
+                        {metric.value}
+                      </div>
+                      <div className="mt-1 text-[11px] text-terminal-dim">
+                        {metric.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {sector.projectExamples.map((project) => (
+                    <Link
+                      key={`${sector.slug}-${project.slug}`}
+                      href={`/projects/${project.slug}`}
+                      className="rounded-sm border border-terminal-border px-2 py-1 text-[11px] text-terminal-muted transition-colors hover:border-terminal-ring hover:text-terminal-fg"
+                    >
+                      {project.name}
+                    </Link>
+                  ))}
+                </div>
+
+                <p className="mt-4 text-[11px] leading-relaxed text-terminal-dim">
+                  {sector.statusNote}
+                </p>
+                <p className="mt-2 text-[11px] leading-relaxed text-terminal-dim">
+                  {sector.methodologyNote}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
