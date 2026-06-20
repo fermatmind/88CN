@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
-  "status": "in_progress",
-  "last_completed_train": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA",
-  "next_recommended_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
-  "notes": "PR164 / SCOUT_SEED1 completed the local-only identity hint pack step with findings: 40 accepted strong/medium hints and 12 rejected/weak hints remain separated under /tmp, with no committed generated pack. Continue with PR165 / SCOUT_SEEDQ QA. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation occurred."
+  "active_train": null,
+  "status": "idle",
+  "last_completed_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
+  "next_recommended_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
+  "notes": "TRAIN-PR163-PR165-SCOUT-SEED-MVP is complete after PR165 / SCOUT_SEEDQ. Continue with PR166 / CANON0 in TRAIN-PR166-PR168-CANON-RESOLVER. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation occurred."
 }
