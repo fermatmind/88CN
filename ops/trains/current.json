@@ -1,7 +1,7 @@
 {
-  "active_train": null,
-  "status": "idle",
+  "active_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
+  "status": "in_progress",
   "last_completed_train": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA",
   "next_recommended_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
-  "notes": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA is complete after PR162 / WORKERQ. Continue with PR163 / SCOUT_SEED0 in TRAIN-PR163-PR165-SCOUT-SEED-MVP. Seed50R files, if present, are research input only; no data repo mutation, public records, audit trigger, Supabase/staging/production write, deploy, Public API/MCP, or sitemap inclusion is authorized."
+  "notes": "PR163 / SCOUT_SEED0 completed the Seed 100 source policy step. Continue with PR164 / SCOUT_SEED1. Seed50R files, if present, remain research input only; PR164 output must be local-only and must not mutate data repo, public surfaces, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap."
 }
