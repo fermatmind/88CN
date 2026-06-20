@@ -3,5 +3,5 @@
   "status": "in_progress",
   "last_completed_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
   "next_recommended_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "notes": "PR176 / REPORT_DATA0 completed the report data eligibility scan with result GO_REPORT_DATA1_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE. Continue with PR177 / REPORT_DATA1 only after PR176 is merged and local main is clean; PR177 has human_checkpoint=true and must remain aggregate draft-only unless explicitly approved. No data repo, public surface, Supabase/staging/production, public report page, sitemap, public JSON, Public API/MCP, external distribution, deploy, project-level claims, or server/cloud mutation occurred."
+  "notes": "PR177 / REPORT_DATA1 completed the English aggregate draft decision with result GO_REPORT_DATA2_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE. Continue with PR178 / REPORT_DATA2 only after PR177 is merged and local main is clean; PR178 has human_checkpoint=true and must remain aggregate draft-only unless explicitly approved. No data repo, public surface, Supabase/staging/production, public report page, sitemap, public JSON, Public API/MCP, external distribution, deploy, project-level claims, or server/cloud mutation occurred."
 }

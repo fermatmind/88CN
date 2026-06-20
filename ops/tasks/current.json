@@ -1,13 +1,13 @@
 {
-  "current_task": "PR176",
-  "current_alias": "REPORT_DATA0",
+  "current_task": "PR177",
+  "current_alias": "REPORT_DATA1",
   "current_repo": "88CN",
   "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "GO_REPORT_DATA1_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE",
-  "next_recommended_task": "PR177",
-  "next_recommended_alias": "REPORT_DATA1",
+  "result": "GO_REPORT_DATA2_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE",
+  "next_recommended_task": "PR178",
+  "next_recommended_alias": "REPORT_DATA2",
   "next_recommended_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "next_non_pr_task": "REPORT_DATA1",
-  "notes": "PR176 scanned current staging/audit outputs with result GO_REPORT_DATA1_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE. Current evidence is eligible only for aggregate draft methodology, sample-size, fixture-mode, no-runtime, and no-public-surface context; it is not eligible for project-level readiness outcomes, rankings, scores, public report pages, sitemap entries, public JSON, Public API/MCP, data repo exports, external distribution, or production/public claims. Exact next task is PR177 / REPORT_DATA1 in TRAIN-PR176-PR179-REPORT-DATA; PR177 has human_checkpoint=true and is not started here."
+  "next_non_pr_task": "REPORT_DATA2",
+  "notes": "PR177 created an English aggregate draft decision with result GO_REPORT_DATA2_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE. The draft is backed only by aggregate process evidence from PR176: 40 local source rows, 5 staging sample rows, 20 audit fixture rows, no external HTTP audit rows, and no public report dataset rows. It is not a public report page, sitemap entry, public JSON, report registry entry, Public API/MCP surface, data repo export, external distribution, deploy, or project-level publication. Exact next task is PR178 / REPORT_DATA2; PR178 has human_checkpoint=true and is not started here."
 }
