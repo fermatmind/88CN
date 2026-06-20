@@ -3,5 +3,5 @@
   "status": "in_progress",
   "last_completed_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
   "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "notes": "PR170 / SCOUT_STAGING1 completed the storage/migration checkpoint with result GO_SCOUT_STAGING2_LOCAL_ONLY. Continue with PR171 / SCOUT_STAGING2 only after PR170 is merged and local main is clean. PR171 has a human checkpoint and must default to local-only dry-run unless explicitly approved; no data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation is authorized."
+  "notes": "PR171 / SCOUT_STAGING2 completed the local-only staging write dry-run with STAGING_WRITE_NOT_AUTHORIZED_LOCAL_ONLY and no DB writes. Continue with PR172 / SCOUT_STAGINGQ after PR171 is merged and local main is clean. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation occurred."
 }

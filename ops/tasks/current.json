@@ -1,13 +1,13 @@
 {
-  "current_task": "PR170",
-  "current_alias": "SCOUT_STAGING1",
+  "current_task": "PR171",
+  "current_alias": "SCOUT_STAGING2",
   "current_repo": "88CN",
-  "current_role": "codex-ops",
+  "current_role": "codex-build",
   "status": "validation_passed",
-  "result": "GO_SCOUT_STAGING2_LOCAL_ONLY",
-  "next_recommended_task": "PR171",
-  "next_recommended_alias": "SCOUT_STAGING2",
+  "result": "PASS_SCOUT_STAGING_LOCAL_DRY_RUN",
+  "next_recommended_task": "PR172",
+  "next_recommended_alias": "SCOUT_STAGINGQ",
   "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "next_non_pr_task": "SCOUT_STAGING2",
-  "notes": "PR170 decides the staging sandbox storage/migration checkpoint with result GO_SCOUT_STAGING2_LOCAL_ONLY. The current staging train remains docs/local-only: no Supabase migration, staging schema, staging write, production write, runtime storage code, public surface, or data repo mutation is authorized. PR170 records future planning inputs for internal staging entities, fields, RLS/access boundaries, indexes, rollback/delete, TTL, and correction workflow, but creates no schema or migration. Exact next task is PR171 / SCOUT_STAGING2; PR171 is not started here."
+  "next_non_pr_task": "SCOUT_STAGINGQ",
+  "notes": "PR171 ran a local-only staging sandbox write dry-run with result PASS_SCOUT_STAGING_LOCAL_DRY_RUN. Because no explicit staging DB write was authorized, it recorded STAGING_WRITE_NOT_AUTHORIZED_LOCAL_ONLY and did not attempt any Supabase/staging/production write. A local dry-run manifest remains under /tmp with 5 sample would-write payloads from the PR167 canonical dry-run, source row count 40. No migration, schema, runtime storage code, worker, crawler, queue, data repo mutation, public route, sitemap, Public API/MCP, report surface, audit, deploy, server/cloud mutation, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR172 / SCOUT_STAGINGQ; PR172 is not started here."
 }
