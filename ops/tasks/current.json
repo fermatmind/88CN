@@ -1,10 +1,10 @@
 {
-  "current_task": "GROWTH2A",
+  "current_task": "GROWTH2B",
   "current_repo": "88CN",
   "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "GO_GROWTH2B",
-  "next_recommended_task": "GROWTH2B",
+  "result": "PASS_LOCAL_DRAFT_CONTRACT_ONLY",
+  "next_recommended_task": "GROWTH2Q",
   "next_recommended_train": "TRAIN-GROWTH2-REPORT-DISTRIBUTION-DRAFTS",
-  "next_non_pr_task": "GROWTH2B"
+  "next_non_pr_task": "GROWTH2Q"
 }
