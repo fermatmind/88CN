@@ -18962,7 +18962,6 @@
         "components/**",
         "lib/**",
         "scripts/**",
-        "supabase/**",
         "deploy/**",
         "middleware.ts",
         "package.json",
@@ -19015,7 +19014,8 @@
         "no production write or seed import occurs"
       ],
       "notes": [
-        "Numeric remap of PR182B for train compatibility."
+        "Numeric remap of PR182B for train compatibility.",
+        "PR184 permits supabase/migrations/** as the staging-only migration exception; broad supabase/** is intentionally omitted from forbidden paths so scope validation can resolve the approved migration file."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
