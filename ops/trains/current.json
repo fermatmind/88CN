@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR182-PROJECT-CONTRACT",
+  "active_train": "TRAIN-PR183-CONTROL-PANEL",
   "status": "registered",
-  "last_completed_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "next_recommended_train": "TRAIN-PR182-PROJECT-CONTRACT",
-  "notes": "PR181 / SEED_MANIFEST verified the repaired private Seed50 artifact with result GO_PROJECT_CONTRACT_WITH_MANUAL_REVIEW_FINDINGS and registered PR182 / PROJECT_CONTRACT as the next immediate task. PR182 is not started here. No private seed rows, source evidence rows, canonical rows, manifest, checksum, zip, data repo mutation, public surface, Supabase/staging/production write, external HTTP audit, worker runtime, crawler, deploy, or server/cloud mutation occurred."
+  "last_completed_train": "TRAIN-PR182-PROJECT-CONTRACT",
+  "next_recommended_train": "TRAIN-PR183-CONTROL-PANEL",
+  "notes": "PR182 / PROJECT_CONTRACT defined the permanent project entity contract and fail-closed publish gate with result GO_CONTROL_PANEL_WITH_PROJECT_CONTRACT_READY. PR183 / CONTROL_PANEL is registered as the next immediate task but not started. No Supabase migration, DB/staging/production write, frontend project page, sitemap runtime, Public API/MCP exposure, Agent/audit/crawler/worker, data repo mutation, deploy, or private seed artifact commit occurred."
 }
