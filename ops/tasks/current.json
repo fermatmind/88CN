@@ -1,13 +1,13 @@
 {
-  "current_task": "PR164",
-  "current_alias": "SCOUT_SEED1",
+  "current_task": "PR165",
+  "current_alias": "SCOUT_SEEDQ",
   "current_repo": "88CN",
-  "current_role": "codex-build",
+  "current_role": "codex-qa",
   "status": "validation_passed",
-  "result": "PASS_SCOUT_SEED40_LOCAL_PACK_WITH_FINDINGS",
-  "next_recommended_task": "PR165",
-  "next_recommended_alias": "SCOUT_SEEDQ",
-  "next_recommended_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
-  "next_non_pr_task": "SCOUT_SEEDQ",
-  "notes": "PR164 generated a local-only Seed identity hint pack under /tmp with result PASS_SCOUT_SEED40_LOCAL_PACK_WITH_FINDINGS. Seed50R /tmp artifacts were used as research input only and structurally revalidated: 40 strong/medium hints passed and 12 rejected/weak hints stayed separated. Exact 100 was not forced. Generated JSONL/manifest outputs were not committed and are not official records. No data repo mutation, Supabase/staging/production write, external HTTP fetch, crawler, audit trigger, public route, sitemap, Public API/MCP, report surface, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR165 / SCOUT_SEEDQ; PR165 is not started here."
+  "result": "PASS_SCOUT_SEED_NO_COPY_QA",
+  "next_recommended_task": "PR166",
+  "next_recommended_alias": "CANON0",
+  "next_recommended_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
+  "next_non_pr_task": "CANON0",
+  "notes": "PR165 verifies PR163-PR164 Seed policy and local pack outputs with result PASS_SCOUT_SEED_NO_COPY_QA. QA confirms 40 accepted local hints use allowed identity fields plus local-only guardrail fields, 12 rejected/weak hints remain separated, and no competitor copy, directory category/ranking/score/review/recommendation text, PII, public status, audit status, Growth status, public route, sitemap, Public API/MCP, report surface, data repo mutation, Supabase write, external HTTP fetch, crawler, or audit trigger occurred. TRAIN-PR163-PR165-SCOUT-SEED-MVP is complete. Exact next task is PR166 / CANON0; PR166 is not started here."
 }
