@@ -1,10 +1,13 @@
 {
-  "current_task": "OPS-INFRA2X",
+  "current_task": "PR145",
+  "current_alias": "SCOUT_IMPLR",
   "current_repo": "88CN",
   "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "GO_SCOUT_IMPL0_WITH_CONDITIONAL_PLACEMENT",
-  "next_recommended_task": "SCOUT_IMPL0",
-  "next_recommended_train": "NONE",
-  "next_non_pr_task": "SCOUT_IMPL0"
+  "result": "GO_SCOUT_IMPL0",
+  "next_recommended_task": "PR146",
+  "next_recommended_alias": "SCOUT_IMPL0",
+  "next_recommended_train": "TRAIN-PR146-PR150-SCOUT-IMPL-PERSISTENCE",
+  "next_non_pr_task": "SCOUT_IMPL0",
+  "notes": "PR145 registers PR146-PR157 and the SCOUT/AUDIT/REPORT implementation-stage trains only. PR145 may auto-merge and delete its task branch after validation. PR146 has not started."
 }
