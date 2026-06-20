@@ -57,6 +57,30 @@ function fail(message) {
   failures.push(message);
 }
 
+let taskDiscoveryBoundaryChecked = false;
+
+function ensureTaskDiscoveryBoundary(reason) {
+  if (taskDiscoveryBoundaryChecked) return;
+  taskDiscoveryBoundaryChecked = true;
+
+  try {
+    execFileSync(process.execPath, [repoPath("scripts/check-task-discovery-boundary.mjs")], {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+  } catch (error) {
+    const output = [error.stdout, error.stderr]
+      .filter(Boolean)
+      .join("\n")
+      .trim();
+    fail(
+      `${reason} requires passing scripts/check-task-discovery-boundary.mjs` +
+        (output ? `: ${output}` : "")
+    );
+  }
+}
+
 function assertExists(file) {
   if (!exists(file)) fail(`${file} is missing`);
 }
@@ -75,7 +99,9 @@ assertExists("app/landscape/page.tsx");
 assertExists("lib/landscape/public-signal-landscape.ts");
 assertExists("docs/traffic/TRAFFIC2B_AI_PROJECT_LANDSCAPE_LANDING_IMPLEMENTATION_V0.md");
 
-if (exists("app/tasks")) fail("app/tasks must not exist");
+if (exists("app/tasks")) {
+  ensureTaskDiscoveryBoundary("finite task routes");
+}
 if (exists("app/zh-CN")) fail("app/zh-CN must not exist");
 if (exists("app/landscape/sectors")) fail("app/landscape/sectors must not exist");
 
@@ -87,7 +113,10 @@ for (const file of changed) {
   if (file === "package-lock.json") {
     fail("package-lock.json must not change");
   }
-  if (file.startsWith("app/tasks/") || file.startsWith("app/zh-CN/")) {
+  if (file.startsWith("app/tasks/")) {
+    ensureTaskDiscoveryBoundary(`${file} task route change`);
+  }
+  if (file.startsWith("app/zh-CN/")) {
     fail(`${file} is outside TRAFFIC2B route scope`);
   }
 }
@@ -200,8 +229,15 @@ if (exists("app/landscape/page.tsx")) {
     }
   }
 
+  if (/href=["']\/tasks(?:["'?#])/.test(page)) {
+    fail("app/landscape/page.tsx must not link to a broad /tasks index");
+  }
+
+  if (/href=["']\/tasks\//.test(page)) {
+    ensureTaskDiscoveryBoundary("landscape task links");
+  }
+
   const unsafeLinks = [
-    'href="/tasks',
     'href="/zh-CN',
     'href="/landscape/sectors',
     'href="/api',
@@ -237,7 +273,37 @@ if (exists("app/sitemap.ts")) {
   if (!sitemap.includes("/landscape")) {
     fail("app/sitemap.ts must include /landscape after safe route implementation");
   }
-  for (const route of ["/landscape/sectors", "/tasks", "/zh-CN"]) {
+
+  if (
+    sitemap.includes("`${baseUrl}/tasks`") ||
+    sitemap.includes('" /tasks"') ||
+    sitemap.includes("'/tasks'")
+  ) {
+    fail("app/sitemap.ts must not include a broad /tasks index");
+  }
+
+  if (sitemap.includes("/tasks/") || sitemap.includes("/tasks/${")) {
+    ensureTaskDiscoveryBoundary("task sitemap entries");
+  }
+
+  for (const route of [
+    "/admin",
+    "/api",
+    "/auth",
+    "/scouted",
+    "/api/alpha-feed/buyer-interest",
+    "/api/alpha-feed/api-keys",
+    "/api/payments",
+    "checkout",
+    "buyer-interest",
+    "api-keys",
+  ]) {
+    if (sitemap.includes(route)) {
+      fail(`app/sitemap.ts must not include unsafe route entry: ${route}`);
+    }
+  }
+
+  for (const route of ["/landscape/sectors", "/zh-CN"]) {
     if (sitemap.includes(route)) {
       fail(`app/sitemap.ts must not include ${route}`);
     }

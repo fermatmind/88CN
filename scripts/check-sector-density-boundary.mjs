@@ -21,6 +21,30 @@ function fail(message) {
   failures.push(message);
 }
 
+let taskDiscoveryBoundaryChecked = false;
+
+function ensureTaskDiscoveryBoundary(reason) {
+  if (taskDiscoveryBoundaryChecked) return;
+  taskDiscoveryBoundaryChecked = true;
+
+  try {
+    execFileSync(process.execPath, [repoPath("scripts/check-task-discovery-boundary.mjs")], {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+  } catch (error) {
+    const output = [error.stdout, error.stderr]
+      .filter(Boolean)
+      .join("\n")
+      .trim();
+    fail(
+      `${reason} requires passing scripts/check-task-discovery-boundary.mjs` +
+        (output ? `: ${output}` : "")
+    );
+  }
+}
+
 function gitLines(args) {
   try {
     const output = execFileSync("git", args, { cwd: root, encoding: "utf8" });
@@ -52,8 +76,12 @@ for (const file of requiredFiles) {
   if (!exists(file)) fail(`${file} is missing`);
 }
 
-for (const dir of ["app/landscape/sectors", "app/tasks", "app/zh-CN"]) {
+for (const dir of ["app/landscape/sectors", "app/zh-CN"]) {
   if (exists(dir)) fail(`${dir} must not exist`);
+}
+
+if (exists("app/tasks")) {
+  ensureTaskDiscoveryBoundary("finite task routes");
 }
 
 const changed = new Set([
@@ -96,9 +124,16 @@ if (exists("app/landscape/page.tsx")) {
     }
   }
 
+  if (/href=["']\/tasks(?:["'?#])/.test(page)) {
+    fail("app/landscape/page.tsx must not link to a broad /tasks index");
+  }
+
+  if (/href=["']\/tasks\//.test(page)) {
+    ensureTaskDiscoveryBoundary("landscape task links");
+  }
+
   for (const unsafeLink of [
     'href="/landscape/sectors',
-    'href="/tasks',
     'href="/zh-CN',
     'href="/api',
     'href="/admin',
@@ -180,7 +215,37 @@ for (const match of containsAny(sectorContent, forbiddenFields)) {
 
 if (exists("app/sitemap.ts")) {
   const sitemap = read("app/sitemap.ts");
-  for (const route of ["/landscape/sectors", "/tasks", "/zh-CN"]) {
+
+  if (
+    sitemap.includes("`${baseUrl}/tasks`") ||
+    sitemap.includes('" /tasks"') ||
+    sitemap.includes("'/tasks'")
+  ) {
+    fail("app/sitemap.ts must not include a broad /tasks index");
+  }
+
+  if (sitemap.includes("/tasks/") || sitemap.includes("/tasks/${")) {
+    ensureTaskDiscoveryBoundary("task sitemap entries");
+  }
+
+  for (const route of [
+    "/admin",
+    "/api",
+    "/auth",
+    "/scouted",
+    "/api/alpha-feed/buyer-interest",
+    "/api/alpha-feed/api-keys",
+    "/api/payments",
+    "checkout",
+    "buyer-interest",
+    "api-keys",
+  ]) {
+    if (sitemap.includes(route)) {
+      fail(`app/sitemap.ts must not include unsafe route entry: ${route}`);
+    }
+  }
+
+  for (const route of ["/landscape/sectors", "/zh-CN"]) {
     if (sitemap.includes(route)) {
       fail(`app/sitemap.ts must not include ${route}`);
     }
