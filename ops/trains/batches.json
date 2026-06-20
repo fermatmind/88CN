@@ -3661,6 +3661,89 @@
       "notes": [
         "Registered by PR181 only. PR182 is not started by PR181."
       ]
+    },
+    {
+      "id": "TRAIN-PR183-CONTROL-PANEL",
+      "title": "Minimal admin review control panel",
+      "phase": "project-contract",
+      "tasks": [
+        "PR183"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint",
+        "auto_publish_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        "admin review state switcher",
+        "published state transition",
+        "Supabase migration or staging write",
+        "public project page",
+        "sitemap inclusion",
+        "Public API or MCP exposure",
+        "data repo export"
+      ],
+      "required_preconditions": [
+        "PR182 merged and cleaned up before executing PR183",
+        "worktree is clean and created from current origin/main",
+        "PR183 is registered as a full roadmap task",
+        "manual review remains mandatory before published",
+        "no auto-publish, no auto-outreach, no copied third-party content, no sitemap, no Public API/MCP, no data repo mutation, no Supabase migration, no external HTTP audit, no worker runtime, no deploy, and no server/cloud mutation is requested without a human checkpoint"
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "Build the minimal admin review surface for project CRUD, source links, audit chips, neutral original summary editing, and manual state switching while preserving PR182 fail-closed publication gates.",
+      "notes": [
+        "Registered by PR182 only. PR183 is not started by PR182."
+      ]
     }
   ]
 }

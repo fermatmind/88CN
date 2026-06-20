@@ -1,13 +1,13 @@
 {
-  "current_task": "PR181",
-  "current_alias": "SEED_MANIFEST",
+  "current_task": "PR182",
+  "current_alias": "PROJECT_CONTRACT",
   "current_repo": "88CN",
   "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "GO_PROJECT_CONTRACT_WITH_MANUAL_REVIEW_FINDINGS",
-  "next_recommended_task": "PR182",
-  "next_recommended_alias": "PROJECT_CONTRACT",
-  "next_recommended_train": "TRAIN-PR182-PROJECT-CONTRACT",
-  "next_non_pr_task": "PROJECT_CONTRACT",
-  "notes": "PR181 verifies the repaired private Seed50 artifact as checksum-verified private handoff input with result GO_PROJECT_CONTRACT_WITH_MANUAL_REVIEW_FINDINGS. Counts: 50 accepted, 25 needs-review, 12 rejected, 20 GitHub-backed, 5 strictly open-source declared, 15 mixed, 30 commercial, 6 missing-docs review, 10 canonical review, 11 reachability review. Row hashes, evidence hashes, canonical hashes, shard hashes, manifest hash, SHA256SUMS, and repaired zip opening were verified. No private seed rows, source evidence rows, canonical rows, manifest, checksum, zip, public surface, data repo mutation, database write, external audit, worker runtime, crawler, or deploy occurred. Exact next task is PR182 / PROJECT_CONTRACT; PR182 is registered but not started."
+  "result": "GO_CONTROL_PANEL_WITH_PROJECT_CONTRACT_READY",
+  "next_recommended_task": "PR183",
+  "next_recommended_alias": "CONTROL_PANEL",
+  "next_recommended_train": "TRAIN-PR183-CONTROL-PANEL",
+  "next_non_pr_task": "CONTROL_PANEL",
+  "notes": "PR182 defines the permanent Entity -> Repo -> Web project contract, Source Evidence root layer, lifecycle states, allowed transitions, field visibility matrix, published_projection, 11 public signal chip slots, fail-closed sitemap/SEO/API/MCP gates, featured/promoted separation, and migration draft policy with result GO_CONTROL_PANEL_WITH_PROJECT_CONTRACT_READY. PR181 manual review findings remain private and publication-blocking. No Supabase migration, DB/staging/production write, frontend route, admin UI implementation, sitemap runtime, Public API/MCP exposure, Agent/audit/crawler/worker, data repo mutation, deploy, or private seed artifact commit occurred. Exact next task is PR183 / CONTROL_PANEL; PR183 is registered but not started."
 }
