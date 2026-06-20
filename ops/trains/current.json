@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
-  "status": "completed",
+  "active_train": "TRAIN-PR176-PR179-REPORT-DATA",
+  "status": "in_progress",
   "last_completed_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
   "next_recommended_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "notes": "PR175 / AUDIT_WORKERQ completed the audit worker runtime QA with result PASS_AUDIT_WORKER_RUNTIME_QA. TRAIN-PR173-PR175-AUDIT-WORKER is complete. Continue only to PR176 / REPORT_DATA0 after PR175 is merged and local main is clean; PR176 has human_checkpoint=true and is not started here. No data repo, public surface, Supabase/staging/production, real audit run, browser fallback, deploy, Public API/MCP, sitemap, worker, crawler, queue, script/package/runtime/schema change, report surface, or server/cloud mutation occurred."
+  "notes": "PR176 / REPORT_DATA0 completed the report data eligibility scan with result GO_REPORT_DATA1_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE. Continue with PR177 / REPORT_DATA1 only after PR176 is merged and local main is clean; PR177 has human_checkpoint=true and must remain aggregate draft-only unless explicitly approved. No data repo, public surface, Supabase/staging/production, public report page, sitemap, public JSON, Public API/MCP, external distribution, deploy, project-level claims, or server/cloud mutation occurred."
 }
