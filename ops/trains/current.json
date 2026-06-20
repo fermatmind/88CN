@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
-  "status": "in_progress",
-  "last_completed_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "next_recommended_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
-  "notes": "PR174 / AUDIT_WORKER1 completed the fixture-only local small-batch audit dry-run with result PASS_AUDIT_WORKER_FIXTURE_DRY_RUN. Continue with PR175 / AUDIT_WORKERQ after PR174 is merged and local main is clean. No data repo, public surface, Supabase/staging/production, real audit run, browser fallback, deploy, Public API/MCP, sitemap, worker, crawler, queue, script/package/runtime/schema change, report surface, or server/cloud mutation occurred."
+  "status": "completed",
+  "last_completed_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
+  "next_recommended_train": "TRAIN-PR176-PR179-REPORT-DATA",
+  "notes": "PR175 / AUDIT_WORKERQ completed the audit worker runtime QA with result PASS_AUDIT_WORKER_RUNTIME_QA. TRAIN-PR173-PR175-AUDIT-WORKER is complete. Continue only to PR176 / REPORT_DATA0 after PR175 is merged and local main is clean; PR176 has human_checkpoint=true and is not started here. No data repo, public surface, Supabase/staging/production, real audit run, browser fallback, deploy, Public API/MCP, sitemap, worker, crawler, queue, script/package/runtime/schema change, report surface, or server/cloud mutation occurred."
 }
