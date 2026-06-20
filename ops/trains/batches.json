@@ -3744,6 +3744,677 @@
       "notes": [
         "Registered by PR182 only. PR183 is not started by PR182."
       ]
+    },
+    {
+      "id": "TRAIN-DATA-PLANE",
+      "title": "20k-50k data-plane schema and bulk import contract",
+      "phase": "scale-buildout-data-plane",
+      "tasks": [
+        "PR184",
+        "PR185"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR184",
+          "reason": "Supabase staging schema apply requires explicit human approval"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint"
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "20k-50k data-plane schema and bulk import contract",
+      "notes": [
+        "Stops at PR184 human checkpoint before any Supabase migration or staging write. PR185 is docs-only contract and can be merged independently if executed alone."
+      ]
+    },
+    {
+      "id": "TRAIN-SERVER-READINESS",
+      "title": "20k-50k server readiness and isolation plan",
+      "phase": "scale-buildout-server-readiness",
+      "tasks": [
+        "PR186",
+        "PR187"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-ops"
+      ],
+      "purpose": "20k-50k server readiness and isolation plan",
+      "notes": [
+        "Read-only/docs-only train. No SSH, console mutation, server write, or deploy is authorized."
+      ]
+    },
+    {
+      "id": "TRAIN-SERVER-PREP",
+      "title": "20k-50k staging/admin and worker host prep",
+      "phase": "scale-buildout-server-prep",
+      "tasks": [
+        "PR188",
+        "PR189"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": true,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR188",
+          "reason": "server prep requires explicit approval"
+        },
+        {
+          "task": "PR189",
+          "reason": "worker/audit host prep requires explicit approval"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint"
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "20k-50k staging/admin and worker host prep",
+      "notes": [
+        "No train auto-run through server prep. Each task stops for human approval."
+      ]
+    },
+    {
+      "id": "TRAIN-CONTROL-PANEL-20K",
+      "title": "20k-50k bulk control panel and review log",
+      "phase": "scale-buildout-control-panel",
+      "tasks": [
+        "PR190",
+        "PR191",
+        "PR192"
+      ],
+      "batch_limit": 3,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR190",
+          "reason": "admin implementation and review state surface requires approval"
+        },
+        {
+          "task": "PR191",
+          "reason": "manual state switcher must preserve publication checkpoint"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint"
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "20k-50k bulk control panel and review log",
+      "notes": [
+        "QA may be auto-merge eligible if executed alone, but this train stops on implementation checkpoints."
+      ]
+    },
+    {
+      "id": "TRAIN-WORKER-PIPELINE-20K",
+      "title": "20k-50k worker, audit, queue, and QA pipeline",
+      "phase": "scale-buildout-worker-pipeline",
+      "tasks": [
+        "PR193",
+        "PR194",
+        "PR195",
+        "PR196",
+        "PR197",
+        "PR198"
+      ],
+      "batch_limit": 6,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR193",
+          "reason": "worker repo/bootstrap boundary requires approval"
+        },
+        {
+          "task": "PR194",
+          "reason": "bulk import worker can affect staging data"
+        },
+        {
+          "task": "PR195",
+          "reason": "canonical resolver can affect staging review data"
+        },
+        {
+          "task": "PR196",
+          "reason": "external HTTP audit requires approval"
+        },
+        {
+          "task": "PR197",
+          "reason": "queue/retry/dead-letter requires approval"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint"
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "20k-50k worker, audit, queue, and QA pipeline",
+      "notes": [
+        "No train auto-run through worker runtime, external HTTP audit, or Redis/queue creation."
+      ]
+    },
+    {
+      "id": "TRAIN-FRONTEND-MVP-20K",
+      "title": "20k-50k frontend listing, detail, collections, search, sitemap, and QA",
+      "phase": "scale-buildout-frontend",
+      "tasks": [
+        "PR199",
+        "PR200",
+        "PR201",
+        "PR202",
+        "PR203"
+      ],
+      "batch_limit": 5,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR199",
+          "reason": "public listing/search surface requires review"
+        },
+        {
+          "task": "PR200",
+          "reason": "project detail public surface requires review"
+        },
+        {
+          "task": "PR201",
+          "reason": "collections surface requires review"
+        },
+        {
+          "task": "PR202",
+          "reason": "sitemap/search index segmentation requires review"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint"
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "20k-50k frontend listing, detail, collections, search, sitemap, and QA",
+      "notes": [
+        "Frontend public surfaces must remain published-only and must not expose raw seed/audit/review data."
+      ]
+    },
+    {
+      "id": "TRAIN-SECURITY-DEPLOY-20K",
+      "title": "20k-50k security firewall and production deploy gate",
+      "phase": "scale-buildout-security-deploy",
+      "tasks": [
+        "PR204",
+        "PR205"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": true,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR204",
+          "reason": "security hardening requires review"
+        },
+        {
+          "task": "PR205",
+          "reason": "production deploy requires exact SHA approval"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint",
+        "PR205 requires exact human-approved SHA and must distinguish live-smoke-only from live-config-change/server configuration before deploy."
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "20k-50k security firewall and production deploy gate",
+      "notes": [
+        "No deploy gate may proceed without exact human-approved SHA.",
+        "PR205 is a live-deploy gate and must distinguish live-smoke-only validation from live-config-change or server configuration work. Exact SHA approval is required before any deployment."
+      ]
+    },
+    {
+      "id": "TRAIN-REPORT-GROWTH-20K",
+      "title": "20k-50k first data report and Growth2 follow-up",
+      "phase": "scale-buildout-report-growth",
+      "tasks": [
+        "PR206",
+        "PR207"
+      ],
+      "batch_limit": 2,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "PR206",
+          "reason": "public report requires real reviewed data"
+        },
+        {
+          "task": "PR207",
+          "reason": "growth material must be report-backed and no external posting by default"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "previous dependency tasks are merged and cleaned up",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue creation, sitemap release, Public API/MCP release, data repo mutation, outreach, or production action occurs without the task-specific human checkpoint"
+      ],
+      "allowed_roles": [
+        "opencode",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "20k-50k first data report and Growth2 follow-up",
+      "notes": [
+        "No report or growth task may publish unreviewed project-level claims or perform external outreach without approval."
+      ]
     }
   ]
 }
