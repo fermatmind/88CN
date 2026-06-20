@@ -27,6 +27,9 @@ Resolved sidecar issues:
   PR123-approved finite task routes are accepted only when
   `scripts/check-task-discovery-boundary.mjs` passes. OPS9B was not rerun and no
   deploy or live smoke occurred in OPS9C.
+- OPS9B rerun resolved the remaining release blocker by deploying exact
+  approved SHA `3234ef79f430569230aabc55b02060092013503d` and passing
+  production-host plus workstation live smoke. No active OPS9B blocker remains.
 - OPS9C resolved the PR131 P3 stale `landscape:check` sidecar after PR123
   finite task pages. The checker no longer requires `app/tasks` and task
   sitemap entries to be absent, while broad `/tasks`, `/zh-CN`, and
