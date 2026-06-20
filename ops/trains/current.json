@@ -3,5 +3,5 @@
   "status": "in_progress",
   "last_completed_train": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA",
   "next_recommended_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
-  "notes": "PR163 / SCOUT_SEED0 completed the Seed 100 source policy step. Continue with PR164 / SCOUT_SEED1. Seed50R files, if present, remain research input only; PR164 output must be local-only and must not mutate data repo, public surfaces, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap."
+  "notes": "PR164 / SCOUT_SEED1 completed the local-only identity hint pack step with findings: 40 accepted strong/medium hints and 12 rejected/weak hints remain separated under /tmp, with no committed generated pack. Continue with PR165 / SCOUT_SEEDQ QA. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation occurred."
 }
