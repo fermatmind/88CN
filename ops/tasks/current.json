@@ -1,13 +1,13 @@
 {
-  "current_task": "PR187",
-  "current_alias": "SERVER_ISOLATION_PLAN",
+  "current_task": "PR188",
+  "current_alias": "STAGING_ADMIN_HOST_PREP",
   "current_repo": "88CN",
-  "current_role": "codex-ops",
-  "status": "validation_passed",
-  "result": "SERVER_ISOLATION_PLAN_READY",
+  "current_role": "opencode",
+  "status": "blocked",
+  "result": "BLOCKED_STAGING_ADMIN_ACCESS_MISSING",
   "next_recommended_task": "PR188",
-  "next_recommended_alias": "STAGING_ADMIN_HOST_PREP",
+  "next_recommended_alias": "STAGING_ADMIN_HOST_PREP_RERUN",
   "next_recommended_train": "TRAIN-SERVER-PREP",
-  "next_non_pr_task": "PR186 / SERVER_CAPACITY_READINESS was verified and skipped because merged PR #224 / OPS-SERVER0R already satisfies the read-only capacity scan requirement.",
-  "notes": "PR187 refreshes the server isolation plan after PR186 equivalence verification. It documents host role separation, do-not-touch rules, PR188/PR189 human confirmations, and no-action boundaries. It is docs/status only; no SSH, cloud console mutation, server write, deploy, restart/reload, user/directory creation, env/secret read, Supabase/DB write, Redis/queue creation, worker/crawler/audit runtime, public surface, data repo mutation, Tencent workload, or FermatMind resource mutation occurs."
+  "next_non_pr_task": "Provide confirmed staging/admin host access, exact target alias, and reversible action list before rerunning PR188.",
+  "notes": "PR188 is blocked because confirmed staging/admin host access, target facts, and reversible server action list are missing. The PR188 roadmap deploy/** allow/forbid conflict is remediated for this task only. No SSH connection, cloud console mutation, server write, deploy, restart/reload, user/directory creation, env/secret read, Supabase/DB write, Redis/queue creation, public DNS change, public web load, FermatMind mutation, Tencent workload, or data repo mutation occurred. Stop before PR189 until PR188 is rerun or the sequence is explicitly changed."
 }

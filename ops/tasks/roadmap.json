@@ -19519,7 +19519,6 @@
         "lib/**",
         "scripts/**",
         "supabase/**",
-        "deploy/**",
         "middleware.ts",
         "package.json",
         "package-lock.json",
@@ -19566,7 +19565,8 @@
         "no production public web load is added"
       ],
       "notes": [
-        "Numeric execution entry for OPS-SERVER2."
+        "Numeric execution entry for OPS-SERVER2.",
+        "PR188 permits deploy/** as the staging/admin host-prep exception; broad deploy/** is intentionally omitted from forbidden paths so scope validation can resolve approved deploy artifacts when access is available."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
