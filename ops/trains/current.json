@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "status": "in_progress",
-  "last_completed_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
+  "status": "complete",
+  "last_completed_train": "TRAIN-PR176-PR179-REPORT-DATA",
   "next_recommended_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "notes": "PR178 / REPORT_DATA2 completed the Chinese outbound aggregate draft decision with result GO_REPORT_DATAQ_QA_ONLY_NO_PUBLIC_SURFACE. Continue with PR179 / REPORT_DATAQ only after PR178 is merged and local main is clean. PR179 must remain QA-only unless explicitly approved. No data repo, public surface, Supabase/staging/production, public report page, sitemap, public JSON, Public API/MCP, external distribution, social/email/DM/CRM activity, deploy, project-level claims, or server/cloud mutation occurred."
+  "notes": "PR179 / REPORT_DATAQ completed QA for PR176-PR178 with result PASS_REPORT_DATA_QA_TTL_CORRECTION_NO_PUBLIC_SURFACE. TRAIN-PR176-PR179-REPORT-DATA is complete. No registered next PR task exists in ops/tasks/roadmap.json after PR179. No data repo, public surface, Supabase/staging/production, public report page, sitemap, public JSON, Public API/MCP, external distribution, social/email/DM/CRM activity, deploy, project-level claims, external HTTP audit, worker runtime, queue, Redis, or server/cloud mutation occurred."
 }
