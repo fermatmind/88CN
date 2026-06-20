@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR144-SCOUT-QA",
-  "next_recommended_train": "TRAIN-PR146-PR150-SCOUT-IMPL-PERSISTENCE",
-  "notes": "PR145 / SCOUT_IMPLR registers PR146-PR157 and three post-INFRA implementation-stage trains. Exact next is PR146 / SCOUT_IMPL0. SCOUT_IMPL0 has not started; staging writes, Supabase migrations, Redis/queue, worker starts, server placement, public report pages, and deploy remain checkpointed or forbidden."
+  "last_completed_train": "TRAIN-PR154-PR157-REPORT-IMPL-READINESS",
+  "next_recommended_train": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA",
+  "notes": "PR160 / WORKER0 registers PR161-PR179 and six post-PR160 trains. Exact next is PR161 / WORKER1 in TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA. PR161 is checkpointed no-runtime bootstrap only and has not started; worker runtime, repo/package creation without checkpoint, external HTTP audit, staging writes, Supabase migrations, Redis/queue, server placement, public report pages, sitemap, Public API/MCP, deploy, data repo mutation, and FermatMind repo mutation remain checkpointed or forbidden."
 }
