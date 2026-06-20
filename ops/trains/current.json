@@ -2,6 +2,6 @@
   "active_train": null,
   "status": "idle",
   "last_completed_train": "TRAIN-PR128-PR131-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA",
-  "next_recommended_train": "TRAIN-GROWTH2-REPORT-DISTRIBUTION-DRAFTS",
-  "notes": "GROWTH0U remediates the GROWTH0T runner compatibility blocker by preserving historical GROWTHQ and registering runner-compatible GROWTH4Q for train execution. Recommended Growth order is TRAIN-GROWTH2-REPORT-DISTRIBUTION-DRAFTS, then TRAIN-GROWTH1-FOUNDER-ACQUISITION-DRAFTS, then TRAIN-GROWTH3-WEEKLY-REVIEW-QA. No Growth train is started by GROWTH0U; BETA1, I18N0, OPS8D, OPS10A, and PR101 remain paused."
+  "next_recommended_train": "TRAIN-PR133-SCOUT0-BOUNDARY",
+  "notes": "PR132 / SCOUT0R registered PR133-PR144 SCOUT/AUDIT/REPORT roadmap tasks and safe train batches after GROWTH4Q closed the Growth drafts/no-auto-send phase. Result is GO_SCOUT0. BETA1, I18N0, OPS8D, OPS10A, PR101, second-round Growth, and SCOUT1+ remain paused."
 }
