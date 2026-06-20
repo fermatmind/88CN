@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA",
-  "status": "in_progress",
-  "last_completed_train": "TRAIN-PR154-PR157-REPORT-IMPL-READINESS",
-  "next_recommended_train": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA",
-  "notes": "PR161 / WORKER1 completed the docs/contracts-only no-runtime bootstrap step. Continue with PR162 / WORKERQ before Seed 100 starts. Worker runtime, repo/package creation without explicit checkpoint, external HTTP audit, staging writes, Supabase migrations, Redis/queue, server placement, public report pages, sitemap, Public API/MCP, deploy, data repo mutation, and FermatMind repo mutation remain checkpointed or forbidden."
+  "active_train": null,
+  "status": "idle",
+  "last_completed_train": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA",
+  "next_recommended_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
+  "notes": "TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA is complete after PR162 / WORKERQ. Continue with PR163 / SCOUT_SEED0 in TRAIN-PR163-PR165-SCOUT-SEED-MVP. Seed50R files, if present, are research input only; no data repo mutation, public records, audit trigger, Supabase/staging/production write, deploy, Public API/MCP, or sitemap inclusion is authorized."
 }
