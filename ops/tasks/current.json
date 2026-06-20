@@ -1,13 +1,13 @@
 {
-  "current_task": "PR180",
-  "current_alias": "POST179R",
+  "current_task": "PR181",
+  "current_alias": "SEED_MANIFEST",
   "current_repo": "88CN",
   "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "GO_SEED_HANDOFF0",
-  "next_recommended_task": "PR181",
-  "next_recommended_alias": "SEED_HANDOFF0",
-  "next_recommended_train": "TRAIN-PR181-SEED-HANDOFF",
-  "next_non_pr_task": "SEED_HANDOFF0",
-  "notes": "PR180 reviewed PR160-PR179 and chose GO_SEED_HANDOFF0. Worker and report outputs are docs/draft-only, while Seed, canonical, staging, and audit outputs remain local /tmp artifacts. Seed has 40 accepted strong/medium identity hints plus 12 rejected/weak hints and a manifest, but no durable repo/data-repo handoff or hash/checksum chain; canonical has 40 provisional candidates but no durable handoff. The next registered task is PR181 / SEED_HANDOFF0. PR180 does not start PR181 and performs no implementation, external HTTP audit, staging/Supabase/production write, public surface, data repo mutation, deploy, worker/runtime, queue, or server/cloud mutation."
+  "result": "GO_PROJECT_CONTRACT_WITH_MANUAL_REVIEW_FINDINGS",
+  "next_recommended_task": "PR182",
+  "next_recommended_alias": "PROJECT_CONTRACT",
+  "next_recommended_train": "TRAIN-PR182-PROJECT-CONTRACT",
+  "next_non_pr_task": "PROJECT_CONTRACT",
+  "notes": "PR181 verifies the repaired private Seed50 artifact as checksum-verified private handoff input with result GO_PROJECT_CONTRACT_WITH_MANUAL_REVIEW_FINDINGS. Counts: 50 accepted, 25 needs-review, 12 rejected, 20 GitHub-backed, 5 strictly open-source declared, 15 mixed, 30 commercial, 6 missing-docs review, 10 canonical review, 11 reachability review. Row hashes, evidence hashes, canonical hashes, shard hashes, manifest hash, SHA256SUMS, and repaired zip opening were verified. No private seed rows, source evidence rows, canonical rows, manifest, checksum, zip, public surface, data repo mutation, database write, external audit, worker runtime, crawler, or deploy occurred. Exact next task is PR182 / PROJECT_CONTRACT; PR182 is registered but not started."
 }

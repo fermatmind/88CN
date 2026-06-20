@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR181-SEED-HANDOFF",
+  "active_train": "TRAIN-PR182-PROJECT-CONTRACT",
   "status": "registered",
   "last_completed_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "next_recommended_train": "TRAIN-PR181-SEED-HANDOFF",
-  "notes": "PR180 / POST179R reviewed PR160-PR179 with result GO_SEED_HANDOFF0 and registered PR181 / SEED_HANDOFF0 as the next immediate task. PR181 is not started here. The next train is a single-task local/private Seed durable handoff boundary; no data repo, public surface, Supabase/staging/production, public report page, sitemap, public JSON, Public API/MCP, external distribution, deploy, project-level claims, external HTTP audit, worker runtime, queue, Redis, or server/cloud mutation occurred."
+  "next_recommended_train": "TRAIN-PR182-PROJECT-CONTRACT",
+  "notes": "PR181 / SEED_MANIFEST verified the repaired private Seed50 artifact with result GO_PROJECT_CONTRACT_WITH_MANUAL_REVIEW_FINDINGS and registered PR182 / PROJECT_CONTRACT as the next immediate task. PR182 is not started here. No private seed rows, source evidence rows, canonical rows, manifest, checksum, zip, data repo mutation, public surface, Supabase/staging/production write, external HTTP audit, worker runtime, crawler, deploy, or server/cloud mutation occurred."
 }
