@@ -1,13 +1,13 @@
 {
-  "current_task": "PR145",
-  "current_alias": "SCOUT_IMPLR",
+  "current_task": "PR146",
+  "current_alias": "SCOUT_IMPL0",
   "current_repo": "88CN",
-  "current_role": "codex-ops",
+  "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "GO_SCOUT_IMPL0",
-  "next_recommended_task": "PR146",
-  "next_recommended_alias": "SCOUT_IMPL0",
+  "result": "GO_SCOUT_IMPL1",
+  "next_recommended_task": "PR147",
+  "next_recommended_alias": "SCOUT_IMPL1",
   "next_recommended_train": "TRAIN-PR146-PR150-SCOUT-IMPL-PERSISTENCE",
-  "next_non_pr_task": "SCOUT_IMPL0",
-  "notes": "PR145 registers PR146-PR157 and the SCOUT/AUDIT/REPORT implementation-stage trains only. PR145 may auto-merge and delete its task branch after validation. PR146 has not started."
+  "next_non_pr_task": "SCOUT_IMPL1",
+  "notes": "PR146 is readiness/repo-split decision only. Boundary/docs/local dry-run work stays in 88CN for now; any future worker repo/package remains a later checkpointed decision. PR147 has not started."
 }
