@@ -1,13 +1,13 @@
 {
-  "current_task": "PR166",
-  "current_alias": "CANON0",
+  "current_task": "PR167",
+  "current_alias": "CANON1",
   "current_repo": "88CN",
-  "current_role": "codex-research",
+  "current_role": "codex-build",
   "status": "validation_passed",
-  "result": "GO_CANON1",
-  "next_recommended_task": "PR167",
-  "next_recommended_alias": "CANON1",
+  "result": "PASS_LOCAL_CANONICAL_RESOLVER_DRY_RUN",
+  "next_recommended_task": "PR168",
+  "next_recommended_alias": "CANONQ",
   "next_recommended_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
-  "next_non_pr_task": "CANON1",
-  "notes": "PR166 defines the canonical resolver boundary with result GO_CANON1: canonical identity fields, URL and GitHub normalization, apex-domain handling, ambiguity states, duplicate handling, quarantine rules, and conflict policies for one-domain-many-repos, one-repo-many-domains, same-name conflicts, renames, redirects, mirrors, forks, wrappers, template repos, docs-only projects, and GitHub-only projects. Name-only matching is forbidden. No resolver implementation, external HTTP fetch, committed generated resolver output, Supabase/staging/production write, data repo mutation, public route, sitemap, Public API/MCP, report surface, audit, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR167 / CANON1; PR167 is not started here."
+  "next_non_pr_task": "CANONQ",
+  "notes": "PR167 ran a local-only canonical resolver dry run under /tmp with result PASS_LOCAL_CANONICAL_RESOLVER_DRY_RUN. Using the PR164 local pack and PR166 boundary rules, 40 local identity hints normalized into provisional canonical_candidate rows; no duplicate, ambiguity, or quarantine states appeared in this bounded sample. Generated resolver JSONL/manifest outputs were not committed. No resolver implementation, external HTTP fetch, DNS/redirect resolution, Supabase/staging/production write, data repo mutation, public route, sitemap, Public API/MCP, report surface, audit, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR168 / CANONQ; PR168 is not started here."
 }
