@@ -1,10 +1,10 @@
 {
-  "current_task": "GROWTH2B",
+  "current_task": "GROWTH2Q",
   "current_repo": "88CN",
-  "current_role": "codex-research",
+  "current_role": "codex-qa",
   "status": "validation_passed",
-  "result": "PASS_LOCAL_DRAFT_CONTRACT_ONLY",
-  "next_recommended_task": "GROWTH2Q",
-  "next_recommended_train": "TRAIN-GROWTH2-REPORT-DISTRIBUTION-DRAFTS",
-  "next_non_pr_task": "GROWTH2Q"
+  "result": "PASS",
+  "next_recommended_task": "GROWTH1A",
+  "next_recommended_train": "TRAIN-GROWTH1-FOUNDER-ACQUISITION-DRAFTS",
+  "next_non_pr_task": "GROWTH1A"
 }
