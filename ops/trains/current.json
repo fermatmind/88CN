@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-SERVER-PREP",
-  "status": "registered",
-  "last_completed_train": "TRAIN-DATA-PLANE",
+  "status": "blocked",
+  "last_completed_train": "TRAIN-SERVER-READINESS",
   "next_recommended_train": "TRAIN-SERVER-PREP",
-  "notes": "PR186 / SERVER_CAPACITY_READINESS was verified and skipped as equivalent to merged PR #224 / OPS-SERVER0R. PR187 / SERVER_ISOLATION_PLAN completes TRAIN-SERVER-READINESS with a docs-only isolation plan and no server/cloud mutation. Exact next task after merge is PR188 / STAGING_ADMIN_HOST_PREP in TRAIN-SERVER-PREP."
+  "notes": "TRAIN-SERVER-PREP is blocked at PR188 / STAGING_ADMIN_HOST_PREP because confirmed staging/admin host access, target facts, and reversible server action list are missing. PR188 registry conflict for deploy/** is remediated, but no live host prep occurred. Do not continue to PR189 until PR188 is rerun with confirmed access or a human explicitly changes the sequence."
 }
