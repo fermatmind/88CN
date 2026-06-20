@@ -1,13 +1,13 @@
 {
-  "current_task": "PR174",
-  "current_alias": "AUDIT_WORKER1",
+  "current_task": "PR175",
+  "current_alias": "AUDIT_WORKERQ",
   "current_repo": "88CN",
-  "current_role": "codex-build",
+  "current_role": "codex-qa",
   "status": "validation_passed",
-  "result": "PASS_AUDIT_WORKER_FIXTURE_DRY_RUN",
-  "next_recommended_task": "PR175",
-  "next_recommended_alias": "AUDIT_WORKERQ",
-  "next_recommended_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
-  "next_non_pr_task": "AUDIT_WORKERQ",
-  "notes": "PR174 ran a fixture-only local small-batch audit dry-run with result PASS_AUDIT_WORKER_FIXTURE_DRY_RUN. Because no explicit external HTTP audit approval was granted, it read the PR167 local canonical resolver artifact and wrote only /tmp/88cn-pr174-small-batch-audit-fixture-dry-run.json with 20 fixture rows from 40 source rows. The local manifest records external_http_attempted=false, browser_attempted=false, worker_started=false, queue_created=false, supabase_write=false, staging_write=false, production_write=false, data_repo_mutation=false, public_surface=false, and report_surface=false. Exact next task is PR175 / AUDIT_WORKERQ; PR175 is not started here."
+  "result": "PASS_AUDIT_WORKER_RUNTIME_QA",
+  "next_recommended_task": "PR176",
+  "next_recommended_alias": "REPORT_DATA0",
+  "next_recommended_train": "TRAIN-PR176-PR179-REPORT-DATA",
+  "next_non_pr_task": "REPORT_DATA0",
+  "notes": "PR175 verified PR173-PR174 with result PASS_AUDIT_WORKER_RUNTIME_QA. The reviewed audit-worker range changed only docs/scout/*, docs/TASK_STATUS.md, ops/tasks/current.json, and ops/trains/current.json. PR174's local manifest records fixture-only mode with no external HTTP audit, browser fallback, worker start, queue creation, Redis use, Supabase/staging/production write, public surface, report surface, data repo mutation, sitemap mutation, Public API/MCP exposure, deploy, or server/cloud mutation. TRAIN-PR173-PR175-AUDIT-WORKER is complete. Exact next task is PR176 / REPORT_DATA0 in TRAIN-PR176-PR179-REPORT-DATA; PR176 has human_checkpoint=true and is not started here."
 }
