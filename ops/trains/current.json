@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR183-CONTROL-PANEL",
+  "active_train": "TRAIN-DATA-PLANE",
   "status": "registered",
   "last_completed_train": "TRAIN-PR182-PROJECT-CONTRACT",
-  "next_recommended_train": "TRAIN-PR183-CONTROL-PANEL",
-  "notes": "PR182A / PROJECT_CONTRACT_MIGRATION_CHECKPOINT produced a task-level staging schema migration readiness plan with result READY_FOR_PR182B_WITH_HUMAN_CHECKPOINT and registered PR182B / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY in the roadmap, but suffixed task IDs are not currently accepted by train-plan batch validators. Therefore the existing PR183 train remains the registry-visible next train until PR182B is either executed by explicit task ID or remapped to a numeric PR by a later roadmap maintenance task. No Supabase migration file, Supabase connection, DB/staging/production write, seed import, frontend/admin UI implementation, sitemap/API/MCP exposure, data repo mutation, server/cloud action, or private seed artifact commit occurred."
+  "next_recommended_train": "TRAIN-DATA-PLANE",
+  "notes": "OPS11A registers the 20k-50k buildout trains with numeric runner-compatible task IDs PR184-PR207. Exact next task is PR184 / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY, which is the numeric remap of PR182B and requires explicit human approval before any Supabase staging schema apply. PR186 / SERVER_CAPACITY_READINESS may run in parallel as read-only/docs-only server readiness. No implementation or infrastructure action occurred in OPS11A."
 }
