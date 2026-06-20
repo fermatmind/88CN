@@ -3499,6 +3499,87 @@
       "notes": [
         "Report work remains aggregate-only and no-public-surface unless a later checkpoint explicitly approves publication."
       ]
+    },
+    {
+      "id": "TRAIN-PR181-SEED-HANDOFF",
+      "title": "Seed durable local artifact handoff boundary",
+      "phase": "seed-durable-handoff",
+      "tasks": [
+        "PR181"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        "durable local artifact handoff",
+        "data repo export",
+        "Supabase or staging write",
+        "external HTTP audit",
+        "public report page",
+        "sitemap inclusion",
+        "Public API or MCP exposure"
+      ],
+      "required_preconditions": [
+        "PR180 merged and cleaned up before executing PR181",
+        "worktree is clean and created from current origin/main",
+        "PR181 is registered as a full roadmap task",
+        "no live deploy, production write, server/cloud mutation, Redis/queue creation, public report page, sitemap inclusion, Public API release, MCP exposure, external service write, data repo mutation, customer access, PII collection, outreach automation, social posting, email send, DM send, CRM write, platform login, browser session export, live analytics connection, crawler runtime, external HTTP audit, Supabase write, staging write, or browser fallback is requested without a human checkpoint"
+      ],
+      "allowed_roles": [
+        "codex-research",
+        "codex-qa",
+        "codex-ops"
+      ],
+      "purpose": "Define a durable local/private Seed handoff boundary before audit proof.",
+      "notes": [
+        "Registered by PR180 only. PR181 is not started by PR180."
+      ]
     }
   ]
 }
