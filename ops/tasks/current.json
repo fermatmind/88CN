@@ -1,13 +1,13 @@
 {
-  "current_task": "PR148",
-  "current_alias": "SCOUT_IMPL2",
+  "current_task": "PR149",
+  "current_alias": "SCOUT_IMPL3",
   "current_repo": "88CN",
-  "current_role": "codex-research",
+  "current_role": "codex-build",
   "status": "validation_passed",
-  "result": "GO_SCOUT_IMPL3_LOCAL_ONLY",
-  "next_recommended_task": "PR149",
-  "next_recommended_alias": "SCOUT_IMPL3",
+  "result": "GO_SCOUT_IMPLQ_LOCAL_ONLY",
+  "next_recommended_task": "PR150",
+  "next_recommended_alias": "SCOUT_IMPLQ",
   "next_recommended_train": "TRAIN-PR146-PR150-SCOUT-IMPL-PERSISTENCE",
-  "next_non_pr_task": "SCOUT_IMPL3",
-  "notes": "PR148 decides the current storage route is local/docs/tmp-artifact only. No schema, migration, Supabase write, staging write, production write, runtime storage path, public surface, Public API, MCP, sitemap change, data repo mutation, or FermatMind repo mutation has started."
+  "next_non_pr_task": "SCOUT_IMPLQ",
+  "notes": "PR149 records local-only dry-run posture under PR148. No schema, migration, Supabase write, staging write, production write, runtime storage path, worker, crawler, queue, public surface, Public API, MCP, sitemap change, committed generated artifact, data repo mutation, or FermatMind repo mutation has started."
 }
