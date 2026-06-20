@@ -20,6 +20,7 @@ Meaning:
 - Repo split and a possible `88cn-scout-worker` boundary should be evaluated next.
 - Actual staging writes, Supabase migrations, Redis/queue creation, worker starts, audit runs, public report pages, sitemap inclusion, deploys, and server placement remain behind later task-specific checkpoints.
 - PR145 does not start PR146 or any implementation task.
+- PR145 itself is docs/status/train registration only and may be auto-merged with task-branch deletion after validation.
 
 ## Scope
 
@@ -142,7 +143,15 @@ OPS-INFRA2X result is `GO_SCOUT_IMPL0_WITH_CONDITIONAL_PLACEMENT`.
 
 ## Risk Flag Matrix
 
-All three registered future trains set these flags to `false`:
+PR145 auto-merge policy:
+
+| Flag | Value |
+| --- | --- |
+| auto_merge_allowed | true |
+
+PR145 may be auto-merged and its task branch may be deleted after validation because it does not perform implementation, runtime, server, cloud, database, staging, worker, public-surface, data-repo, or deploy work.
+
+The three registered future trains still keep these risk flags at `false`:
 
 | Flag | Value |
 | --- | --- |

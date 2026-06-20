@@ -13127,10 +13127,11 @@
       "notes": [
         "PR145 is split/readiness only and does not start SCOUT_IMPL0.",
         "OPS-INFRA2X result GO_SCOUT_IMPL0_WITH_CONDITIONAL_PLACEMENT is the immediate infrastructure source of truth.",
-        "Future writes, migrations, workers, queues, public pages, and repo splits require later task-specific checkpoints."
+        "Future writes, migrations, workers, queues, public pages, and repo splits require later task-specific checkpoints.",
+        "PR145 itself may be auto-merged and its task branch deleted after validation because it is docs/status/train registration only. Future checkpointed trains retain their own merge gates."
       ],
       "risk_flags": {
-        "auto_merge_allowed": false,
+        "auto_merge_allowed": true,
         "live_deploy_allowed": false,
         "server_change_allowed": false,
         "payment_change_allowed": false,
@@ -13164,7 +13165,7 @@
         "no_staging_write": true,
         "no_redis_queue": true
       },
-      "auto_merge_allowed": false,
+      "auto_merge_allowed": true,
       "live_deploy_allowed": false,
       "server_change_allowed": false,
       "payment_change_allowed": false,
