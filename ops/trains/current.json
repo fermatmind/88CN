@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR128-PR131-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA",
-  "next_recommended_train": "TRAIN-PR133-SCOUT0-BOUNDARY",
-  "notes": "PR132 / SCOUT0R registered PR133-PR144 SCOUT/AUDIT/REPORT roadmap tasks and safe train batches after GROWTH4Q closed the Growth drafts/no-auto-send phase. Result is GO_SCOUT0. BETA1, I18N0, OPS8D, OPS10A, PR101, second-round Growth, and SCOUT1+ remain paused."
+  "last_completed_train": "TRAIN-PR144-SCOUT-QA",
+  "next_recommended_train": "TRAIN-PR146-PR150-SCOUT-IMPL-PERSISTENCE",
+  "notes": "PR145 / SCOUT_IMPLR registers PR146-PR157 and three post-INFRA implementation-stage trains. Exact next is PR146 / SCOUT_IMPL0. SCOUT_IMPL0 has not started; staging writes, Supabase migrations, Redis/queue, worker starts, server placement, public report pages, and deploy remain checkpointed or forbidden."
 }
