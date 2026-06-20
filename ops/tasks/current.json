@@ -1,10 +1,10 @@
 {
-  "current_task": "PR142",
+  "current_task": "PR143",
   "current_repo": "88CN",
   "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "PASS_REPORT1_CONTRACT",
-  "next_recommended_task": "PR143",
-  "next_recommended_train": "TRAIN-PR142-PR143-READINESS-REPORTS",
-  "next_non_pr_task": "REPORT2"
+  "result": "PASS_REPORT2_CONTRACT",
+  "next_recommended_task": "PR144",
+  "next_recommended_train": "TRAIN-PR144-SCOUT-QA",
+  "next_non_pr_task": "SCOUTQ"
 }
