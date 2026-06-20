@@ -1,13 +1,13 @@
 {
-  "current_task": "PR172",
-  "current_alias": "SCOUT_STAGINGQ",
+  "current_task": "PR173",
+  "current_alias": "AUDIT_WORKER0",
   "current_repo": "88CN",
-  "current_role": "codex-qa",
+  "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "PASS_SCOUT_STAGING_NO_PUBLISH_QA",
-  "next_recommended_task": "PR173",
-  "next_recommended_alias": "AUDIT_WORKER0",
+  "result": "GO_AUDIT_WORKER1_WITH_CONDITIONAL_CAPACITY",
+  "next_recommended_task": "PR174",
+  "next_recommended_alias": "AUDIT_WORKER1",
   "next_recommended_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
-  "next_non_pr_task": "AUDIT_WORKER0",
-  "notes": "PR172 verified PR169-PR171 with result PASS_SCOUT_STAGING_NO_PUBLISH_QA. The reviewed staging range changed only docs/scout/*, docs/TASK_STATUS.md, ops/tasks/current.json, and ops/trains/current.json. PR171's local manifest records STAGING_WRITE_NOT_AUTHORIZED_LOCAL_ONLY, no attempted staging write, no Supabase write, no production write, no data repo mutation, no public surface, and no audit trigger. TRAIN-PR169-PR172-SCOUT-STAGING is complete. Exact next task is PR173 / AUDIT_WORKER0 in TRAIN-PR173-PR175-AUDIT-WORKER; PR173 has human_checkpoint=true and is not started here."
+  "next_non_pr_task": "AUDIT_WORKER1",
+  "notes": "PR173 defines the HTTP-first audit worker boundary, zero-runtime default, capacity model, egress politeness rules, failure taxonomy, browser-fallback prohibition, queue boundary, and OPS-INFRA2X placement constraints with result GO_AUDIT_WORKER1_WITH_CONDITIONAL_CAPACITY. Exact next task is PR174 / AUDIT_WORKER1 in TRAIN-PR173-PR175-AUDIT-WORKER; PR174 has human_checkpoint=true and is not started here. Docs/status/current/train metadata only; no external HTTP audit, browser fallback, worker runtime, Redis/queue, script/package/runtime/schema change, deploy, server/cloud mutation, Supabase/staging/production write, data repo mutation, public route, sitemap, Public API/MCP, report surface, Growth, BETA, I18N, OPS10A, or PR101 occurred."
 }

@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "status": "completed",
+  "active_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
+  "status": "in_progress",
   "last_completed_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
   "next_recommended_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
-  "notes": "PR172 / SCOUT_STAGINGQ completed the staging sandbox no-publish QA with result PASS_SCOUT_STAGING_NO_PUBLISH_QA. TRAIN-PR169-PR172-SCOUT-STAGING is complete. Continue only to PR173 / AUDIT_WORKER0 after PR172 is merged and local main is clean; PR173 has human_checkpoint=true and is not started here. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, sitemap, worker, crawler, queue, or server/cloud mutation occurred."
+  "notes": "PR173 / AUDIT_WORKER0 completed the HTTP-first audit worker boundary and capacity model with result GO_AUDIT_WORKER1_WITH_CONDITIONAL_CAPACITY. Continue with PR174 / AUDIT_WORKER1 only after PR173 is merged and local main is clean; PR174 has human_checkpoint=true and must default to fixture/local-only unless explicitly approved. No data repo, public surface, Supabase/staging/production, audit run, browser fallback, deploy, Public API/MCP, sitemap, worker, crawler, queue, script/package/runtime/schema change, or server/cloud mutation occurred."
 }
