@@ -3,5 +3,5 @@
   "status": "in_progress",
   "last_completed_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
   "next_recommended_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
-  "notes": "PR173 / AUDIT_WORKER0 completed the HTTP-first audit worker boundary and capacity model with result GO_AUDIT_WORKER1_WITH_CONDITIONAL_CAPACITY. Continue with PR174 / AUDIT_WORKER1 only after PR173 is merged and local main is clean; PR174 has human_checkpoint=true and must default to fixture/local-only unless explicitly approved. No data repo, public surface, Supabase/staging/production, audit run, browser fallback, deploy, Public API/MCP, sitemap, worker, crawler, queue, script/package/runtime/schema change, or server/cloud mutation occurred."
+  "notes": "PR174 / AUDIT_WORKER1 completed the fixture-only local small-batch audit dry-run with result PASS_AUDIT_WORKER_FIXTURE_DRY_RUN. Continue with PR175 / AUDIT_WORKERQ after PR174 is merged and local main is clean. No data repo, public surface, Supabase/staging/production, real audit run, browser fallback, deploy, Public API/MCP, sitemap, worker, crawler, queue, script/package/runtime/schema change, report surface, or server/cloud mutation occurred."
 }
