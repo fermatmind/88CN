@@ -1,13 +1,13 @@
 {
-  "current_task": "OPS11A",
-  "current_alias": "OPS11A_20K_50K_SCALE_BUILDOUT_READINESS",
+  "current_task": "PR184",
+  "current_alias": "PROJECT_CONTRACT_STAGING_SCHEMA_APPLY",
   "current_repo": "88CN",
-  "current_role": "codex-ops",
+  "current_role": "opencode",
   "status": "validation_passed",
-  "result": "GO_SCALE_BUILDOUT_TRAINS_REGISTERED",
-  "next_recommended_task": "PR184",
-  "next_recommended_alias": "PROJECT_CONTRACT_STAGING_SCHEMA_APPLY",
+  "result": "STAGING_SCHEMA_MIGRATION_READY_APPLY_PENDING",
+  "next_recommended_task": "PR185",
+  "next_recommended_alias": "BULK_IMPORT_CONTRACT",
   "next_recommended_train": "TRAIN-DATA-PLANE",
-  "next_non_pr_task": "PR186 / SERVER_CAPACITY_READINESS may run in parallel as read-only server readiness scan",
-  "notes": "OPS11A remaps the 20k-50k buildout from suffixed PR labels to numeric runner-compatible task IDs PR184-PR207 while preserving aliases. PR184 is the numeric remap for PR182B / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY and remains human-checkpointed. PR186 / SERVER_CAPACITY_READINESS is the parallel read-only server readiness path. No implementation, Supabase migration, DB/staging/production write, server/cloud action, frontend/public surface, worker/runtime, external HTTP audit, Redis/queue, data repo mutation, deploy, or private seed artifact commit occurred."
+  "next_non_pr_task": "PR186 / SERVER_CAPACITY_READINESS is already represented by merged OPS-SERVER0R evidence and should be verified when reached in sequence.",
+  "notes": "PR184 creates the staging-only project contract Supabase migration 013 with fail-closed admin-only RLS and documents rollback/schema smoke. Supabase CLI is unavailable locally, so remote staging apply is pending; no staging/production write, seed import, public read, sitemap/API/MCP, worker/audit, data repo mutation, deploy, server/cloud mutation, or secrets printing occurred. Core gate and PR184 scope validation passed; legacy traffic direct-checker lifecycle debt is recorded as a non-blocking sidecar."
 }

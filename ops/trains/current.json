@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-DATA-PLANE",
-  "status": "registered",
+  "status": "in_progress",
   "last_completed_train": "TRAIN-PR182-PROJECT-CONTRACT",
   "next_recommended_train": "TRAIN-DATA-PLANE",
-  "notes": "OPS11A registers the 20k-50k buildout trains with numeric runner-compatible task IDs PR184-PR207. Exact next task is PR184 / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY, which is the numeric remap of PR182B and requires explicit human approval before any Supabase staging schema apply. PR186 / SERVER_CAPACITY_READINESS may run in parallel as read-only/docs-only server readiness. No implementation or infrastructure action occurred in OPS11A."
+  "notes": "PR184 / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY is in progress with result STAGING_SCHEMA_MIGRATION_READY_APPLY_PENDING pending validation/merge. Exact next task after merge is PR185 / BULK_IMPORT_CONTRACT. PR186 / SERVER_CAPACITY_READINESS is already represented by merged OPS-SERVER0R evidence and should be verified when reached in order."
 }
