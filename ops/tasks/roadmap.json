@@ -8227,9 +8227,9 @@
       "repo": "88CN",
       "phase": "growth-boundary",
       "depends_on": [
-        "TRAFFIC0"
+        "OPS9B"
       ],
-      "purpose": "Define growth-agent observation, draft, and reporting boundaries before any growth automation.",
+      "purpose": "Define growth-agent observation, draft, queue, review, and reporting boundaries before any growth-agent implementation, with no auto-send, no platform login, no PII storage, no external writes, and no data-repo mutation.",
       "allowed_paths": [
         "docs/growth/GROWTH0_*.md",
         "docs/SIDECAR_ISSUES.md",
@@ -8261,11 +8261,22 @@
         "npm run policy:scan",
         "npm run third-party:check",
         "npm run agent:redact:check",
-        "npm run agent:scope:check -- GROWTH0"
+        "npm run agent:scope:check -- GROWTH0",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs",
+        "npm run landscape:check",
+        "node scripts/check-sector-density-boundary.mjs"
       ],
       "data_planes": [
         "docs_only",
-        "research_roadmap"
+        "research_roadmap",
+        "growth_boundary",
+        "no_auto_send_policy"
       ],
       "deployment": "none",
       "human_checkpoint": false,
@@ -8274,14 +8285,25 @@
       "public_pages": "none",
       "data_repo": "none",
       "definition_of_done": [
-        "growth agent boundaries documented",
-        "external write restrictions documented",
-        "no automation executed"
+        "growth-agent boundary documented",
+        "allowed and forbidden behaviors documented",
+        "data classification documented",
+        "founder acquisition boundary documented",
+        "report distribution boundary documented",
+        "weekly growth review boundary documented",
+        "GROWTHQ policy documented or registered",
+        "BETA/I18N/OPS future scan policy documented",
+        "split recommendation documented",
+        "safe split tasks registered if allowed",
+        "no product/runtime code modified",
+        "no external writes, platform login, PII storage, deploy, or data repo mutation",
+        "GROWTH1 not started"
       ],
       "notes": [
-        "No product/runtime implementation in this task.",
-        "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
-        "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+        "Boundary and split-registration task only. Do not implement growth agents.",
+        "Codex may prepare drafts, checklists, local-only queues, and redacted summaries; humans execute external actions.",
+        "No email send, DM send, social post, GitHub Issue creation, platform login, browser cookie/session use, CRM write, PII storage, private contact enrichment, live analytics connection, Supabase write, deploy, payment/customer access, or data repo mutation.",
+        "Train metadata is not modified unless GROWTH0 scope explicitly allows ops/trains paths."
       ]
     },
     {
@@ -8477,6 +8499,671 @@
         "No product/runtime implementation in this task.",
         "No external service write, login, contact automation, PII storage, platform posting, or data repo mutation.",
         "Use finite reviewed route plans only; no scraping at scale and no mass page generation."
+      ]
+    },
+    {
+      "id": "GROWTH1A",
+      "title": "Founder Acquisition Agent Boundary v0",
+      "type": "growth-boundary",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-founder",
+      "depends_on": [
+        "GROWTH0"
+      ],
+      "purpose": "Define the founder acquisition assistant boundary before any lead queue or outreach draft generator work.",
+      "allowed_paths": [
+        "docs/growth/GROWTH1A_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH1A"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "founder acquisition inputs documented",
+        "safe and unsafe sources documented",
+        "manual execution requirement documented",
+        "GROWTH1B scope sharpened",
+        "no outreach or contact data collection"
+      ],
+      "notes": [
+        "Does not send, post, log in, create issues, scrape contacts, store PII, write CRM, or mutate the data repo.",
+        "Exact next task after GROWTH0 if the team chooses founder acquisition first."
+      ]
+    },
+    {
+      "id": "GROWTH1B",
+      "title": "Founder Lead Queue + Outreach Draft Generator v0",
+      "type": "future-checkpointed",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-founder",
+      "depends_on": [
+        "GROWTH1A"
+      ],
+      "purpose": "Future local-only draft generator for project-level lead queues, public project summaries, and outreach draft packets for human review.",
+      "allowed_paths": [
+        "docs/growth/GROWTH1B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH1B"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "local-only output boundary enforced",
+        "manual review queue documented",
+        "no-send behavior documented",
+        "no private contact collection",
+        "repo-safe examples only"
+      ],
+      "notes": [
+        "Drafts only. Humans send or discard.",
+        "No platform login, browser cookie/session use, contact enrichment, external write, CRM write, Supabase write, or committed lead database."
+      ]
+    },
+    {
+      "id": "GROWTH1Q",
+      "title": "Founder Acquisition Agent QA / No-Auto-Send QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "growth-founder",
+      "depends_on": [
+        "GROWTH1B"
+      ],
+      "purpose": "Verify founder acquisition draft work remains local-only, redacted, and no-auto-send.",
+      "allowed_paths": [
+        "docs/growth/GROWTH1Q_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH1Q"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "no sender path found",
+        "no platform login found",
+        "no PII storage found",
+        "redaction and policy scans pass",
+        "data repo clean"
+      ],
+      "notes": [
+        "QA-only. No founder contact, no external write, no product/runtime changes."
+      ]
+    },
+    {
+      "id": "GROWTH2A",
+      "title": "Report Distribution Agent Boundary v0",
+      "type": "growth-boundary",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-distribution",
+      "depends_on": [
+        "GROWTH0"
+      ],
+      "purpose": "Define the report distribution assistant boundary before any distribution draft generator work.",
+      "allowed_paths": [
+        "docs/growth/GROWTH2A_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH2A"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "distribution channels documented as drafts-only",
+        "copy boundaries documented",
+        "manual posting requirement documented",
+        "GROWTH2B scope sharpened",
+        "no external post or send"
+      ],
+      "notes": [
+        "Does not post, send, log in, call platform APIs, collect handles, or mutate the data repo."
+      ]
+    },
+    {
+      "id": "GROWTH2B",
+      "title": "Report Distribution Draft Generator v0",
+      "type": "future-checkpointed",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-distribution",
+      "depends_on": [
+        "GROWTH2A"
+      ],
+      "purpose": "Future local-only generator for report distribution drafts, snippets, title candidates, and manual posting checklists.",
+      "allowed_paths": [
+        "docs/growth/GROWTH2B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH2B"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "local-only draft output documented",
+        "manual posting checklist documented",
+        "copy policy enforced",
+        "no external platform write",
+        "no account data stored"
+      ],
+      "notes": [
+        "Drafts only. No external posting, email send, DM send, platform login, auto-comment, auto-submit, or paid placement behavior."
+      ]
+    },
+    {
+      "id": "GROWTH2Q",
+      "title": "Report Distribution Agent QA / No-External-Post QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "growth-distribution",
+      "depends_on": [
+        "GROWTH2B"
+      ],
+      "purpose": "Verify report distribution draft work remains local-only, policy-safe, and no-external-post.",
+      "allowed_paths": [
+        "docs/growth/GROWTH2Q_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH2Q"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "no external posting path found",
+        "no platform login found",
+        "copy policy scan passes",
+        "redaction scan passes",
+        "data repo clean"
+      ],
+      "notes": [
+        "QA-only. No external posts, no product/runtime changes, no deployment."
+      ]
+    },
+    {
+      "id": "GROWTH3A",
+      "title": "Weekly Growth Review Boundary v0",
+      "type": "growth-boundary",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-review",
+      "depends_on": [
+        "GROWTH0"
+      ],
+      "purpose": "Define weekly growth review inputs, redaction, and manually supplied aggregate boundaries before generator work.",
+      "allowed_paths": [
+        "docs/growth/GROWTH3A_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH3A"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "allowed aggregate inputs documented",
+        "forbidden live analytics sources documented",
+        "redaction rules documented",
+        "GROWTH3B scope sharpened"
+      ],
+      "notes": [
+        "No live analytics connection, CRM import, private server log use, unredacted user data, or data repo mutation."
+      ]
+    },
+    {
+      "id": "GROWTH3B",
+      "title": "Weekly Growth Review Generator v0",
+      "type": "research",
+      "role": "codex-research",
+      "repo": "88CN",
+      "phase": "growth-review",
+      "depends_on": [
+        "GROWTH3A"
+      ],
+      "purpose": "Future local-only weekly review generator using repo-safe counts, merged PR summaries, redacted QA findings, and manually supplied aggregate notes.",
+      "allowed_paths": [
+        "docs/growth/GROWTH3B_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH3B"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "structured input boundary documented",
+        "local output documented",
+        "manual aggregate source requirement documented",
+        "no live analytics connection"
+      ],
+      "notes": [
+        "No Google Search Console API, Cloudflare analytics, Vercel analytics, CRM data, email platform data, social platform stats, private server logs, or unredacted user data unless a later explicit checkpoint allows it."
+      ]
+    },
+    {
+      "id": "GROWTH3Q",
+      "title": "Weekly Growth Review QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "growth-review",
+      "depends_on": [
+        "GROWTH3B"
+      ],
+      "purpose": "Verify weekly review output is repo-safe, redacted, local-only, and not connected to live analytics.",
+      "allowed_paths": [
+        "docs/growth/GROWTH3Q_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTH3Q"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "no live analytics connection found",
+        "no PII storage found",
+        "redaction scan passes",
+        "policy scan passes",
+        "data repo clean"
+      ],
+      "notes": [
+        "QA-only. No external service connection, no product/runtime changes, no deployment."
+      ]
+    },
+    {
+      "id": "GROWTHQ",
+      "title": "Growth Ops QA / No-Auto-Send QA v0",
+      "type": "qa",
+      "role": "codex-qa",
+      "repo": "88CN",
+      "phase": "growth-qa",
+      "depends_on": [
+        "GROWTH1Q",
+        "GROWTH2Q",
+        "GROWTH3Q"
+      ],
+      "purpose": "Final growth-agent phase QA closer verifying no auto-send, no external post, no PII storage, and no platform login across growth drafts and review work.",
+      "allowed_paths": [
+        "docs/growth/GROWTHQ_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:scope:check -- GROWTHQ"
+      ],
+      "data_planes": [
+        "docs_only",
+        "growth_boundary",
+        "local_draft_policy"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "no auto-send path found",
+        "no auto-post path found",
+        "no CRM write found",
+        "no PII storage found",
+        "no cookies/session use found",
+        "drafts-only output verified",
+        "manual review required",
+        "data repo clean"
+      ],
+      "notes": [
+        "Final QA closer only. No implementation, no outreach, no deployment."
       ]
     },
     {
