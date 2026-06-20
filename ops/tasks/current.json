@@ -1,13 +1,13 @@
 {
-  "current_task": "PR171",
-  "current_alias": "SCOUT_STAGING2",
+  "current_task": "PR172",
+  "current_alias": "SCOUT_STAGINGQ",
   "current_repo": "88CN",
-  "current_role": "codex-build",
+  "current_role": "codex-qa",
   "status": "validation_passed",
-  "result": "PASS_SCOUT_STAGING_LOCAL_DRY_RUN",
-  "next_recommended_task": "PR172",
-  "next_recommended_alias": "SCOUT_STAGINGQ",
-  "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "next_non_pr_task": "SCOUT_STAGINGQ",
-  "notes": "PR171 ran a local-only staging sandbox write dry-run with result PASS_SCOUT_STAGING_LOCAL_DRY_RUN. Because no explicit staging DB write was authorized, it recorded STAGING_WRITE_NOT_AUTHORIZED_LOCAL_ONLY and did not attempt any Supabase/staging/production write. A local dry-run manifest remains under /tmp with 5 sample would-write payloads from the PR167 canonical dry-run, source row count 40. No migration, schema, runtime storage code, worker, crawler, queue, data repo mutation, public route, sitemap, Public API/MCP, report surface, audit, deploy, server/cloud mutation, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR172 / SCOUT_STAGINGQ; PR172 is not started here."
+  "result": "PASS_SCOUT_STAGING_NO_PUBLISH_QA",
+  "next_recommended_task": "PR173",
+  "next_recommended_alias": "AUDIT_WORKER0",
+  "next_recommended_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
+  "next_non_pr_task": "AUDIT_WORKER0",
+  "notes": "PR172 verified PR169-PR171 with result PASS_SCOUT_STAGING_NO_PUBLISH_QA. The reviewed staging range changed only docs/scout/*, docs/TASK_STATUS.md, ops/tasks/current.json, and ops/trains/current.json. PR171's local manifest records STAGING_WRITE_NOT_AUTHORIZED_LOCAL_ONLY, no attempted staging write, no Supabase write, no production write, no data repo mutation, no public surface, and no audit trigger. TRAIN-PR169-PR172-SCOUT-STAGING is complete. Exact next task is PR173 / AUDIT_WORKER0 in TRAIN-PR173-PR175-AUDIT-WORKER; PR173 has human_checkpoint=true and is not started here."
 }
