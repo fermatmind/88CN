@@ -3,5 +3,5 @@
   "status": "registered",
   "last_completed_train": "TRAIN-PR182-PROJECT-CONTRACT",
   "next_recommended_train": "TRAIN-PR183-CONTROL-PANEL",
-  "notes": "PR182 / PROJECT_CONTRACT defined the permanent project entity contract and fail-closed publish gate with result GO_CONTROL_PANEL_WITH_PROJECT_CONTRACT_READY. PR183 / CONTROL_PANEL is registered as the next immediate task but not started. No Supabase migration, DB/staging/production write, frontend project page, sitemap runtime, Public API/MCP exposure, Agent/audit/crawler/worker, data repo mutation, deploy, or private seed artifact commit occurred."
+  "notes": "PR182A / PROJECT_CONTRACT_MIGRATION_CHECKPOINT produced a task-level staging schema migration readiness plan with result READY_FOR_PR182B_WITH_HUMAN_CHECKPOINT and registered PR182B / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY in the roadmap, but suffixed task IDs are not currently accepted by train-plan batch validators. Therefore the existing PR183 train remains the registry-visible next train until PR182B is either executed by explicit task ID or remapped to a numeric PR by a later roadmap maintenance task. No Supabase migration file, Supabase connection, DB/staging/production write, seed import, frontend/admin UI implementation, sitemap/API/MCP exposure, data repo mutation, server/cloud action, or private seed artifact commit occurred."
 }

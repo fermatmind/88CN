@@ -1,13 +1,13 @@
 {
-  "current_task": "PR182",
-  "current_alias": "PROJECT_CONTRACT",
+  "current_task": "PR182A",
+  "current_alias": "PROJECT_CONTRACT_MIGRATION_CHECKPOINT",
   "current_repo": "88CN",
   "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "GO_CONTROL_PANEL_WITH_PROJECT_CONTRACT_READY",
-  "next_recommended_task": "PR183",
-  "next_recommended_alias": "CONTROL_PANEL",
+  "result": "READY_FOR_PR182B_WITH_HUMAN_CHECKPOINT",
+  "next_recommended_task": "PR182B",
+  "next_recommended_alias": "PROJECT_CONTRACT_STAGING_SCHEMA_APPLY",
   "next_recommended_train": "TRAIN-PR183-CONTROL-PANEL",
-  "next_non_pr_task": "CONTROL_PANEL",
-  "notes": "PR182 defines the permanent Entity -> Repo -> Web project contract, Source Evidence root layer, lifecycle states, allowed transitions, field visibility matrix, published_projection, 11 public signal chip slots, fail-closed sitemap/SEO/API/MCP gates, featured/promoted separation, and migration draft policy with result GO_CONTROL_PANEL_WITH_PROJECT_CONTRACT_READY. PR181 manual review findings remain private and publication-blocking. No Supabase migration, DB/staging/production write, frontend route, admin UI implementation, sitemap runtime, Public API/MCP exposure, Agent/audit/crawler/worker, data repo mutation, deploy, or private seed artifact commit occurred. Exact next task is PR183 / CONTROL_PANEL; PR183 is registered but not started."
+  "next_non_pr_task": "PROJECT_CONTRACT_STAGING_SCHEMA_APPLY",
+  "notes": "PR182A scans current Supabase/migration posture and converts PR182 into a staging schema migration readiness plan with result READY_FOR_PR182B_WITH_HUMAN_CHECKPOINT. Existing migrations 001-012, RLS conventions, public.projects, and admin-only review/import tables are present, but no PR182 staging namespace or project contract table family exists. The report defines future table matrices, lifecycle enum storage, fail-closed RLS/visibility principles, markdown-only SQL draft, seed import boundary, rollback/retention policy, Aliyun/Tencent relevance statement, and PR182B checkpoint requirements. No supabase migration file, Supabase connection, DB/staging/production write, seed import, frontend/admin UI implementation, sitemap/API/MCP exposure, data repo mutation, server/cloud action, or private seed artifact commit occurred. Exact next task is PR182B / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY; PR182B is registered but not started. Train registry remains on TRAIN-PR183-CONTROL-PANEL because current batch validators do not accept suffixed PR IDs such as PR182B."
 }
