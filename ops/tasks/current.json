@@ -1,13 +1,13 @@
 {
-  "current_task": "PR177",
-  "current_alias": "REPORT_DATA1",
+  "current_task": "PR178",
+  "current_alias": "REPORT_DATA2",
   "current_repo": "88CN",
   "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "GO_REPORT_DATA2_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE",
-  "next_recommended_task": "PR178",
-  "next_recommended_alias": "REPORT_DATA2",
+  "result": "GO_REPORT_DATAQ_QA_ONLY_NO_PUBLIC_SURFACE",
+  "next_recommended_task": "PR179",
+  "next_recommended_alias": "REPORT_DATAQ",
   "next_recommended_train": "TRAIN-PR176-PR179-REPORT-DATA",
-  "next_non_pr_task": "REPORT_DATA2",
-  "notes": "PR177 created an English aggregate draft decision with result GO_REPORT_DATA2_AGGREGATE_DRAFT_ONLY_NO_PUBLIC_SURFACE. The draft is backed only by aggregate process evidence from PR176: 40 local source rows, 5 staging sample rows, 20 audit fixture rows, no external HTTP audit rows, and no public report dataset rows. It is not a public report page, sitemap entry, public JSON, report registry entry, Public API/MCP surface, data repo export, external distribution, deploy, or project-level publication. Exact next task is PR178 / REPORT_DATA2; PR178 has human_checkpoint=true and is not started here."
+  "next_non_pr_task": "REPORT_DATAQ",
+  "notes": "PR178 created a Chinese outbound aggregate draft decision with result GO_REPORT_DATAQ_QA_ONLY_NO_PUBLIC_SURFACE. The draft is internal wording guidance only, backed by PR176 aggregate evidence and PR177 English boundary: 40 local source rows, 5 staging sample rows, 20 audit fixture rows, no external HTTP audit rows, and no public report dataset rows. It is not a public report page, sitemap entry, public JSON, report registry entry, Public API/MCP surface, data repo export, external distribution, social/email/DM/CRM activity, deploy, or project-level publication. Exact next task is PR179 / REPORT_DATAQ."
 }
