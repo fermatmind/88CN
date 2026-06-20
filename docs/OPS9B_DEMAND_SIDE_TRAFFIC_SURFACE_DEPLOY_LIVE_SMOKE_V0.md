@@ -2,163 +2,230 @@
 
 Date: 2026-06-20
 Role: Codex-QA / Deploy-QA
-Result: BLOCKED_RELEASE_RISK
-Exact next recommended task: OPS9C OPS9B Registry + Landscape Checker Lifecycle Remediation v0
+Result: LIVE_PASS
+Exact deployed SHA: `3234ef79f430569230aabc55b02060092013503d`
 
 ## Result
 
-OPS9B did not deploy.
+OPS9B deployed the exact approved `origin/main` SHA to production and completed
+post-deploy live smoke.
 
-The approved local `origin/main` SHA passed the repo-wide build and gate checks,
-but the required pre-deploy landscape boundary checker failed before production
-deployment was allowed. Per OPS9B hard-stop rules, the deployment script was not
-run, Aliyun production state was not changed, and live smoke was not started.
+The deployment used the existing production host checkout and the documented
+deploy script. No new environment variables, payment flags, secret flags,
+server config, Supabase schema, data-repo files, product/runtime code, or
+public-route implementation was changed in this OPS9B evidence task.
+
+GROWTH0, BETA1, I18N0, PR101, and any new traffic task were not started.
+
+## Human Approval
+
+The deployment was executed only after explicit human approval naming the exact
+SHA:
+
+```text
+我确认部署 88CN origin/main SHA 3234ef79f430569230aabc55b02060092013503d 到生产服务器，不启用任何新 env/payment/secret flag。
+```
+
+## Precondition
+
+OPS9C merged first and resolved the OPS9B local blockers recorded in PR #150:
+
+- `OPS9B` now resolves through `npm run agent:scope:check -- OPS9B`.
+- `landscape:check` accepts the PR123-approved finite
+  `/tasks/evaluate-ai-builder-infrastructure` route only when the task discovery
+  checker passes.
+- Broad `/tasks`, `/zh-CN`, `/landscape/sectors`, unsafe sitemap entries, and
+  under-threshold task slugs remain rejected.
 
 ## Approved Deploy SHA
 
 | Item | Evidence | Result |
 | --- | --- | --- |
-| Approved deploy SHA | `0cad8207cf697e8b2a56a091db7be1878aaea422` | PASS |
-| Local `main` before OPS9B | `HEAD == origin/main == 0cad8207cf697e8b2a56a091db7be1878aaea422` | PASS |
-| PR122-PR131 chain present | `git log --oneline -15` shows PR122 through PR131 ending at `0cad820` | PASS |
-| Deployed production SHA | Not applicable; deployment was blocked before deploy script execution | BLOCKED |
+| Approved deploy SHA | `3234ef79f430569230aabc55b02060092013503d` | PASS |
+| Local `main` before OPS9B | `HEAD == origin/main == 3234ef79f430569230aabc55b02060092013503d` | PASS |
+| PR122-PR131 chain present | Local history includes PR122 through PR131 and OPS9C PR #151 before deploy | PASS |
+| Deployed production SHA | Deploy script output: `production deploy completed at 3234ef79f430569230aabc55b02060092013503d` | PASS |
 
 ## Scope
 
-OPS9B was allowed to deploy the exact current `origin/main` SHA only if local
-pre-deploy checks, data-repo cleanliness, and production SHA confirmation all
-passed.
-
-This blocked report records evidence only. It does not modify product/runtime
-code, routes, feature flags, server config in git, deployment scripts, secrets,
-environment files, Supabase schema, payment settings, API key runtime, MCP
-runtime, Laravel runtime, customer access, outreach tooling, or
+OPS9B records deployment and smoke evidence only. It does not modify
+product/runtime code, routes, feature flags, server config in git, deployment
+scripts, secrets, environment files, Supabase schema, payment settings, API key
+runtime, MCP runtime, Laravel runtime, customer access, outreach tooling, or
 `/Users/rainie/Desktop/88cn-index-data`.
-
-GROWTH0, BETA1, I18N0, PR101, and any new traffic task were not started.
 
 ## Pre-Deploy Validation Matrix
 
 | Check | Result | Notes |
 | --- | --- | --- |
-| `git checkout main` | PASS | Branch was up to date with `origin/main` |
-| `git fetch origin` | PASS | Fetched current `origin/main` |
-| `git pull --ff-only origin main` | PASS | Already up to date |
-| `git status --short --branch` | PASS | Clean `main...origin/main` before report branch |
-| `git rev-parse HEAD` | PASS | `0cad8207cf697e8b2a56a091db7be1878aaea422` |
-| `git rev-parse origin/main` | PASS | `0cad8207cf697e8b2a56a091db7be1878aaea422` |
+| `git status --short --branch` | PASS | Clean `main...origin/main` |
+| `git rev-parse HEAD` | PASS | `3234ef79f430569230aabc55b02060092013503d` |
+| `git rev-parse origin/main` | PASS | `3234ef79f430569230aabc55b02060092013503d` |
+| Data repo status | PASS | `/Users/rainie/Desktop/88cn-index-data` clean on `main...origin/main` |
 | `npm run verify:day0` | PASS | Includes docs, policy, and third-party checks |
 | `npm run policy:scan` | PASS | Public wording guard passed |
 | `npm run third-party:check` | PASS | Notice guard passed |
 | `npm run agent:redact:check` | PASS | Redaction guard passed |
-| `npm run agent:batch:check` | PASS | 37 batches, 142 roadmap tasks, 80 skeleton tasks |
+| `npm run agent:batch:check` | PASS | 37 batches, 144 roadmap tasks, 80 skeleton tasks |
 | `npm run agent:train-plan:check` | PASS | Current train-plan dry run passed |
-| `npm run lint` | PASS | No ESLint warnings or errors |
+| `npm run agent:scope:check -- OPS9B` | PASS | OPS9B registry resolved after OPS9C |
+| `npm run lint` | PASS | No ESLint errors |
 | `npm run typecheck` | PASS | TypeScript check passed |
-| `npm run build` | PASS | Next build generated `/landscape`, one task route, and four alternatives routes |
+| `npm run build` | PASS | Next build generated `/landscape`, one finite task route, and four alternatives routes |
 | `npm run agent:gate` | PASS | Full local agent gate passed |
-| `node scripts/check-landscape-boundary.mjs` | FAIL | Pre-deploy hard stop |
-| `npm run landscape:check` | NOT RUN | Stopped after direct checker failure |
-| `node scripts/check-sector-density-boundary.mjs` | NOT RUN | Stopped after direct checker failure |
+| `node scripts/check-landscape-boundary.mjs` | PASS | Accepts approved finite task route with task-discovery evidence |
+| `npm run landscape:check` | PASS | Wrapper check passed |
+| `node scripts/check-task-discovery-boundary.mjs` | PASS | Finite task route boundary passed |
+| `node scripts/check-sector-density-boundary.mjs` | PASS | Sector-density boundary passed |
+| `npm run report-distribution-pack:generate -- --dry-run` | PASS | 4 reports, 7 files, all external-write safety flags false |
 
-Failing checker output:
+## Deployment Command
 
-```text
-landscape:check failed
-- app/tasks must not exist
-- app/sitemap.ts must not include /tasks
-```
-
-## Post-Report Validation
-
-After this blocked report was written, the allowed docs/status changes were
-checked before any commit or PR handoff.
-
-| Check | Result | Notes |
-| --- | --- | --- |
-| `npm run verify:day0` | PASS | Includes docs, policy, and third-party checks |
-| `npm run policy:scan` | PASS | New report copy passed policy scan |
-| `npm run third-party:check` | PASS | Notice guard passed |
-| `npm run agent:redact:check` | PASS | Redaction guard passed |
-| `npm run agent:batch:check` | PASS | Batch registry still valid |
-| `npm run agent:train-plan:check` | PASS | Current train-plan dry run still valid |
-| `npm run agent:scope:check -- OPS9B` | FAIL | `scope-check failed: task OPS9B not found` |
-
-The scope-check failure is not fixed in OPS9B because the allowed file list for
-this task does not include roadmap/scope registry files.
-
-## Deployment Summary
-
-Deployment was not executed.
-
-The documented deploy command was therefore not run:
+The deploy command run on the production host checkout was:
 
 ```bash
-scripts/agent/deploy-production.sh --confirm --commit "$APPROVED_SHA"
+cd /var/www/88cn
+BASE_URL=https://88cn.com scripts/agent/deploy-production.sh --confirm --commit 3234ef79f430569230aabc55b02060092013503d
 ```
+
+The script completed the fixed-SHA checkout, dependency install, Day 0
+verification, production build, PM2 restart, PM2 save/status, Nginx config test,
+Nginx reload, local smoke, live smoke, and final deployed-SHA assertion.
 
 ## PM2 / Nginx / TLS / DNS Summary
 
-Not applicable. OPS9B did not reach the production deployment stage, so no PM2
-restart, Nginx reload, TLS smoke, or DNS smoke was performed in this task.
+| Area | Result | Evidence |
+| --- | --- | --- |
+| PM2 | PASS | `88cn-web` restarted and remained `online` |
+| Nginx config | PASS | `nginx: configuration file /etc/nginx/nginx.conf test is successful` |
+| Local smoke from production host | PASS | `/api/healthz`, `/`, `/projects`, `/submit`, `/geo-checker`, `/sitemap.xml`, `/robots.txt`, `/admin` returned 200 |
+| Live smoke from production host | PASS | Same route set returned 200 through `https://88cn.com` |
+| External live smoke from local workstation | PASS | `BASE_URL=https://88cn.com scripts/agent/smoke-live.sh` returned `live smoke passed` |
 
 ## Baseline Public Route Smoke Matrix
 
-Not run. Live route smoke is downstream of successful pre-deploy validation.
+| Route | Result |
+| --- | --- |
+| `/` | 200 |
+| `/projects` | 200 |
+| `/reports` | 200 |
+| `/reports/early-ai-project-machine-readability-2026` | 200 |
+| `/geo-checker` | 200 |
+| `/submit` | 200 |
+| `/founders` | 200 |
+| `/genesis` | 200 |
+| `/alpha-feed` | 200 |
+| `/sitemap.xml` | 200 |
+| `/robots.txt` | 200 |
 
 ## Demand-Side Route Smoke Matrix
 
-Not run. `/landscape`, finite task route, and alternatives route smoke were not
-started because pre-deploy validation failed.
+| Route | Result |
+| --- | --- |
+| `/landscape` | 200 |
+| `/tasks/evaluate-ai-builder-infrastructure` | 200 |
+| `/alternatives/aurora-code-vs-nucleus-ml` | 200 |
+| `/alternatives/nucleus-ml-vs-vectorbase` | 200 |
+| `/alternatives/complykit-vs-pulse-analytics` | 200 |
+| `/alternatives/aurora-code-vs-vectorbase` | 200 |
 
-## Task Route Smoke Matrix
+## Negative Route Smoke Matrix
 
-Not run. Build output confirmed the current implementation includes
-`/tasks/evaluate-ai-builder-infrastructure`, but live task route smoke was not
-allowed after the checker hard stop.
-
-## Alternatives Route Smoke Matrix
-
-Not run. Build output confirmed four static alternatives routes, but live
-alternatives route smoke was not allowed after the checker hard stop.
+| Probe | Expected | Result |
+| --- | --- | --- |
+| `/tasks` | No broad task index | 404 |
+| `/tasks/review-model-search-infrastructure` | Under-threshold task absent | 404 |
+| `/tasks/unknown-task-slug` | Unknown task absent | 404 |
+| `/zh-CN` | I18N route absent | 404 |
+| `/landscape/sectors` | Sector sub-route absent | 404 |
+| `/alternatives/vectorbase-vs-aurora-code` | Reverse duplicate absent | 404 |
 
 ## Disabled Route Smoke Matrix
 
-Not run. Disabled API/payment/MCP/API-key/buyer-interest live smoke was not
-started because OPS9B stopped before deployment.
+| Route | Method | Result |
+| --- | --- | --- |
+| `/api/mcp` | GET | 503 Problem Details |
+| `/api/mcp` | POST | 503 Problem Details |
+| `/api/payments/featured-signals/checkout` | GET | 503 Problem Details |
+| `/api/payments/featured-signals/checkout` | POST | 503 Problem Details |
+| `/api/alpha-feed/api-keys` | GET | 503 Problem Details |
+| `/api/alpha-feed/api-keys` | POST | 503 Problem Details |
+| `/api/alpha-feed/buyer-interest` | GET | 503 Problem Details |
+| `/api/alpha-feed/buyer-interest` | POST | 503 Problem Details |
+
+No disabled MCP, payment, API-key, or buyer-interest surface activated during
+the OPS9B deploy.
 
 ## Sitemap Verification
 
-Local build completed and generated the expected route classes, including
-`/landscape`, `/tasks/evaluate-ai-builder-infrastructure`, and four
-`/alternatives/*` routes.
+Live `/sitemap.xml` returned 200 with 36 URLs.
 
-Live sitemap verification was not run because deployment was blocked.
+Required demand-side entries were present:
+
+- `/landscape`
+- `/tasks/evaluate-ai-builder-infrastructure`
+- `/alternatives/aurora-code-vs-nucleus-ml`
+- `/alternatives/nucleus-ml-vs-vectorbase`
+- `/alternatives/complykit-vs-pulse-analytics`
+- `/alternatives/aurora-code-vs-vectorbase`
+
+Forbidden sitemap entries were absent:
+
+- `/api`, `/admin`, `/mcp`, `/payments`, `api-keys`, `buyer-interest`
+- `/private`, `/submitted`, `/pending`, `/quarantined`, `/scouted`, `/rejected`
+- `/zh-CN`, `/landscape/sectors`
+- `/alternatives/vectorbase-vs-aurora-code`
+- under-threshold or unknown task slugs
 
 ## Robots Verification
 
-Not run. Live robots verification is downstream of successful deployment.
+Live `/robots.txt` returned 200 and includes:
+
+- `Disallow: /admin/`
+- `Disallow: /api/`
+- `Disallow: /preview/`
+- `Disallow: /claim/`
+- `Disallow: /submit/`
+- `Sitemap: https://88cn.com/sitemap.xml`
 
 ## Security Header Summary
 
-Not run. Security header smoke is downstream of successful deployment.
+Checked `/`, `/landscape`, `/tasks/evaluate-ai-builder-infrastructure`,
+`/alternatives/aurora-code-vs-nucleus-ml`, and `/api/mcp`.
+
+All checked responses included:
+
+- `x-content-type-options`
+- `referrer-policy`
+- `permissions-policy`
+- `x-frame-options` and/or `content-security-policy`
+- expected cache policy for static pages or `no-store` for disabled API
 
 ## Copy Boundary Live Smoke
 
-Not run. Live rendered-copy smoke is downstream of successful deployment.
+Rendered live HTML for the home page, landscape page, finite task page, and an
+alternatives page was scanned for the public-language-ban term set. No forbidden
+public-copy match was found in the checked live surfaces.
 
 ## Report Distribution Dry-Run Safety
 
-Not run in OPS9B after the pre-deploy hard stop. PR130 already verified the
-local report distribution pack generator and recorded that its external-write
-safety flags remain false.
+`npm run report-distribution-pack:generate -- --dry-run` returned a finite local
+draft plan:
+
+- 4 reports
+- 7 files
+- all safety flags false for external writes, email send, DM send, social post,
+  platform login, CRM write, PII inclusion, browser session export, data-repo
+  mutation, and deploy
 
 ## Data Leak Scan
 
-Live data leak smoke was not run because deployment was blocked.
+Live sitemap and checked HTML did not expose private/admin/payment/API-key/MCP
+surfaces, unsafe lifecycle states, reverse alternatives duplicates, broad task
+index, under-threshold task slugs, `/zh-CN`, or `/landscape/sectors`.
 
-No local evidence in this OPS9B run indicated a new leak; the block is the stale
-checker assumption that conflicts with the intentional finite task route.
+The disabled-route probes returned 503 Problem Details instead of activating
+write-capable behavior.
 
 ## Data Repo Cleanliness
 
@@ -167,46 +234,25 @@ OPS9B did not mutate the data repo.
 
 ## Findings By Severity
 
-- P0: none observed in local pre-deploy validation.
-- P1: OPS9B release is blocked because a required pre-deploy checker fails.
-- P1: OPS9B report validation is blocked because `OPS9B` is not registered for
-  `agent:scope:check -- OPS9B`.
-- P2: none recorded.
-- P3: the failing checker appears lifecycle-stale after PR123 finite task pages;
-  PR131 already recorded this as a sidecar, but OPS9B treats it as blocking
-  because the deploy goal explicitly requires this checker to pass.
+- P0: none.
+- P1: none.
+- P2: none.
+- P3: existing generic `scripts/agent/smoke-live.sh` still covers only the
+  baseline route set; OPS9B used an expanded manual probe for demand-side,
+  disabled-route, sitemap, robots, header, and copy boundaries.
 
 ## Sidecar Issues
 
-The existing PR131 sidecar remains active:
+No active OPS9B blocker remains after this rerun.
 
-- `scripts/check-landscape-boundary.mjs` still expects `app/tasks` to be absent
-  and `app/sitemap.ts` not to include `/tasks`.
-- PR123 intentionally added finite `/tasks/[slug]` for
-  `evaluate-ai-builder-infrastructure`.
-- `scripts/check-task-discovery-boundary.mjs` owns the finite task boundary.
+OPS9C resolved the prior P1 blockers before deployment:
 
-OPS9B cannot bypass this sidecar because its deploy checklist explicitly makes
-the landscape checker a hard pre-deploy gate.
-
-## Exact Next Recommendation
-
-Create a narrow OPS9C / registry-and-checker-lifecycle remediation task that:
-
-- registers the OPS9B deploy/live-smoke task in the scope registry, or updates
-  the validation target to a registered deploy task ID;
-- updates `scripts/check-landscape-boundary.mjs` and the `landscape:check`
-  wrapper so they continue validating `/landscape` while accepting the
-  PR123-approved finite task route and sitemap entry.
-
-After that remediation passes, rerun OPS9B from a clean `origin/main` SHA and
-deploy only if every required gate is green.
+- OPS9B scope-check registration.
+- Landscape checker lifecycle acceptance for the PR123 finite task route.
 
 ## What This Task Does Not Do
 
-- Does not deploy.
-- Does not run live smoke.
-- Does not touch Aliyun production state.
+- Does not create new env, payment, or secret flags.
 - Does not change product/runtime code.
 - Does not change routes, sitemap runtime, robots runtime, or feature flags.
 - Does not change deployment scripts or server config in git.
