@@ -1,7 +1,7 @@
 {
-  "active_train": null,
-  "status": "idle",
+  "active_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
+  "status": "in_progress",
   "last_completed_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
   "next_recommended_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
-  "notes": "TRAIN-PR163-PR165-SCOUT-SEED-MVP is complete after PR165 / SCOUT_SEEDQ. Continue with PR166 / CANON0 in TRAIN-PR166-PR168-CANON-RESOLVER. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation occurred."
+  "notes": "PR166 / CANON0 completed the canonical resolver boundary step. Continue with PR167 / CANON1 only after PR166 is merged and local main is clean. PR167 has a human checkpoint and must stay local/fixture-only unless explicitly approved; no data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation is authorized."
 }
