@@ -1,13 +1,13 @@
 {
-  "current_task": "PR185",
-  "current_alias": "BULK_IMPORT_CONTRACT",
+  "current_task": "PR187",
+  "current_alias": "SERVER_ISOLATION_PLAN",
   "current_repo": "88CN",
   "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "BULK_IMPORT_CONTRACT_READY",
-  "next_recommended_task": "PR186",
-  "next_recommended_alias": "SERVER_CAPACITY_READINESS",
-  "next_recommended_train": "TRAIN-SERVER-READINESS",
-  "next_non_pr_task": "PR186 / SERVER_CAPACITY_READINESS is already represented by merged OPS-SERVER0R evidence and should be verified when reached in sequence.",
-  "notes": "PR185 defines the bulk import manifest, row hash, batch hash, source evidence mapping, accepted/needs-review/rejected/quarantine outcomes, rollback-by-batch contract, 20k-50k sharding limits, retry boundaries, and no-public defaults. It is docs/status only; no seed import, DB write, Supabase/staging/production write, worker, queue, external HTTP audit, public surface, sitemap, Public API/MCP, data repo mutation, deploy, or server/cloud mutation occurs."
+  "result": "SERVER_ISOLATION_PLAN_READY",
+  "next_recommended_task": "PR188",
+  "next_recommended_alias": "STAGING_ADMIN_HOST_PREP",
+  "next_recommended_train": "TRAIN-SERVER-PREP",
+  "next_non_pr_task": "PR186 / SERVER_CAPACITY_READINESS was verified and skipped because merged PR #224 / OPS-SERVER0R already satisfies the read-only capacity scan requirement.",
+  "notes": "PR187 refreshes the server isolation plan after PR186 equivalence verification. It documents host role separation, do-not-touch rules, PR188/PR189 human confirmations, and no-action boundaries. It is docs/status only; no SSH, cloud console mutation, server write, deploy, restart/reload, user/directory creation, env/secret read, Supabase/DB write, Redis/queue creation, worker/crawler/audit runtime, public surface, data repo mutation, Tencent workload, or FermatMind resource mutation occurs."
 }
