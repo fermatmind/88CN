@@ -8307,6 +8307,94 @@
       ]
     },
     {
+      "id": "GROWTH0T",
+      "title": "Growth Train Registration + Readiness Scan v0",
+      "type": "roadmap-readiness",
+      "role": "codex-build",
+      "repo": "88CN",
+      "phase": "growth-train-registration",
+      "depends_on": [
+        "GROWTH0"
+      ],
+      "purpose": "Scan and attempt safe non-PR Growth train registration after GROWTH0, documenting the runner compatibility blocker without starting any Growth task or implementation.",
+      "allowed_paths": [
+        "docs/growth/GROWTH0T_*.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json",
+        "ops/trains/batches.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- GROWTH0T",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs",
+        "npm run landscape:check",
+        "node scripts/check-sector-density-boundary.mjs",
+        "node scripts/check-task-discovery-boundary.mjs",
+        "node scripts/check-alternatives-canonical.mjs",
+        "npm run report-distribution-pack:generate -- --dry-run"
+      ],
+      "data_planes": [
+        "docs_only",
+        "roadmap_readiness",
+        "train_registry",
+        "growth_safety_gate"
+      ],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "GROWTH split tasks verified as fully registered",
+        "Growth train batches registered or runner blocker documented without weakening validators",
+        "GROWTHQ runner compatibility blocker documented when explicit Growth train-plan check fails",
+        "agent batch and default train-plan checks pass after reverting unsafe train registration",
+        "exact next remediation task documented",
+        "BETA1, I18N0, OPS8D, OPS10A, and PR101 remain paused",
+        "no Growth implementation started",
+        "no product/runtime code modified",
+        "no external write, PII storage, deployment, Supabase write, or data repo mutation"
+      ],
+      "notes": [
+        "Train-registration and readiness scan only. Do not start any Growth train inside GROWTH0T.",
+        "GROWTHQ is a complete roadmap task but is blocked from train registration by the current OPS9A2 non-PR task ID pattern, which accepts GROWTH<number><optional-letter> but not GROWTHQ.",
+        "Do not weaken validators in GROWTH0T and do not modify scripts. Register no partial Growth train set while GROWTH3/GROWTHQ cannot pass runner checks.",
+        "Recommended next remediation is a narrow runner compatibility or task-alias decision before registering Growth trains."
+      ]
+    },
+    {
       "id": "GROWTH1",
       "title": "Founder Acquisition Agent v0",
       "type": "future-checkpointed",
