@@ -2,6 +2,15 @@
 
 Open sidecar issues:
 
+- OPS9B P1 release-blocking sidecar: OPS9B did not deploy because the required
+  pre-deploy `node scripts/check-landscape-boundary.mjs` gate fails after PR123
+  finite task pages. The checker still requires `app/tasks` to be absent and
+  `app/sitemap.ts` not to include `/tasks`, while PR123 intentionally added the
+  finite `/tasks/[slug]` route and PR124/PR131 verified the task boundary with
+  `scripts/check-task-discovery-boundary.mjs`. OPS9B report validation also
+  found `agent:scope:check -- OPS9B` fails because OPS9B is not registered for
+  scope checking. These must be resolved in a narrow registry-and-checker
+  lifecycle remediation before rerunning OPS9B.
 - PR131 P3 sidecar: `npm run landscape:check` is stale after PR123 because `scripts/check-landscape-boundary.mjs` still expects `app/tasks` to be absent and `app/sitemap.ts` not to include `/tasks`. PR123 intentionally added finite `/tasks/[slug]`, PR124 QA passed, and `node scripts/check-task-discovery-boundary.mjs` now owns the finite task boundary. PR131 is QA-only and forbids `scripts/**`, so no checker update is made here.
 - OPS8A P3 sidecar: existing `scripts/agent/smoke-live.sh` covers generic public/admin/sitemap/robots live smoke, but does not by itself assert disabled-route 503 Problem Details for Public API, MCP, payment checkout, API key shell, or buyer-interest shell. OPS8A records an expanded OPS8B checklist instead of modifying scripts because OPS8A scope forbids `scripts/**`.
 - PR98 P3 sidecar: `scripts/check-alpha-feed-landing.mjs` is PR95-phase scoped and fails after PR96 because the Alpha Feed page now includes a disabled/no-write buyer-interest preview form. The current PR96 `scripts/check-data-buyer-interest.mjs` checker passes, so this is lifecycle-aware checker debt rather than an active leakage issue.
