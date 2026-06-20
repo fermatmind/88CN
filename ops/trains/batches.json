@@ -2,7 +2,28 @@
   "version": "0.1.0",
   "registry": "88CN PR Train Batch Registry",
   "policy": {
-    "default_auto_merge_allowed": false,
+    "default_auto_merge_allowed": true,
+    "stable_auto_merge_allowed": true,
+    "auto_delete_branch_after_merge": true,
+    "auto_merge_requires": [
+      "mergeable_pr",
+      "required_github_checks_pass",
+      "scope_validation_pass",
+      "policy_scan_pass",
+      "no_human_checkpoint_bypassed"
+    ],
+    "auto_merge_blocked_when": [
+      "human_checkpoint_required",
+      "live_deploy_requested",
+      "server_or_cloud_mutation_requested",
+      "production_or_staging_write_requested",
+      "secret_or_env_change_requested",
+      "payment_or_customer_access_requested",
+      "external_write_or_outreach_requested",
+      "data_repo_mutation_requested",
+      "public_api_or_mcp_release_requested",
+      "new_dependency_or_plugin_requested"
+    ],
     "default_plugin_install_allowed": false,
     "default_new_dependency_allowed": false,
     "same_worktree_parallelism_allowed": false,

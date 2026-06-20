@@ -57,7 +57,7 @@ That implementation should be narrow:
 
 Recommended default policy for the first non-PR train support:
 
-- `auto_merge_allowed`: false unless all tasks are docs-only/QA and explicitly marked low risk.
+- `auto_merge_allowed`: true by default for stable docs-only, status-only, readiness, and QA tasks when no human checkpoint or high-risk flag is present.
 - `live_deploy_allowed`: false.
 - `payment_change_allowed`: false.
 - `mcp_change_allowed`: false unless each MCP task is human-checkpointed.

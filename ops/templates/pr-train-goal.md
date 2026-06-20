@@ -8,7 +8,7 @@ You are Codex 5.5 High under the 88CN Agent Operating System.
 
 Inputs:
 - BATCH_ID: <BATCH_ID>
-- AUTO_MERGE_ALLOWED: <true|false>
+- AUTO_MERGE_ALLOWED: <true by default for stable low-risk tasks; false for checkpointed/high-risk tasks>
 - LIVE_DEPLOY_ALLOWED: <true|false>
 - PAYMENT_CHANGE_ALLOWED: <true|false>
 - MCP_CHANGE_ALLOWED: <true|false>
@@ -29,13 +29,14 @@ Rules:
 10. Record sidecar issues in `docs/SIDECAR_ISSUES.md` only when the issue is outside the current task scope and `continue_on_sidecar` is true.
 11. Do not install plugins, add dependencies, configure real MCP servers, touch payment enablement, or change server configuration unless both the batch and task explicitly allow it.
 12. Run the validations required by each task, then run the train-level validation bundle.
+13. For stable low-risk tasks where repo policy and the selected batch allow auto-merge, merge with task-branch deletion after required checks pass.
 
 Completion:
 - Summarize completed tasks.
 - List validations and results.
 - List sidecar issues, if any.
 - Confirm `git status --short --branch`.
-- Do not run train-driven auto-merge unless repo policy, tool registry, and the selected batch allow merge. Codex may use `gh pr merge` without a separate human approval step when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
+- Auto-merge stable low-risk tasks by default when repo policy, tool registry, the selected batch, the active roadmap task, and GitHub merge state allow it. Use branch deletion after merge. Do not auto-merge if a human checkpoint, live deploy, server/cloud mutation, production/staging write, secret/env change, payment/customer access, external write/outreach, data repo mutation, Public API/MCP release, plugin, or new dependency would be bypassed.
 ```
 
 Only change these template inputs for routine use:
