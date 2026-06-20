@@ -3,5 +3,5 @@
   "status": "idle",
   "last_completed_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
   "next_recommended_train": "TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY",
-  "notes": "PR122-PR131 register the PR-numbered execution chain for the demand-side traffic work previously split as TRAFFIC4A through TRAFFIC7. The exact next executable PR train is TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY beginning with PR122 / TRAFFIC4A. PR101-PR121 remain reserved for the existing MCP and agent ecosystem train and are not reused."
+  "notes": "GROWTH0T found a Growth train runner compatibility blocker before registering Growth trains: GROWTHQ is a registered roadmap task but does not match the current OPS9A2 allowlisted non-PR task ID pattern. Growth train registry remains unchanged; the existing PR122-PR124 traffic train recommendation is preserved for runner compatibility."
 }
