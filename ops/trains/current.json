@@ -1,7 +1,7 @@
 {
-  "active_train": null,
-  "status": "idle",
+  "active_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
+  "status": "in_progress",
   "last_completed_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
   "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "notes": "TRAIN-PR166-PR168-CANON-RESOLVER is complete after PR168 / CANONQ. Continue with PR169 / SCOUT_STAGING0 only after PR168 is merged and local main is clean. PR169 has a human checkpoint and must remain boundary-only; no data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation is authorized."
+  "notes": "PR169 / SCOUT_STAGING0 completed the staging sandbox persistence boundary step. Continue with PR170 / SCOUT_STAGING1 only after PR169 is merged and local main is clean. PR170 has a human checkpoint and must remain storage/migration decision-only unless explicitly approved; no data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation is authorized."
 }

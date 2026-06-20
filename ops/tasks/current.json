@@ -1,13 +1,13 @@
 {
-  "current_task": "PR168",
-  "current_alias": "CANONQ",
+  "current_task": "PR169",
+  "current_alias": "SCOUT_STAGING0",
   "current_repo": "88CN",
-  "current_role": "codex-qa",
+  "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "PASS_CANONICAL_RESOLVER_QA",
-  "next_recommended_task": "PR169",
-  "next_recommended_alias": "SCOUT_STAGING0",
+  "result": "GO_SCOUT_STAGING1",
+  "next_recommended_task": "PR170",
+  "next_recommended_alias": "SCOUT_STAGING1",
   "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "next_non_pr_task": "SCOUT_STAGING0",
-  "notes": "PR168 verifies PR166-PR167 with result PASS_CANONICAL_RESOLVER_QA. QA confirms no name-only canonical keys, no unexpected resolver output fields, no public/review/audit/Growth/report/sitemap/API/MCP-ready states, no duplicate auto-merge, and no public route, sitemap, Public API/MCP, report surface, data repo mutation, Supabase write, external HTTP fetch, DNS/redirect resolution, crawler, or audit trigger occurred. TRAIN-PR166-PR168-CANON-RESOLVER is complete. Exact next task is PR169 / SCOUT_STAGING0; PR169 is not started here."
+  "next_non_pr_task": "SCOUT_STAGING1",
+  "notes": "PR169 defines the staging sandbox persistence boundary with result GO_SCOUT_STAGING1. It defines staging sandbox meaning, allowed future staging fields, local-only fields, forbidden fields, staging-only statuses, DB-backed requirements, no-public-surface rules, migration/write checkpoint requirements, rollback/delete/TTL/correction expectations, and PR170 handoff. No schema, migration, Supabase/staging/production write, runtime storage code, worker, crawler, queue, data repo mutation, public route, sitemap, Public API/MCP, report surface, audit, deploy, server/cloud mutation, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR170 / SCOUT_STAGING1; PR170 is not started here."
 }
