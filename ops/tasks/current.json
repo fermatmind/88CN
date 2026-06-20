@@ -1,13 +1,13 @@
 {
-  "current_task": "PR155",
-  "current_alias": "REPORT_IMPL1",
+  "current_task": "PR156",
+  "current_alias": "REPORT_IMPL2",
   "current_repo": "88CN",
   "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "GO_REPORT_IMPL2_DRAFT_ONLY_NO_PUBLIC_SURFACE",
-  "next_recommended_task": "PR156",
-  "next_recommended_alias": "REPORT_IMPL2",
+  "result": "GO_REPORT_IMPLQ_DRAFT_ONLY_NO_PUBLIC_SURFACE",
+  "next_recommended_task": "PR157",
+  "next_recommended_alias": "REPORT_IMPLQ",
   "next_recommended_train": "TRAIN-PR154-PR157-REPORT-IMPL",
-  "next_non_pr_task": "REPORT_IMPL2",
-  "notes": "PR155 creates a draft-only aggregate report decision. No public report page, sitemap entry, public JSON, report registry entry, Public API/MCP, distribution pack, data repo export, external submission, project-level claim, production write, or deploy has started."
+  "next_non_pr_task": "REPORT_IMPLQ",
+  "notes": "PR156 creates a Chinese outbound draft-only decision. No Chinese report page, sitemap entry, public JSON, report registry entry, Public API/MCP, distribution pack, data repo export, external submission, outreach write, project-level claim, production write, or deploy has started."
 }
