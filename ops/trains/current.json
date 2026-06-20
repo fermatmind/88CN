@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-SERVER-READINESS",
+  "active_train": "TRAIN-SERVER-PREP",
   "status": "registered",
   "last_completed_train": "TRAIN-DATA-PLANE",
-  "next_recommended_train": "TRAIN-SERVER-READINESS",
-  "notes": "PR185 / BULK_IMPORT_CONTRACT completes TRAIN-DATA-PLANE with a docs-only bulk import contract and no import or DB write. Exact next task after merge is PR186 / SERVER_CAPACITY_READINESS in TRAIN-SERVER-READINESS, already represented by merged OPS-SERVER0R evidence and to be verified in sequence."
+  "next_recommended_train": "TRAIN-SERVER-PREP",
+  "notes": "PR186 / SERVER_CAPACITY_READINESS was verified and skipped as equivalent to merged PR #224 / OPS-SERVER0R. PR187 / SERVER_ISOLATION_PLAN completes TRAIN-SERVER-READINESS with a docs-only isolation plan and no server/cloud mutation. Exact next task after merge is PR188 / STAGING_ADMIN_HOST_PREP in TRAIN-SERVER-PREP."
 }
