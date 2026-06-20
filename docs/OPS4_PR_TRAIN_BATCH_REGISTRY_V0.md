@@ -53,7 +53,7 @@ Each batch object in `ops/trains/batches.json` includes:
 - `allowed_roles`
 - `notes`
 
-Booleans are explicit. The default policy blocks auto merge, plugin install, new dependencies, and same-worktree parallel writes.
+Booleans are explicit. The default policy allows auto-merge for stable low-risk operations, deletes task branches after merge, and continues to block plugin install, new dependencies, and same-worktree parallel writes.
 
 ## Registered Batches
 
@@ -73,7 +73,9 @@ Booleans are explicit. The default policy blocks auto merge, plugin install, new
 
 The runner skill requires a stop before checkpointed actions. Human checkpoints cover payment/Stripe/commercial enablement, email automation, external notification, public API external release, scaled public content expansion, data feed release, real MCP endpoint configuration, external framework PR creation, and live deployment unless both the batch and task allow it.
 
-Auto merge is false in this registry because train-driven merge should remain controlled by batch and roadmap permissions. Repository policy allows Codex to execute `gh pr merge` without a separate human approval step when the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
+Auto merge is the default for stable low-risk operations. Train-driven merge remains controlled by repository policy, batch permissions, roadmap permissions, and required checks. Repository policy allows Codex to execute `gh pr merge --delete-branch` without a separate human approval step when the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
+
+Auto merge is blocked when a task would bypass a human checkpoint, live deploy, server or cloud mutation, production or staging write, secret or environment change, payment/customer access, external write or outreach, data repo mutation, Public API/MCP release, plugin install, or new dependency.
 
 ## Parallel Worktree Policy
 

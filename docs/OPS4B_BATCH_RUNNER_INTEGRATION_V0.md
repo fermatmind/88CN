@@ -49,6 +49,7 @@ OPS-4B adds:
   - `credential_prompt`
 - payment, MCP, server, plugin, and dependency permission flags require human checkpoints when true
 - auto-merge batches include required check and scope stop conditions
+- registry policy requires stable auto-merge eligibility, branch deletion after merge, and explicit auto-merge blockers
 - live deploy batches keep `server_change_allowed=false`
 - live deploy batches distinguish live-smoke-only from live-config-change
 - `ops/trains/current.json` has the required pointer fields
@@ -95,13 +96,16 @@ Train dry-run also reports task-level human checkpoint status for roadmap tasks 
 
 ## Auto-Merge Safety Rules
 
-Train-driven auto-merge remains controlled by batch and roadmap permissions. If a batch sets `auto_merge_allowed=true`, it must include stop conditions for required GitHub check failure and scope validation failure.
+Stable low-risk train-driven auto-merge is allowed by default and remains controlled by repository policy, batch permissions, roadmap permissions, and required checks. If a batch sets `auto_merge_allowed=true`, it must include stop conditions for required GitHub check failure and scope validation failure.
 
 Codex merge execution still requires policy gates:
 
 - PR is mergeable
 - required checks pass
+- branch deletion after merge is enabled by repository policy
 - no human checkpoint is bypassed
+
+Auto merge remains blocked for human checkpoints, live deploys, server or cloud mutation, production or staging writes, secret or environment changes, payment/customer access, external writes or outreach, data repo mutation, Public API/MCP release, plugins, and new dependencies unless a later task explicitly records the required human checkpoint.
 
 ## Live Smoke Only vs Live Config Change
 

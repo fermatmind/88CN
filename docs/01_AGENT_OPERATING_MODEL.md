@@ -16,7 +16,9 @@ The implementation agent owns code, database, tests, queues, scoring, AI draft s
 
 ## Human Team
 
-The human team owns production access, release approval, editorial approval, and public launch decisions. Codex may execute a final PR merge with `gh pr merge` when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
+The human team owns production access, release approval, editorial approval, and public launch decisions. Stable low-risk operations are auto-merge eligible by default. Codex may execute a final PR merge with branch deletion when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
+
+Auto-merge eligibility does not override human checkpoints. Live deploys, server or cloud mutation, production or staging writes, secret or environment changes, payment/customer access, external writes or outreach, data repo mutation, Public API/MCP release, plugins, and new dependencies require an explicit checkpoint before merge.
 
 ## Promotion Boundary
 

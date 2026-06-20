@@ -41,18 +41,23 @@ Never use a sidecar issue to bypass a forbidden path, failed security gate, miss
 
 ## Merge Policy
 
-Merges are policy-gated by default.
+Stable low-risk operations are auto-merge eligible by default.
 
-The runner must not execute an unattended or train-driven auto-merge unless all conditions are true:
+The runner may execute an unattended or train-driven auto-merge and delete the task branch when all conditions are true:
 
-- the selected batch sets `auto_merge_allowed` to true
-- the active roadmap task allows merge
+- repository policy has `default_auto_merge_allowed=true`
+- repository policy has `auto_delete_branch_after_merge=true`
+- the selected batch sets `auto_merge_allowed` to true, or the active task is a stable docs/status/QA/readiness task with no checkpoint blockers
+- the active roadmap task allows merge or has no human checkpoint requirement
 - `ops/tools/tool-registry.json` allows the required merge command
 - the PR is mergeable
 - required checks pass
+- scope validation and policy scan pass
 - no human checkpoint is bypassed
 
-Codex may run `gh pr merge` without a separate human approval step when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
+Codex may run `gh pr merge --delete-branch` without a separate human approval step when repo policy allows it, the PR is mergeable, required checks pass, and no human checkpoint is bypassed.
+
+Auto-merge remains blocked for human checkpoints, live deploys, server or cloud mutation, production or staging writes, secret or environment changes, payment/customer access, external writes or outreach, data repo mutation, Public API/MCP release, plugins, or new dependencies unless a later task explicitly records the required human checkpoint.
 
 If merge gates do not pass, open or update the PR and stop before merge.
 

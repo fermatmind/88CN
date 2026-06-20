@@ -39,6 +39,40 @@ const requiredCurrentFields = [
   'notes'
 ];
 
+const requiredPolicyFields = [
+  'default_auto_merge_allowed',
+  'stable_auto_merge_allowed',
+  'auto_delete_branch_after_merge',
+  'auto_merge_requires',
+  'auto_merge_blocked_when',
+  'default_plugin_install_allowed',
+  'default_new_dependency_allowed',
+  'same_worktree_parallelism_allowed',
+  'sidecar_issue_file',
+  'runner_skill'
+];
+
+const requiredAutoMergeRequirements = [
+  'mergeable_pr',
+  'required_github_checks_pass',
+  'scope_validation_pass',
+  'policy_scan_pass',
+  'no_human_checkpoint_bypassed'
+];
+
+const requiredAutoMergeBlockers = [
+  'human_checkpoint_required',
+  'live_deploy_requested',
+  'server_or_cloud_mutation_requested',
+  'production_or_staging_write_requested',
+  'secret_or_env_change_requested',
+  'payment_or_customer_access_requested',
+  'external_write_or_outreach_requested',
+  'data_repo_mutation_requested',
+  'public_api_or_mcp_release_requested',
+  'new_dependency_or_plugin_requested'
+];
+
 const booleanFields = [
   'auto_merge_allowed',
   'live_deploy_allowed',
@@ -246,6 +280,56 @@ function validateNonPrBatchRisk(batch, failures) {
   }
 }
 
+function validateRegistryPolicy(registry, failures) {
+  const policy = registry.policy;
+  add(failures, policy && typeof policy === 'object' && !Array.isArray(policy), 'registry.policy must be object');
+  if (!policy || typeof policy !== 'object' || Array.isArray(policy)) return;
+
+  for (const field of requiredPolicyFields) {
+    add(failures, Object.hasOwn(policy, field), `registry.policy missing ${field}`);
+  }
+
+  for (const field of [
+    'default_auto_merge_allowed',
+    'stable_auto_merge_allowed',
+    'auto_delete_branch_after_merge',
+    'default_plugin_install_allowed',
+    'default_new_dependency_allowed',
+    'same_worktree_parallelism_allowed'
+  ]) {
+    if (Object.hasOwn(policy, field)) {
+      add(failures, typeof policy[field] === 'boolean', `registry.policy ${field} must be boolean`);
+    }
+  }
+
+  add(failures, Array.isArray(policy.auto_merge_requires), 'registry.policy auto_merge_requires must be array');
+  add(failures, Array.isArray(policy.auto_merge_blocked_when), 'registry.policy auto_merge_blocked_when must be array');
+
+  for (const requirement of requiredAutoMergeRequirements) {
+    add(
+      failures,
+      Array.isArray(policy.auto_merge_requires) && policy.auto_merge_requires.includes(requirement),
+      `registry.policy auto_merge_requires missing ${requirement}`
+    );
+  }
+
+  for (const blocker of requiredAutoMergeBlockers) {
+    add(
+      failures,
+      Array.isArray(policy.auto_merge_blocked_when) && policy.auto_merge_blocked_when.includes(blocker),
+      `registry.policy auto_merge_blocked_when missing ${blocker}`
+    );
+  }
+
+  if (policy.default_auto_merge_allowed === true || policy.stable_auto_merge_allowed === true) {
+    add(failures, policy.auto_delete_branch_after_merge === true, 'auto-merge policy requires auto_delete_branch_after_merge=true');
+  }
+
+  add(failures, policy.default_plugin_install_allowed === false, 'registry.policy default_plugin_install_allowed must remain false');
+  add(failures, policy.default_new_dependency_allowed === false, 'registry.policy default_new_dependency_allowed must remain false');
+  add(failures, policy.same_worktree_parallelism_allowed === false, 'registry.policy same_worktree_parallelism_allowed must remain false');
+}
+
 function validateBatch(batch, failures, roadmapTasksById, roadmapTaskIds, skeletonTaskIds) {
   const label = batch?.id || '<missing id>';
   for (const field of requiredBatchFields) {
@@ -351,6 +435,7 @@ function main() {
 
   const failures = [];
   add(failures, Array.isArray(registry.batches), 'registry.batches must be array');
+  validateRegistryPolicy(registry, failures);
 
   for (const field of requiredCurrentFields) {
     add(failures, Object.hasOwn(current, field), `current.json missing ${field}`);
