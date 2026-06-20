@@ -1,10 +1,10 @@
 {
-  "current_task": "GROWTH4Q",
+  "current_task": "PR132",
   "current_repo": "88CN",
-  "current_role": "codex-qa",
+  "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "PASS_GROWTH_PHASE_CLOSED",
-  "next_recommended_task": "HUMAN_DECISION_BETA1_OR_I18N0",
-  "next_recommended_train": "TRAIN-GROWTH3-WEEKLY-REVIEW-QA",
-  "next_non_pr_task": "HUMAN_DECISION_BETA1_OR_I18N0"
+  "result": "GO_SCOUT0",
+  "next_recommended_task": "PR133",
+  "next_recommended_train": "TRAIN-PR133-SCOUT0-BOUNDARY",
+  "next_non_pr_task": "SCOUT0"
 }
