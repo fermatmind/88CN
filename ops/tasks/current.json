@@ -1,13 +1,13 @@
 {
-  "current_task": "PR162",
-  "current_alias": "WORKERQ",
+  "current_task": "PR163",
+  "current_alias": "SCOUT_SEED0",
   "current_repo": "88CN",
-  "current_role": "codex-qa",
+  "current_role": "codex-research",
   "status": "validation_passed",
-  "result": "PASS_WORKER_REPO_ISOLATION_QA",
-  "next_recommended_task": "PR163",
-  "next_recommended_alias": "SCOUT_SEED0",
+  "result": "GO_SCOUT_SEED1",
+  "next_recommended_task": "PR164",
+  "next_recommended_alias": "SCOUT_SEED1",
   "next_recommended_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
-  "next_non_pr_task": "SCOUT_SEED0",
-  "notes": "PR162 verifies PR160-PR161 worker bootstrap isolation. TRAIN-PR161-PR162-WORKER-BOOTSTRAP-QA is complete. No worker repo, package, workspace, dependency, worker source, runtime, crawler, external HTTP audit, Supabase migration/write, staging or production write, Redis/queue, deploy, SSH, server/cloud mutation, data repo mutation, FermatMind repo mutation, public report page, sitemap, Public API/MCP, Seed 100, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR163 / SCOUT_SEED0; PR163 is not started here."
+  "next_non_pr_task": "SCOUT_SEED1",
+  "notes": "PR163 defines the Seed 100 source mix, allowed source types, forbidden source types, identity-only allowed fields, forbidden copied/private/public-state fields, directory-hint policy, Chinese outbound policy, confidence levels, rejected/weak handling, Seed50R research-input rules, and no-public-surface boundary. Seed50R /tmp artifacts were read as research input only and not ingested, committed, published, audited, or exported. No data repo mutation, Supabase/staging/production write, external HTTP fetch, crawler, audit trigger, public route, sitemap, Public API/MCP, report surface, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR164 / SCOUT_SEED1; PR164 is not started here."
 }
