@@ -1,13 +1,13 @@
 {
-  "current_task": "PR169",
-  "current_alias": "SCOUT_STAGING0",
+  "current_task": "PR170",
+  "current_alias": "SCOUT_STAGING1",
   "current_repo": "88CN",
-  "current_role": "codex-research",
+  "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "GO_SCOUT_STAGING1",
-  "next_recommended_task": "PR170",
-  "next_recommended_alias": "SCOUT_STAGING1",
+  "result": "GO_SCOUT_STAGING2_LOCAL_ONLY",
+  "next_recommended_task": "PR171",
+  "next_recommended_alias": "SCOUT_STAGING2",
   "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "next_non_pr_task": "SCOUT_STAGING1",
-  "notes": "PR169 defines the staging sandbox persistence boundary with result GO_SCOUT_STAGING1. It defines staging sandbox meaning, allowed future staging fields, local-only fields, forbidden fields, staging-only statuses, DB-backed requirements, no-public-surface rules, migration/write checkpoint requirements, rollback/delete/TTL/correction expectations, and PR170 handoff. No schema, migration, Supabase/staging/production write, runtime storage code, worker, crawler, queue, data repo mutation, public route, sitemap, Public API/MCP, report surface, audit, deploy, server/cloud mutation, Growth, BETA, I18N, OPS10A, or PR101 occurred. Exact next task is PR170 / SCOUT_STAGING1; PR170 is not started here."
+  "next_non_pr_task": "SCOUT_STAGING2",
+  "notes": "PR170 decides the staging sandbox storage/migration checkpoint with result GO_SCOUT_STAGING2_LOCAL_ONLY. The current staging train remains docs/local-only: no Supabase migration, staging schema, staging write, production write, runtime storage code, public surface, or data repo mutation is authorized. PR170 records future planning inputs for internal staging entities, fields, RLS/access boundaries, indexes, rollback/delete, TTL, and correction workflow, but creates no schema or migration. Exact next task is PR171 / SCOUT_STAGING2; PR171 is not started here."
 }
