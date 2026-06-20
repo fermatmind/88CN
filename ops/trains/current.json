@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "status": "in_progress",
-  "last_completed_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
-  "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
-  "notes": "PR171 / SCOUT_STAGING2 completed the local-only staging write dry-run with STAGING_WRITE_NOT_AUTHORIZED_LOCAL_ONLY and no DB writes. Continue with PR172 / SCOUT_STAGINGQ after PR171 is merged and local main is clean. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation occurred."
+  "status": "completed",
+  "last_completed_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
+  "next_recommended_train": "TRAIN-PR173-PR175-AUDIT-WORKER",
+  "notes": "PR172 / SCOUT_STAGINGQ completed the staging sandbox no-publish QA with result PASS_SCOUT_STAGING_NO_PUBLISH_QA. TRAIN-PR169-PR172-SCOUT-STAGING is complete. Continue only to PR173 / AUDIT_WORKER0 after PR172 is merged and local main is clean; PR173 has human_checkpoint=true and is not started here. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, sitemap, worker, crawler, queue, or server/cloud mutation occurred."
 }
