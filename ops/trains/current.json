@@ -1,7 +1,7 @@
 {
   "active_train": null,
   "status": "idle",
-  "last_completed_train": "TRAIN-PR98-PR100-B2B-ALPHA-QA-READINESS",
-  "next_recommended_train": "TRAIN-PR122-PR124-TRAFFIC4-TASK-DISCOVERY",
-  "notes": "GROWTH0T found a Growth train runner compatibility blocker before registering Growth trains: GROWTHQ is a registered roadmap task but does not match the current OPS9A2 allowlisted non-PR task ID pattern. Growth train registry remains unchanged; the existing PR122-PR124 traffic train recommendation is preserved for runner compatibility."
+  "last_completed_train": "TRAIN-PR128-PR131-TRAFFIC6-TRAFFIC7-DISTRIBUTION-QA",
+  "next_recommended_train": "TRAIN-GROWTH2-REPORT-DISTRIBUTION-DRAFTS",
+  "notes": "GROWTH0U remediates the GROWTH0T runner compatibility blocker by preserving historical GROWTHQ and registering runner-compatible GROWTH4Q for train execution. Recommended Growth order is TRAIN-GROWTH2-REPORT-DISTRIBUTION-DRAFTS, then TRAIN-GROWTH1-FOUNDER-ACQUISITION-DRAFTS, then TRAIN-GROWTH3-WEEKLY-REVIEW-QA. No Growth train is started by GROWTH0U; BETA1, I18N0, OPS8D, OPS10A, and PR101 remain paused."
 }
