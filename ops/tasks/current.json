@@ -1,10 +1,10 @@
 {
-  "current_task": "GROWTH0T",
+  "current_task": "GROWTH0U",
   "current_repo": "88CN",
   "current_role": "codex-build",
   "status": "validation_passed",
-  "result": "BLOCKED_RUNNER_COMPATIBILITY",
-  "next_recommended_task": "AWAIT_HUMAN_GROWTH_RUNNER_COMPATIBILITY_DECISION",
-  "next_recommended_train": "NONE",
-  "next_non_pr_task": "NONE"
+  "result": "GROWTH_TRAINS_REGISTERED_WITH_ALIAS",
+  "next_recommended_task": "GROWTH2A",
+  "next_recommended_train": "TRAIN-GROWTH2-REPORT-DISTRIBUTION-DRAFTS",
+  "next_non_pr_task": "GROWTH2A"
 }
