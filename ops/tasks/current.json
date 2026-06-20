@@ -1,13 +1,13 @@
 {
-  "current_task": "PR158",
-  "current_alias": "POST_IMPL0",
+  "current_task": "PR159",
+  "current_alias": "ARCH0",
   "current_repo": "88CN",
   "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "GO_ARCH0_BEFORE_SECOND_GROWTH",
-  "next_recommended_task": "PR159",
-  "next_recommended_alias": "ARCH0",
+  "result": "GO_WORKER0_REPO_SPLIT_READINESS",
+  "next_recommended_task": "PR160",
+  "next_recommended_alias": "WORKER0",
   "next_recommended_train": "none",
-  "next_non_pr_task": "ARCH0",
-  "notes": "PR158 reviews PR146-PR157 and chooses architecture/worker/staging readiness before second-round Growth. The completed train is safe but local-only, fixture-only, and draft-only: no real staging dataset, no real external audit result, no public report data, no distribution-ready report material. Exact next task is PR159 / ARCH0, but PR159 is not started here. No implementation, Growth, BETA, I18N, deploy, Supabase/staging/production write, worker runtime, Redis/queue, external HTTP audit, public report page, Public API/MCP, data repo mutation, or FermatMind repo mutation occurred."
+  "next_non_pr_task": "WORKER0",
+  "notes": "PR159 selects Route A: worker/repo boundary readiness before staging write or worker runtime. Exact next task is PR160 / WORKER0, but PR160 is not started here. PR160-PR162 are registered as roadmap metadata only. No implementation, new repo, package, dependency, migration, staging or production write, Redis/queue, worker runtime, crawler runtime, external HTTP audit, deploy, server/cloud mutation, data repo mutation, FermatMind repo mutation, public report page, sitemap, Public API/MCP, Growth, BETA, I18N, OPS10A, or PR101 occurred."
 }
