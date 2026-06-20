@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-DATA-PLANE",
-  "status": "in_progress",
-  "last_completed_train": "TRAIN-PR182-PROJECT-CONTRACT",
-  "next_recommended_train": "TRAIN-DATA-PLANE",
-  "notes": "PR184 / PROJECT_CONTRACT_STAGING_SCHEMA_APPLY is in progress with result STAGING_SCHEMA_MIGRATION_READY_APPLY_PENDING pending validation/merge. Exact next task after merge is PR185 / BULK_IMPORT_CONTRACT. PR186 / SERVER_CAPACITY_READINESS is already represented by merged OPS-SERVER0R evidence and should be verified when reached in order."
+  "active_train": "TRAIN-SERVER-READINESS",
+  "status": "registered",
+  "last_completed_train": "TRAIN-DATA-PLANE",
+  "next_recommended_train": "TRAIN-SERVER-READINESS",
+  "notes": "PR185 / BULK_IMPORT_CONTRACT completes TRAIN-DATA-PLANE with a docs-only bulk import contract and no import or DB write. Exact next task after merge is PR186 / SERVER_CAPACITY_READINESS in TRAIN-SERVER-READINESS, already represented by merged OPS-SERVER0R evidence and to be verified in sequence."
 }

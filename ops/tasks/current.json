@@ -1,13 +1,13 @@
 {
-  "current_task": "PR184",
-  "current_alias": "PROJECT_CONTRACT_STAGING_SCHEMA_APPLY",
+  "current_task": "PR185",
+  "current_alias": "BULK_IMPORT_CONTRACT",
   "current_repo": "88CN",
-  "current_role": "opencode",
+  "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "STAGING_SCHEMA_MIGRATION_READY_APPLY_PENDING",
-  "next_recommended_task": "PR185",
-  "next_recommended_alias": "BULK_IMPORT_CONTRACT",
-  "next_recommended_train": "TRAIN-DATA-PLANE",
+  "result": "BULK_IMPORT_CONTRACT_READY",
+  "next_recommended_task": "PR186",
+  "next_recommended_alias": "SERVER_CAPACITY_READINESS",
+  "next_recommended_train": "TRAIN-SERVER-READINESS",
   "next_non_pr_task": "PR186 / SERVER_CAPACITY_READINESS is already represented by merged OPS-SERVER0R evidence and should be verified when reached in sequence.",
-  "notes": "PR184 creates the staging-only project contract Supabase migration 013 with fail-closed admin-only RLS and documents rollback/schema smoke. Supabase CLI is unavailable locally, so remote staging apply is pending; no staging/production write, seed import, public read, sitemap/API/MCP, worker/audit, data repo mutation, deploy, server/cloud mutation, or secrets printing occurred. Core gate and PR184 scope validation passed; legacy traffic direct-checker lifecycle debt is recorded as a non-blocking sidecar."
+  "notes": "PR185 defines the bulk import manifest, row hash, batch hash, source evidence mapping, accepted/needs-review/rejected/quarantine outcomes, rollback-by-batch contract, 20k-50k sharding limits, retry boundaries, and no-public defaults. It is docs/status only; no seed import, DB write, Supabase/staging/production write, worker, queue, external HTTP audit, public surface, sitemap, Public API/MCP, data repo mutation, deploy, or server/cloud mutation occurs."
 }
