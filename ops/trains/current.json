@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
-  "status": "in_progress",
-  "last_completed_train": "TRAIN-PR163-PR165-SCOUT-SEED-MVP",
-  "next_recommended_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
-  "notes": "PR167 / CANON1 completed the local-only canonical resolver dry run under /tmp. Continue with PR168 / CANONQ after PR167 is merged and local main is clean. No data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation occurred."
+  "active_train": null,
+  "status": "idle",
+  "last_completed_train": "TRAIN-PR166-PR168-CANON-RESOLVER",
+  "next_recommended_train": "TRAIN-PR169-PR172-SCOUT-STAGING",
+  "notes": "TRAIN-PR166-PR168-CANON-RESOLVER is complete after PR168 / CANONQ. Continue with PR169 / SCOUT_STAGING0 only after PR168 is merged and local main is clean. PR169 has a human checkpoint and must remain boundary-only; no data repo, public surface, Supabase/staging/production, audit, deploy, Public API/MCP, or sitemap mutation is authorized."
 }
