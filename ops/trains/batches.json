@@ -4157,9 +4157,9 @@
       ],
       "purpose": "20k-50k worker, audit, queue, and QA pipeline",
       "notes": [
-        "PR196 completed as fixture-only HTTP-first audit worker in fermatmind/88cn-scout-worker PR #3 with worker commit d68deb7.",
-        "Continue PR197 local-only queue/retry/dead-letter work only after PR196 merges.",
-        "No train auto-run through PR199; no live network, browser fallback, WAF bypass, runtime, staging/prod write, Redis/queue runtime, crawler, audit daemon, worker daemon, or deployment."
+        "PR197 completed as local-only queue/retry/dead-letter handling in fermatmind/88cn-scout-worker PR #4 with worker commit ee44871.",
+        "Continue PR198 QA-only boundary verification after PR197 merges.",
+        "Stop after PR198. Do not start PR199; no runtime, Redis connection, staging/prod write, external HTTP, crawler, audit daemon, worker daemon, or deployment."
       ]
     },
     {

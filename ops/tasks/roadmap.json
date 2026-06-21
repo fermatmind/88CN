@@ -21098,7 +21098,8 @@
       ],
       "notes": [
         "Numeric remap of PR184E.",
-        "PR196 completed with HTTP_AUDIT_WORKER_READY_FIXTURE_ONLY; PR197 may proceed next as local-only queue/retry/dead-letter contract and dry-run adapter work."
+        "PR196 completed with HTTP_AUDIT_WORKER_READY_FIXTURE_ONLY; PR197 may proceed next as local-only queue/retry/dead-letter contract and dry-run adapter work.",
+        "PR197 worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/4 adds local dry-run queue/retry/dead-letter contracts, bounded retry policy, local adapter, future Redis interface-only contract, fixture, and no-dependency test. No Redis connection/client, shared Redis, FermatMind Redis, Tencent Redis, background daemon, server deployment, DB/Supabase write, runtime start, package/dependency, external HTTP, data repo mutation, or secret/env read occurred."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
@@ -21235,7 +21236,8 @@
         "no implementation file is changed"
       ],
       "notes": [
-        "Numeric remap of PR184Q."
+        "Numeric remap of PR184Q.",
+        "PR197 completed with QUEUE_RETRY_DEAD_LETTER_READY_LOCAL_ONLY; PR198 may proceed next as QA-only no-runtime boundary verification."
       ],
       "risk_flags": {
         "auto_merge_allowed": true,
