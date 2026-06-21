@@ -175,9 +175,9 @@ export default function SubmitForm() {
           type="submit"
           disabled={form.status === "submitting"}
           className={cn(
-            "inline-flex items-center gap-2 rounded-md border border-terminal-border px-6 py-2.5 text-sm font-semibold",
-            "bg-terminal-fg text-terminal-surface hover:bg-terminal-muted transition-colors",
-            "disabled:opacity-50 disabled:cursor-not-allowed"
+            "inline-flex h-12 items-center gap-2 rounded-xl px-6 text-sm font-semibold",
+            "bg-slate-950 text-white transition-colors hover:bg-slate-800",
+            "disabled:cursor-not-allowed disabled:opacity-50"
           )}
         >
           {form.status === "submitting" ? (
@@ -208,7 +208,7 @@ export default function SubmitForm() {
         )}
       </div>
 
-      <p className="text-[11px] text-terminal-dim leading-relaxed">
+      <p className="text-xs leading-relaxed text-slate-500">
         Submit public project information only. Private business data,
         credentials, and non-public files are not required for this form.
       </p>
@@ -224,8 +224,8 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <fieldset className="rounded-lg border border-terminal-border bg-terminal-surface p-5">
-      <legend className="text-xs font-semibold uppercase tracking-wider text-terminal-muted mb-4 px-2">
+    <fieldset className="rounded-[1.25rem] border border-slate-200 bg-slate-50/60 p-5">
+      <legend className="mb-4 px-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
         {label}
       </legend>
       <div className="space-y-4">{children}</div>
@@ -254,8 +254,8 @@ function Field({
 }) {
   const inputId = `field-${name}`;
   const baseClass = cn(
-    "w-full rounded-md border border-terminal-border bg-terminal-bg px-3 py-2 text-xs text-terminal-fg",
-    "placeholder:text-terminal-dim/50 focus:border-terminal-ring focus:outline-none",
+    "w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-950",
+    "placeholder:text-slate-400 focus:border-sky-300 focus:outline-none",
     inputClassName
   );
 
@@ -263,12 +263,10 @@ function Field({
     <div>
       <label
         htmlFor={inputId}
-        className="block mb-1.5 text-xs font-medium text-terminal-muted"
+        className="mb-1.5 block text-xs font-semibold text-slate-600"
       >
         {label}
-        {required && (
-          <span className="ml-0.5 text-terminal-dim">*</span>
-        )}
+        {required && <span className="ml-0.5 text-slate-400">*</span>}
       </label>
       {textarea ? (
         <textarea
