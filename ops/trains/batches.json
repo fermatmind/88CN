@@ -4157,9 +4157,9 @@
       ],
       "purpose": "20k-50k worker, audit, queue, and QA pipeline",
       "notes": [
-        "PR195 completed as dry-run-only canonical resolver in fermatmind/88cn-scout-worker PR #2 with worker commit 952cfd7.",
-        "Continue PR196 HTTP audit worker fixture-only work only after PR195 merges.",
-        "No train auto-run through PR199; no live network, runtime, staging/prod write, external HTTP audit by default, Redis/queue creation, crawler, audit daemon, worker daemon, or deployment."
+        "PR196 completed as fixture-only HTTP-first audit worker in fermatmind/88cn-scout-worker PR #3 with worker commit d68deb7.",
+        "Continue PR197 local-only queue/retry/dead-letter work only after PR196 merges.",
+        "No train auto-run through PR199; no live network, browser fallback, WAF bypass, runtime, staging/prod write, Redis/queue runtime, crawler, audit daemon, worker daemon, or deployment."
       ]
     },
     {

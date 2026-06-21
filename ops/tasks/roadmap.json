@@ -20958,7 +20958,8 @@
       ],
       "notes": [
         "Numeric remap of PR184D.",
-        "PR195 completed with CANONICAL_RESOLVER_WORKER_READY_DRY_RUN_ONLY; PR196 may proceed next as fixture-only HTTP-first audit worker work with no live network by default."
+        "PR195 completed with CANONICAL_RESOLVER_WORKER_READY_DRY_RUN_ONLY; PR196 may proceed next as fixture-only HTTP-first audit worker work with no live network by default.",
+        "PR196 worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/3 adds fixture-only HTTP-first audit contracts, policy defaults, failure taxonomy, response evaluator, stale snapshot preservation, and no-dependency test. No live network, fetch/http/https request, Playwright/headless/browser fallback, WAF bypass, login/cookies/session, DB/Supabase write, runtime daemon, Redis/queue, deploy, package/dependency, data repo mutation, or secret/env read occurred."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
@@ -21096,7 +21097,8 @@
         "queue isolation is preserved"
       ],
       "notes": [
-        "Numeric remap of PR184E."
+        "Numeric remap of PR184E.",
+        "PR196 completed with HTTP_AUDIT_WORKER_READY_FIXTURE_ONLY; PR197 may proceed next as local-only queue/retry/dead-letter contract and dry-run adapter work."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
