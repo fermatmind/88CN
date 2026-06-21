@@ -1,41 +1,54 @@
 [
   {
     "slug": "open-source-ai-agents",
-    "title": "Open-Source AI Agent Tools",
-    "summary": "Published 88CN projects with public source links and AI agent or developer workflow relevance.",
+    "title": "Open-Source AI Agents",
+    "summary": "Reviewed published projections with public source links and AI agent or developer workflow relevance.",
     "status": "published",
     "sitemapEligible": true,
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-06-21",
     "minimumPublishedProjects": 2,
-    "projectSlugs": ["aurora-code", "vectorbase"],
-    "inclusionCriteria": "Projects must be manually selected from local reviewed 88CN records, have published status, and include at least one public source link.",
-    "whyIncluded": "Aurora Code and VectorBase are published local records with public sources and builder-facing AI workflow relevance.",
-    "methodologyNote": "Curated collections are finite editorial groups. They are selected from reviewed local project records and are not generated from tags, query parameters, external crawls, or bulk templates."
+    "projectSlugs": ["aurora-code", "nucleus-ml"],
+    "inclusionCriteria": "Projects must come from reviewed published projections, include public source links, and match a finite collection definition.",
+    "whyIncluded": "Aurora Code and Nucleus ML are published projections with public source links and AI workflow context.",
+    "methodologyNote": "Collections are finite reviewed groups. They are not generated from arbitrary filters, query parameters, external crawls, or bulk templates."
   },
   {
-    "slug": "commercial-readiness-signals",
-    "title": "Commercial Readiness Signals",
-    "summary": "Published 88CN projects with public product positioning, onboarding, or business-readiness context.",
+    "slug": "rag-projects",
+    "title": "RAG Projects",
+    "summary": "Reviewed published projections connected to retrieval, vector search, or AI infrastructure workflows.",
     "status": "published",
     "sitemapEligible": true,
-    "lastReviewed": "2026-06-19",
-    "minimumPublishedProjects": 2,
-    "projectSlugs": ["pulse-analytics", "complykit"],
-    "inclusionCriteria": "Projects must be manually selected from local reviewed 88CN records, have published status, and include public source links that support product-readiness review.",
-    "whyIncluded": "Pulse Analytics and ComplyKit are published local records with public sources and clear product-readiness context.",
-    "methodologyNote": "Commercial readiness here means public product context is reviewable. It does not verify revenue, customers, financing, or business outcomes."
-  },
-  {
-    "slug": "model-and-search-infrastructure",
-    "title": "Model and Search Infrastructure",
-    "summary": "Published 88CN projects related to model workflows, semantic search, or AI infrastructure decisions.",
-    "status": "published",
-    "sitemapEligible": true,
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-06-21",
     "minimumPublishedProjects": 2,
     "projectSlugs": ["nucleus-ml", "vectorbase"],
-    "inclusionCriteria": "Projects must be manually selected from local reviewed 88CN records, have published status, and include public source links tied to infrastructure review.",
-    "whyIncluded": "Nucleus ML and VectorBase are published local records with public sources and infrastructure-oriented product positioning.",
-    "methodologyNote": "This collection is a reviewed discovery surface for related infrastructure projects. It does not recalculate scores or infer private adoption data."
+    "inclusionCriteria": "Projects must be reviewed published projections with public source links and retrieval or search infrastructure relevance.",
+    "whyIncluded": "Nucleus ML and VectorBase are published projections with public documentation and infrastructure context.",
+    "methodologyNote": "This collection is a finite discovery surface. It does not recalculate scores or infer private adoption data."
+  },
+  {
+    "slug": "ai-outbound",
+    "title": "AI Outbound",
+    "summary": "Reviewed published projections with public product context for outreach, analytics, or operations workflows.",
+    "status": "published",
+    "sitemapEligible": true,
+    "lastReviewed": "2026-06-21",
+    "minimumPublishedProjects": 2,
+    "projectSlugs": ["pulse-analytics", "complykit"],
+    "inclusionCriteria": "Projects must be reviewed published projections with public product context and public source links.",
+    "whyIncluded": "Pulse Analytics and ComplyKit are published projections with public product and operations context.",
+    "methodologyNote": "Collection membership is reviewed and finite. It does not verify customers, revenue, financing, or private outcomes."
+  },
+  {
+    "slug": "ai-tool-alternatives",
+    "title": "AI Tool Alternatives",
+    "summary": "Reviewed published projections that have finite discovery links to related project alternatives.",
+    "status": "published",
+    "sitemapEligible": true,
+    "lastReviewed": "2026-06-21",
+    "minimumPublishedProjects": 2,
+    "projectSlugs": ["aurora-code", "vectorbase", "complykit"],
+    "inclusionCriteria": "Projects must be reviewed published projections and must appear only in this finite collection definition.",
+    "whyIncluded": "Aurora Code, VectorBase, and ComplyKit are published projections with public source links and related discovery context.",
+    "methodologyNote": "Alternatives context is neutral discovery support. It does not order, endorse, or predict outcomes for projects."
   }
 ]

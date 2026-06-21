@@ -4254,7 +4254,8 @@
       "notes": [
         "Frontend public surfaces must remain published-only and must not expose raw seed/audit/review data.",
         "PR199 validation_passed: /projects listing/search now reads only reviewed published_projection fixture adapter fields; no sitemap entry expansion, deployment, runtime, server/cloud action, DB write, or data repo mutation.",
-        "PR200 validation_passed: /projects/[slug] now reads only reviewed published_projection fixture adapter fields, fails closed for missing/non-published records, and remains noindex until PR202; no deployment, runtime, server/cloud action, DB write, or data repo mutation."
+        "PR200 validation_passed: /projects/[slug] now reads only reviewed published_projection fixture adapter fields, fails closed for missing/non-published records, and remains noindex until PR202; no deployment, runtime, server/cloud action, DB write, or data repo mutation.",
+        "PR201 validation_passed: finite reviewed collection slugs open-source-ai-agents, rag-projects, ai-outbound, and ai-tool-alternatives resolve only published_projection members; no broad pSEO expansion, deployment, runtime, server/cloud action, DB write, or data repo mutation."
       ]
     },
     {

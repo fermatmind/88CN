@@ -28,7 +28,6 @@ export async function generateMetadata({
   if (
     !collection ||
     collection.status !== "published" ||
-    !collection.sitemapEligible ||
     projects.length < collection.minimumPublishedProjects
   ) {
     return {
@@ -40,13 +39,13 @@ export async function generateMetadata({
   return {
     title: siteTitle(collection.title),
     description: siteDescription(collection.summary.slice(0, 150)),
-    robots: { index: true, follow: true },
+    robots: { index: false, follow: true },
   };
 }
 
 export default function CollectionPage({ params }: CollectionPageProps) {
   const collection = getCuratedCollectionBySlug(params.slug);
-  if (!collection || collection.status !== "published" || !collection.sitemapEligible) {
+  if (!collection || collection.status !== "published") {
     notFound();
   }
 
@@ -66,7 +65,7 @@ export default function CollectionPage({ params }: CollectionPageProps) {
     collection.summary,
     projects.map((p) => ({
       url: `${baseUrl}/projects/${p.slug}`,
-      name: p.name,
+      name: p.project_name,
     }))
   );
 
@@ -78,6 +77,7 @@ export default function CollectionPage({ params }: CollectionPageProps) {
     whyIncluded: collection.whyIncluded,
     projectSlugs: collection.projectSlugs,
     lastUpdated: collection.lastReviewed,
+    methodologyNote: collection.methodologyNote,
   };
 
   return (

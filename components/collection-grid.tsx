@@ -1,13 +1,23 @@
-import type { DemoCollection } from "@/lib/demo-collections";
-import type { DemoProject } from "@/lib/demo-projects";
-import ProjectCard from "@/components/project-card";
+import type { PublishedProjectProjection } from "@/lib/projects/published-projection";
+import { PublishedProjectCard } from "@/components/published-project-card";
 import { MethodologyBlock } from "@/components/methodology-block";
 import { cn } from "@/lib/utils";
 import { Bookmark, Filter, Clock } from "lucide-react";
 
+interface CollectionView {
+  slug: string;
+  title: string;
+  inclusionCriteria: string;
+  editorialSummary: string;
+  whyIncluded: string;
+  projectSlugs: string[];
+  lastUpdated: string;
+  methodologyNote: string;
+}
+
 interface CollectionGridProps {
-  collection: DemoCollection;
-  projects: DemoProject[];
+  collection: CollectionView;
+  projects: PublishedProjectProjection[];
   className?: string;
 }
 
@@ -66,7 +76,7 @@ export function CollectionGrid({
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+              <PublishedProjectCard key={project.slug} project={project} />
             ))}
           </div>
         )}
@@ -79,7 +89,7 @@ export function CollectionGrid({
         </p>
       </div>
 
-      <MethodologyBlock methodologyNote="Collection criteria are defined by 88CN editorial review. Inclusion does not imply endorsement, verification of claims, or any commercial relationship. Projects are selected based on public signals and editorial assessment." />
+      <MethodologyBlock methodologyNote={collection.methodologyNote} />
     </div>
   );
 }
