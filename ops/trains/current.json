@@ -1,9 +1,10 @@
 {
   "active_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "status": "pr204_validation_passed_continue_to_pr205",
-  "last_completed_train": "TRAIN-FRONTEND-MVP-20K",
-  "last_completed_task": "PR204",
-  "next_recommended_task": "PR205",
+  "status": "complete_stop_after_pr205",
+  "last_completed_train": "TRAIN-SECURITY-DEPLOY-20K",
+  "last_completed_task": "PR205",
+  "candidate_origin_main_sha": "4f5792564d78966556189f18e40c97cff2b9ad23",
+  "next_recommended_task": "PRODUCTION_DEPLOY_APPROVAL_FOR_EXACT_SHA",
   "next_recommended_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "notes": "PR204 / SECURITY_FIREWALL passed with SECURITY_FIREWALL_READY_NO_DEPLOY. Continue only to PR205 / PRODUCTION_DEPLOY_GATE. No deploy, live smoke, SSH, cloud/server mutation, Nginx reload, PM2 restart, Supabase/staging/production write, worker/runtime/Redis/queue action, Public API/MCP release, external outreach, or data repo mutation occurred."
+  "notes": "TRAIN-SECURITY-DEPLOY-20K is complete: PR204 recorded SECURITY_FIREWALL_READY_NO_DEPLOY and PR205 recorded READY_FOR_PRODUCTION_DEPLOY_APPROVAL. Stop after PR205. Do not start PR206, PR207, Growth2, Growth1, BETA, I18N, OPS10A, or production deploy without exact SHA approval for the recorded candidate SHA."
 }

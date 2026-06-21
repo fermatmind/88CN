@@ -1,13 +1,16 @@
 {
-  "current_task": "PR204",
-  "current_alias": "SECURITY_FIREWALL",
+  "current_task": "PR205",
+  "current_alias": "PRODUCTION_DEPLOY_GATE",
   "current_repo": "88CN",
   "current_role": "opencode",
   "status": "validation_passed",
-  "result": "SECURITY_FIREWALL_READY_NO_DEPLOY",
-  "next_recommended_task": "PR205",
-  "next_recommended_alias": "PRODUCTION_DEPLOY_GATE",
+  "result": "READY_FOR_PRODUCTION_DEPLOY_APPROVAL",
+  "candidate_origin_main_sha": "4f5792564d78966556189f18e40c97cff2b9ad23",
+  "next_recommended_task": "PRODUCTION_DEPLOY_APPROVAL_FOR_EXACT_SHA",
+  "next_recommended_alias": "DEPLOY_APPROVAL_REQUIRED",
   "next_recommended_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "next_non_pr_task": "Continue to PR205 in this approved train. Do not deploy, SSH, mutate cloud/server/DB/data repo, or start PR206 before PR205 is complete.",
-  "notes": "PR204 records the pre-deploy security firewall after PR203. Public project listing/detail remain published-projection only; collections are finite reviewed registry rows; task discovery remains finite and checker-backed; sitemap/search eligibility excludes stale/quarantine/rejected/copied-content/directory-hint blockers; Public API/MCP remain disabled; worker runtime remains no-runtime; and no raw seed/evidence/audit/review/quarantine/rejected/private artifact, internal hash, copied competitor copy, ranking/best/top claim, paid influence, deploy, live smoke, SSH, Aliyun/Tencent/Workbench action, Nginx reload, PM2 restart, Supabase/staging/production write, worker/runtime/Redis/queue action, external outreach, Public API/MCP release, or data repo mutation occurs. Exact next task is PR205 / PRODUCTION_DEPLOY_GATE."
+  "next_non_pr_task": "Stop after PR205. Do not start PR206, PR207, Growth2, Growth1, BETA, I18N, OPS10A, or production deploy unless the human gives exact SHA approval for the recorded candidate SHA.",
+  "exact_approval_phrase_en": "I APPROVE 88CN PRODUCTION DEPLOY FOR EXACT SHA 4f5792564d78966556189f18e40c97cff2b9ad23",
+  "exact_approval_phrase_zh": "我批准 88CN 按 exact SHA 4f5792564d78966556189f18e40c97cff2b9ad23 执行生产部署",
+  "notes": "PR205 records the production deploy gate only. It documents exact SHA approval phrases, preflight, live smoke, rollback, post-deploy no-leak checks, sitemap/live URL checks, server connection state, blockers, and actions requiring later approval. No deploy, live smoke, SSH, Aliyun/Tencent/Workbench action, Nginx reload, PM2 restart, secret/env read or print, new env/payment/secret flag, Supabase/staging/production write, worker/runtime/Redis/queue action, Public API/MCP release, external outreach, or data repo mutation occurs. TRAIN-SECURITY-DEPLOY-20K is complete and this run stops after PR205."
 }
