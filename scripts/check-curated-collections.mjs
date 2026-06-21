@@ -10,7 +10,10 @@ const contractPath = path.join(
   root,
   "ops/contracts/curated-collections-boundary.json"
 );
-const demoProjectsPath = path.join(root, "lib/demo-projects.ts");
+const publishedProjectionPath = path.join(
+  root,
+  "lib/projects/published-projection.jsonl"
+);
 
 const errors = [];
 const allowedStatuses = new Set(["draft", "noindex", "published", "archived"]);
@@ -43,11 +46,18 @@ const pageSource = fs.existsSync(pagePath)
 const sitemapSource = fs.existsSync(sitemapPath)
   ? fs.readFileSync(sitemapPath, "utf8")
   : "";
-const demoSource = fs.readFileSync(demoProjectsPath, "utf8");
 const minimumPublishedProjects =
   contract.evidence_thresholds?.minimum_published_projects ?? 2;
 const maxPublishedCollections =
   contract.route_generation?.max_published_collections_v0 ?? 4;
+const publishedProjectionRows = fs
+  .readFileSync(publishedProjectionPath, "utf8")
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((line) => JSON.parse(line));
+const publishedProjectsBySlug = new Map(
+  publishedProjectionRows.map((project) => [project.slug, project])
+);
 
 if (!Array.isArray(registry) || registry.length === 0) {
   fail("curated collection registry must be a non-empty array");
@@ -100,6 +110,14 @@ for (const collection of registry) {
     );
   }
 
+  if (
+    !collection.match ||
+    typeof collection.match.collectionTag !== "string" ||
+    collection.match.collectionTag !== collection.slug
+  ) {
+    fail(`${collection.slug} must declare a matching collectionTag`);
+  }
+
   const copyFields = [
     collection.title,
     collection.summary,
@@ -122,24 +140,28 @@ for (const collection of registry) {
   }
 
   for (const projectSlug of collection.projectSlugs ?? []) {
-    const blockPattern = new RegExp(
-      `slug:\\s*"${projectSlug}"[\\s\\S]*?status:\\s*"([^"]+)"`,
-      "m"
-    );
-    const match = demoSource.match(blockPattern);
+    const project = publishedProjectsBySlug.get(projectSlug);
 
-    if (!match) {
-      fail(`project slug not found in local project records: ${projectSlug}`);
+    if (!project) {
+      fail(`project slug not found in published projection: ${projectSlug}`);
       continue;
     }
 
-    if (match[1] !== "published") {
-      fail(`project ${projectSlug} has status ${match[1]}, expected published`);
+    if (project.lifecycle_status !== "published") {
+      fail(
+        `project ${projectSlug} has status ${project.lifecycle_status}, expected published`
+      );
+    }
+
+    if (!project.collection_tags?.includes(collection.match.collectionTag)) {
+      fail(
+        `project ${projectSlug} does not include collection tag ${collection.match.collectionTag}`
+      );
     }
   }
 }
 
-if (!helperSource.includes('project.status === "published"')) {
+if (!helperSource.includes('project.lifecycle_status === "published"')) {
   fail("curated collection helper must filter projects to status published");
 }
 
@@ -154,6 +176,10 @@ if (!helperSource.includes("minimumPublishedProjects")) {
 if (pageSource) {
   if (!pageSource.includes("generateStaticParams")) {
     fail("collection page must define generateStaticParams");
+  }
+
+  if (!pageSource.includes("dynamicParams = false")) {
+    fail("collection page must fail closed for unknown static slugs");
   }
 
   if (!pageSource.includes("getPublishedCuratedCollections")) {
@@ -174,11 +200,11 @@ if (pageSource) {
 }
 
 if (sitemapSource) {
-  if (!sitemapSource.includes("getPublishedCuratedCollections")) {
-    fail("sitemap must use getPublishedCuratedCollections");
+  if (!sitemapSource.includes("getCollectionSitemapEntries")) {
+    fail("sitemap must use collection sitemap entries");
   }
 
-  if (!sitemapSource.includes("/collections/")) {
+  if (!sitemapSource.includes("collectionEntries")) {
     fail("sitemap must include finite collection route URLs");
   }
 
