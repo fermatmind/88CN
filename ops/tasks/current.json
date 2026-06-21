@@ -4,10 +4,10 @@
   "current_repo": "88CN",
   "current_role": "codex-qa",
   "status": "validation_passed",
-  "result": "STATE_SWITCHER_REVIEW_LOG_READY",
-  "next_recommended_task": "PR192",
-  "next_recommended_alias": "CONTROL_PANEL_QA",
-  "next_recommended_train": "TRAIN-CONTROL-PANEL-20K",
+  "result": "PASS_CONTROL_PANEL_QA_WITH_SERVER_PREP_SIDECAR",
+  "next_recommended_task": "PR188",
+  "next_recommended_alias": "SERVER_PREP_SIDECAR_RESOLUTION",
+  "next_recommended_train": "TRAIN-SERVER-PREP",
   "next_non_pr_task": "Resolve SERVER_PREP_SIDECAR_BLOCKED before PR193+ worker/server-dependent runtime tasks.",
-  "notes": "PR191 implements a manual admin state switcher and review log path for /admin/bulk-review. State transitions require admin guard, decision reason, reviewed fields, previous/next state capture, and review_decisions persistence. Published transition additionally requires original summary and public field checks. No Agent auto-publish, bulk blind publish, public route change, sitemap change, Public API/MCP release, payment/CRM/email/social flow, deploy, server/cloud mutation, production DB write by Codex, worker runtime, data repo mutation, FermatMind mutation, or secret/env read occurred. PR188/PR189 remain SERVER_PREP_SIDECAR_BLOCKED, and PR193+ remains blocked until that sidecar is resolved or the dependency is explicitly reworked."
+  "notes": "PR192 verifies PR190/PR191 control-panel boundaries with result PASS_CONTROL_PANEL_QA_WITH_SERVER_PREP_SIDECAR. Admin bulk review remains guarded; no unreviewed seed_hint, identity_candidate, canonical_candidate, review_ready, quarantined, or rejected record is exposed publicly; raw source, audit, and review details remain admin-only; no auto-publish path exists; published transition remains manual with reason and public-field checks; sitemap, Public API, MCP, payment, CRM, email, social, deploy, server/cloud, worker runtime, and data repo surfaces remain unchanged. Stop after PR192. PR188/PR189 remain SERVER_PREP_SIDECAR_BLOCKED, and PR193+ remains blocked until that sidecar is resolved or the dependency is explicitly reworked."
 }

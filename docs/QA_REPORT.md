@@ -1,5 +1,25 @@
 # QA Report
 
+## PR192 Control Panel QA v0
+
+Result: `PASS_CONTROL_PANEL_QA_WITH_SERVER_PREP_SIDECAR`
+
+PR192 verifies the merged PR190 / BULK_CONTROL_PANEL and PR191 /
+STATE_SWITCHER_REVIEW_LOG lane. The admin bulk review surface remains guarded,
+no unreviewed `seed_hint`, `identity_candidate`, `canonical_candidate`,
+`review_ready`, `quarantined`, or `rejected` record is exposed to public routes,
+raw source/audit/review details remain admin-only, and the state switcher keeps
+publication manual with required reason and public-field checks.
+
+No sitemap, Public API, MCP, payment, CRM, email, social, deployment,
+server/cloud, worker runtime, or data-repo mutation occurs in PR192. Direct
+`landscape:check` remains a recorded TRAFFIC2B lifecycle sidecar for changed
+`app/api/**`; PR192 does not modify `scripts/**`.
+
+Stop after PR192. PR188 and PR189 remain `SERVER_PREP_SIDECAR_BLOCKED`, and
+PR193+ remains blocked until the server-prep sidecar is resolved or the
+dependency is explicitly reworked.
+
 ## Latest Run
 
 - Date: 2026-06-20
