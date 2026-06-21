@@ -1,7 +1,9 @@
 import {
-  MethodologyPanel,
-  PageShell,
-  SectionHeader,
+  ConsolePageHeader,
+  DiscoveryShell,
+  EvidencePanel,
+  EvidenceStat,
+  ProjectSignalPill,
 } from "@/components/public-ui";
 import { siteDescription, siteTitle } from "@/lib/seo";
 import {
@@ -37,50 +39,84 @@ const PRINCIPLES = [
   },
   {
     title: "Finite navigation",
-    body: "Collections use explicit inclusion criteria and avoid broad faceted page generation.",
+    body: "Collections use explicit inclusion criteria and avoid broad generated query pages.",
     icon: CheckCircle2,
   },
 ];
 
 export default function MethodologyPage() {
   return (
-    <PageShell size="prose" className="space-y-8">
-      <SectionHeader
+    <DiscoveryShell className="space-y-8">
+      <ConsolePageHeader
         eyebrow="Public methodology"
-        title="How 88CN Builds Public Pages"
-        description="88CN is a reviewed public signal directory. The interface is built to make source checking fast while keeping private pipeline material out of the public product."
+        title="How 88CN builds public pages"
+        description="88CN is a reviewed public signal directory. The interface is built to make source checking fast while keeping non-public workspace material out of the public product."
       />
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        <EvidenceStat
+          label="Public source"
+          value="Reviewed"
+          detail="Published projection only"
+        />
+        <EvidenceStat
+          label="Navigation"
+          value="Finite"
+          detail="Collections over broad facets"
+        />
+        <EvidenceStat
+          label="Ordering"
+          value="Neutral"
+          detail="No ranking or paid boost"
+        />
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         {PRINCIPLES.map((principle) => {
           const Icon = principle.icon;
 
           return (
-            <section
+            <EvidencePanel
               key={principle.title}
-              className="rounded-lg border border-terminal-border bg-terminal-surface p-5 shadow-sm"
+              title={principle.title}
+              icon={<Icon className="h-4 w-4 text-slate-500" />}
             >
-              <Icon className="mb-3 h-5 w-5 text-terminal-ring" />
-              <h2 className="text-sm font-semibold text-terminal-fg">
-                {principle.title}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-terminal-dim">
+              <p className="text-sm leading-6 text-slate-600">
                 {principle.body}
               </p>
-            </section>
+            </EvidencePanel>
           );
         })}
       </div>
 
-      <MethodologyPanel
-        title="Public data boundary"
-        body="Public UI shows project name, summary, category, public model, signal chips, official links, collection membership, lifecycle display, and review timestamps. Non-public pipeline material is excluded from the product surface."
-      />
+      <EvidencePanel title="Public data boundary">
+        <div className="mb-5 flex flex-wrap gap-2">
+          {[
+            "Project name",
+            "Summary",
+            "Category",
+            "Official links",
+            "Signal chips",
+            "Review timestamp",
+          ].map((label) => (
+            <ProjectSignalPill key={label} label={label} tone="slate" />
+          ))}
+        </div>
+        <p className="text-sm leading-6 text-slate-600">
+          Public UI shows project name, summary, category, public model, signal
+          chips, official links, collection membership, lifecycle display, and
+          review timestamps. Non-public workspace material is excluded from the
+          product surface.
+        </p>
+      </EvidencePanel>
 
-      <MethodologyPanel
-        title="Indexing boundary"
-        body="Sitemaps include eligible published projections and published collections only. Search and listing pages paginate results instead of generating broad query landing pages."
-      />
-    </PageShell>
+      <EvidencePanel title="Indexing boundary">
+        <p className="text-sm leading-6 text-slate-600">
+          Sitemaps include eligible published projections and published
+          collections only. Search and listing pages paginate results instead
+          of generating broad query landing pages.
+        </p>
+      </EvidencePanel>
+    </DiscoveryShell>
   );
 }

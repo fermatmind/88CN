@@ -1,4 +1,9 @@
-import { PageShell, SectionHeader } from "@/components/public-ui";
+import {
+  ConsolePageHeader,
+  DiscoveryShell,
+  EvidencePanel,
+  EvidenceStat,
+} from "@/components/public-ui";
 import SubmitForm from "@/components/submit-form";
 import { noIndex, siteDescription, siteTitle } from "@/lib/seo";
 import { FileText, Search, ShieldCheck } from "lucide-react";
@@ -16,19 +21,19 @@ export const metadata: Metadata = {
 const BENEFITS = [
   {
     icon: FileText,
-    title: "Public Project Profile",
+    title: "Public project profile",
     description:
       "Eligible submissions may become public profiles after editorial review.",
   },
   {
     icon: Search,
-    title: "Reviewed Public Signals",
+    title: "Reviewed public signals",
     description:
       "Use public source links so reviewers can verify the project surface.",
   },
   {
     icon: ShieldCheck,
-    title: "Founder Claim Path",
+    title: "Founder correction path",
     description:
       "Founders can request corrections after a claim review is completed.",
   },
@@ -36,39 +41,70 @@ const BENEFITS = [
 
 export default function SubmitPage() {
   return (
-    <PageShell size="prose" className="space-y-8">
-      <SectionHeader
-        eyebrow="Submit"
+    <DiscoveryShell className="space-y-8">
+      <ConsolePageHeader
+        eyebrow="Submit for review"
         title="Submit a Project"
         description="Share public project information for editorial review. Submission does not guarantee publication, placement, or search treatment."
         action={
-          <Link
-            href="/founding-slots"
-            className="inline-flex items-center rounded-md border border-terminal-border px-3 py-2 text-xs font-semibold text-terminal-muted transition-colors hover:border-terminal-ring hover:text-terminal-fg"
-          >
-            Founder FAQ
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/founding-slots"
+              className="inline-flex h-11 items-center rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-600 shadow-sm transition-colors hover:border-sky-300 hover:text-slate-950"
+            >
+              Founder FAQ
+            </Link>
+            <Link
+              href="/methodology"
+              className="inline-flex h-11 items-center rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-600 shadow-sm transition-colors hover:border-sky-300 hover:text-slate-950"
+            >
+              Review policy
+            </Link>
+          </div>
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        {BENEFITS.map((benefit) => (
-          <div
-            key={benefit.title}
-            className="rounded-lg border border-terminal-border bg-terminal-surface p-4 shadow-sm"
-          >
-            <benefit.icon className="mb-3 h-5 w-5 text-terminal-ring" />
-            <h3 className="mb-1.5 text-sm font-semibold text-terminal-fg">
-              {benefit.title}
-            </h3>
-            <p className="text-xs leading-5 text-terminal-dim">
-              {benefit.description}
-            </p>
-          </div>
-        ))}
+      <div className="grid gap-3 sm:grid-cols-3">
+        <EvidenceStat
+          label="Submission"
+          value="Review"
+          detail="Human approval required"
+        />
+        <EvidenceStat
+          label="Public fields"
+          value="Source links"
+          detail="Official website, docs, launch URL"
+        />
+        <EvidenceStat
+          label="Indexing"
+          value="Not automatic"
+          detail="Only approved public profiles"
+        />
       </div>
 
-      <SubmitForm />
-    </PageShell>
+      <div className="grid gap-4 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <aside className="grid gap-4 self-start">
+          {BENEFITS.map((benefit) => {
+            const Icon = benefit.icon;
+
+            return (
+              <EvidencePanel
+                key={benefit.title}
+                title={benefit.title}
+                icon={<Icon className="h-4 w-4 text-slate-500" />}
+              >
+                <p className="text-sm leading-6 text-slate-600">
+                  {benefit.description}
+                </p>
+              </EvidencePanel>
+            );
+          })}
+        </aside>
+
+        <EvidencePanel title="Project submission form">
+          <SubmitForm />
+        </EvidencePanel>
+      </div>
+    </DiscoveryShell>
   );
 }

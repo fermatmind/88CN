@@ -5,7 +5,7 @@ import {
   getPublishedCuratedCollections,
 } from "@/lib/collections/curated-collections";
 import { CollectionGrid } from "@/components/collection-grid";
-import { PageShell } from "@/components/public-ui";
+import { DiscoveryShell } from "@/components/public-ui";
 import { collectionPageJSONLD } from "@/lib/structured-data";
 import { siteTitle, siteDescription } from "@/lib/seo";
 import { isCollectionSitemapEligible } from "@/lib/projects/search-index";
@@ -86,12 +86,12 @@ export default function CollectionPage({ params }: CollectionPageProps) {
   };
 
   return (
-    <PageShell>
+    <DiscoveryShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLD) }}
       />
       <CollectionGrid collection={collectionView} projects={projects} />
-    </PageShell>
+    </DiscoveryShell>
   );
 }
