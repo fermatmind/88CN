@@ -1,13 +1,13 @@
 {
-  "current_task": "PR194",
-  "current_alias": "BULK_IMPORT_WORKER",
+  "current_task": "PR195",
+  "current_alias": "CANONICAL_RESOLVER_WORKER",
   "current_repo": "88CN",
   "current_role": "opencode",
   "status": "validation_passed",
-  "result": "BULK_IMPORT_WORKER_READY_DRY_RUN_ONLY",
-  "next_recommended_task": "PR195",
-  "next_recommended_alias": "CANONICAL_RESOLVER_WORKER",
+  "result": "CANONICAL_RESOLVER_WORKER_READY_DRY_RUN_ONLY",
+  "next_recommended_task": "PR196",
+  "next_recommended_alias": "HTTP_AUDIT_WORKER",
   "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "next_non_pr_task": "Continue PR195 only after PR194 worker and tracking PRs merge. Keep runtime, staging/prod write, external HTTP, Redis/queue, deploy, data repo mutation, and PR199 blocked.",
-  "notes": "PR194 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/1 and worker commit 1675d9e. The worker repo adds local dry-run bulk import parsing, validation, row/batch hashing, accepted/needs-review/rejected routing, quarantine output, rollback plan, fixtures, and no-dependency test. No DB/Supabase/staging/production write, runtime daemon, public projection, Redis/queue, external HTTP, crawler, audit runtime, package/dependency, deploy, data repo mutation, or secret/env read occurred."
+  "next_non_pr_task": "Continue PR196 only after PR195 worker and tracking PRs merge. Keep live network, runtime, staging/prod write, Redis/queue, deploy, data repo mutation, and PR199 blocked.",
+  "notes": "PR195 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/2 and worker commit 952cfd7. The worker repo adds local fixture-only canonical resolver logic for project names, domains, GitHub repos, one-domain-many-repos, one-repo-many-domains, parent brand ambiguity, product-scope ambiguity, duplicate candidates, quarantined identity conflicts, and needs_canonical_review routing. No external HTTP, DB/Supabase/staging/production write, runtime daemon, public projection, best/top/rank claims, Redis/queue, deploy, package/dependency, data repo mutation, or secret/env read occurred."
 }

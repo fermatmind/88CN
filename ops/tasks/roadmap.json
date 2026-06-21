@@ -20816,7 +20816,8 @@
       ],
       "notes": [
         "Numeric remap of PR184C.",
-        "PR194 completed with BULK_IMPORT_WORKER_READY_DRY_RUN_ONLY; PR195 may proceed next as local fixture-only canonical resolver work."
+        "PR194 completed with BULK_IMPORT_WORKER_READY_DRY_RUN_ONLY; PR195 may proceed next as local fixture-only canonical resolver work.",
+        "PR195 worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/2 adds local fixture-only canonical resolver logic for names, domains, GitHub repos, duplicate/ambiguity states, and needs_canonical_review routing. No external HTTP, DB/Supabase write, runtime daemon, public projection, best/top/rank claims, Redis/queue, deploy, package/dependency, data repo mutation, or secret/env read occurred."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
@@ -20956,7 +20957,8 @@
         "audit observations remain private"
       ],
       "notes": [
-        "Numeric remap of PR184D."
+        "Numeric remap of PR184D.",
+        "PR195 completed with CANONICAL_RESOLVER_WORKER_READY_DRY_RUN_ONLY; PR196 may proceed next as fixture-only HTTP-first audit worker work with no live network by default."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
