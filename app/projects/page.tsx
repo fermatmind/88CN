@@ -1,6 +1,12 @@
-import { PublishedProjectCard } from "@/components/published-project-card";
+import {
+  EmptyState,
+  PageShell,
+  ProjectGrid,
+  SectionHeader,
+} from "@/components/public-ui";
 import { searchPublishedProjectProjections } from "@/lib/projects/published-projection";
-import { siteTitle, siteDescription } from "@/lib/seo";
+import { siteDescription, siteTitle } from "@/lib/seo";
+import { ArrowLeft, ArrowRight, Search } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -32,20 +38,16 @@ export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
   const activeTag = searchParams?.tag?.trim() ?? "";
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-      <div className="mb-10">
-        <h1 className="mb-2 text-2xl font-bold tracking-tight text-terminal-fg">
-          Projects
-        </h1>
-        <p className="text-sm text-terminal-dim">
-          Search reviewed published projections. Filters are finite and do not
-          create faceted index pages.
-        </p>
-      </div>
+    <PageShell>
+      <SectionHeader
+        eyebrow="Directory"
+        title="Projects"
+        description="Search reviewed published projections. Results paginate from a segmented public index and filters are finite browsing controls."
+      />
 
       <form
         action="/projects"
-        className="mb-6 grid gap-3 rounded-lg border border-terminal-border bg-terminal-surface p-4 md:grid-cols-[minmax(0,1fr)_220px_180px_auto]"
+        className="mb-6 grid gap-3 rounded-lg border border-terminal-border bg-terminal-surface p-3 shadow-sm md:grid-cols-[minmax(0,1fr)_220px_180px_auto]"
       >
         <label className="block">
           <span className="mb-1 block text-[10px] font-medium uppercase tracking-wider text-terminal-dim">
@@ -54,7 +56,7 @@ export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
           <input
             name="q"
             defaultValue={activeQuery}
-            placeholder="Project, category, public signal"
+            placeholder="Project, category, or public signal"
             className="h-10 w-full rounded-md border border-terminal-border bg-terminal-bg px-3 text-sm text-terminal-fg outline-none transition-colors placeholder:text-terminal-dim focus:border-terminal-ring"
           />
         </label>
@@ -98,8 +100,9 @@ export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
         <div className="flex items-end gap-2">
           <button
             type="submit"
-            className="h-10 rounded-md border border-terminal-ring bg-terminal-elevated px-4 text-xs font-semibold text-terminal-fg transition-colors hover:bg-terminal-border"
+            className="inline-flex h-10 items-center gap-2 rounded-md bg-terminal-fg px-4 text-xs font-semibold text-terminal-surface transition-colors hover:bg-terminal-muted"
           >
+            <Search className="h-3.5 w-3.5" />
             Search
           </button>
           {(activeQuery || activeCategory || activeTag) && (
@@ -123,21 +126,90 @@ export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
       </div>
 
       {result.items.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center">
-          <p className="text-sm text-terminal-dim">
-            No published projections matched this search.
-          </p>
-          <p className="mt-1 text-xs text-terminal-dim/60">
-            Adjust the query or finite filters. Unreviewed records are not shown.
-          </p>
-        </div>
+        <EmptyState
+          title="No public profiles matched"
+          body="Adjust the query or finite filters. Records outside the reviewed published projection are not shown."
+          action={
+            <Link
+              href="/projects"
+              className="inline-flex items-center rounded-md border border-terminal-border px-3 py-2 text-xs font-semibold text-terminal-muted transition-colors hover:border-terminal-ring hover:text-terminal-fg"
+            >
+              Reset search
+            </Link>
+          }
+        />
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {result.items.map((project) => (
-            <PublishedProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
+        <ProjectGrid projects={result.items} />
       )}
-    </div>
+
+      {result.pageCount > 1 && (
+        <nav className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-terminal-border pt-5 text-xs">
+          <PaginationLink
+            href={paginationHref(searchParams, result.page - 1)}
+            disabled={result.page <= 1}
+            label="Previous"
+            icon="previous"
+          />
+          <span className="text-terminal-dim">
+            Page {result.page} of {result.pageCount}
+          </span>
+          <PaginationLink
+            href={paginationHref(searchParams, result.page + 1)}
+            disabled={result.page >= result.pageCount}
+            label="Next"
+            icon="next"
+          />
+        </nav>
+      )}
+    </PageShell>
+  );
+}
+
+function paginationHref(
+  searchParams: ProjectsPageProps["searchParams"],
+  page: number
+) {
+  const params = new URLSearchParams();
+  if (searchParams?.q) params.set("q", searchParams.q);
+  if (searchParams?.category) params.set("category", searchParams.category);
+  if (searchParams?.tag) params.set("tag", searchParams.tag);
+  params.set("page", String(page));
+  return `/projects?${params.toString()}`;
+}
+
+function PaginationLink({
+  href,
+  disabled,
+  label,
+  icon,
+}: {
+  href: string;
+  disabled: boolean;
+  label: string;
+  icon: "previous" | "next";
+}) {
+  const content = (
+    <>
+      {icon === "previous" && <ArrowLeft className="h-3.5 w-3.5" />}
+      {label}
+      {icon === "next" && <ArrowRight className="h-3.5 w-3.5" />}
+    </>
+  );
+
+  if (disabled) {
+    return (
+      <span className="inline-flex h-9 items-center gap-2 rounded-md border border-terminal-border px-3 font-semibold text-terminal-dim opacity-50">
+        {content}
+      </span>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      className="inline-flex h-9 items-center gap-2 rounded-md border border-terminal-border px-3 font-semibold text-terminal-muted transition-colors hover:border-terminal-ring hover:text-terminal-fg"
+    >
+      {content}
+    </Link>
   );
 }

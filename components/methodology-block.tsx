@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Beaker, ShieldAlert } from "lucide-react";
+import { BookOpen, ShieldCheck } from "lucide-react";
 
 interface MethodologyBlockProps {
   methodologyNote: string;
@@ -14,23 +14,23 @@ export function MethodologyBlock({
 }: MethodologyBlockProps) {
   return (
     <div className={cn("space-y-3", className)}>
-      <section className="rounded-lg border border-terminal-border bg-terminal-surface p-5">
+      <section className="rounded-lg border border-terminal-border bg-terminal-surface p-5 shadow-sm">
         <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-terminal-fg">
-          <Beaker className="h-4 w-4 text-terminal-muted" />
+          <BookOpen className="h-4 w-4 text-terminal-ring" />
           Methodology
         </h2>
-        <p className="text-xs text-terminal-dim leading-relaxed">
+        <p className="text-sm leading-6 text-terminal-dim">
           {methodologyNote}
         </p>
       </section>
 
       {sourceConfidenceNote && (
-        <section className="rounded-lg border border-terminal-border bg-terminal-surface p-5">
+        <section className="rounded-lg border border-terminal-border bg-terminal-surface p-5 shadow-sm">
           <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-terminal-fg">
-            <ShieldAlert className="h-4 w-4 text-terminal-muted" />
-            Source Confidence
+            <ShieldCheck className="h-4 w-4 text-terminal-ring" />
+            Public Data Boundary
           </h2>
-          <p className="text-xs text-terminal-dim leading-relaxed">
+          <p className="text-sm leading-6 text-terminal-dim">
             {sourceConfidenceNote}
           </p>
         </section>

@@ -10,14 +10,14 @@ const config: Config = {
     extend: {
       colors: {
         terminal: {
-          bg: "#0a0a0a",
-          surface: "#141414",
-          elevated: "#1a1a1a",
-          border: "#262626",
-          ring: "#404040",
-          fg: "#f5f5f5",
-          muted: "#a3a3a3",
-          dim: "#737373",
+          bg: "#f8fafc",
+          surface: "#ffffff",
+          elevated: "#f1f5f9",
+          border: "#d9e1ea",
+          ring: "#2563eb",
+          fg: "#111827",
+          muted: "#334155",
+          dim: "#64748b",
         },
       },
       fontFamily: {

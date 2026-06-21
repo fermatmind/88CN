@@ -33,18 +33,21 @@ export default function SubmitForm() {
         body: JSON.stringify(body),
       });
 
-      const json = await res.json();
+      await res.json().catch(() => undefined);
 
       if (res.ok) {
         setForm({
           status: "success",
           message:
-            "Project submitted for editorial review. You will be notified when the review is complete.",
+            "Project submitted for editorial review. Public display requires review approval.",
         });
         e.currentTarget.reset();
       } else {
-        const detail = json?.error?.detail ?? "Submission failed.";
-        setForm({ status: "error", message: detail });
+        setForm({
+          status: "error",
+          message:
+            "Submission could not be completed. Please review the fields and try again.",
+        });
       }
     } catch {
       setForm({
@@ -152,8 +155,17 @@ export default function SubmitForm() {
         />
       </Section>
 
-      {/* Honeypot fields — hidden from users, filled by bots */}
-      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }}>
+      {/* Honeypot fields hidden from users, filled by bots. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          opacity: 0,
+          height: 0,
+          overflow: "hidden",
+        }}
+      >
         <input type="text" name="company_homepage" tabIndex={-1} autoComplete="off" />
         <input type="text" name="fax_number" tabIndex={-1} autoComplete="off" />
       </div>
@@ -164,7 +176,7 @@ export default function SubmitForm() {
           disabled={form.status === "submitting"}
           className={cn(
             "inline-flex items-center gap-2 rounded-md border border-terminal-border px-6 py-2.5 text-sm font-semibold",
-            "bg-terminal-fg text-terminal-bg hover:bg-terminal-muted transition-colors",
+            "bg-terminal-fg text-terminal-surface hover:bg-terminal-muted transition-colors",
             "disabled:opacity-50 disabled:cursor-not-allowed"
           )}
         >
@@ -182,24 +194,23 @@ export default function SubmitForm() {
         </button>
 
         {form.status === "success" && (
-          <div className="flex items-start gap-2 rounded-md border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs">
-            <CheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
-            <span className="text-emerald-400">{form.message}</span>
+          <div className="flex items-start gap-2 rounded-md border border-emerald-200 bg-emerald-50 p-3 text-xs">
+            <CheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-700" />
+            <span className="text-emerald-800">{form.message}</span>
           </div>
         )}
 
         {form.status === "error" && (
-          <div className="flex items-start gap-2 rounded-md border border-red-500/30 bg-red-500/10 p-3 text-xs">
-            <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-400" />
-            <span className="text-red-400">{form.message}</span>
+          <div className="flex items-start gap-2 rounded-md border border-red-200 bg-red-50 p-3 text-xs">
+            <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-700" />
+            <span className="text-red-800">{form.message}</span>
           </div>
         )}
       </div>
 
       <p className="text-[11px] text-terminal-dim leading-relaxed">
-        Create a free structured AI project profile. No ranking guarantees. No
-        link placement promises. Submissions are reviewed for public growth signals
-        and editorial quality.
+        Submit public project information only. Private business data,
+        credentials, and non-public files are not required for this form.
       </p>
     </form>
   );
