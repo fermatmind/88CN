@@ -1,5 +1,5 @@
 import {
-  getPublishedProjectBySlug,
+  getPublishedProjectProjections,
   type PublishedProjectProjection,
 } from "@/lib/projects/published-projection";
 import registry from "./curated-collections.json";
@@ -26,6 +26,9 @@ export interface CuratedCollection {
   inclusionCriteria: string;
   whyIncluded: string;
   methodologyNote: string;
+  match: {
+    collectionTag: string;
+  };
 }
 
 const collections = registry as CuratedCollection[];
@@ -35,15 +38,10 @@ export function getAllCuratedCollections(): CuratedCollection[] {
 }
 
 export function getPublishedCuratedCollections(): CuratedCollection[] {
-  return collections.filter((collection) => {
-    const projects = getProjectsForCuratedCollection(collection);
-
-    return (
-      collection.status === "published" &&
-      collection.sitemapEligible &&
-      projects.length >= collection.minimumPublishedProjects
-    );
-  });
+  return collections.filter(
+    (collection) =>
+      collection.status === "published" && collection.sitemapEligible
+  );
 }
 
 export function getCuratedCollectionBySlug(
@@ -55,10 +53,19 @@ export function getCuratedCollectionBySlug(
 export function getProjectsForCuratedCollection(
   collection: CuratedCollection
 ): PublishedProjectProjection[] {
-  return collection.projectSlugs
-    .map((slug) => getPublishedProjectBySlug(slug))
+  const allowedSlugs = new Set(collection.projectSlugs);
+  const matchTag = collection.match.collectionTag;
+
+  return getPublishedProjectProjections()
     .filter(
-      (project): project is PublishedProjectProjection =>
-        project !== undefined && project.lifecycle_status === "published"
+      (project) =>
+        project.lifecycle_status === "published" &&
+        allowedSlugs.has(project.slug) &&
+        project.collection_tags.includes(matchTag)
+    )
+    .sort(
+      (a, b) =>
+        collection.projectSlugs.indexOf(a.slug) -
+        collection.projectSlugs.indexOf(b.slug)
     );
 }

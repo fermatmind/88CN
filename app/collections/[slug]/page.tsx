@@ -14,6 +14,8 @@ interface CollectionPageProps {
   params: { slug: string };
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return getPublishedCuratedCollections().map((collection) => ({
     slug: collection.slug,
@@ -28,8 +30,7 @@ export async function generateMetadata({
 
   if (
     !collection ||
-    collection.status !== "published" ||
-    projects.length < collection.minimumPublishedProjects
+    collection.status !== "published"
   ) {
     return {
       title: "Not Found",
@@ -57,10 +58,6 @@ export default function CollectionPage({ params }: CollectionPageProps) {
 
   const projects = getProjectsForCuratedCollection(collection);
 
-  if (projects.length < collection.minimumPublishedProjects) {
-    notFound();
-  }
-
   const baseUrl =
     process.env.APP_URL ?? "http://localhost:3000";
   const pageUrl = `${baseUrl}/collections/${collection.slug}`;
@@ -82,6 +79,7 @@ export default function CollectionPage({ params }: CollectionPageProps) {
     editorialSummary: collection.summary,
     whyIncluded: collection.whyIncluded,
     projectSlugs: collection.projectSlugs,
+    matchTag: collection.match.collectionTag,
     lastUpdated: collection.lastReviewed,
     methodologyNote: collection.methodologyNote,
   };

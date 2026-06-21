@@ -11,6 +11,7 @@ interface CollectionView {
   editorialSummary: string;
   whyIncluded: string;
   projectSlugs: string[];
+  matchTag: string;
   lastUpdated: string;
   methodologyNote: string;
 }
@@ -71,7 +72,7 @@ export function CollectionGrid({
         </h2>
         {projects.length === 0 ? (
           <p className="text-xs text-terminal-dim">
-            No projects match this collection&apos;s criteria yet.
+            No reviewed projects are available in this collection yet.
           </p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
