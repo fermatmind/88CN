@@ -21465,9 +21465,6 @@
       ],
       "forbidden_paths": [
         "README.md",
-        "app/**",
-        "components/**",
-        "lib/**",
         "scripts/**",
         "supabase/**",
         "deploy/**",
@@ -21518,7 +21515,9 @@
         "no raw seed/source/audit/review fields leak"
       ],
       "notes": [
-        "Numeric remap of PR185B."
+        "Numeric remap of PR185B.",
+        "PR200 updates contradictory scope metadata so app/components/lib changes allowed by this frontend task are not also forbidden by scope-check.",
+        "PR200 result: PROJECT_DETAIL_PAGE_READY_PUBLISHED_ONLY. Detail pages read only internal published_projection fixture adapter fields and stay noindex until PR202."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,

@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-FRONTEND-MVP-20K",
-  "status": "pr199_validation_passed",
+  "status": "pr200_validation_passed",
   "last_completed_train": "TRAIN-WORKER-PIPELINE-20K",
   "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "notes": "PR199 / PROJECT_LISTING_SEARCH is validation_passed with PROJECT_LISTING_SEARCH_READY_PUBLISHED_ONLY. Continue to PR200 after merge. No deploy, server action, runtime, Redis/queue, Supabase/staging/production write, Public API/MCP release, external outreach, or data repo mutation occurred."
+  "notes": "PR200 / PROJECT_DETAIL_PAGE is validation_passed with PROJECT_DETAIL_PAGE_READY_PUBLISHED_ONLY. Continue to PR201 after merge. No deploy, server action, runtime, Redis/queue, Supabase/staging/production write, Public API/MCP release, external outreach, or data repo mutation occurred."
 }
