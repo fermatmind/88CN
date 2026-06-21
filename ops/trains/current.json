@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-WORKER-PIPELINE-20K",
-  "status": "pr195_validation_passed_continue_pr196",
-  "last_completed_train": "TRAIN-WORKER-PIPELINE-20K_PR195",
+  "status": "pr196_validation_passed_continue_pr197",
+  "last_completed_train": "TRAIN-WORKER-PIPELINE-20K_PR196",
   "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "notes": "PR195 completed with result CANONICAL_RESOLVER_WORKER_READY_DRY_RUN_ONLY. Continue to PR196 / HTTP_AUDIT_WORKER after worker and 88CN PR195 merge. PR199 remains not started; no live network, runtime, staging/prod write, external HTTP audit, Redis/queue, crawler, audit runtime, deploy, or data repo mutation."
+  "notes": "PR196 completed with result HTTP_AUDIT_WORKER_READY_FIXTURE_ONLY. Continue to PR197 / QUEUE_RETRY_DEAD_LETTER after worker and 88CN PR196 merge. PR199 remains not started; no live network, browser fallback, WAF bypass, runtime, staging/prod write, Redis/queue runtime, crawler, audit daemon, deploy, or data repo mutation."
 }
