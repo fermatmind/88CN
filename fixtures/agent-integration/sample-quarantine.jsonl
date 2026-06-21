@@ -1,0 +1,1 @@
+{"quarantine_id":"quarantine-example-0001","project_name":"Example Developer Tool","reason_code":"policy_boundary_risk","severity":"medium","source_stage":"canonical_candidate","observed_at":"2026-06-21T00:00:00Z","retry_allowed":true,"human_review_required":true,"admin_only_details":"Synthetic fixture: potential boundary issue requires admin review before any queue entry."}

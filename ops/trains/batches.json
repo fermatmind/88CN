@@ -4608,6 +4608,174 @@
       ],
       "status": "planned",
       "completed_tasks": []
+    },
+    {
+      "id": "AGENT_INTEGRATION_REVIEW_QUEUE_CONTRACT",
+      "title": "88CN review queue import contract for worker artifacts",
+      "phase": "agent-integration-review-queue",
+      "tasks": [
+        "AGENT-INTEGRATION0"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "supabase_migration_allowed": false,
+      "staging_write_allowed": false,
+      "external_http_allowed": false,
+      "redis_queue_allowed": false,
+      "sitemap_change_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [],
+      "required_preconditions": [
+        "88CN main is clean and synced",
+        "88cn-scout-worker is inspected read-only at final worker SHA 31153adb2a125b16c33858f507ce762247a2a3ff",
+        "contract work stays inside docs/agent, contracts/agent, fixtures/agent-integration, scripts/agent, docs/status, and ops metadata",
+        "no import, publish, runtime, crawler, Redis/queue, Supabase/staging/production write, published_projection write, sitemap/frontend mutation, deploy, cloud action, data repo mutation, or worker repo mutation occurs"
+      ],
+      "allowed_roles": [
+        "codex-ops",
+        "codex-qa"
+      ],
+      "purpose": "Define the official handoff contract from completed 88cn-scout-worker artifacts into 88CN admin review queue candidates.",
+      "notes": [
+        "This is a contract/boundary/validator task only.",
+        "Worker output may recommend review or publish, but it cannot publish.",
+        "The next task is AGENT-INTEGRATION0B / Worker Review Payload Compatibility in 88cn-scout-worker."
+      ],
+      "status": "validation_passed",
+      "completed_tasks": [
+        "AGENT-INTEGRATION0"
+      ]
+    },
+    {
+      "id": "AGENT_INTEGRATION_REVIEW_PAYLOAD_COMPATIBILITY",
+      "title": "Worker review payload compatibility with 88CN import contract",
+      "phase": "agent-integration-review-payload-compatibility",
+      "tasks": [
+        "AGENT-INTEGRATION1"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "supabase_migration_allowed": false,
+      "staging_write_allowed": false,
+      "external_http_allowed": false,
+      "redis_queue_allowed": false,
+      "sitemap_change_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "AGENT-INTEGRATION1",
+          "reason": "Next worker-repo task is planned only and must be separately authorized before mutating 88cn-scout-worker."
+        }
+      ],
+      "required_preconditions": [
+        "AGENT-INTEGRATION0 contract is merged into 88CN main",
+        "88cn-scout-worker is checked in its own clean worktree before AGENT-INTEGRATION1 starts",
+        "no 88CN repo mutation, data repo mutation, runtime worker, crawler, Redis/queue, external write, DB write, published_projection write, sitemap/frontend mutation, deploy, or cloud action occurs"
+      ],
+      "allowed_roles": [
+        "codex-ops",
+        "codex-qa"
+      ],
+      "purpose": "Plan the next worker-repo compatibility task against the 88CN review queue import contract.",
+      "notes": [
+        "Registered by AGENT-INTEGRATION0 so next_recommended_train resolves to a real planned train.",
+        "This planned train is not completed by AGENT-INTEGRATION0.",
+        "Human-facing label: AGENT-INTEGRATION0B / Worker Review Payload Compatibility."
+      ],
+      "status": "planned",
+      "completed_tasks": []
     }
   ]
 }

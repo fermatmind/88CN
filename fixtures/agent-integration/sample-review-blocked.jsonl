@@ -1,0 +1,1 @@
+{"project_name":"Example RAG Project","slug_candidate":"example-rag-project","blocker_codes":["docs_missing","manual_review_required"],"source_stage":"audit_observed","observed_at":"2026-06-21T00:00:00Z","human_unblock_required":true,"admin_only_summary":"Synthetic fixture: docs link is intentionally absent, so this record stays review-blocked."}

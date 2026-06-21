@@ -1,0 +1,38 @@
+{
+  "schema_version": "review-queue-import-manifest.v0",
+  "run_id": "agent-integration0a-sample-run",
+  "generated_at": "2026-06-21T00:00:00Z",
+  "worker_repo": "88cn-scout-worker",
+  "worker_repo_sha": "31153adb2a125b16c33858f507ce762247a2a3ff",
+  "worker_task_range": [
+    "AGENT1",
+    "AGENT2",
+    "AGENT3",
+    "AGENT4",
+    "AGENT5",
+    "AGENT6",
+    "AGENT7",
+    "AGENT8",
+    "AGENTQ"
+  ],
+  "source_manifest_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "artifact_hashes": {
+    "review-ready.jsonl": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "review-blocked.jsonl": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "quarantine.jsonl": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+    "publish-recommendations.jsonl": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "events.jsonl": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "report.md": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+  },
+  "counts": {
+    "review_ready_count": 1,
+    "review_blocked_count": 1,
+    "quarantine_count": 1,
+    "publish_recommendation_count": 1
+  },
+  "mode": "review_packaging",
+  "network_used": false,
+  "runtime_started": false,
+  "db_write_performed": false,
+  "auto_publish_performed": false
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://88cn.com/contracts/agent/quarantine-event.schema.json",
+  "title": "88CN Agent Quarantine Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "quarantine_id",
+    "project_name",
+    "reason_code",
+    "severity",
+    "source_stage",
+    "observed_at",
+    "retry_allowed",
+    "human_review_required",
+    "admin_only_details"
+  ],
+  "properties": {
+    "quarantine_id": { "type": "string", "minLength": 8 },
+    "project_name": { "type": "string", "minLength": 1 },
+    "reason_code": {
+      "enum": [
+        "pii_or_private_data_risk",
+        "copied_content_risk",
+        "malicious_payload_risk",
+        "source_integrity_risk",
+        "policy_boundary_risk"
+      ]
+    },
+    "severity": { "enum": ["low", "medium", "high"] },
+    "source_stage": {
+      "enum": ["discovery_hint", "source_verified", "canonical_candidate", "audit_observed", "review_ready"]
+    },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "retry_allowed": { "type": "boolean" },
+    "human_review_required": { "const": true },
+    "admin_only_details": { "type": "string", "minLength": 1 }
+  }
+}
