@@ -1,13 +1,13 @@
 {
-  "current_task": "PR199",
-  "current_alias": "PROJECT_LISTING_SEARCH",
+  "current_task": "PR200",
+  "current_alias": "PROJECT_DETAIL_PAGE",
   "current_repo": "88CN",
   "current_role": "opencode",
   "status": "validation_passed",
-  "result": "PROJECT_LISTING_SEARCH_READY_PUBLISHED_ONLY",
-  "next_recommended_task": "PR200",
-  "next_recommended_alias": "PROJECT_DETAIL_PAGE",
+  "result": "PROJECT_DETAIL_PAGE_READY_PUBLISHED_ONLY",
+  "next_recommended_task": "PR201",
+  "next_recommended_alias": "COLLECTIONS",
   "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "next_non_pr_task": "Continue PR200 after PR199 merge; do not deploy.",
-  "notes": "PR199 adds published-only /projects listing/search backed by an internal published_projection fixture adapter. It exposes only public projection fields, finite filters, source-signal chips, and pagination-ready shape. No raw seed/evidence/audit/review/quarantine/rejected data, sitemap inclusion, Public API/MCP release, deploy, server action, Supabase/staging/production write, runtime, Redis/queue, external outreach, or data repo mutation occurred."
+  "next_non_pr_task": "Continue PR201 after PR200 merge; do not deploy.",
+  "notes": "PR200 switches /projects/[slug] to published_projection-only lookup, with notFound fail-closed behavior for missing or non-published slugs, noindex metadata until PR202, source links, signal chips, public-safe entity scope, collection links, and reviewed alternatives links. No raw seed/evidence/audit/review/quarantine/rejected data, sitemap inclusion, Public API/MCP release, deploy, server action, Supabase/staging/production write, runtime, Redis/queue, external outreach, or data repo mutation occurred."
 }
