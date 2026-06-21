@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-SERVER-PREP",
-  "status": "blocked",
+  "active_train": "TRAIN-CONTROL-PANEL-20K",
+  "status": "ready",
   "last_completed_train": "TRAIN-SERVER-READINESS",
-  "next_recommended_train": "TRAIN-SERVER-PREP",
-  "notes": "TRAIN-SERVER-PREP is blocked at PR188 / STAGING_ADMIN_HOST_PREP because confirmed staging/admin host access, target facts, and reversible server action list are missing. PR188 registry conflict for deploy/** is remediated, but no live host prep occurred. Do not continue to PR189 until PR188 is rerun with confirmed access or a human explicitly changes the sequence."
+  "next_recommended_train": "TRAIN-CONTROL-PANEL-20K",
+  "notes": "OPS11B applies Scheme B: PR188 / STAGING_ADMIN_HOST_PREP and PR189 / WORKER_AUDIT_HOST_PREP remain SERVER_PREP_SIDECAR_BLOCKED because confirmed host access, exact target aliases, and reversible server action lists are missing. This sidecar does not block PR190-PR192 admin/control-panel code path. PR193+ worker/server-dependent runtime tasks remain blocked until the server sidecar is resolved or the dependency is explicitly reworked. No SSH, cloud console write, server mutation, deploy, production DB write, worker runtime start, external outreach, data repo mutation, FermatMind mutation, or secret/env read occurred."
 }
