@@ -3,12 +3,18 @@
   "current_alias": "CONTENT50_FRONTEND_SMOKE",
   "current_repo": "88CN",
   "current_role": "opencode",
-  "status": "in_progress",
-  "result": "CONTENT50_FRONTEND_SMOKE_PENDING_VALIDATION",
+  "status": "validation_passed_with_browser_smoke_blocked",
+  "result": "PR210_UNBLOCKED_PUBLISHED_PROJECTION_JSONL_BOUND",
   "candidate_origin_main_sha": "7d5531833a796f3ff231457b1877c83b3078af7d",
   "depends_on_pr": "https://github.com/fermatmind/88CN/pull/248",
+  "current_pr": "https://github.com/fermatmind/88CN/pull/249",
+  "jsonl_row_count": 27,
+  "published_rows_loaded": 27,
+  "generated_project_routes": 27,
+  "leakage_scan": "pass",
+  "browser_smoke": "blocked_local_healthz_unavailable",
   "next_recommended_task": "HUMAN_REVIEW_CONTENT50_STACKED_PRS",
   "next_recommended_alias": "MERGE_REVIEW_REQUIRED",
   "next_recommended_train": "CONTENT50",
-  "notes": "PR210 local frontend smoke only. No deploy, server/cloud action, DB write, external API call, sitemap production push, worker runtime, or index-data repo mutation."
+  "notes": "PR210 JSONL runtime binding is unblocked. No deploy, server/cloud action, DB write, external API call, sitemap production push, worker runtime, PR211, PR206, Growth, or index-data repo mutation."
 }

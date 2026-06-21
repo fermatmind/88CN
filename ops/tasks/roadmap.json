@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-21T07:22:44.576Z",
+  "updated_at": "2026-06-21T07:44:21.203Z",
   "tasks": [
     {
       "id": "OPS0",
@@ -22811,7 +22811,9 @@
         "docs/FLOW_BUGS.md",
         "screenshots/qa/**",
         "ops/tasks/current.json",
-        "ops/tasks/roadmap.json"
+        "ops/tasks/roadmap.json",
+        "lib/projects/published-projection.ts",
+        "lib/projects/search-index.ts"
       ],
       "forbidden_paths": [
         "README.md",
@@ -22852,10 +22854,12 @@
       "definition_of_done": [
         "local build and frontend leakage scans complete",
         "/tmp/pr210-smoke-report.md records leakage status, tested pages, published coverage, missing routes, and sitemap correctness",
-        "no deploy, server runtime, worker runtime, cloud, database, or index-data mutation occurs"
+        "no deploy, server runtime, worker runtime, cloud, database, or index-data mutation occurs",
+        "published projection adapter loads lib/projects/published-projection.jsonl and frontend route generation covers the PR209 published rows"
       ],
       "notes": [
-        "CONTENT50 local smoke branch; browser use must respect Codex preflight if opened."
+        "CONTENT50 local smoke branch; browser use must respect Codex preflight if opened.",
+        "PR210 unblock permits minimal published projection JSONL loader and search/sitemap eligibility binding changes only."
       ],
       "risk_flags": {
         "auto_merge_allowed": true,
@@ -22885,9 +22889,9 @@
         "staging_write_allowed": false,
         "external_http_allowed": false,
         "redis_queue_allowed": false,
-        "sitemap_change_allowed": false,
+        "sitemap_change_allowed": true,
         "data_repo_risk": false,
-        "public_surface_risk": false,
+        "public_surface_risk": true,
         "human_checkpoint": false
       },
       "auto_merge_allowed": true,
@@ -22917,9 +22921,9 @@
       "staging_write_allowed": false,
       "external_http_allowed": false,
       "redis_queue_allowed": false,
-      "sitemap_change_allowed": false,
+      "sitemap_change_allowed": true,
       "data_repo_risk": false,
-      "public_surface_risk": false
+      "public_surface_risk": true
     }
   ],
   "skeletons": [

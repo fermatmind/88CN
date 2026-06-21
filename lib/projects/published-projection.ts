@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { LifecycleState } from "@/lib/constants";
 
 export interface PublishedProjectProjection {
@@ -7,12 +9,14 @@ export interface PublishedProjectProjection {
   official_website_url: string;
   github_url?: string;
   docs_url?: string;
+  category?: string;
   primary_category: string;
   collection_tags: string[];
   open_source_or_commercial: "open_source" | "commercial" | "hybrid";
   public_signal_chips: string[];
   last_reviewed_at: string;
   lifecycle_status: Extract<LifecycleState, "published">;
+  seo_indexable?: boolean;
 }
 
 export interface PublishedProjectSearchParams {
@@ -36,103 +40,41 @@ export interface PublishedProjectSearchResult {
 
 export const PROJECT_LISTING_PAGE_SIZE = 24;
 
-const publishedProjectionFixtures: PublishedProjectProjection[] = [
-  {
-    slug: "aurora-code",
-    project_name: "Aurora Code",
-    original_summary:
-      "AI code review assistant for teams that want public repository checks and documented review workflows.",
-    official_website_url: "https://auroracode.dev",
-    github_url: "https://github.com/aurora-code/aurora",
-    docs_url: "https://docs.auroracode.dev",
-    primary_category: "AI Coding",
-    collection_tags: ["open-source-ai-agents", "ai-tool-alternatives"],
-    open_source_or_commercial: "open_source",
-    public_signal_chips: ["Official site", "Public GitHub", "Docs reviewed"],
-    last_reviewed_at: "2026-06-21",
-    lifecycle_status: "published",
-  },
-  {
-    slug: "pulse-analytics",
-    project_name: "Pulse Analytics",
-    original_summary:
-      "Privacy-aware product analytics surface with first-party tracking and public documentation.",
-    official_website_url: "https://pulseanalytics.io",
-    github_url: "https://github.com/pulse-analytics/pulse",
-    docs_url: "https://docs.pulseanalytics.io",
-    primary_category: "Analytics",
-    collection_tags: ["ai-outbound"],
-    open_source_or_commercial: "commercial",
-    public_signal_chips: ["Official site", "Public docs", "Founder claim ready"],
-    last_reviewed_at: "2026-06-21",
-    lifecycle_status: "published",
-  },
-  {
-    slug: "nucleus-ml",
-    project_name: "Nucleus ML",
-    original_summary:
-      "Model training infrastructure for small teams evaluating self-managed AI builder workflows.",
-    official_website_url: "https://nucleusml.com",
-    github_url: "https://github.com/nucleus-ml/nucleus",
-    docs_url: "https://docs.nucleusml.com",
-    primary_category: "AI Infrastructure",
-    collection_tags: ["rag-projects", "open-source-ai-agents"],
-    open_source_or_commercial: "hybrid",
-    public_signal_chips: ["Official site", "Public GitHub", "Docs reviewed"],
-    last_reviewed_at: "2026-06-21",
-    lifecycle_status: "published",
-  },
-  {
-    slug: "vectorbase",
-    project_name: "VectorBase",
-    original_summary:
-      "Vector search infrastructure project with public repository and implementation documentation.",
-    official_website_url: "https://vectorbase.dev",
-    github_url: "https://github.com/vectorbase/vectorbase",
-    docs_url: "https://docs.vectorbase.dev",
-    primary_category: "Search Infrastructure",
-    collection_tags: ["rag-projects", "ai-tool-alternatives"],
-    open_source_or_commercial: "open_source",
-    public_signal_chips: ["Official site", "Public GitHub", "Docs reviewed"],
-    last_reviewed_at: "2026-06-21",
-    lifecycle_status: "published",
-  },
-  {
-    slug: "complykit",
-    project_name: "ComplyKit",
-    original_summary:
-      "Compliance preparation workspace for software teams reviewing public trust and readiness signals.",
-    official_website_url: "https://complykit.io",
-    github_url: "https://github.com/complykit/complykit",
-    docs_url: "https://docs.complykit.io",
-    primary_category: "Trust Operations",
-    collection_tags: ["ai-outbound", "ai-tool-alternatives"],
-    open_source_or_commercial: "commercial",
-    public_signal_chips: ["Official site", "Public GitHub", "Docs reviewed"],
-    last_reviewed_at: "2026-06-21",
-    lifecycle_status: "published",
-  },
-  {
-    slug: "scribe-ai",
-    project_name: "Scribe AI",
-    original_summary:
-      "Local-first meeting transcription project with public product materials and founder claim path.",
-    official_website_url: "https://scribeai.app",
-    github_url: "https://github.com/scribeai/scribe",
-    docs_url: "https://docs.scribeai.app",
-    primary_category: "Productivity",
-    collection_tags: ["ai-outbound"],
-    open_source_or_commercial: "hybrid",
-    public_signal_chips: ["Official site", "Public GitHub", "Founder claim ready"],
-    last_reviewed_at: "2026-06-21",
-    lifecycle_status: "published",
-  },
-];
+const PUBLISHED_PROJECTION_JSONL_PATH = path.join(
+  process.cwd(),
+  "lib/projects/published-projection.jsonl"
+);
+
+const forbiddenPublicFields = new Set(
+  [
+    ["seed", "hint"],
+    ["identity", "candidate"],
+    ["canonical", "candidate"],
+    ["audit", "pending"],
+    ["raw", "audit"],
+    ["raw", "source", "evidence"],
+    ["review", "notes"],
+    ["quarantine", "reason"],
+    ["rejected", "reason"],
+    ["row", "hash"],
+    ["evidence", "hash"],
+    ["manifest", "hash"],
+    ["private", "artifact", "path"],
+    ["internal", "confidence"],
+    ["canonical", "ambiguity"],
+    ["source", "evidence", "ids"],
+    ["worker", "job", "payload"],
+  ].map((parts) => parts.join("_"))
+);
+
+let publishedProjectionCache: PublishedProjectProjection[] | undefined;
 
 export function getPublishedProjectProjections(): PublishedProjectProjection[] {
-  return publishedProjectionFixtures.filter(
-    (project) => project.lifecycle_status === "published"
-  );
+  if (!publishedProjectionCache) {
+    publishedProjectionCache = loadPublishedProjectionJsonl();
+  }
+
+  return publishedProjectionCache;
 }
 
 export function getPublishedProjectBySlug(
@@ -208,4 +150,105 @@ function getPublishedProjectFilters(projects: PublishedProjectProjection[]) {
 
 function normalizeParam(value: string | undefined): string {
   return value?.trim().toLowerCase() ?? "";
+}
+
+function loadPublishedProjectionJsonl(): PublishedProjectProjection[] {
+  if (!fs.existsSync(PUBLISHED_PROJECTION_JSONL_PATH)) return [];
+
+  return fs
+    .readFileSync(PUBLISHED_PROJECTION_JSONL_PATH, "utf8")
+    .split(/\r?\n/)
+    .flatMap((line) => {
+      const trimmed = line.trim();
+      if (!trimmed) return [];
+
+      try {
+        const parsed = JSON.parse(trimmed) as Record<string, unknown>;
+        const projection = toPublishedProjectProjection(parsed);
+        return projection ? [projection] : [];
+      } catch {
+        return [];
+      }
+    });
+}
+
+function toPublishedProjectProjection(
+  row: Record<string, unknown>
+): PublishedProjectProjection | undefined {
+  if (hasForbiddenPublicField(row)) return undefined;
+
+  const slug = stringValue(row.slug);
+  const projectName = stringValue(row.project_name);
+  const originalSummary = stringValue(row.original_summary);
+  const officialWebsiteUrl = stringValue(row.official_website_url);
+  const lifecycleStatus = stringValue(row.lifecycle_status);
+  const primaryCategory =
+    stringValue(row.primary_category) ?? stringValue(row.category);
+
+  if (
+    !slug ||
+    !projectName ||
+    !originalSummary ||
+    !officialWebsiteUrl ||
+    !primaryCategory ||
+    lifecycleStatus !== "published"
+  ) {
+    return undefined;
+  }
+
+  return {
+    slug,
+    project_name: projectName,
+    original_summary: originalSummary,
+    official_website_url: officialWebsiteUrl,
+    github_url: stringValue(row.github_url),
+    docs_url: stringValue(row.docs_url),
+    category: stringValue(row.category),
+    primary_category: primaryCategory,
+    collection_tags: stringArrayValue(row.collection_tags),
+    open_source_or_commercial: openSourceOrCommercialValue(
+      row.open_source_or_commercial
+    ),
+    public_signal_chips: stringArrayValue(row.public_signal_chips),
+    last_reviewed_at: stringValue(row.last_reviewed_at) ?? "2026-06-21",
+    lifecycle_status: "published",
+    seo_indexable: booleanValue(row.seo_indexable),
+  };
+}
+
+function hasForbiddenPublicField(row: Record<string, unknown>): boolean {
+  return Object.keys(row).some((key) => forbiddenPublicFields.has(key));
+}
+
+function stringValue(value: unknown): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}
+
+function stringArrayValue(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+
+  return value.flatMap((item) => {
+    const normalized = stringValue(item);
+    return normalized ? [normalized] : [];
+  });
+}
+
+function booleanValue(value: unknown): boolean | undefined {
+  return typeof value === "boolean" ? value : undefined;
+}
+
+function openSourceOrCommercialValue(
+  value: unknown
+): PublishedProjectProjection["open_source_or_commercial"] {
+  if (
+    value === "open_source" ||
+    value === "commercial" ||
+    value === "hybrid"
+  ) {
+    return value;
+  }
+
+  return "hybrid";
 }

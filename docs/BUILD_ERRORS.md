@@ -11,3 +11,5 @@ No active build or policy errors after PR #30 README policy unblock.
 | 2026-06-19T21:23:36Z | TRAFFIC3Q `scripts/codex-preflight.sh` browser preflight | `http://localhost:3000/api/healthz` did not return 200 because no local server was listening on port 3000. Browser QA was not opened; TRAFFIC3Q used build/static/sitemap/checker evidence only. | RECORDED |
 
 | 2026-06-21T07:26:19Z | codex-preflight http://localhost:3000/api/healthz | curl: (7) Failed to connect to localhost port 3000 after 1 ms: Couldn't connect to server  | Open |
+
+| 2026-06-21T07:48:37Z | codex-preflight http://localhost:3000/api/healthz | curl: (7) Failed to connect to localhost port 3000 after 2 ms: Couldn't connect to server  | Open |
