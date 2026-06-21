@@ -22072,7 +22072,8 @@
         "no deploy occurs"
       ],
       "notes": [
-        "Numeric remap of PR186A."
+        "Numeric remap of PR186A.",
+        "PR204 result: SECURITY_FIREWALL_READY_NO_DEPLOY. Firewall evidence confirms published-projection-only project surfaces, finite collections/tasks, sitemap/search eligibility blockers, disabled Public API/MCP, no worker runtime publication path, and no deploy/server/cloud/DB/data-repo mutation."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
