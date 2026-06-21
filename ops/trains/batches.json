@@ -4157,9 +4157,9 @@
       ],
       "purpose": "20k-50k worker, audit, queue, and QA pipeline",
       "notes": [
-        "PR193 may proceed only as no-runtime worker repo bootstrap after OPS11C records the OPS-SERVER-APPLY0 partial private-only host prep sidecar.",
-        "No train auto-run through worker runtime, staging write, external HTTP audit, Redis/queue creation, crawler, audit, or deployment.",
-        "PR194+ remains blocked until separately approved after PR193."
+        "PR193 completed the private worker repo no-runtime bootstrap at fermatmind/88cn-scout-worker with initial commit 4de3dd49ac91e5f0f14aa76d96550be27eff1773.",
+        "The worker repo contains only README, docs, contracts, fixtures guidance, src README placeholders, tests README, and .gitignore.",
+        "Stop after PR193. No train auto-run through PR194+ runtime, staging write, external HTTP audit, Redis/queue creation, crawler, audit, worker, or deployment."
       ]
     },
     {

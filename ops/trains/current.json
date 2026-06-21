@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-WORKER-PIPELINE-20K",
-  "status": "ready_for_pr193_no_runtime",
-  "last_completed_train": "TRAIN-CONTROL-PANEL-20K",
+  "status": "blocked_after_pr193_pending_pr194_approval",
+  "last_completed_train": "TRAIN-WORKER-PIPELINE-20K_PR193",
   "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "notes": "OPS11C records OPS-SERVER-APPLY0 with server_sidecar_status=PARTIAL_PRIVATE_ONLY_HOSTS_PREPARED. PR188/PR189 are no longer hard blocked; they are Workbench-only partially prepared with local SSH private-only/timeout and no runtime activation. PR193 may proceed only as no-runtime worker repo bootstrap. Do not start PR194+ runtime, staging-write, external HTTP, Redis/queue, crawler, audit, or worker tasks without a separate checkpoint."
+  "notes": "PR193 is complete with result SCOUT_WORKER_REPO_BOOTSTRAP_READY_NO_RUNTIME. Worker repo fermatmind/88cn-scout-worker is private and has initial no-runtime skeleton commit 4de3dd49ac91e5f0f14aa76d96550be27eff1773 on main. Stop here. PR194+ remains blocked pending separate approval for runtime, staging write, external HTTP, Redis/queue, crawler, audit, or worker execution."
 }
