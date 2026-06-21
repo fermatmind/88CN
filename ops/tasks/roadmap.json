@@ -19624,6 +19624,146 @@
       "production_worker_allowed": false
     },
     {
+      "id": "OPS11C",
+      "alias": "SERVER_APPLY0_HANDOFF",
+      "title": "Server Apply0 Handoff + Resume Worker Bootstrap Gate v0",
+      "type": "ops-remediation",
+      "role": "codex-ops",
+      "repo": "88CN",
+      "phase": "scale-buildout-server-prep",
+      "depends_on": [
+        "PR192",
+        "PR188",
+        "PR189"
+      ],
+      "purpose": "Record OPS-SERVER-APPLY0 private-only Workbench server prep handoff and reopen only PR193 no-runtime worker repo bootstrap.",
+      "allowed_paths": [
+        "docs/infra/OPS11C_SERVER_APPLY0_HANDOFF.md",
+        "docs/SIDECAR_ISSUES.md",
+        "docs/BUILD_ERRORS.md",
+        "docs/TASK_STATUS.md",
+        "ops/tasks/current.json",
+        "ops/tasks/roadmap.json",
+        "ops/trains/current.json",
+        "ops/trains/batches.json"
+      ],
+      "forbidden_paths": [
+        "README.md",
+        "app/**",
+        "components/**",
+        "lib/**",
+        "scripts/**",
+        "supabase/**",
+        "deploy/**",
+        "middleware.ts",
+        "package.json",
+        "package-lock.json",
+        "public/**",
+        ".env*",
+        ".codex/**",
+        "third_party/**",
+        "gateway/**",
+        "screenshots/**",
+        "docs/traffic/**",
+        "docs/growth/**",
+        "/Users/rainie/Desktop/88cn-index-data/**",
+        "/Users/rainie/Desktop/GitHub/fap-web/**",
+        "/Users/rainie/Desktop/GitHub/fap-api/**"
+      ],
+      "validations": [
+        "npm run verify:day0",
+        "npm run policy:scan",
+        "npm run third-party:check",
+        "npm run agent:redact:check",
+        "npm run agent:batch:check",
+        "npm run agent:train-plan:check",
+        "npm run agent:scope:check -- OPS11C",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build",
+        "npm run agent:gate",
+        "node scripts/check-landscape-boundary.mjs",
+        "npm run landscape:check",
+        "node scripts/check-sector-density-boundary.mjs",
+        "node scripts/check-task-discovery-boundary.mjs",
+        "node scripts/check-alternatives-canonical.mjs",
+        "git diff --check"
+      ],
+      "data_planes": [],
+      "deployment": "none",
+      "human_checkpoint": false,
+      "payments": "none",
+      "mcp": "none",
+      "public_pages": "none",
+      "data_repo": "none",
+      "definition_of_done": [
+        "OPS-SERVER-APPLY0 is recorded as PARTIAL_PRIVATE_ONLY_HOSTS_PREPARED",
+        "PR188 and PR189 are moved from hard blocked to Workbench-only partially prepared sidecar status",
+        "PR193 is allowed to proceed only as no-runtime worker repo bootstrap",
+        "PR194 and later runtime, staging write, external HTTP, queue, Redis, audit, and crawler tasks remain blocked until separately approved"
+      ],
+      "notes": [
+        "OPS11C is a non-deploy metadata handoff task.",
+        "No Aliyun Workbench, SSH, cloud console write, server mutation, runtime start, queue creation, deploy, production or staging write, data repo mutation, FermatMind mutation, Tencent mutation, or secret/env read is allowed."
+      ],
+      "risk_flags": {
+        "auto_merge_allowed": true,
+        "live_deploy_allowed": false,
+        "server_change_allowed": false,
+        "payment_change_allowed": false,
+        "mcp_change_allowed": false,
+        "plugin_install_allowed": false,
+        "new_dependency_allowed": false,
+        "external_service_allowed": false,
+        "data_repo_mutation_allowed": false,
+        "public_api_release_allowed": false,
+        "customer_access_allowed": false,
+        "pii_collection_allowed": false,
+        "social_posting_allowed": false,
+        "outreach_automation_allowed": false,
+        "email_send_allowed": false,
+        "dm_send_allowed": false,
+        "crm_write_allowed": false,
+        "platform_login_allowed": false,
+        "browser_session_export_allowed": false,
+        "live_analytics_connection_allowed": false,
+        "crawler_runtime_allowed": false,
+        "production_write_allowed": false,
+        "production_worker_allowed": false,
+        "supabase_migration_allowed": false,
+        "staging_write_allowed": false,
+        "external_http_allowed": false,
+        "redis_queue_allowed": false,
+        "sitemap_change_allowed": false,
+        "data_repo_risk": false,
+        "public_surface_risk": false,
+        "human_checkpoint": false
+      },
+      "auto_merge_allowed": true,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "public_api_release_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false
+    },
+    {
       "id": "PR188",
       "alias": "STAGING_ADMIN_HOST_PREP",
       "title": "Staging/Admin Host Prep v0",
@@ -19702,7 +19842,8 @@
       ],
       "notes": [
         "Numeric execution entry for OPS-SERVER2.",
-        "PR188 permits deploy/** as the staging/admin host-prep exception; broad deploy/** is intentionally omitted from forbidden paths so scope validation can resolve approved deploy artifacts when access is available."
+        "PR188 permits deploy/** as the staging/admin host-prep exception; broad deploy/** is intentionally omitted from forbidden paths so scope validation can resolve approved deploy artifacts when access is available.",
+        "OPS11C records OPS-SERVER-APPLY0: admin host prep is partially prepared via Aliyun Workbench only; local SSH remains private-only/timeout; no runtime, Nginx reload, PM2 start, deploy, or staging write occurred."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
@@ -19839,7 +19980,8 @@
         "no crawler or audit runtime starts"
       ],
       "notes": [
-        "Numeric execution entry for OPS-SERVER3."
+        "Numeric execution entry for OPS-SERVER3.",
+        "OPS11C records OPS-SERVER-APPLY0: scout and ops host prep is partially prepared via Aliyun Workbench only; local SSH remains private-only; no worker, queue, Redis, crawler, audit runtime, PM2 start, deploy, or data write occurred."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
@@ -20322,7 +20464,8 @@
       "phase": "worker-pipeline",
       "depends_on": [
         "PR185",
-        "PR187"
+        "PR187",
+        "OPS11C"
       ],
       "purpose": "Bootstrap worker repo/workspace boundary without starting runtime unless separately approved.",
       "allowed_paths": [
@@ -20389,7 +20532,8 @@
         "no runtime, queue, crawler, or external HTTP audit starts"
       ],
       "notes": [
-        "Numeric remap of PR184A."
+        "Numeric remap of PR184A.",
+        "OPS11C opens PR193 only as no-runtime worker repo bootstrap after OPS-SERVER-APPLY0 partial private-only host prep; PR194+ runtime, queue, staging write, external HTTP, audit, crawler, and Redis tasks remain separately blocked."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,

@@ -3973,8 +3973,9 @@
       ],
       "purpose": "20k-50k staging/admin and worker host prep",
       "notes": [
-        "No train auto-run through server prep. Each task stops for human approval.",
-        "OPS11B records PR188 and PR189 as SERVER_PREP_SIDECAR_BLOCKED when confirmed host access, exact target aliases, and reversible server action lists are missing."
+        "OPS-SERVER-APPLY0 produced PARTIAL_PRIVATE_ONLY_HOSTS_PREPARED: SH-ALIYUN-02 admin, SH-ALIYUN-03 scout, and SH-ALIYUN-04 ops prep completed via Aliyun Workbench only.",
+        "Local SSH remains private-only or timed out; no runtime, worker, queue, Redis, crawler, audit, Nginx reload, PM2 start, deployment, staging/production write, data repo mutation, FermatMind/Tencent mutation, or secret/env read occurred.",
+        "OPS11C records PR188/PR189 as Workbench-only partially prepared sidecar status, not as active runtime readiness."
       ]
     },
     {
@@ -4156,8 +4157,9 @@
       ],
       "purpose": "20k-50k worker, audit, queue, and QA pipeline",
       "notes": [
-        "No train auto-run through worker runtime, external HTTP audit, or Redis/queue creation.",
-        "PR193+ remains blocked until SERVER_PREP_SIDECAR_BLOCKED is resolved or the dependency is explicitly reworked."
+        "PR193 may proceed only as no-runtime worker repo bootstrap after OPS11C records the OPS-SERVER-APPLY0 partial private-only host prep sidecar.",
+        "No train auto-run through worker runtime, staging write, external HTTP audit, Redis/queue creation, crawler, audit, or deployment.",
+        "PR194+ remains blocked until separately approved after PR193."
       ]
     },
     {

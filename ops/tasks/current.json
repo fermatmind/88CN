@@ -1,13 +1,13 @@
 {
-  "current_task": "PR192",
-  "current_alias": "CONTROL_PANEL_QA",
+  "current_task": "OPS11C",
+  "current_alias": "SERVER_APPLY0_HANDOFF",
   "current_repo": "88CN",
-  "current_role": "codex-qa",
+  "current_role": "codex-ops",
   "status": "validation_passed",
-  "result": "PASS_CONTROL_PANEL_QA_WITH_SERVER_PREP_SIDECAR",
-  "next_recommended_task": "PR188",
-  "next_recommended_alias": "SERVER_PREP_SIDECAR_RESOLUTION",
-  "next_recommended_train": "TRAIN-SERVER-PREP",
-  "next_non_pr_task": "Resolve SERVER_PREP_SIDECAR_BLOCKED before PR193+ worker/server-dependent runtime tasks.",
-  "notes": "PR192 verifies PR190/PR191 control-panel boundaries with result PASS_CONTROL_PANEL_QA_WITH_SERVER_PREP_SIDECAR. Admin bulk review remains guarded; no unreviewed seed_hint, identity_candidate, canonical_candidate, review_ready, quarantined, or rejected record is exposed publicly; raw source, audit, and review details remain admin-only; no auto-publish path exists; published transition remains manual with reason and public-field checks; sitemap, Public API, MCP, payment, CRM, email, social, deploy, server/cloud, worker runtime, and data repo surfaces remain unchanged. Stop after PR192. PR188/PR189 remain SERVER_PREP_SIDECAR_BLOCKED, and PR193+ remains blocked until that sidecar is resolved or the dependency is explicitly reworked."
+  "result": "GO_PR193_SCOUT_WORKER_REPO_BOOTSTRAP_WITH_SERVER_SIDECAR_PARTIAL",
+  "next_recommended_task": "PR193",
+  "next_recommended_alias": "SCOUT_WORKER_REPO_BOOTSTRAP",
+  "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
+  "next_non_pr_task": "Do not start PR194 or any runtime/staging-write/external-HTTP/queue task until separately approved after PR193.",
+  "notes": "OPS11C records OPS-SERVER-APPLY0 as PARTIAL_PRIVATE_ONLY_HOSTS_PREPARED. SH-ALIYUN-02 admin, SH-ALIYUN-03 scout, and SH-ALIYUN-04 ops are prepared via Aliyun Workbench only; local SSH remains private-only or timed out. Runtime, worker, queue, Redis, crawler, audit, Nginx reload, PM2 start, deployment, staging/production write, data repo mutation, FermatMind/Tencent mutation, and secret/env reads were not performed. PR193 may proceed only as no-runtime worker repo bootstrap. Stop after PR193; PR194+ remains blocked until separately approved."
 }
