@@ -11,6 +11,7 @@ import {
   SearchCheck,
   BarChart3,
   KeyRound,
+  ClipboardList,
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -100,6 +101,14 @@ export default async function AdminPage() {
             icon={SearchCheck}
             title="Scouted Profiles"
             description="Review observed public-source profiles and intent records."
+            tag="Active"
+          />
+        </Link>
+        <Link href="/admin/bulk-review" className="block">
+          <AdminCard
+            icon={ClipboardList}
+            title="Bulk Review"
+            description="Inspect backstage project entities, review states, sources, and public-signal previews."
             tag="Active"
           />
         </Link>
