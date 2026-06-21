@@ -1,13 +1,13 @@
 {
-  "current_task": "PR203",
-  "current_alias": "FRONTEND_QA",
+  "current_task": "PR204",
+  "current_alias": "SECURITY_FIREWALL",
   "current_repo": "88CN",
-  "current_role": "codex-qa",
+  "current_role": "opencode",
   "status": "validation_passed",
-  "result": "PASS_FRONTEND_QA_NO_LEAKAGE",
-  "next_recommended_task": "PR204",
-  "next_recommended_alias": "SECURITY_FIREWALL",
+  "result": "SECURITY_FIREWALL_READY_NO_DEPLOY",
+  "next_recommended_task": "PR205",
+  "next_recommended_alias": "PRODUCTION_DEPLOY_GATE",
   "next_recommended_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "next_non_pr_task": "Stop after PR203. Do not start PR204 in this run.",
-  "notes": "PR203 is QA-only and verifies PR199-PR202 frontend MVP boundaries: /projects lists only published_projection records; project detail missing/non-published records fail closed; collections are finite reviewed allowlist slugs; unknown collections fail closed; search index and sitemap helpers include only eligible published_projection records; Public API/MCP remain disabled; no raw seed/evidence/audit/review/quarantine/rejected/stale/archived/private hash/internal confidence exposure, no copied competitor copy, no ranking/best/top claims, no paid influence, no deploy, no server/cloud action, no Supabase/staging/production write, no runtime, no Redis/queue, no external outreach, and no data repo mutation occurred. Stop after PR203; PR204 is not started."
+  "next_non_pr_task": "Continue to PR205 in this approved train. Do not deploy, SSH, mutate cloud/server/DB/data repo, or start PR206 before PR205 is complete.",
+  "notes": "PR204 records the pre-deploy security firewall after PR203. Public project listing/detail remain published-projection only; collections are finite reviewed registry rows; task discovery remains finite and checker-backed; sitemap/search eligibility excludes stale/quarantine/rejected/copied-content/directory-hint blockers; Public API/MCP remain disabled; worker runtime remains no-runtime; and no raw seed/evidence/audit/review/quarantine/rejected/private artifact, internal hash, copied competitor copy, ranking/best/top claim, paid influence, deploy, live smoke, SSH, Aliyun/Tencent/Workbench action, Nginx reload, PM2 restart, Supabase/staging/production write, worker/runtime/Redis/queue action, external outreach, Public API/MCP release, or data repo mutation occurs. Exact next task is PR205 / PRODUCTION_DEPLOY_GATE."
 }

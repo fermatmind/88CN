@@ -4341,8 +4341,10 @@
       "purpose": "20k-50k security firewall and production deploy gate",
       "notes": [
         "No deploy gate may proceed without exact human-approved SHA.",
-        "PR205 is a live-deploy gate and must distinguish live-smoke-only validation from live-config-change or server configuration work. Exact SHA approval is required before any deployment."
-      ]
+        "PR205 is a live-deploy gate and must distinguish live-smoke-only validation from live-config-change or server configuration work. Exact SHA approval is required before any deployment.",
+        "PR204 passed with SECURITY_FIREWALL_READY_NO_DEPLOY. Continue to PR205 production deploy gate; exact SHA approval remains required before any deploy/server/cloud/live-smoke action."
+      ],
+      "status": "pr204_validation_passed_continue_to_pr205"
     },
     {
       "id": "TRAIN-REPORT-GROWTH-20K",
