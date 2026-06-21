@@ -3,8 +3,8 @@
   "status": "validation_passed",
   "last_completed_train": "TRAIN-AGENT-AUTOMATION-STRATEGY",
   "last_completed_task": "AGENT0R",
-  "candidate_origin_main_sha": "5c82ae0e3ed143e691e669891ae09c7da6875977",
+  "candidate_origin_main_sha": "33a4010f176375c4736389b9135a399fa8291006",
   "next_recommended_task": "AGENT1",
   "next_recommended_train": "AGENT1_WORKER_CLI_CONTRACT_ONLY",
-  "notes": "AGENT0R confirms the 88CN full automation Agent strategy and task split with result AGENT0R_READY_FOR_AGENT1_WORKER_CLI_CONTRACT_ONLY. The next task is AGENT1 in 88cn-scout-worker. AGENT1 is contract/CLI/dry-run only and must not start runtime, crawler, external HTTP audit runtime, Redis/queue runtime, browser fallback, Supabase/staging/production writes, 88CN mutation, published_projection write, sitemap change, deploy, server/cloud action, external outreach, index-data mutation, env read, or secret printing."
+  "notes": "AGENT0R confirms the 88CN full automation Agent strategy and canonical docs/agent task split with result AGENT0R_READY_FOR_WORKER_AGENT_IMPLEMENTATION. The next task is AGENT1 in 88cn-scout-worker. AGENT1 is contract/CLI/dry-run only and must not start runtime, crawler, external HTTP audit runtime, Redis/queue runtime, browser fallback, Supabase/staging/production writes, 88CN mutation, published_projection write, sitemap change, deploy, server/cloud action, external outreach, index-data mutation, env read, or secret printing."
 }
