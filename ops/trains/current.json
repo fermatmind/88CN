@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-FRONTEND-MVP-20K",
-  "status": "pr202_validation_passed",
-  "last_completed_train": "TRAIN-WORKER-PIPELINE-20K",
-  "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "notes": "PR202 / SEARCH_INDEX_SITEMAP_SEGMENTATION is validation_passed with SEARCH_INDEX_SITEMAP_SEGMENTATION_READY_PUBLISHED_ONLY. Continue to PR203 after merge. No deploy, server action, runtime, Redis/queue, Supabase/staging/production write, Public API/MCP release, external outreach, or data repo mutation occurred."
+  "status": "validation_passed_stop_after_pr203",
+  "last_completed_train": "TRAIN-FRONTEND-MVP-20K",
+  "next_recommended_train": "TRAIN-SECURITY-DEPLOY-20K",
+  "notes": "PR199-PR203 frontend MVP train is complete with PASS_FRONTEND_QA_NO_LEAKAGE. Stop here. PR204 / SECURITY_FIREWALL is next but is not started in this run. No deploy, server/cloud action, runtime, Redis/queue, Supabase/staging/production write, Public API/MCP release, external outreach, copied competitor content, ranking/best/top claims, or data repo mutation occurred."
 }
