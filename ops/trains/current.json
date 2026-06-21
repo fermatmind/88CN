@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-WORKER-PIPELINE-20K",
-  "status": "blocked_after_pr193_pending_pr194_approval",
-  "last_completed_train": "TRAIN-WORKER-PIPELINE-20K_PR193",
+  "status": "pr194_validation_passed_continue_pr195",
+  "last_completed_train": "TRAIN-WORKER-PIPELINE-20K_PR194",
   "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "notes": "PR193 is complete with result SCOUT_WORKER_REPO_BOOTSTRAP_READY_NO_RUNTIME. Worker repo fermatmind/88cn-scout-worker is private and has initial no-runtime skeleton commit 4de3dd49ac91e5f0f14aa76d96550be27eff1773 on main. Stop here. PR194+ remains blocked pending separate approval for runtime, staging write, external HTTP, Redis/queue, crawler, audit, or worker execution."
+  "notes": "PR194 completed with result BULK_IMPORT_WORKER_READY_DRY_RUN_ONLY. Continue to PR195 / CANONICAL_RESOLVER_WORKER after worker and 88CN PR194 merge. PR199 remains not started; no runtime, staging/prod write, external HTTP, Redis/queue, crawler, audit runtime, deploy, or data repo mutation."
 }

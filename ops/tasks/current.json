@@ -1,13 +1,13 @@
 {
-  "current_task": "PR193",
-  "current_alias": "SCOUT_WORKER_REPO_BOOTSTRAP",
+  "current_task": "PR194",
+  "current_alias": "BULK_IMPORT_WORKER",
   "current_repo": "88CN",
   "current_role": "opencode",
   "status": "validation_passed",
-  "result": "SCOUT_WORKER_REPO_BOOTSTRAP_READY_NO_RUNTIME",
-  "next_recommended_task": "PR194",
-  "next_recommended_alias": "BULK_IMPORT_WORKER",
+  "result": "BULK_IMPORT_WORKER_READY_DRY_RUN_ONLY",
+  "next_recommended_task": "PR195",
+  "next_recommended_alias": "CANONICAL_RESOLVER_WORKER",
   "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "next_non_pr_task": "Stop after PR193. PR194 and later runtime, staging-write, external HTTP, Redis/queue, crawler, audit, and worker tasks require separate approval before execution.",
-  "notes": "PR193 creates/verifies private worker repo fermatmind/88cn-scout-worker at https://github.com/fermatmind/88cn-scout-worker and records initial no-runtime skeleton commit 4de3dd49ac91e5f0f14aa76d96550be27eff1773. Skeleton contains README, docs, JSON contracts, fixture guidance, src README placeholders, tests README, and .gitignore only. No package/dependency, runtime code, worker, queue, Redis, crawler, audit execution, external HTTP, Supabase/staging/production write, public API/MCP/frontend/deploy config, data repo mutation, FermatMind/Tencent mutation, or secret/env read occurred. Stop after PR193; do not start PR194 without separate approval."
+  "next_non_pr_task": "Continue PR195 only after PR194 worker and tracking PRs merge. Keep runtime, staging/prod write, external HTTP, Redis/queue, deploy, data repo mutation, and PR199 blocked.",
+  "notes": "PR194 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/1 and worker commit 1675d9e. The worker repo adds local dry-run bulk import parsing, validation, row/batch hashing, accepted/needs-review/rejected routing, quarantine output, rollback plan, fixtures, and no-dependency test. No DB/Supabase/staging/production write, runtime daemon, public projection, Redis/queue, external HTTP, crawler, audit runtime, package/dependency, deploy, data repo mutation, or secret/env read occurred."
 }
