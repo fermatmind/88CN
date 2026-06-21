@@ -66,6 +66,11 @@ export interface BulkControlPanelRow {
   reviewState: BulkReviewState;
   sourceLinks: BulkControlPanelSourceLink[];
   publicSignalChips: string[];
+  latestReview: {
+    decision: string;
+    reason: string;
+    createdAt: string;
+  } | null;
   flags: {
     missingDocs: boolean;
     canonicalReview: boolean;
@@ -133,6 +138,13 @@ interface PublishedProjectionRecord {
   slug: string;
   public_signal_chips: Record<string, unknown> | null;
   seo_indexable: boolean;
+}
+
+interface ReviewDecisionRecord {
+  project_entity_id: string;
+  decision: string;
+  decision_reason: string | null;
+  created_at: string;
 }
 
 export function parseBulkControlPanelFilters(
@@ -256,10 +268,11 @@ async function getRelatedRecords(ids: string[]) {
       webAssets: [] as WebAssetRecord[],
       auditObservations: [] as AuditObservationRecord[],
       publishedProjections: [] as PublishedProjectionRecord[],
+      reviewDecisions: [] as ReviewDecisionRecord[],
     };
   }
 
-  const [sourceEvidence, repoAssets, webAssets, auditObservations, publishedProjections] =
+  const [sourceEvidence, repoAssets, webAssets, auditObservations, publishedProjections, reviewDecisions] =
     await Promise.all([
       client
         .from("source_evidences")
@@ -281,6 +294,11 @@ async function getRelatedRecords(ids: string[]) {
         .from("published_projections")
         .select("project_entity_id, slug, public_signal_chips, seo_indexable")
         .in("project_entity_id", ids),
+      client
+        .from("review_decisions")
+        .select("project_entity_id, decision, decision_reason, created_at")
+        .in("project_entity_id", ids)
+        .order("created_at", { ascending: false }),
     ]);
 
   return {
@@ -289,6 +307,7 @@ async function getRelatedRecords(ids: string[]) {
     webAssets: ((webAssets.data ?? []) as WebAssetRecord[]) ?? [],
     auditObservations: ((auditObservations.data ?? []) as AuditObservationRecord[]) ?? [],
     publishedProjections: ((publishedProjections.data ?? []) as PublishedProjectionRecord[]) ?? [],
+    reviewDecisions: ((reviewDecisions.data ?? []) as ReviewDecisionRecord[]) ?? [],
   };
 }
 
@@ -306,6 +325,9 @@ function toBulkControlPanelRow(
   );
   const projection = related.publishedProjections.find(
     (item) => item.project_entity_id === row.id,
+  );
+  const latestReview = related.reviewDecisions.find(
+    (decision) => decision.project_entity_id === row.id,
   );
 
   const hasDocs = webAssets.some((asset) => asset.asset_role === "docs" || asset.asset_role === "api_docs");
@@ -354,6 +376,13 @@ function toBulkControlPanelRow(
     reviewState: row.review_state,
     sourceLinks,
     publicSignalChips,
+    latestReview: latestReview
+      ? {
+          decision: latestReview.decision,
+          reason: latestReview.decision_reason ?? "No reason recorded",
+          createdAt: latestReview.created_at,
+        }
+      : null,
     flags: {
       missingDocs: !hasDocs,
       canonicalReview: row.lifecycle_status === "canonical_candidate",
