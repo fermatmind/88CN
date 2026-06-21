@@ -7,6 +7,7 @@ import {
   Filter,
   Search,
   Shield,
+  GitPullRequestArrow,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -82,12 +83,13 @@ export function BulkControlPanel({
                     <th className="px-4 py-3 font-medium">Source Links</th>
                     <th className="px-4 py-3 font-medium">Signal Preview</th>
                     <th className="px-4 py-3 font-medium">Review Flags</th>
+                    <th className="px-4 py-3 font-medium">Manual State</th>
                   </tr>
                 </thead>
                 <tbody>
                   {data.rows.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="px-4 py-10 text-center text-xs text-terminal-dim">
+                      <td colSpan={7} className="px-4 py-10 text-center text-xs text-terminal-dim">
                         No records match the current filters.
                       </td>
                     </tr>
@@ -262,6 +264,72 @@ function BulkRow({ row }: { row: BulkControlPanelRow }) {
             </span>
           ))}
         </div>
+        {row.latestReview ? (
+          <div className="mt-3 max-w-[240px] text-[10px] leading-relaxed text-terminal-dim">
+            Last: {row.latestReview.decision} on {formatDate(row.latestReview.createdAt)}
+            <div className="truncate">{row.latestReview.reason}</div>
+          </div>
+        ) : null}
+      </td>
+      <td className="px-4 py-4">
+        <form action={`/api/admin/project-entities/${row.id}/review-state`} method="post" className="w-[230px] space-y-2">
+          <select
+            name="next_state"
+            required
+            className="h-8 w-full rounded-md border border-terminal-border bg-terminal-bg px-2 text-xs text-terminal-fg outline-none focus:border-terminal-muted"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select state
+            </option>
+            <option value="review_ready">review ready</option>
+            <option value="published">published</option>
+            <option value="quarantined">quarantined</option>
+            <option value="rejected">rejected</option>
+            <option value="stale">stale</option>
+            <option value="archived">archived</option>
+          </select>
+          <input
+            name="decision_reason"
+            required
+            minLength={8}
+            placeholder="Decision reason"
+            className="h-8 w-full rounded-md border border-terminal-border bg-terminal-bg px-2 text-xs text-terminal-fg outline-none focus:border-terminal-muted"
+          />
+          <div className="grid grid-cols-2 gap-1 text-[10px] text-terminal-dim">
+            <label className="flex items-center gap-1">
+              <input type="checkbox" name="reviewed_fields" value="identity" />
+              Identity
+            </label>
+            <label className="flex items-center gap-1">
+              <input type="checkbox" name="reviewed_fields" value="sources" />
+              Sources
+            </label>
+            <label className="flex items-center gap-1">
+              <input type="checkbox" name="reviewed_fields" value="canonical" />
+              Canonical
+            </label>
+            <label className="flex items-center gap-1">
+              <input type="checkbox" name="reviewed_fields" value="reachability" />
+              Reachability
+            </label>
+          </div>
+          <label className="flex items-center gap-1 text-[10px] text-terminal-dim">
+            <input type="checkbox" name="original_summary_checked" />
+            Original summary checked
+          </label>
+          <label className="flex items-center gap-1 text-[10px] text-terminal-dim">
+            <input type="checkbox" name="public_fields_checked" />
+            Public fields checked
+          </label>
+          <button
+            type="submit"
+            className="inline-flex h-8 items-center gap-1.5 rounded-md border border-terminal-border px-2 text-xs font-medium text-terminal-fg transition-colors hover:bg-terminal-surface"
+          >
+            <GitPullRequestArrow className="h-3.5 w-3.5" />
+            Record
+          </button>
+        </form>
       </td>
     </tr>
   );

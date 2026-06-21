@@ -2,6 +2,15 @@
 
 Open sidecar issues:
 
+- PR191 P3 sidecar: `scripts/check-landscape-boundary.mjs` is still
+  TRAFFIC2B-phase scoped and rejects any changed `app/api/**` file with
+  `must not be changed by TRAFFIC2B`. PR191 legitimately adds the admin-only
+  POST route `app/api/admin/project-entities/[id]/review-state/route.ts` for the
+  required manual state switcher and review log. PR191 scope permits
+  `app/api/admin/**`; `npm run agent:scope:check -- PR191`, `npm run
+  agent:gate`, and public-surface gates pass. PR191 does not modify
+  `scripts/**`, so the checker lifecycle fix is deferred to a later scoped
+  remediation.
 - OPS11B P1 sidecar: `SERVER_PREP_SIDECAR_BLOCKED`: PR188 /
   STAGING_ADMIN_HOST_PREP and PR189 / WORKER_AUDIT_HOST_PREP require confirmed
   host access, exact target aliases, and reversible server action lists. They
