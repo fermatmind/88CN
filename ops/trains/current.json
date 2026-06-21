@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-WORKER-PIPELINE-20K",
-  "status": "validation_passed_stop_after_pr198",
+  "active_train": "TRAIN-FRONTEND-MVP-20K",
+  "status": "pr199_validation_passed",
   "last_completed_train": "TRAIN-WORKER-PIPELINE-20K",
   "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "notes": "PR194-PR198 worker pipeline no-runtime train is complete with PASS_WORKER_QA_NO_RUNTIME. Stop here. PR199 / PROJECT_LISTING_SEARCH is the next task but is not started in this run. No runtime, Redis/queue runtime, live external HTTP by default, browser fallback, WAF bypass, Supabase/staging/production write, server/cloud mutation, deploy, data repo mutation, or secret/env read occurred."
+  "notes": "PR199 / PROJECT_LISTING_SEARCH is validation_passed with PROJECT_LISTING_SEARCH_READY_PUBLISHED_ONLY. Continue to PR200 after merge. No deploy, server action, runtime, Redis/queue, Supabase/staging/production write, Public API/MCP release, external outreach, or data repo mutation occurred."
 }

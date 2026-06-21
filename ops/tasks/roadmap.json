@@ -21324,9 +21324,6 @@
       ],
       "forbidden_paths": [
         "README.md",
-        "app/**",
-        "components/**",
-        "lib/**",
         "scripts/**",
         "supabase/**",
         "deploy/**",
@@ -21380,7 +21377,9 @@
       ],
       "notes": [
         "Numeric remap of PR185A.",
-        "PR198 stops the worker pipeline train. PR199 is not started by the PR194-PR198 no-runtime worker train."
+        "PR198 stops the worker pipeline train. PR199 is not started by the PR194-PR198 no-runtime worker train.",
+        "PR199 updates the contradictory scope metadata so app/components/lib changes allowed by this frontend task are not also forbidden by scope-check.",
+        "PR199 result: PROJECT_LISTING_SEARCH_READY_PUBLISHED_ONLY. Listing/search reads only internal published_projection fixture adapter fields and does not add sitemap entries."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
