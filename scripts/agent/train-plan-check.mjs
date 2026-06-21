@@ -4,6 +4,10 @@ import path from 'node:path';
 const root = process.cwd();
 
 const nonPrTaskIdPatterns = [
+  /^AGENT\d+[A-Z]?$/,
+  /^AGENTQ$/,
+  /^AGENT-INTEGRATION\d+$/,
+  /^BULK\d+_AGENT_DRY_RUN$/,
   /^TRAFFIC\d+[A-Z]?$/,
   /^GROWTH\d+[A-Z]?$/,
   /^OPS\d+[A-Z]?\d?$/,

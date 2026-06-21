@@ -1,10 +1,10 @@
 {
-  "active_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "status": "complete_stop_after_pr205",
-  "last_completed_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "last_completed_task": "PR205",
-  "candidate_origin_main_sha": "4f5792564d78966556189f18e40c97cff2b9ad23",
-  "next_recommended_task": "PRODUCTION_DEPLOY_APPROVAL_FOR_EXACT_SHA",
-  "next_recommended_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "notes": "TRAIN-SECURITY-DEPLOY-20K is complete: PR204 recorded SECURITY_FIREWALL_READY_NO_DEPLOY and PR205 recorded READY_FOR_PRODUCTION_DEPLOY_APPROVAL. Stop after PR205. Do not start PR206, PR207, Growth2, Growth1, BETA, I18N, OPS10A, or production deploy without exact SHA approval for the recorded candidate SHA."
+  "active_train": "TRAIN-AGENT-AUTOMATION-STRATEGY",
+  "status": "validation_passed",
+  "last_completed_train": "TRAIN-AGENT-AUTOMATION-STRATEGY",
+  "last_completed_task": "AGENT0R",
+  "candidate_origin_main_sha": "5c82ae0e3ed143e691e669891ae09c7da6875977",
+  "next_recommended_task": "AGENT1",
+  "next_recommended_train": "AGENT1_WORKER_CLI_CONTRACT_ONLY",
+  "notes": "AGENT0R confirms the 88CN full automation Agent strategy and task split with result AGENT0R_READY_FOR_AGENT1_WORKER_CLI_CONTRACT_ONLY. The next task is AGENT1 in 88cn-scout-worker. AGENT1 is contract/CLI/dry-run only and must not start runtime, crawler, external HTTP audit runtime, Redis/queue runtime, browser fallback, Supabase/staging/production writes, 88CN mutation, published_projection write, sitemap change, deploy, server/cloud action, external outreach, index-data mutation, env read, or secret printing."
 }

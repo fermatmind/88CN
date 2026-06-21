@@ -4433,6 +4433,181 @@
       "notes": [
         "No report or growth task may publish unreviewed project-level claims or perform external outreach without approval."
       ]
+    },
+    {
+      "id": "TRAIN-AGENT-AUTOMATION-STRATEGY",
+      "title": "Agent automation strategy review and task split gate",
+      "phase": "agent-automation-strategy",
+      "tasks": [
+        "AGENT0R"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "supabase_migration_allowed": false,
+      "staging_write_allowed": false,
+      "external_http_allowed": false,
+      "redis_queue_allowed": false,
+      "sitemap_change_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "AGENT0R",
+          "reason": "strategy acceptance confirms the next worker task but does not authorize runtime, DB writes, publication, sitemap changes, or external writes"
+        }
+      ],
+      "required_preconditions": [
+        "worktree is clean and created from current origin/main",
+        "AUTO0R temp artifacts are reviewed",
+        "AGENT0R stays in docs, ops task registry, train registry, and local validator support only",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, external HTTP runtime, Redis/queue runtime, crawler, browser fallback, sitemap change, Public API/MCP release, data repo mutation, outreach, or production action occurs"
+      ],
+      "allowed_roles": [
+        "codex-ops",
+        "codex-qa"
+      ],
+      "purpose": "Confirm the 88CN full automation Agent strategy, boundaries, task split, and AGENT1 entry conditions",
+      "notes": [
+        "AGENT0R result is AGENT0R_READY_FOR_AGENT1_WORKER_CLI_CONTRACT_ONLY.",
+        "The next task is AGENT1 in 88cn-scout-worker, but AGENT1 is contract/CLI/dry-run only.",
+        "AGENT-INTEGRATION0 remains the first convergence point with 88CN review queue.",
+        "No worker task before AGENT-INTEGRATION0 may write 88CN review queue, published_projection, sitemap, production DB, or index-data."
+      ],
+      "status": "validation_passed",
+      "completed_tasks": [
+        "AGENT0R"
+      ]
+    },
+    {
+      "id": "AGENT1_WORKER_CLI_CONTRACT_ONLY",
+      "title": "Worker CLI contract stabilization only",
+      "phase": "agent-worker-cli-contract",
+      "tasks": [
+        "AGENT1"
+      ],
+      "batch_limit": 1,
+      "auto_merge_allowed": false,
+      "live_deploy_allowed": false,
+      "server_change_allowed": false,
+      "payment_change_allowed": false,
+      "mcp_change_allowed": false,
+      "public_api_release_allowed": false,
+      "plugin_install_allowed": false,
+      "new_dependency_allowed": false,
+      "external_service_allowed": false,
+      "data_repo_mutation_allowed": false,
+      "customer_access_allowed": false,
+      "pii_collection_allowed": false,
+      "social_posting_allowed": false,
+      "outreach_automation_allowed": false,
+      "email_send_allowed": false,
+      "dm_send_allowed": false,
+      "crm_write_allowed": false,
+      "platform_login_allowed": false,
+      "browser_session_export_allowed": false,
+      "live_analytics_connection_allowed": false,
+      "crawler_runtime_allowed": false,
+      "production_write_allowed": false,
+      "production_worker_allowed": false,
+      "supabase_migration_allowed": false,
+      "staging_write_allowed": false,
+      "external_http_allowed": false,
+      "redis_queue_allowed": false,
+      "sitemap_change_allowed": false,
+      "continue_on_sidecar": true,
+      "stop_on": [
+        "missing_task_object",
+        "validation_failure",
+        "forbidden_path_change",
+        "secret_or_server_detail_detected",
+        "same_worktree_parallel_write_detected",
+        "secret_exposure",
+        "scope_validation_failure",
+        "policy_scan_failure",
+        "required_github_check_failure",
+        "credential_prompt",
+        "live_deploy_requested_without_checkpoint",
+        "server_change_requested_without_checkpoint",
+        "external_write_requested_without_checkpoint",
+        "data_repo_mutation_requested_without_checkpoint",
+        "pii_or_outreach_requested_without_checkpoint",
+        "platform_login_requested_without_checkpoint",
+        "crawler_runtime_requested_without_checkpoint",
+        "staging_write_requested_without_checkpoint",
+        "supabase_migration_requested_without_checkpoint",
+        "redis_queue_requested_without_checkpoint",
+        "public_report_page_requested_without_checkpoint",
+        "browser_fallback_requested_without_checkpoint"
+      ],
+      "human_checkpoints": [
+        {
+          "task": "AGENT1",
+          "reason": "AGENT1 may stabilize only local worker CLI and dry-run artifact contracts; it does not authorize runtime, crawling, writes, publication, sitemap changes, server/cloud action, or dependency changes"
+        }
+      ],
+      "required_preconditions": [
+        "worker repo is checked separately before AGENT1 starts",
+        "AGENT0R strategy result is recorded as AGENT0R_READY_FOR_AGENT1_WORKER_CLI_CONTRACT_ONLY",
+        "AGENT1 stays in 88cn-scout-worker contract, docs, fixtures, local tests, and deterministic dry-run output only",
+        "no live deploy, server/cloud mutation, Supabase/staging/production write, live HTTP audit runtime, Redis/queue runtime, crawler, browser fallback, sitemap change, Public API/MCP release, dependency change, index-data write, outreach, or production action occurs"
+      ],
+      "allowed_roles": [
+        "codex-ops",
+        "codex-qa"
+      ],
+      "purpose": "Enter the worker repo only to harden the CLI contract and dry-run evidence surface for later agent modules",
+      "notes": [
+        "This batch is registered by AGENT0R so next_recommended_train resolves to a real train.",
+        "It is not completed by AGENT0R and should run in 88cn-scout-worker only after the user explicitly moves to AGENT1.",
+        "AGENT-INTEGRATION0 remains the first future task allowed to connect worker output back to the 88CN review queue."
+      ],
+      "status": "planned",
+      "completed_tasks": []
     }
   ]
 }
