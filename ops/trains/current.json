@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-CONTROL-PANEL-20K",
-  "status": "ready",
-  "last_completed_train": "TRAIN-SERVER-READINESS",
-  "next_recommended_train": "TRAIN-CONTROL-PANEL-20K",
-  "notes": "PR191 / STATE_SWITCHER_REVIEW_LOG is ready with manual admin state transitions and review_decisions logging. Continue with PR192 / CONTROL_PANEL_QA in TRAIN-CONTROL-PANEL-20K. PR188 / STAGING_ADMIN_HOST_PREP and PR189 / WORKER_AUDIT_HOST_PREP remain SERVER_PREP_SIDECAR_BLOCKED. PR193+ worker/server-dependent runtime tasks remain blocked until the server sidecar is resolved or the dependency is explicitly reworked. No SSH, cloud console write, server mutation, deploy, production DB write by Codex, worker runtime start, external outreach, data repo mutation, FermatMind mutation, or secret/env read occurred."
+  "status": "validation_passed",
+  "last_completed_train": "TRAIN-CONTROL-PANEL-20K",
+  "next_recommended_train": "TRAIN-SERVER-PREP",
+  "notes": "TRAIN-CONTROL-PANEL-20K is complete through PR192 with result PASS_CONTROL_PANEL_QA_WITH_SERVER_PREP_SIDECAR. Stop after PR192 and do not start PR193. PR188 / STAGING_ADMIN_HOST_PREP and PR189 / WORKER_AUDIT_HOST_PREP remain SERVER_PREP_SIDECAR_BLOCKED. PR193+ worker/server-dependent runtime tasks remain blocked until the server sidecar is resolved or the dependency is explicitly reworked. No SSH, cloud console write, server mutation, deploy, production DB write by Codex, worker runtime start, external outreach, data repo mutation, FermatMind mutation, or secret/env read occurred."
 }
