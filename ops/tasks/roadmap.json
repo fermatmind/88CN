@@ -23396,6 +23396,13 @@
         "PR-FEUI-A"
       ],
       "allowed_paths": [
+        "docs/agent/AGENT_AUTOMATION_STRATEGY.md",
+        "docs/agent/AGENT_ARCHITECTURE_MAP.md",
+        "docs/agent/AGENT_TASK_ROADMAP.md",
+        "docs/agent/AGENT_BOUNDARY_POLICY.md",
+        "docs/agent/AGENT_TASK_SPLIT.json",
+        "docs/agent/AGENT_*.md",
+        "docs/agent/AGENT_*.json",
         "docs/scout/AGENT0R_AGENT_AUTOMATION_STRATEGY_REVIEW.md",
         "docs/scout/AGENT0R_*.md",
         "docs/TASK_STATUS.md",
@@ -23454,6 +23461,7 @@
       "definition_of_done": [
         "AUTO0R artifacts are reviewed and accepted with bounded changes",
         "AGENT task family is recognized by local train validators",
+        "canonical docs/agent strategy files are present",
         "AGENT0R train is registered as a single-task non-auto-merge strategy gate",
         "AGENT1 entry contract is documented as worker CLI contract only",
         "runtime, queue, Redis, DB, server, publish, sitemap, external outreach, and data repo writes remain forbidden"
@@ -23481,7 +23489,7 @@
       "sitemap_change_allowed": false,
       "data_repo_risk": false,
       "public_surface_risk": false,
-      "result": "AGENT0R_READY_FOR_AGENT1_WORKER_CLI_CONTRACT_ONLY"
+      "result": "AGENT0R_READY_FOR_WORKER_AGENT_IMPLEMENTATION"
     },
     {
       "id": "AGENT1",

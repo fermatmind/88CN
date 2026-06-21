@@ -4513,7 +4513,7 @@
       ],
       "purpose": "Confirm the 88CN full automation Agent strategy, boundaries, task split, and AGENT1 entry conditions",
       "notes": [
-        "AGENT0R result is AGENT0R_READY_FOR_AGENT1_WORKER_CLI_CONTRACT_ONLY.",
+        "AGENT0R result is AGENT0R_READY_FOR_WORKER_AGENT_IMPLEMENTATION.",
         "The next task is AGENT1 in 88cn-scout-worker, but AGENT1 is contract/CLI/dry-run only.",
         "AGENT-INTEGRATION0 remains the first convergence point with 88CN review queue.",
         "No worker task before AGENT-INTEGRATION0 may write 88CN review queue, published_projection, sitemap, production DB, or index-data."
@@ -4592,7 +4592,7 @@
       ],
       "required_preconditions": [
         "worker repo is checked separately before AGENT1 starts",
-        "AGENT0R strategy result is recorded as AGENT0R_READY_FOR_AGENT1_WORKER_CLI_CONTRACT_ONLY",
+        "AGENT0R strategy result is recorded as AGENT0R_READY_FOR_WORKER_AGENT_IMPLEMENTATION",
         "AGENT1 stays in 88cn-scout-worker contract, docs, fixtures, local tests, and deterministic dry-run output only",
         "no live deploy, server/cloud mutation, Supabase/staging/production write, live HTTP audit runtime, Redis/queue runtime, crawler, browser fallback, sitemap change, Public API/MCP release, dependency change, index-data write, outreach, or production action occurs"
       ],
