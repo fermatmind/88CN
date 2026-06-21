@@ -1,4 +1,7 @@
-import { getProjectBySlug, type DemoProject } from "@/lib/demo-projects";
+import {
+  getPublishedProjectBySlug,
+  type PublishedProjectProjection,
+} from "@/lib/projects/published-projection";
 import registry from "./curated-collections.json";
 
 export const CURATED_COLLECTION_STATUSES = [
@@ -51,11 +54,11 @@ export function getCuratedCollectionBySlug(
 
 export function getProjectsForCuratedCollection(
   collection: CuratedCollection
-): DemoProject[] {
+): PublishedProjectProjection[] {
   return collection.projectSlugs
-    .map((slug) => getProjectBySlug(slug))
+    .map((slug) => getPublishedProjectBySlug(slug))
     .filter(
-      (project): project is DemoProject =>
-        project !== undefined && project.status === "published"
+      (project): project is PublishedProjectProjection =>
+        project !== undefined && project.lifecycle_status === "published"
     );
 }

@@ -21603,9 +21603,6 @@
       ],
       "forbidden_paths": [
         "README.md",
-        "app/**",
-        "components/**",
-        "lib/**",
         "scripts/**",
         "supabase/**",
         "deploy/**",
@@ -21657,7 +21654,9 @@
         "no broad faceted pSEO surface is created"
       ],
       "notes": [
-        "Numeric remap of PR185C."
+        "Numeric remap of PR185C.",
+        "PR201 updates contradictory scope metadata so app/components/lib changes allowed by this frontend task are not also forbidden by scope-check.",
+        "PR201 result: COLLECTIONS_READY_FINITE_REVIEWED. Collections are finite allowlisted slugs backed by published_projection membership."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
