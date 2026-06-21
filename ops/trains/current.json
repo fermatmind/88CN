@@ -1,7 +1,7 @@
 {
-  "active_train": "TRAIN-CONTROL-PANEL-20K",
-  "status": "validation_passed",
+  "active_train": "TRAIN-WORKER-PIPELINE-20K",
+  "status": "ready_for_pr193_no_runtime",
   "last_completed_train": "TRAIN-CONTROL-PANEL-20K",
-  "next_recommended_train": "TRAIN-SERVER-PREP",
-  "notes": "TRAIN-CONTROL-PANEL-20K is complete through PR192 with result PASS_CONTROL_PANEL_QA_WITH_SERVER_PREP_SIDECAR. Stop after PR192 and do not start PR193. PR188 / STAGING_ADMIN_HOST_PREP and PR189 / WORKER_AUDIT_HOST_PREP remain SERVER_PREP_SIDECAR_BLOCKED. PR193+ worker/server-dependent runtime tasks remain blocked until the server sidecar is resolved or the dependency is explicitly reworked. No SSH, cloud console write, server mutation, deploy, production DB write by Codex, worker runtime start, external outreach, data repo mutation, FermatMind mutation, or secret/env read occurred."
+  "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
+  "notes": "OPS11C records OPS-SERVER-APPLY0 with server_sidecar_status=PARTIAL_PRIVATE_ONLY_HOSTS_PREPARED. PR188/PR189 are no longer hard blocked; they are Workbench-only partially prepared with local SSH private-only/timeout and no runtime activation. PR193 may proceed only as no-runtime worker repo bootstrap. Do not start PR194+ runtime, staging-write, external HTTP, Redis/queue, crawler, audit, or worker tasks without a separate checkpoint."
 }

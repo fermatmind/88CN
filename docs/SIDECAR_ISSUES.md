@@ -11,12 +11,6 @@ Open sidecar issues:
   agent:gate`, and public-surface gates pass. PR191 does not modify
   `scripts/**`, so the checker lifecycle fix is deferred to a later scoped
   remediation.
-- OPS11B P1 sidecar: `SERVER_PREP_SIDECAR_BLOCKED`: PR188 /
-  STAGING_ADMIN_HOST_PREP and PR189 / WORKER_AUDIT_HOST_PREP require confirmed
-  host access, exact target aliases, and reversible server action lists. They
-  are not ready for physical execution. This does not block PR190-PR192
-  admin/control-panel code path. It blocks PR193+ worker/server-dependent
-  runtime tasks until resolved.
 - PR184 P3 sidecar: `scripts/check-task-discovery-boundary.mjs` is still PR123-phase scoped and rejects any `supabase/**` diff with `must not change in PR123`. Because `check-landscape-boundary.mjs` and `check-sector-density-boundary.mjs` call that checker when finite task routes exist, `node scripts/check-landscape-boundary.mjs`, `npm run landscape:check`, and `node scripts/check-sector-density-boundary.mjs` also fail during the approved PR184 Supabase migration diff. PR184 scope explicitly permits `supabase/migrations/**`, `npm run agent:scope:check -- PR184`, `npm run db:schema:check`, and `npm run agent:gate` pass, and PR184 does not modify `scripts/**`, so this is lifecycle-aware checker debt for a later scoped remediation task.
 - OPS8A P3 sidecar: existing `scripts/agent/smoke-live.sh` covers generic public/admin/sitemap/robots live smoke, but does not by itself assert disabled-route 503 Problem Details for Public API, MCP, payment checkout, API key shell, or buyer-interest shell. OPS8A records an expanded OPS8B checklist instead of modifying scripts because OPS8A scope forbids `scripts/**`.
 - PR98 P3 sidecar: `scripts/check-alpha-feed-landing.mjs` is PR95-phase scoped and fails after PR96 because the Alpha Feed page now includes a disabled/no-write buyer-interest preview form. The current PR96 `scripts/check-data-buyer-interest.mjs` checker passes, so this is lifecycle-aware checker debt rather than an active leakage issue.
@@ -38,6 +32,15 @@ Open sidecar issues:
 
 Resolved sidecar issues:
 
+- OPS11C resolved the OPS11B P1 hard-blocked server-prep sidecar by recording
+  OPS-SERVER-APPLY0 as `PARTIAL_PRIVATE_ONLY_HOSTS_PREPARED`. PR188 /
+  STAGING_ADMIN_HOST_PREP and PR189 / WORKER_AUDIT_HOST_PREP are now
+  Workbench-only partially prepared: admin, scout, and ops host prep completed
+  through Aliyun Workbench, while local SSH remains private-only or timed out.
+  No runtime, worker, queue, Redis, crawler, audit, Nginx reload, PM2 start,
+  deploy, live smoke, staging/production write, data repo mutation,
+  FermatMind/Tencent mutation, or secret/env read occurred. PR193 may proceed
+  only as no-runtime worker repo bootstrap; PR194+ remains separately blocked.
 - OPS9C resolved the OPS9B P1 release-blocking sidecar by registering OPS9B for
   scope checking and updating the demand-side traffic checkers so
   PR123-approved finite task routes are accepted only when
