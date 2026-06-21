@@ -1,12 +1,13 @@
-import { getPublishedProjects } from "@/lib/demo-projects";
 import { demoCategories } from "@/lib/demo-categories";
 import { getPublishedReportSitemapEntries } from "@/lib/reports/published-reports";
 import { getPublishedStackClusters } from "@/lib/stacks/tech-stack-clusters";
-import { getPublishedCuratedCollections } from "@/lib/collections/curated-collections";
 import { getPublishedVerticalAssetGrids } from "@/lib/verticals/vertical-asset-grids";
 import { getPublishedCuratedAlternatives } from "@/lib/alternatives/curated-alternatives";
 import { getPublishedTaskDiscoveryEntries } from "@/lib/tasks/task-discovery";
-import { INDEXABLE_STATES } from "@/lib/constants";
+import {
+  getCollectionSitemapEntries,
+  getProjectSitemapEntries,
+} from "@/lib/projects/search-index";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -52,15 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const published = getPublishedProjects();
-  const projectEntries: MetadataRoute.Sitemap = published
-    .filter((p) => INDEXABLE_STATES.has(p.status))
-    .map((p) => ({
-      url: `${baseUrl}/projects/${p.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    }));
+  const projectEntries = getProjectSitemapEntries(baseUrl);
 
   const categoryEntries: MetadataRoute.Sitemap = demoCategories.map((c) => ({
     url: `${baseUrl}/categories/${c.slug}`,
@@ -69,13 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const collectionEntries: MetadataRoute.Sitemap =
-    getPublishedCuratedCollections().map((collection) => ({
-      url: `${baseUrl}/collections/${collection.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    }));
+  const collectionEntries = getCollectionSitemapEntries(baseUrl);
 
   const reportListEntries: MetadataRoute.Sitemap = [
     {

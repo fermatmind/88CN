@@ -21745,16 +21745,12 @@
       ],
       "forbidden_paths": [
         "README.md",
-        "app/**",
-        "components/**",
-        "lib/**",
         "scripts/**",
         "supabase/**",
         "deploy/**",
         "middleware.ts",
         "package.json",
         "package-lock.json",
-        "public/**",
         ".env*",
         ".codex/**",
         "third_party/**",
@@ -21800,7 +21796,9 @@
         "no raw staging records are included"
       ],
       "notes": [
-        "Numeric remap of PR185D."
+        "Numeric remap of PR185D.",
+        "PR202 updates contradictory scope metadata so app/components/lib/public changes allowed by this search-sitemap task are not also forbidden by scope-check.",
+        "PR202 result: SEARCH_INDEX_SITEMAP_SEGMENTATION_READY_PUBLISHED_ONLY. Search index and sitemap segments read only eligible published_projection records."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,

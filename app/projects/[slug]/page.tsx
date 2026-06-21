@@ -3,6 +3,7 @@ import {
   getPublishedProjectBySlug,
   getPublishedProjectProjections,
 } from "@/lib/projects/published-projection";
+import { isProjectSitemapEligible } from "@/lib/projects/search-index";
 import { getPublishedCuratedAlternatives } from "@/lib/alternatives/curated-alternatives";
 import { siteTitle } from "@/lib/seo";
 import Link from "next/link";
@@ -35,7 +36,12 @@ export async function generateMetadata({
   return {
     title: siteTitle(project.project_name),
     description: project.original_summary,
-    robots: { index: false, follow: true },
+    alternates: {
+      canonical: `/projects/${project.slug}`,
+    },
+    robots: isProjectSitemapEligible(project)
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
   };
 }
 
