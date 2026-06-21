@@ -1,13 +1,13 @@
 {
-  "current_task": "PR198",
-  "current_alias": "WORKER_QA",
+  "current_task": "PR199",
+  "current_alias": "PROJECT_LISTING_SEARCH",
   "current_repo": "88CN",
-  "current_role": "codex-qa",
+  "current_role": "opencode",
   "status": "validation_passed",
-  "result": "PASS_WORKER_QA_NO_RUNTIME",
-  "next_recommended_task": "PR199",
-  "next_recommended_alias": "PROJECT_LISTING_SEARCH",
+  "result": "PROJECT_LISTING_SEARCH_READY_PUBLISHED_ONLY",
+  "next_recommended_task": "PR200",
+  "next_recommended_alias": "PROJECT_DETAIL_PAGE",
   "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "next_non_pr_task": "Stop after PR198. Do not start PR199 in this run.",
-  "notes": "PR198 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/5 and worker commit bd8af3c. QA covers PR194-PR197 and confirms no runtime daemon, worker start, queue/Redis runtime, live external HTTP by default, Playwright/headless/browser fallback, WAF bypass, login/cookies/session, Supabase/staging/production write, public projection, private seed artifact, raw project rows, server/cloud mutation, package/dependency, deploy, data repo mutation, or secret/env read. Stop after PR198; PR199 is not started."
+  "next_non_pr_task": "Continue PR200 after PR199 merge; do not deploy.",
+  "notes": "PR199 adds published-only /projects listing/search backed by an internal published_projection fixture adapter. It exposes only public projection fields, finite filters, source-signal chips, and pagination-ready shape. No raw seed/evidence/audit/review/quarantine/rejected data, sitemap inclusion, Public API/MCP release, deploy, server action, Supabase/staging/production write, runtime, Redis/queue, external outreach, or data repo mutation occurred."
 }

@@ -4252,7 +4252,8 @@
       ],
       "purpose": "20k-50k frontend listing, detail, collections, search, sitemap, and QA",
       "notes": [
-        "Frontend public surfaces must remain published-only and must not expose raw seed/audit/review data."
+        "Frontend public surfaces must remain published-only and must not expose raw seed/audit/review data.",
+        "PR199 validation_passed: /projects listing/search now reads only reviewed published_projection fixture adapter fields; no sitemap entry expansion, deployment, runtime, server/cloud action, DB write, or data repo mutation."
       ]
     },
     {
