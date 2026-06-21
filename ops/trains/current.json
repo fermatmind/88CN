@@ -1,7 +1,7 @@
 {
   "active_train": "TRAIN-FRONTEND-MVP-20K",
-  "status": "pr201_validation_passed",
+  "status": "pr202_validation_passed",
   "last_completed_train": "TRAIN-WORKER-PIPELINE-20K",
   "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "notes": "PR201 / COLLECTIONS is validation_passed with COLLECTIONS_READY_FINITE_REVIEWED. Continue to PR202 after merge. No deploy, server action, runtime, Redis/queue, Supabase/staging/production write, Public API/MCP release, external outreach, or data repo mutation occurred."
+  "notes": "PR202 / SEARCH_INDEX_SITEMAP_SEGMENTATION is validation_passed with SEARCH_INDEX_SITEMAP_SEGMENTATION_READY_PUBLISHED_ONLY. Continue to PR203 after merge. No deploy, server action, runtime, Redis/queue, Supabase/staging/production write, Public API/MCP release, external outreach, or data repo mutation occurred."
 }

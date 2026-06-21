@@ -1,13 +1,13 @@
 {
-  "current_task": "PR201",
-  "current_alias": "COLLECTIONS",
+  "current_task": "PR202",
+  "current_alias": "SEARCH_INDEX_SITEMAP_SEGMENTATION",
   "current_repo": "88CN",
   "current_role": "opencode",
   "status": "validation_passed",
-  "result": "COLLECTIONS_READY_FINITE_REVIEWED",
-  "next_recommended_task": "PR202",
-  "next_recommended_alias": "SEARCH_INDEX_SITEMAP_SEGMENTATION",
+  "result": "SEARCH_INDEX_SITEMAP_SEGMENTATION_READY_PUBLISHED_ONLY",
+  "next_recommended_task": "PR203",
+  "next_recommended_alias": "FRONTEND_QA",
   "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "next_non_pr_task": "Continue PR202 after PR201 merge; do not deploy.",
-  "notes": "PR201 registers finite reviewed collections open-source-ai-agents, rag-projects, ai-outbound, and ai-tool-alternatives. Membership resolves only from published_projection records with lifecycle_status published. Unknown or ineligible collection slugs fail closed. No broad faceted pSEO, generated category expansion, ranking claims, paid influence, raw seed/evidence/audit/review/quarantine/rejected exposure, deploy, server action, Supabase/staging/production write, runtime, Redis/queue, external outreach, Public API/MCP release, or data repo mutation occurred."
+  "next_non_pr_task": "Continue PR203 after PR202 merge; do not deploy.",
+  "notes": "PR202 adds internal search index and sitemap segmentation helpers from published_projection only. Eligibility requires lifecycle_status published, original_summary, official_website_url, canonical slug, seo_indexable true, and no stale/quarantine/rejected/copied-content/directory-hint blocker. Project and collection metadata now uses canonical paths and indexes only when eligible. No raw seed/evidence/audit/review/quarantine/rejected/stale/archived records, Public API/MCP release, deploy, server action, Supabase/staging/production write, runtime, Redis/queue, external outreach, or data repo mutation occurred."
 }

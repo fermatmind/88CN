@@ -7,6 +7,7 @@ import {
 import { CollectionGrid } from "@/components/collection-grid";
 import { collectionPageJSONLD } from "@/lib/structured-data";
 import { siteTitle, siteDescription } from "@/lib/seo";
+import { isCollectionSitemapEligible } from "@/lib/projects/search-index";
 import type { Metadata } from "next";
 
 interface CollectionPageProps {
@@ -39,7 +40,12 @@ export async function generateMetadata({
   return {
     title: siteTitle(collection.title),
     description: siteDescription(collection.summary.slice(0, 150)),
-    robots: { index: false, follow: true },
+    alternates: {
+      canonical: `/collections/${collection.slug}`,
+    },
+    robots: isCollectionSitemapEligible(collection)
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
   };
 }
 
