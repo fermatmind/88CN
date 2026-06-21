@@ -21237,7 +21237,8 @@
       ],
       "notes": [
         "Numeric remap of PR184Q.",
-        "PR197 completed with QUEUE_RETRY_DEAD_LETTER_READY_LOCAL_ONLY; PR198 may proceed next as QA-only no-runtime boundary verification."
+        "PR197 completed with QUEUE_RETRY_DEAD_LETTER_READY_LOCAL_ONLY; PR198 may proceed next as QA-only no-runtime boundary verification.",
+        "PR198 worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/5 adds worker boundary QA script and report. QA confirms PR194-PR197 remain no-runtime: no daemon, worker start, Redis/queue runtime, live external HTTP by default, browser fallback, WAF bypass, login/session, Supabase/staging/production write, public projection, private seed artifact, raw rows, server/cloud mutation, package/dependency, deploy, data repo mutation, or secret/env read."
       ],
       "risk_flags": {
         "auto_merge_allowed": true,
@@ -21378,7 +21379,8 @@
         "raw seed/audit data is not exposed"
       ],
       "notes": [
-        "Numeric remap of PR185A."
+        "Numeric remap of PR185A.",
+        "PR198 stops the worker pipeline train. PR199 is not started by the PR194-PR198 no-runtime worker train."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,

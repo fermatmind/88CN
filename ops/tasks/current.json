@@ -1,13 +1,13 @@
 {
-  "current_task": "PR197",
-  "current_alias": "QUEUE_RETRY_DEAD_LETTER",
+  "current_task": "PR198",
+  "current_alias": "WORKER_QA",
   "current_repo": "88CN",
-  "current_role": "opencode",
+  "current_role": "codex-qa",
   "status": "validation_passed",
-  "result": "QUEUE_RETRY_DEAD_LETTER_READY_LOCAL_ONLY",
-  "next_recommended_task": "PR198",
-  "next_recommended_alias": "WORKER_QA",
-  "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "next_non_pr_task": "Continue PR198 QA only after PR197 worker and tracking PRs merge. Keep PR199 blocked.",
-  "notes": "PR197 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/4 and worker commit ee44871. The worker repo adds local dry-run queue/retry/dead-letter contracts, bounded retry policy, local adapter, future Redis interface-only contract, fixture, and no-dependency test. Defaults enforce max_attempts<=3, default_concurrency<=3, audit per-domain cooldown, dead-letter required, and redis_connected=false. No Redis connection/client, shared Redis, FermatMind Redis, Tencent Redis, background daemon, server deployment, DB/Supabase/staging/production write, runtime start, package/dependency, external HTTP, data repo mutation, or secret/env read occurred."
+  "result": "PASS_WORKER_QA_NO_RUNTIME",
+  "next_recommended_task": "PR199",
+  "next_recommended_alias": "PROJECT_LISTING_SEARCH",
+  "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
+  "next_non_pr_task": "Stop after PR198. Do not start PR199 in this run.",
+  "notes": "PR198 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/5 and worker commit bd8af3c. QA covers PR194-PR197 and confirms no runtime daemon, worker start, queue/Redis runtime, live external HTTP by default, Playwright/headless/browser fallback, WAF bypass, login/cookies/session, Supabase/staging/production write, public projection, private seed artifact, raw project rows, server/cloud mutation, package/dependency, deploy, data repo mutation, or secret/env read. Stop after PR198; PR199 is not started."
 }

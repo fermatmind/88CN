@@ -4157,9 +4157,9 @@
       ],
       "purpose": "20k-50k worker, audit, queue, and QA pipeline",
       "notes": [
-        "PR197 completed as local-only queue/retry/dead-letter handling in fermatmind/88cn-scout-worker PR #4 with worker commit ee44871.",
-        "Continue PR198 QA-only boundary verification after PR197 merges.",
-        "Stop after PR198. Do not start PR199; no runtime, Redis connection, staging/prod write, external HTTP, crawler, audit daemon, worker daemon, or deployment."
+        "PR194-PR198 completed as a no-runtime worker pipeline train.",
+        "Worker repo PRs #1-#5 implement dry-run import, dry-run canonical resolver, fixture-only HTTP audit, local-only queue/retry/dead-letter, and worker boundary QA.",
+        "Stop after PR198. PR199 is not started; no runtime, Redis/queue runtime, live external HTTP by default, browser fallback, WAF bypass, staging/prod write, server/cloud mutation, deployment, or data repo mutation."
       ]
     },
     {
