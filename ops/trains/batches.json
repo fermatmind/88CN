@@ -3973,7 +3973,8 @@
       ],
       "purpose": "20k-50k staging/admin and worker host prep",
       "notes": [
-        "No train auto-run through server prep. Each task stops for human approval."
+        "No train auto-run through server prep. Each task stops for human approval.",
+        "OPS11B records PR188 and PR189 as SERVER_PREP_SIDECAR_BLOCKED when confirmed host access, exact target aliases, and reversible server action lists are missing."
       ]
     },
     {
@@ -4056,7 +4057,8 @@
       ],
       "purpose": "20k-50k bulk control panel and review log",
       "notes": [
-        "QA may be auto-merge eligible if executed alone, but this train stops on implementation checkpoints."
+        "QA may be auto-merge eligible if executed alone, but this train stops on implementation checkpoints.",
+        "OPS11B Scheme B permits PR190-PR192 to proceed while PR188/PR189 remain SERVER_PREP_SIDECAR_BLOCKED because the control-panel path depends on PR184 staging schema contract/apply path, not physical host prep."
       ]
     },
     {
@@ -4154,7 +4156,8 @@
       ],
       "purpose": "20k-50k worker, audit, queue, and QA pipeline",
       "notes": [
-        "No train auto-run through worker runtime, external HTTP audit, or Redis/queue creation."
+        "No train auto-run through worker runtime, external HTTP audit, or Redis/queue creation.",
+        "PR193+ remains blocked until SERVER_PREP_SIDECAR_BLOCKED is resolved or the dependency is explicitly reworked."
       ]
     },
     {
