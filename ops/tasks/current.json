@@ -1,13 +1,13 @@
 {
-  "current_task": "PR196",
-  "current_alias": "HTTP_AUDIT_WORKER",
+  "current_task": "PR197",
+  "current_alias": "QUEUE_RETRY_DEAD_LETTER",
   "current_repo": "88CN",
   "current_role": "opencode",
   "status": "validation_passed",
-  "result": "HTTP_AUDIT_WORKER_READY_FIXTURE_ONLY",
-  "next_recommended_task": "PR197",
-  "next_recommended_alias": "QUEUE_RETRY_DEAD_LETTER",
+  "result": "QUEUE_RETRY_DEAD_LETTER_READY_LOCAL_ONLY",
+  "next_recommended_task": "PR198",
+  "next_recommended_alias": "WORKER_QA",
   "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "next_non_pr_task": "Continue PR197 only after PR196 worker and tracking PRs merge. Keep live network, browser fallback, WAF bypass, runtime, staging/prod write, Redis/queue runtime, deploy, data repo mutation, and PR199 blocked.",
-  "notes": "PR196 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/3 and worker commit d68deb7. The worker repo adds fixture-only HTTP-first audit input/result contracts, policy defaults, failure taxonomy, response evaluator, last-successful snapshot preservation, stale marking, JSON-LD/canonical/sitemap/reachable output fields, and no-dependency test. No live network, fetch/http/https request, Playwright/headless/browser fallback, WAF bypass, proxy evasion, login/cookies/session, DB/Supabase/staging/production write, runtime daemon, Redis/queue, deploy, package/dependency, data repo mutation, or secret/env read occurred."
+  "next_non_pr_task": "Continue PR198 QA only after PR197 worker and tracking PRs merge. Keep PR199 blocked.",
+  "notes": "PR197 tracks worker repo PR https://github.com/fermatmind/88cn-scout-worker/pull/4 and worker commit ee44871. The worker repo adds local dry-run queue/retry/dead-letter contracts, bounded retry policy, local adapter, future Redis interface-only contract, fixture, and no-dependency test. Defaults enforce max_attempts<=3, default_concurrency<=3, audit per-domain cooldown, dead-letter required, and redis_connected=false. No Redis connection/client, shared Redis, FermatMind Redis, Tencent Redis, background daemon, server deployment, DB/Supabase/staging/production write, runtime start, package/dependency, external HTTP, data repo mutation, or secret/env read occurred."
 }
