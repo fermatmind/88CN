@@ -678,3 +678,52 @@ revalidation, the PR133-PR144 SCOUT/AUDIT/REPORT train is closed. Do not start
 second-round Growth, BETA1, I18N0, OPS8D, OPS10A, PR101, deploy, public release,
 crawler runtime, data repo mutation, external write, search submission, or
 production work from this PR.
+
+# PR210 CONTENT50 Frontend Smoke v0
+
+- Date: 2026-06-21
+- Scope: PR210 CONTENT50 Frontend Smoke v0
+- Role: Codex-QA
+- Result: BLOCKED
+- Blocked: Yes
+
+## Summary
+
+- PR209 generated 27 public-safe rows in
+  `lib/projects/published-projection.jsonl`.
+- `npm run build` passed with the existing Supabase Edge Runtime warning.
+- Static leakage scan passed for `app`, `components`, `lib`, `public`, and
+  `.next`: no seed filenames, staging queue filename, evidence fields,
+  canonical fields, row hashes, review flags, rejected flags, private evidence
+  IDs/hashes/notes, or canonical risk markers were found.
+- Browser smoke was not opened because `scripts/codex-preflight.sh` failed:
+  `http://localhost:3000/api/healthz` did not return 200.
+- Frontend coverage is blocked: generated `/projects/[slug]` routes still come
+  from the legacy inline `publishedProjectionFixtures` set, not the PR209 JSONL.
+- Generated project route overlap with PR209 projection rows is 0 of 27.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| `scripts/codex-preflight.sh` | BLOCKED: local healthz unavailable; no browser opened |
+| `npm run build` | PASS with existing Supabase Edge Runtime warning |
+| static leakage scan | PASS |
+| generated route coverage probe | BLOCKED: 0% PR209 projection coverage |
+
+## Findings
+
+- P0: none
+- P1: frontend does not load `lib/projects/published-projection.jsonl`; it still
+  renders six inline fixture project slugs: `aurora-code`, `complykit`,
+  `nucleus-ml`, `pulse-analytics`, `scribe-ai`, and `vectorbase`.
+- P2: browser validation is blocked until local preflight healthz returns 200.
+- P3: none
+
+## Recommendation
+
+Do not treat CONTENT50 as deploy-ready. The import and projection artifacts are
+locally valid, but frontend consumption of the PR209 JSONL projection requires a
+separate implementation lane before PR210 can pass. No deploy, server/cloud
+action, database write, external API call, sitemap production push,
+worker/runtime/queue start, or companion index-data repo mutation occurred.
