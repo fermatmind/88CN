@@ -1,13 +1,13 @@
 {
-  "current_task": "PR202",
-  "current_alias": "SEARCH_INDEX_SITEMAP_SEGMENTATION",
+  "current_task": "PR203",
+  "current_alias": "FRONTEND_QA",
   "current_repo": "88CN",
-  "current_role": "opencode",
+  "current_role": "codex-qa",
   "status": "validation_passed",
-  "result": "SEARCH_INDEX_SITEMAP_SEGMENTATION_READY_PUBLISHED_ONLY",
-  "next_recommended_task": "PR203",
-  "next_recommended_alias": "FRONTEND_QA",
-  "next_recommended_train": "TRAIN-FRONTEND-MVP-20K",
-  "next_non_pr_task": "Continue PR203 after PR202 merge; do not deploy.",
-  "notes": "PR202 adds internal search index and sitemap segmentation helpers from published_projection only. Eligibility requires lifecycle_status published, original_summary, official_website_url, canonical slug, seo_indexable true, and no stale/quarantine/rejected/copied-content/directory-hint blocker. Project and collection metadata now uses canonical paths and indexes only when eligible. No raw seed/evidence/audit/review/quarantine/rejected/stale/archived records, Public API/MCP release, deploy, server action, Supabase/staging/production write, runtime, Redis/queue, external outreach, or data repo mutation occurred."
+  "result": "PASS_FRONTEND_QA_NO_LEAKAGE",
+  "next_recommended_task": "PR204",
+  "next_recommended_alias": "SECURITY_FIREWALL",
+  "next_recommended_train": "TRAIN-SECURITY-DEPLOY-20K",
+  "next_non_pr_task": "Stop after PR203. Do not start PR204 in this run.",
+  "notes": "PR203 is QA-only and verifies PR199-PR202 frontend MVP boundaries: /projects lists only published_projection records; project detail missing/non-published records fail closed; collections are finite reviewed allowlist slugs; unknown collections fail closed; search index and sitemap helpers include only eligible published_projection records; Public API/MCP remain disabled; no raw seed/evidence/audit/review/quarantine/rejected/stale/archived/private hash/internal confidence exposure, no copied competitor copy, no ranking/best/top claims, no paid influence, no deploy, no server/cloud action, no Supabase/staging/production write, no runtime, no Redis/queue, no external outreach, and no data repo mutation occurred. Stop after PR203; PR204 is not started."
 }

@@ -21934,7 +21934,8 @@
         "no implementation files are changed"
       ],
       "notes": [
-        "Numeric remap of PR185Q."
+        "Numeric remap of PR185Q.",
+        "PR203 result: PASS_FRONTEND_QA_NO_LEAKAGE. QA-only PR; no implementation files changed. Stop after PR203 and do not start PR204."
       ],
       "risk_flags": {
         "auto_merge_allowed": true,

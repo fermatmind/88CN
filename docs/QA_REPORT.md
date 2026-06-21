@@ -1,5 +1,20 @@
 # QA Report
 
+## PR203 Frontend No-Leakage QA v0
+
+Result: `PASS_FRONTEND_QA_NO_LEAKAGE`
+
+PR203 verifies the PR199-PR202 frontend MVP public surface:
+
+- `/projects` lists only internal `published_projection` fixture adapter records and exposes only reviewed public projection fields.
+- `/projects/[slug]` uses published projection static params and lookup; missing or non-published records fail closed.
+- Collections are finite reviewed slugs: `open-source-ai-agents`, `rag-projects`, `ai-outbound`, and `ai-tool-alternatives`.
+- Search index and sitemap helpers include only eligible published projection records with canonical slug, source, summary, seo indexability, and blocker checks.
+- Public API and MCP remain disabled by existing checks.
+- No raw seed, source evidence, audit payload, review note, quarantine/rejected/stale/archived record, private hash, internal confidence, copied competitor copy, ranking/best/top claim, paid influence, deployment, server action, runtime, Redis/queue runtime, Supabase/staging/production write, external outreach, or data repo mutation was found.
+
+Validation: local static/build/gate checks passed. Browser/manual visual QA was not opened because this PR is QA documentation/status only under the goal's no-browser/no-deploy constraints.
+
 ## PR198 Worker Boundary QA
 
 Result: `PASS_WORKER_QA_NO_RUNTIME`
