@@ -1,13 +1,13 @@
 {
-  "current_task": "OPS11C",
-  "current_alias": "SERVER_APPLY0_HANDOFF",
+  "current_task": "PR193",
+  "current_alias": "SCOUT_WORKER_REPO_BOOTSTRAP",
   "current_repo": "88CN",
-  "current_role": "codex-ops",
+  "current_role": "opencode",
   "status": "validation_passed",
-  "result": "GO_PR193_SCOUT_WORKER_REPO_BOOTSTRAP_WITH_SERVER_SIDECAR_PARTIAL",
-  "next_recommended_task": "PR193",
-  "next_recommended_alias": "SCOUT_WORKER_REPO_BOOTSTRAP",
+  "result": "SCOUT_WORKER_REPO_BOOTSTRAP_READY_NO_RUNTIME",
+  "next_recommended_task": "PR194",
+  "next_recommended_alias": "BULK_IMPORT_WORKER",
   "next_recommended_train": "TRAIN-WORKER-PIPELINE-20K",
-  "next_non_pr_task": "Do not start PR194 or any runtime/staging-write/external-HTTP/queue task until separately approved after PR193.",
-  "notes": "OPS11C records OPS-SERVER-APPLY0 as PARTIAL_PRIVATE_ONLY_HOSTS_PREPARED. SH-ALIYUN-02 admin, SH-ALIYUN-03 scout, and SH-ALIYUN-04 ops are prepared via Aliyun Workbench only; local SSH remains private-only or timed out. Runtime, worker, queue, Redis, crawler, audit, Nginx reload, PM2 start, deployment, staging/production write, data repo mutation, FermatMind/Tencent mutation, and secret/env reads were not performed. PR193 may proceed only as no-runtime worker repo bootstrap. Stop after PR193; PR194+ remains blocked until separately approved."
+  "next_non_pr_task": "Stop after PR193. PR194 and later runtime, staging-write, external HTTP, Redis/queue, crawler, audit, and worker tasks require separate approval before execution.",
+  "notes": "PR193 creates/verifies private worker repo fermatmind/88cn-scout-worker at https://github.com/fermatmind/88cn-scout-worker and records initial no-runtime skeleton commit 4de3dd49ac91e5f0f14aa76d96550be27eff1773. Skeleton contains README, docs, JSON contracts, fixture guidance, src README placeholders, tests README, and .gitignore only. No package/dependency, runtime code, worker, queue, Redis, crawler, audit execution, external HTTP, Supabase/staging/production write, public API/MCP/frontend/deploy config, data repo mutation, FermatMind/Tencent mutation, or secret/env read occurred. Stop after PR193; do not start PR194 without separate approval."
 }
