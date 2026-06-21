@@ -22209,7 +22209,8 @@
         "post-deploy smoke is defined"
       ],
       "notes": [
-        "Numeric remap of PR186B."
+        "Numeric remap of PR186B.",
+        "PR205 result: READY_FOR_PRODUCTION_DEPLOY_APPROVAL for candidate origin/main SHA 4f5792564d78966556189f18e40c97cff2b9ad23. Deploy is not executed; exact SHA approval remains required before deploy, SSH/Workbench, server/cloud action, Nginx reload, PM2 restart, live smoke, Supabase/staging/production write, or new env/payment/secret flag."
       ],
       "risk_flags": {
         "auto_merge_allowed": false,
