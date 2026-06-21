@@ -1,13 +1,14 @@
-import { siteTitle, siteDescription, noIndex } from "@/lib/seo";
-import { PlusCircle, FileText, Search, ShieldCheck } from "lucide-react";
+import { PageShell, SectionHeader } from "@/components/public-ui";
 import SubmitForm from "@/components/submit-form";
-import Link from "next/link";
+import { noIndex, siteDescription, siteTitle } from "@/lib/seo";
+import { FileText, Search, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: siteTitle("Submit a Project"),
   description: siteDescription(
-    "Submit a free AI project profile to 88CN. Public growth signals, editorial review, and search-indexed discovery for early AI projects."
+    "Submit a free AI project profile to 88CN for editorial review."
   ),
   ...noIndex(),
 };
@@ -15,58 +16,52 @@ export const metadata: Metadata = {
 const BENEFITS = [
   {
     icon: FileText,
-    title: "Free AI Project Profile",
+    title: "Public Project Profile",
     description:
-      "A public project page indexed by search engines and discoverable by the 88CN community.",
+      "Eligible submissions may become public profiles after editorial review.",
   },
   {
     icon: Search,
-    title: "Editorial Listing",
+    title: "Reviewed Public Signals",
     description:
-      "Projects pass through editorial review and are listed alongside public growth signals and Signal Scores.",
+      "Use public source links so reviewers can verify the project surface.",
   },
   {
     icon: ShieldCheck,
-    title: "Publisher Claim",
+    title: "Founder Claim Path",
     description:
-      "Founders can claim their profile and manage public project information after verification.",
+      "Founders can request corrections after a claim review is completed.",
   },
 ];
 
 export default function SubmitPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <div className="mb-12 text-center">
-        <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full border border-terminal-border bg-terminal-surface">
-          <PlusCircle className="h-5 w-5 text-terminal-muted" />
-        </div>
-        <h1 className="mb-3 text-2xl font-bold tracking-tight text-terminal-fg">
-          Submit a Project
-        </h1>
-        <p className="text-sm text-terminal-dim leading-relaxed max-w-lg mx-auto">
-          Share an early AI project for inclusion in the 88CN free AI project
-          growth index. Submissions are reviewed for public growth signals and
-          editorial quality.
-        </p>
-        <Link
-          href="/founding-slots"
-          className="mt-4 inline-flex rounded-md border border-terminal-border px-3 py-2 text-xs text-terminal-muted transition-colors hover:bg-terminal-surface hover:text-terminal-fg"
-        >
-          Read the founder submission FAQ
-        </Link>
-      </div>
+    <PageShell size="prose" className="space-y-8">
+      <SectionHeader
+        eyebrow="Submit"
+        title="Submit a Project"
+        description="Share public project information for editorial review. Submission does not guarantee publication, placement, or search treatment."
+        action={
+          <Link
+            href="/founding-slots"
+            className="inline-flex items-center rounded-md border border-terminal-border px-3 py-2 text-xs font-semibold text-terminal-muted transition-colors hover:border-terminal-ring hover:text-terminal-fg"
+          >
+            Founder FAQ
+          </Link>
+        }
+      />
 
-      <div className="mb-12 grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-3">
         {BENEFITS.map((benefit) => (
           <div
             key={benefit.title}
-            className="rounded-lg border border-terminal-border bg-terminal-surface p-5"
+            className="rounded-lg border border-terminal-border bg-terminal-surface p-4 shadow-sm"
           >
-            <benefit.icon className="mb-3 h-5 w-5 text-terminal-muted" />
+            <benefit.icon className="mb-3 h-5 w-5 text-terminal-ring" />
             <h3 className="mb-1.5 text-sm font-semibold text-terminal-fg">
               {benefit.title}
             </h3>
-            <p className="text-xs text-terminal-dim leading-relaxed">
+            <p className="text-xs leading-5 text-terminal-dim">
               {benefit.description}
             </p>
           </div>
@@ -74,6 +69,6 @@ export default function SubmitPage() {
       </div>
 
       <SubmitForm />
-    </div>
+    </PageShell>
   );
 }

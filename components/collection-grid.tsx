@@ -1,8 +1,12 @@
 import type { PublishedProjectProjection } from "@/lib/projects/published-projection";
-import { PublishedProjectCard } from "@/components/published-project-card";
-import { MethodologyBlock } from "@/components/methodology-block";
+import {
+  EmptyState,
+  MethodologyPanel,
+  ProjectGrid,
+  ReviewTimestamp,
+} from "@/components/public-ui";
 import { cn } from "@/lib/utils";
-import { Bookmark, Filter, Clock } from "lucide-react";
+import { Bookmark, Filter } from "lucide-react";
 
 interface CollectionView {
   slug: string;
@@ -29,38 +33,43 @@ export function CollectionGrid({
 }: CollectionGridProps) {
   return (
     <div className={cn("space-y-10", className)}>
-      <section>
+      <section className="border-b border-terminal-border pb-8">
         <div className="mb-2 flex items-center gap-2">
-          <Bookmark className="h-4 w-4 text-terminal-muted" />
-          <span className="text-[10px] font-mono uppercase tracking-widest text-terminal-dim">
+          <Bookmark className="h-4 w-4 text-terminal-ring" />
+          <span className="text-xs font-semibold text-terminal-ring">
             Curated Collection
           </span>
         </div>
-        <h1 className="mb-4 text-2xl font-bold tracking-tight text-terminal-fg">
+        <h1 className="mb-4 text-3xl font-semibold tracking-tight text-terminal-fg sm:text-5xl">
           {collection.title}
         </h1>
-        <p className="max-w-3xl text-sm text-terminal-muted leading-relaxed">
+        <p className="max-w-3xl text-sm leading-6 text-terminal-muted">
           {collection.editorialSummary}
         </p>
+        <ReviewTimestamp
+          value={collection.lastUpdated}
+          label="Collection reviewed"
+          className="mt-4"
+        />
       </section>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         <section className="rounded-lg border border-terminal-border bg-terminal-surface p-5">
           <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-terminal-fg">
-            <Filter className="h-4 w-4 text-terminal-muted" />
+            <Filter className="h-4 w-4 text-terminal-ring" />
             Inclusion Criteria
           </h2>
-          <p className="text-xs text-terminal-dim leading-relaxed">
+          <p className="text-sm leading-6 text-terminal-dim">
             {collection.inclusionCriteria}
           </p>
         </section>
 
         <section className="rounded-lg border border-terminal-border bg-terminal-surface p-5">
           <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-terminal-fg">
-            <Bookmark className="h-4 w-4 text-terminal-muted" />
-            Why These Projects Are Included
+            <Bookmark className="h-4 w-4 text-terminal-ring" />
+            Why included
           </h2>
-          <p className="text-xs text-terminal-dim leading-relaxed">
+          <p className="text-sm leading-6 text-terminal-dim">
             {collection.whyIncluded}
           </p>
         </section>
@@ -71,26 +80,16 @@ export function CollectionGrid({
           Projects in This Collection
         </h2>
         {projects.length === 0 ? (
-          <p className="text-xs text-terminal-dim">
-            No reviewed projects are available in this collection yet.
-          </p>
+          <EmptyState
+            title="No public profiles in this collection"
+            body="This collection stays empty until eligible published projections match its finite criteria."
+          />
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
-              <PublishedProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
+          <ProjectGrid projects={projects} />
         )}
       </section>
 
-      <div className="flex items-center gap-2 rounded-lg border border-terminal-border bg-terminal-surface p-4">
-        <Clock className="h-4 w-4 shrink-0 text-terminal-dim" />
-        <p className="text-xs text-terminal-dim">
-          Last updated: {collection.lastUpdated}
-        </p>
-      </div>
-
-      <MethodologyBlock methodologyNote={collection.methodologyNote} />
+      <MethodologyPanel body={collection.methodologyNote} />
     </div>
   );
 }
