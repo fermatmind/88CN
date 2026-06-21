@@ -107,13 +107,14 @@ export function getCollectionSitemapEntries(
 export function isProjectSitemapEligible(
   project: PublishedProjectProjection
 ): boolean {
-  const eligibility = sitemapEligibilityBySlug[project.slug];
+  const eligibility = sitemapEligibilityBySlug[project.slug] ?? eligible(project.slug);
 
   return (
     project.lifecycle_status === "published" &&
     Boolean(project.original_summary.trim()) &&
     Boolean(project.official_website_url.trim()) &&
-    eligibility?.seo_indexable === true &&
+    project.seo_indexable !== false &&
+    eligibility.seo_indexable === true &&
     eligibility.canonical_slug === project.slug &&
     eligibility.stale_blocker === false &&
     eligibility.quarantine_blocker === false &&

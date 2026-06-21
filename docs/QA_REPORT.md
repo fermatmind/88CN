@@ -678,3 +678,74 @@ revalidation, the PR133-PR144 SCOUT/AUDIT/REPORT train is closed. Do not start
 second-round Growth, BETA1, I18N0, OPS8D, OPS10A, PR101, deploy, public release,
 crawler runtime, data repo mutation, external write, search submission, or
 production work from this PR.
+
+# PR210 CONTENT50 Frontend Smoke v0
+
+- Date: 2026-06-21
+- Scope: PR210 CONTENT50 Frontend Smoke v0
+- Role: Codex-QA
+- Result: PR210_UNBLOCKED_PUBLISHED_PROJECTION_JSONL_BOUND
+- Blocked: Browser smoke only, because local healthz is unavailable
+
+## Summary
+
+- PR209 generated 27 public-safe rows in
+  `lib/projects/published-projection.jsonl`.
+- `lib/projects/published-projection.ts` now loads the JSONL projection,
+  normalizes `category` into the existing `primary_category` adapter shape, and
+  returns only public fields for rows with `lifecycle_status = "published"`.
+- `npm run build` passed and generated 27 `/projects/[slug]` routes from the
+  PR209 projection.
+- Static leakage scan passed for built public/client/project/sitemap artifacts:
+  no seed filenames, staging queue filename, evidence fields, canonical fields,
+  row hashes, review flags, rejected flags, private evidence IDs/hashes/notes,
+  or canonical risk markers were found.
+- Browser smoke was not opened because `scripts/codex-preflight.sh` failed:
+  `http://localhost:3000/api/healthz` did not return 200.
+- Frontend coverage is unblocked: generated project route overlap with PR209
+  projection rows is 27 of 27.
+- Sitemap dry-run includes 27 project URLs from the PR209 projection.
+- Collections fail closed because the existing finite collection registry points
+  to legacy fixture slugs not present in the PR209 projection; this does not
+  expose non-published rows.
+
+## Validation Commands
+
+| Command | Result |
+| --- | --- |
+| JSONL row check | PASS: 27 rows, 27 published |
+| `scripts/codex-preflight.sh` | BLOCKED: local healthz unavailable; no browser opened |
+| `npm run verify:day0` | PASS |
+| `npm run policy:scan` | PASS |
+| `npm run third-party:check` | PASS |
+| `npm run agent:redact:check` | PASS |
+| `npm run agent:batch:check` | PASS |
+| `npm run agent:train-plan:check` | PASS |
+| `npm run agent:scope:check -- PR210` | PASS |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS: generated 27 project routes |
+| `npm run agent:gate` | PASS |
+| `git diff --check` | PASS |
+| static leakage scan | PASS |
+| generated route coverage probe | PASS: 27/27 PR209 projection coverage |
+| sitemap dry-run probe | PASS: 27 project URLs |
+
+## Findings
+
+- P0: none
+- P1: none
+- P2: browser validation is blocked until local preflight healthz returns 200.
+- P3: existing finite collection slugs currently resolve to zero static
+  collection pages because their registry members are legacy fixture slugs, not
+  PR209 projection slugs. The behavior is fail-closed and does not leak private
+  or non-published data.
+
+## Recommendation
+
+PR210 is unblocked for the published projection JSONL binding and is ready for
+human review as a stacked PR after PR208 and PR209. Browser smoke remains blocked
+only by unavailable local healthz. No deploy, server/cloud action, database
+write, external API call, sitemap production push, worker/runtime/queue start,
+raw seed/evidence/audit mutation or exposure, PR211/PR206/Growth work, or
+companion index-data repo mutation occurred.
