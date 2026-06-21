@@ -1,16 +1,13 @@
 {
-  "current_task": "PR205",
-  "current_alias": "PRODUCTION_DEPLOY_GATE",
+  "current_task": "PR208",
+  "current_alias": "CONTENT50_IMPORT",
   "current_repo": "88CN",
   "current_role": "opencode",
-  "status": "validation_passed",
-  "result": "READY_FOR_PRODUCTION_DEPLOY_APPROVAL",
-  "candidate_origin_main_sha": "4f5792564d78966556189f18e40c97cff2b9ad23",
-  "next_recommended_task": "PRODUCTION_DEPLOY_APPROVAL_FOR_EXACT_SHA",
-  "next_recommended_alias": "DEPLOY_APPROVAL_REQUIRED",
-  "next_recommended_train": "TRAIN-SECURITY-DEPLOY-20K",
-  "next_non_pr_task": "Stop after PR205. Do not start PR206, PR207, Growth2, Growth1, BETA, I18N, OPS10A, or production deploy unless the human gives exact SHA approval for the recorded candidate SHA.",
-  "exact_approval_phrase_en": "I APPROVE 88CN PRODUCTION DEPLOY FOR EXACT SHA 4f5792564d78966556189f18e40c97cff2b9ad23",
-  "exact_approval_phrase_zh": "我批准 88CN 按 exact SHA 4f5792564d78966556189f18e40c97cff2b9ad23 执行生产部署",
-  "notes": "PR205 records the production deploy gate only. It documents exact SHA approval phrases, preflight, live smoke, rollback, post-deploy no-leak checks, sitemap/live URL checks, server connection state, blockers, and actions requiring later approval. No deploy, live smoke, SSH, Aliyun/Tencent/Workbench action, Nginx reload, PM2 restart, secret/env read or print, new env/payment/secret flag, Supabase/staging/production write, worker/runtime/Redis/queue action, Public API/MCP release, external outreach, or data repo mutation occurs. TRAIN-SECURITY-DEPLOY-20K is complete and this run stops after PR205."
+  "status": "in_progress",
+  "result": "CONTENT50_IMPORT_PENDING_VALIDATION",
+  "candidate_origin_main_sha": "7d5531833a796f3ff231457b1877c83b3078af7d",
+  "next_recommended_task": "PR209",
+  "next_recommended_alias": "CONTENT50_REVIEW_PUBLISH",
+  "next_recommended_train": "CONTENT50",
+  "notes": "PR208 local Seed50 import only. No deploy, server/cloud action, DB write, external API call, sitemap production push, worker runtime, or index-data repo mutation."
 }
