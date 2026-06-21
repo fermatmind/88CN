@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://88cn.com/contracts/agent/agent-integration-artifact-set.schema.json",
+  "title": "88CN Agent Integration Artifact Set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest.json",
+    "review-ready.jsonl",
+    "review-blocked.jsonl",
+    "quarantine.jsonl",
+    "publish-recommendations.jsonl"
+  ],
+  "properties": {
+    "manifest.json": { "const": "required" },
+    "review-ready.jsonl": { "const": "required" },
+    "review-blocked.jsonl": { "const": "required" },
+    "quarantine.jsonl": { "const": "required" },
+    "publish-recommendations.jsonl": { "const": "required" },
+    "events.jsonl": { "const": "optional" },
+    "report.md": { "const": "optional" }
+  }
+}

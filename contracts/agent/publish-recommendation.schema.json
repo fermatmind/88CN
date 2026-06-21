@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://88cn.com/contracts/agent/publish-recommendation.schema.json",
+  "title": "88CN Agent Publish Recommendation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_name",
+    "slug_candidate",
+    "recommendation",
+    "reason_codes",
+    "missing_fields",
+    "risk_flags",
+    "human_review_required",
+    "recommendation_confidence_band"
+  ],
+  "properties": {
+    "project_name": { "type": "string", "minLength": 1 },
+    "slug_candidate": { "type": "string" },
+    "recommendation": {
+      "enum": [
+        "recommend_publish",
+        "recommend_review",
+        "recommend_quarantine",
+        "recommend_reject",
+        "recommend_recheck"
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "missing_fields": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "human_review_required": { "const": true },
+    "recommendation_confidence_band": {
+      "enum": ["low", "medium", "high"]
+    }
+  }
+}

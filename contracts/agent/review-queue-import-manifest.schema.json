@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://88cn.com/contracts/agent/review-queue-import-manifest.schema.json",
+  "title": "88CN Review Queue Import Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "generated_at",
+    "worker_repo",
+    "worker_repo_sha",
+    "worker_task_range",
+    "source_manifest_hash",
+    "artifact_hashes",
+    "counts",
+    "mode",
+    "network_used",
+    "runtime_started",
+    "db_write_performed",
+    "auto_publish_performed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "review-queue-import-manifest.v0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "worker_repo": {
+      "const": "88cn-scout-worker"
+    },
+    "worker_repo_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "worker_task_range": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_manifest_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review-ready.jsonl",
+        "review-blocked.jsonl",
+        "quarantine.jsonl",
+        "publish-recommendations.jsonl"
+      ],
+      "properties": {
+        "review-ready.jsonl": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "review-blocked.jsonl": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "quarantine.jsonl": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "publish-recommendations.jsonl": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "events.jsonl": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "report.md": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_ready_count",
+        "review_blocked_count",
+        "quarantine_count",
+        "publish_recommendation_count"
+      ],
+      "properties": {
+        "review_ready_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "review_blocked_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "quarantine_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "publish_recommendation_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "mode": {
+      "enum": ["dry_run", "review_packaging"]
+    },
+    "network_used": {
+      "const": false
+    },
+    "runtime_started": {
+      "const": false
+    },
+    "db_write_performed": {
+      "const": false
+    },
+    "auto_publish_performed": {
+      "const": false
+    }
+  }
+}
