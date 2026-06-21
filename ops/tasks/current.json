@@ -1,13 +1,14 @@
 {
-  "current_task": "PR208",
-  "current_alias": "CONTENT50_IMPORT",
+  "current_task": "PR209",
+  "current_alias": "CONTENT50_REVIEW_PUBLISH",
   "current_repo": "88CN",
   "current_role": "opencode",
   "status": "in_progress",
-  "result": "CONTENT50_IMPORT_PENDING_VALIDATION",
+  "result": "CONTENT50_REVIEW_PUBLISH_PENDING_VALIDATION",
   "candidate_origin_main_sha": "7d5531833a796f3ff231457b1877c83b3078af7d",
-  "next_recommended_task": "PR209",
-  "next_recommended_alias": "CONTENT50_REVIEW_PUBLISH",
+  "depends_on_pr": "https://github.com/fermatmind/88CN/pull/247",
+  "next_recommended_task": "PR210",
+  "next_recommended_alias": "CONTENT50_FRONTEND_SMOKE",
   "next_recommended_train": "CONTENT50",
-  "notes": "PR208 local Seed50 import only. No deploy, server/cloud action, DB write, external API call, sitemap production push, worker runtime, or index-data repo mutation."
+  "notes": "PR209 local projection only. No deploy, server/cloud action, DB write, external API call, sitemap production push, worker runtime, or index-data repo mutation."
 }
